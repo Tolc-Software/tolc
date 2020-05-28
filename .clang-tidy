@@ -1,0 +1,5 @@
+---
+Checks:          '*,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-llvm-*'
+WarningsAsErrors: '1'
+HeaderFilterRegex: ''
+FormatStyle:     none
