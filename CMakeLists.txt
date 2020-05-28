@@ -19,8 +19,26 @@ include(cmake/StaticAnalyzers.cmake)
 
 include(cmake/CodeCoverage.cmake)
 
+# Define run_conan
+include(cmake/ConanHelpers.cmake)
+run_conan(REQUIRES lyra/1.4.0@_/_)
+
+include(FetchContent)
+FetchContent_Declare(
+  Parser
+  GIT_REPOSITORY git@github.com:srydell/Parser.git
+  GIT_TAG master)
+FetchContent_MakeAvailable(Parser)
+
+FetchContent_Declare(
+  PythonFrontend
+  GIT_REPOSITORY git@github.com:srydell/frontend.py.git
+  GIT_TAG master)
+FetchContent_MakeAvailable(PythonFrontend)
+
 add_executable(tolc src/tolc.main.cpp)
-target_link_libraries(tolc PRIVATE tolc_warnings tolc_options)
+target_link_libraries(tolc PRIVATE tolc_warnings tolc_options Tolc::Parser
+                                   Tolc::Frontend.py CONAN_PKG::lyra)
 set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                OFF)
 
