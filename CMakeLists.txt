@@ -39,8 +39,9 @@ FetchContent_MakeAvailable(PythonFrontend)
 add_library(CommandLineParser src/CommandLine/buildConfig.cpp)
 target_include_directories(CommandLineParser PUBLIC src)
 target_link_libraries(
-  CommandLineParser PUBLIC tolc_warnings tolc_options Tolc::Parser
-                           Tolc::Frontend.py CONAN_PKG::lyra)
+  CommandLineParser
+  PUBLIC tolc_warnings tolc_options Tolc::Parser Tolc::Frontend.py
+  PRIVATE CONAN_PKG::lyra)
 set_target_properties(CommandLineParser PROPERTIES CXX_STANDARD_REQUIRED ON
                                                    CXX_EXTENSIONS OFF)
 
