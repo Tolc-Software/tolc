@@ -36,9 +36,16 @@ FetchContent_Declare(
   GIT_TAG master)
 FetchContent_MakeAvailable(PythonFrontend)
 
+add_library(CommandLineParser src/CommandLine/buildConfig.cpp)
+target_include_directories(CommandLineParser PUBLIC src)
+target_link_libraries(
+  CommandLineParser PUBLIC tolc_warnings tolc_options Tolc::Parser
+                           Tolc::Frontend.py CONAN_PKG::lyra)
+set_target_properties(CommandLineParser PROPERTIES CXX_STANDARD_REQUIRED ON
+                                                   CXX_EXTENSIONS OFF)
+
 add_executable(tolc src/tolc.main.cpp)
-target_link_libraries(tolc PRIVATE tolc_warnings tolc_options Tolc::Parser
-                                   Tolc::Frontend.py CONAN_PKG::lyra)
+target_link_libraries(tolc PRIVATE CommandLineParser)
 set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                OFF)
 
