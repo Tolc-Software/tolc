@@ -21,7 +21,9 @@ include(cmake/CodeCoverage.cmake)
 
 # Define run_conan
 include(cmake/ConanHelpers.cmake)
-run_conan(REQUIRES lyra/1.4.0@_/_)
+# This helps with packaging
+set(CONAN_REQUIRES_PACKAGES CLI11/1.9.1@cliutils/stable)
+find_conan_packages(REQUIRES ${CONAN_REQUIRES_PACKAGES})
 
 include(FetchContent)
 FetchContent_Declare(
@@ -36,12 +38,12 @@ FetchContent_Declare(
   GIT_TAG master)
 FetchContent_MakeAvailable(PythonFrontend)
 
-add_library(CommandLineParser src/CommandLine/buildConfig.cpp)
+add_library(tolc_internals src/CommandLine/buiCommandLineParserldConfig.cpp)
 target_include_directories(CommandLineParser PUBLIC src)
 target_link_libraries(
   CommandLineParser
   PUBLIC tolc_warnings tolc_options Tolc::Parser Tolc::Frontend.py
-  PRIVATE CONAN_PKG::lyra)
+  PRIVATE CLI11::CLI11)
 set_target_properties(CommandLineParser PROPERTIES CXX_STANDARD_REQUIRED ON
                                                    CXX_EXTENSIONS OFF)
 
