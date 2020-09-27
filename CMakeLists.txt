@@ -5,10 +5,8 @@ project(
   VERSION 0.1
   LANGUAGES CXX)
 
-# Define project_warnings and project_options targets
+# Define add_{warnings,options}
 include(cmake/WarningsAndOptions.cmake)
-add_warnings(TARGET tolc_warnings)
-add_options(TARGET tolc_options)
 
 # Define options such as ccache
 include(cmake/ProjectSettings.cmake)
@@ -38,17 +36,19 @@ FetchContent_Declare(
   GIT_TAG master)
 FetchContent_MakeAvailable(PythonFrontend)
 
-add_library(tolc_internals src/CommandLine/buiCommandLineParserldConfig.cpp)
-target_include_directories(CommandLineParser PUBLIC src)
-target_link_libraries(
-  CommandLineParser
-  PUBLIC tolc_warnings tolc_options Tolc::Parser Tolc::Frontend.py
-  PRIVATE CLI11::CLI11)
-set_target_properties(CommandLineParser PROPERTIES CXX_STANDARD_REQUIRED ON
-                                                   CXX_EXTENSIONS OFF)
+add_library(TolcInternal src/TolcInternal/run.cpp
+                         src/CommandLine/addOptions.cpp)
+target_include_directories(TolcInternal PUBLIC src)
+target_link_libraries(TolcInternal PRIVATE Tolc::Parser Tolc::Frontend.py
+                                           CLI11::CLI11)
+set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
+                                              CXX_EXTENSIONS OFF)
+
+add_warnings(TARGET TolcInternal)
+add_options(TARGET TolcInternal)
 
 add_executable(tolc src/tolc.main.cpp)
-target_link_libraries(tolc PRIVATE CommandLineParser)
+target_link_libraries(tolc PRIVATE TolcInternal)
 set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                OFF)
 
