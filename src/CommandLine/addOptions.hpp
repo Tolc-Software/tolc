@@ -16,6 +16,9 @@ struct CLIResult {
 	// Where tolc is allowed to put output
 	std::string outputDirectory;
 
+	// The language chosen by the user to translate to
+	std::string language;
+
 	// Include directories for the input file
 	std::vector<std::string> includes;
 };

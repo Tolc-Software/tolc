@@ -23,12 +23,34 @@ include(cmake/ConanHelpers.cmake)
 set(CONAN_REQUIRES_PACKAGES CLI11/1.9.1@cliutils/stable)
 find_conan_packages(REQUIRES ${CONAN_REQUIRES_PACKAGES})
 
-include(FetchContent)
-FetchContent_Declare(
-  Parser
-  GIT_REPOSITORY git@github.com:srydell/Parser.git
-  GIT_TAG master)
-FetchContent_MakeAvailable(Parser)
+include(cmake/GetParser.cmake)
+
+option(BUILD_DEPENDENCIES_FROM_SOURCE
+       "Building dependencies from source instead of downloading an asset"
+       FALSE)
+set(parser_source_switch "")
+if(BUILD_DEPENDENCIES_FROM_SOURCE)
+  set(parser_source_switch "BUILD_FROM_SOURCE")
+endif()
+get_parser(ASSET_NAME Parser-${CMAKE_SYSTEM_NAME}-master.tar.gz
+           ${parser_source_switch})
+
+# If we are not building from source we need to create some variables
+# containing the paths to the included system library
+if(NOT parser_source_switch)
+  # Set the include path for the system library in the variable
+  # We are using the standard library shipped
+  # with the downloaded llvm for include paths in the parsing
+  get_parser_system_include(
+    VARIABLE
+    SYSTEM_INCLUDE_PATHS
+    PARSER_SOURCE_DIR
+    ${parser_SOURCE_DIR}
+    LIBCPP_ROOT_DIR
+    ${parser_SOURCE_DIR}/lib/Parser
+    LLVM_VERSION
+    ${PARSER_LLVM_VERSION})
+endif()
 
 FetchContent_Declare(
   PythonFrontend

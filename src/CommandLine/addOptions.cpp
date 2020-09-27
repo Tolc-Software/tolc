@@ -1,4 +1,7 @@
 #include "CommandLine/addOptions.hpp"
+#include <CLI/CLI.hpp>
+#include <string>
+#include <vector>
 
 namespace CommandLine {
 
@@ -24,6 +27,8 @@ void addCommandLineOptions(CLI::App& app, CommandLine::CLIResult& result) {
 	    ->required();
 
 	python->callback([&result]() {
+		result.language = "python";
+
 		std::cout << "Got the python command" << '\n';
 		std::cout << "Got input: " << result.inputFile << '\n';
 		std::cout << "Got output: " << result.outputDirectory << '\n';
