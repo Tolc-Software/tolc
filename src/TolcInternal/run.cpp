@@ -1,5 +1,5 @@
 #include "TolcInternal/run.hpp"
-#include "CommandLine/addOptions.hpp"
+#include "CommandLine/parse.hpp"
 #include <CLI/CLI.hpp>
 #include <filesystem>
 #include <iostream>
@@ -12,7 +12,7 @@ namespace TolcInternal {
 /**
 * Stores everyting needed to use the Parser and Frontends
 */
-struct ConfigInternal {
+struct Config {
 	enum class Language { Python };
 
 	// The language chosen to translate to
@@ -31,29 +31,26 @@ struct ConfigInternal {
 /**
 * Tries to build the config from the cli options given by the user
 */
-std::optional<ConfigInternal> buildConfig(CommandLine::CLIResult const& cli) {
-	ConfigInternal config;
+std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
+	Config config;
 
 	if (auto input = std::filesystem::path(cli.inputFile);
 	    std::filesystem::is_regular_file(input)) {
 		config.inputFile = input;
 	} else {
-		std::cout << "Input is not a file!" << '\n';
 		return {};
 	}
 
-	if (auto output = std::filesystem::path(cli.outputDirectory);
-	    std::filesystem::is_directory(output)) {
-		config.outputDirectory = output;
-	} else {
-		std::cout << "Output is not a directory!" << '\n';
-		return {};
+	config.outputDirectory = std::filesystem::path(cli.outputDirectory);
+
+	config.includes.reserve(cli.includes.size());
+	for (auto const& include : cli.includes) {
+		config.includes.emplace_back(include);
 	}
 
 	if (cli.language == "python") {
-		config.language = ConfigInternal::Language::Python;
+		config.language = Config::Language::Python;
 	} else {
-		std::cout << "Input is not a language that is available!" << '\n';
 		return {};
 	}
 
@@ -61,21 +58,15 @@ std::optional<ConfigInternal> buildConfig(CommandLine::CLIResult const& cli) {
 }
 
 int run(int argc, const char** argv) {
-	CLI::App app {"Tolc is an automatic translator for C++"};
-
-	CommandLine::CLIResult result;
-	CommandLine::addCommandLineOptions(app, result);
-
-	if (auto maybeConfig = buildConfig(result)) {
-		auto config = maybeConfig.value();
-		std::cout << "Got config with input: " << config.inputFile << '\n';
+	if (auto maybeResult = CommandLine::parse(argc, argv)) {
+		auto result = maybeResult.value();
+		if (auto maybeConfig = buildConfig(result)) {
+			auto config = maybeConfig.value();
+			std::cout << "Got config with input: " << config.inputFile << '\n';
+		}
 	}
 
-	// Will return if something goes wrong
-	// Therefore it has to be at this level
-	CLI11_PARSE(app, argc, argv);
-
-	return 0;
+	return 1;
 }
 
 }    // namespace TolcInternal

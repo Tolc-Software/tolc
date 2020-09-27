@@ -59,7 +59,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(PythonFrontend)
 
 add_library(TolcInternal src/TolcInternal/run.cpp
-                         src/CommandLine/addOptions.cpp)
+                         src/CommandLine/parse.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(TolcInternal PRIVATE Tolc::Parser Tolc::Frontend.py
                                            CLI11::CLI11)

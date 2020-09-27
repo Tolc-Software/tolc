@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CLI/CLI.hpp>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -24,7 +24,9 @@ struct CLIResult {
 };
 
 /**
-* Set what is valid input to the tolc executable
+* Parses the input and tries to create a CLIResult
+* Returns std::nullopt on any non-compliant CLI options.
+* To see what is compliant, run the executable with the --help flag
 */
-void addCommandLineOptions(CLI::App& app, CommandLine::CLIResult& result);
+std::optional<CommandLine::CLIResult> parse(int argc, const char** argv);
 }
