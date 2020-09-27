@@ -58,8 +58,9 @@ FetchContent_Declare(
   GIT_TAG master)
 FetchContent_MakeAvailable(PythonFrontend)
 
-add_library(TolcInternal src/TolcInternal/run.cpp
-                         src/CommandLine/parse.cpp)
+add_library(
+  TolcInternal src/TolcInternal/run.cpp src/TolcInternal/buildConfig.cpp
+               src/CommandLine/parse.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(TolcInternal PRIVATE Tolc::Parser Tolc::Frontend.py
                                            CLI11::CLI11)
