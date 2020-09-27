@@ -2,6 +2,7 @@
 #include "CommandLine/addOptions.hpp"
 #include <CLI/CLI.hpp>
 #include <filesystem>
+#include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
@@ -30,28 +31,31 @@ struct ConfigInternal {
 /**
 * Tries to build the config from the cli options given by the user
 */
-std::optional<ConfigInternal> buildConfig(CommandLine::CLIResult const&) {
-	std::optional<ConfigInternal> config = std::nullopt;
+std::optional<ConfigInternal> buildConfig(CommandLine::CLIResult const& cli) {
+	ConfigInternal config;
 
-	// if (auto input = std::filesystem::path(cli.inputFile);
-	//     std::filesystem::is_regular_file(input)) {
-	// 	config.inputFile = input;
-	// } else {
-	// 	return {};
-	// }
+	if (auto input = std::filesystem::path(cli.inputFile);
+	    std::filesystem::is_regular_file(input)) {
+		config.inputFile = input;
+	} else {
+		std::cout << "Input is not a file!" << '\n';
+		return {};
+	}
 
-	// if (auto output = std::filesystem::path(cli.outputDirectory);
-	//     std::filesystem::is_directory(output)) {
-	// 	config.outputDirectory = output;
-	// } else {
-	// 	return {};
-	// }
+	if (auto output = std::filesystem::path(cli.outputDirectory);
+	    std::filesystem::is_directory(output)) {
+		config.outputDirectory = output;
+	} else {
+		std::cout << "Output is not a directory!" << '\n';
+		return {};
+	}
 
-	// if (cli.language == "python") {
-	// 	config.language = ConfigInternal::Language::Python;
-	// } else {
-	// 	return {};
-	// }
+	if (cli.language == "python") {
+		config.language = ConfigInternal::Language::Python;
+	} else {
+		std::cout << "Input is not a language that is available!" << '\n';
+		return {};
+	}
 
 	return config;
 }
