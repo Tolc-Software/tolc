@@ -23,6 +23,9 @@ include(cmake/ConanHelpers.cmake)
 set(CONAN_REQUIRES_PACKAGES CLI11/1.9.1@cliutils/stable)
 find_conan_packages(REQUIRES ${CONAN_REQUIRES_PACKAGES})
 
+include(cmake/GetFrontendpy.cmake)
+get_frontend_py(ASSET_NAME Frontend.py-${CMAKE_SYSTEM_NAME}-master.tar.gz)
+
 include(cmake/GetParser.cmake)
 
 option(BUILD_DEPENDENCIES_FROM_SOURCE
@@ -51,12 +54,6 @@ if(NOT parser_source_switch)
     LLVM_VERSION
     ${PARSER_LLVM_VERSION})
 endif()
-
-FetchContent_Declare(
-  PythonFrontend
-  GIT_REPOSITORY git@github.com:srydell/frontend.py.git
-  GIT_TAG master)
-FetchContent_MakeAvailable(PythonFrontend)
 
 add_library(
   TolcInternal src/TolcInternal/run.cpp src/TolcInternal/buildConfig.cpp

@@ -26,7 +26,9 @@ function(fetch_asset_from_github)
     RESULT_VARIABLE result)
 
   if(NOT result EQUAL 0)
-    message(FATAL_ERROR "Something went wrong downloading dependencies. Exit code: ${result}")
+    message(
+      FATAL_ERROR
+        "Something went wrong downloading dependencies. Exit code: ${result}")
   endif()
 
   set(python_args
@@ -48,16 +50,22 @@ function(fetch_asset_from_github)
     OUTPUT_VARIABLE asset_id)
 
   if(NOT result EQUAL 0)
-    message(FATAL_ERROR "Something went wrong trying to find the asset id. Exit code: ${result}")
+    message(
+      FATAL_ERROR
+        "Something went wrong trying to find the asset id. Exit code: ${result}"
+    )
   endif()
 
   message(
-    STATUS "Fetching asset ${ARG_USER}/${ARG_REPOSITORY}/releases/assets/${asset_id}")
+    STATUS
+      "Fetching asset ${ARG_USER}/${ARG_REPOSITORY}/releases/assets/${asset_id}"
+  )
   include(FetchContent)
   FetchContent_Declare(
     ${ARG_FETCH_VARIABLE}
     URL https://api.github.com/repos/${ARG_USER}/${ARG_REPOSITORY}/releases/assets/${asset_id}
-    HTTP_HEADER "Authorization: token ${ARG_GITHUB_TOKEN}" "Accept: application/octet-stream")
+    HTTP_HEADER "Authorization: token ${ARG_GITHUB_TOKEN}"
+                "Accept: application/octet-stream")
   FetchContent_Populate(${ARG_FETCH_VARIABLE})
 
   # Note that things get set on the lowercase version of the input variable
