@@ -53,11 +53,23 @@ if(NOT parser_source_switch)
     ${parser_SOURCE_DIR}/lib/Parser
     LLVM_VERSION
     ${PARSER_LLVM_VERSION})
+
+  set(SYSTEM_INCLUDES "")
+  set(TOKEN_STRING "{replaceme}")
+  foreach(include ${SYSTEM_INCLUDE_PATHS})
+    string(REPLACE ${parser_SOURCE_DIR}/lib/Parser ${TOKEN_STRING}
+                   formated_include ${include})
+    list(APPEND SYSTEM_INCLUDES ${formated_include})
+  endforeach()
 endif()
+
+configure_file(
+  src/TolcInternal/getSystemIncludes.cpp.in
+  ${CMAKE_CURRENT_LIST_DIR}/src/TolcInternal/getSystemIncludes.cpp @ONLY)
 
 add_library(
   TolcInternal src/TolcInternal/run.cpp src/TolcInternal/buildConfig.cpp
-               src/CommandLine/parse.cpp)
+               src/CommandLine/parse.cpp src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(TolcInternal PRIVATE Tolc::Parser Tolc::Frontend.py
                                            CLI11::CLI11)

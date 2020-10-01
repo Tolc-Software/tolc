@@ -5,6 +5,9 @@
 .DS_Store
 .log
 
+# CMake generated files
+src/TolcInternal/getSystemIncludes.cpp
+
 # Except these
 # Files
 !.clang-format

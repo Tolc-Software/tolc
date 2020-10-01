@@ -8,10 +8,11 @@ namespace TolcInternal {
 
 int run(int argc, const char** argv) {
 	if (auto maybeResult = CommandLine::parse(argc, argv)) {
-		auto result = maybeResult.value();
-		if (auto maybeConfig = buildConfig(result)) {
+		if (auto maybeConfig = buildConfig(maybeResult.value())) {
 			auto config = maybeConfig.value();
 			std::cout << "Got config with input: " << config.inputFile << '\n';
+
+			return 0;
 		}
 	}
 
