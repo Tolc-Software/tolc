@@ -1,0 +1,28 @@
+#include "TolcInternal/getSystemIncludes.hpp"
+#include <string>
+#include <string_view>
+#include <vector>
+
+namespace {
+void replace(std::string& str, std::string_view from, const std::string& to) {
+	size_t start_pos = str.find(from);
+	str.replace(start_pos, from.length(), to);
+}
+}
+
+namespace TolcInternal {
+std::vector<std::string> getSystemIncludes(std::string const& llvmRoot) {
+	// This gets populated by CMake.
+	// Since we don't know relative to what we will find the llvm includes,
+	// we use a token string that is set for the includes that should relate to llvm
+	// E.g. {"-isystem/usr/include", "-isystem@TOKEN_STRING@/include/c++/v1", ...}
+	constexpr static std::string_view replacementString = "@TOKEN_STRING@";
+	std::vector<std::string> includes = {@SYSTEM_INCLUDES@};
+	for (auto& include : includes) {
+		replace(include, replacementString, llvmRoot);
+	}
+
+	return includes;
+}
+
+}
