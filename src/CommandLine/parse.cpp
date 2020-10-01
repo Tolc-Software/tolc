@@ -1,5 +1,6 @@
 #include "CommandLine/parse.hpp"
 #include <CLI/CLI.hpp>
+#include <optional>
 #include <string>
 #include <vector>
 
