@@ -88,9 +88,8 @@ set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
 if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(ENABLE_TESTING "Build the testing tree" OFF)
   if(ENABLE_TESTING)
-    # TODO: Add tests
-    # enable_testing()
-    # add_subdirectory(tests)
+    enable_testing()
+    add_subdirectory(tests)
   endif()
 
   option(ENABLE_BENCHMARKS "Build the benchmarks" OFF)
