@@ -18,7 +18,6 @@ if(ENABLE_COVERAGE)
 
   # Use coverage of parser
   target_code_coverage(TolcInternal)
-
   add_code_coverage_all_targets()
 endif()
 
