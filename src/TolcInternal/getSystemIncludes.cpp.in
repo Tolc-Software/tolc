@@ -5,8 +5,9 @@
 
 namespace {
 void replace(std::string& str, std::string_view from, const std::string& to) {
-	size_t start_pos = str.find(from);
-	str.replace(start_pos, from.length(), to);
+	if (auto startPos = str.find(from); startPos != std::string::npos) {
+		str.replace(startPos, from.length(), to);
+	}
 }
 }
 

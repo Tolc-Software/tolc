@@ -1,4 +1,5 @@
 #include "TolcInternal/getExecutablePath.hpp"
+#include <boost/filesystem.hpp>
 #include <boost/dll/runtime_symbol_info.hpp>
 #include <filesystem>
 

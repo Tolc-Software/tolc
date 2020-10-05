@@ -6,7 +6,7 @@ macro(find_conan_packages)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues DO_NOT_FIND)
-  set(singleValues)
+  set(singleValues PROFILE)
   set(multiValues OPTIONS REQUIRES SETTINGS)
   # Process the arguments passed in can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -14,8 +14,15 @@ macro(find_conan_packages)
 
   # Download it via conan
   message(STATUS "Will download dependencies via conan: ${ARG_REQUIRES}")
-  run_conan(REQUIRES ${ARG_REQUIRES} OPTIONS ${ARG_OPTIONS} SETTINGS
-            ${ARG_SETTINGS})
+  run_conan(
+    REQUIRES
+    ${ARG_REQUIRES}
+    OPTIONS
+    ${ARG_OPTIONS}
+    SETTINGS
+    ${ARG_SETTINGS}
+    PROFILE
+    ${ARG_PROFILE})
 
   # Get the paths for the find_package calls
   include(${CMAKE_CURRENT_BINARY_DIR}/conan_paths.cmake)
@@ -69,7 +76,7 @@ function(run_conan)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues)
+  set(singleValues PROFILE)
   set(multiValues SETTINGS OPTIONS REQUIRES)
   # Process the arguments passed in can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -96,6 +103,8 @@ function(run_conan)
     GENERATORS
     cmake_paths
     cmake_find_package
+    PROFILE
+    ${ARG_PROFILE}
     BUILD
     missing)
 endfunction()

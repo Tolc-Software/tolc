@@ -1,0 +1,13 @@
+arch=x86_64
+arch_build=x86_64
+build_type=Release
+compiler=clang
+compiler.libcxx=libc++
+compiler.version=10
+os=Macos
+os_build=Macos
+[options]
+[build_requires]
+[env]
+CC=/usr/local/opt/llvm/bin/clang
+CXX=/usr/local/opt/llvm/bin/clang++

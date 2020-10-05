@@ -20,3 +20,4 @@ src/TolcInternal/getSystemIncludes.cpp
 !cmake
 !src
 !tests
+!tools

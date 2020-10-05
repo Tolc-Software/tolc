@@ -20,8 +20,18 @@ include(cmake/CodeCoverage.cmake)
 # Define run_conan
 include(cmake/ConanHelpers.cmake)
 
-find_conan_packages(REQUIRES CLI11/1.9.1@cliutils/stable)
-find_conan_packages(REQUIRES boost/1.74.0 DO_NOT_FIND)
+find_conan_packages(
+  REQUIRES CLI11/1.9.1@cliutils/stable PROFILE
+  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
+find_conan_packages(
+  REQUIRES
+  boost/1.74.0
+  DO_NOT_FIND
+  OPTIONS
+  boost:zlib=False
+  boost:bzip2=False
+  PROFILE
+  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
 find_package(Boost REQUIRED)
 
 include(cmake/GetFrontendpy.cmake)
