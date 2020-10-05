@@ -19,9 +19,10 @@ include(cmake/CodeCoverage.cmake)
 
 # Define run_conan
 include(cmake/ConanHelpers.cmake)
-# This helps with packaging
-set(CONAN_REQUIRES_PACKAGES CLI11/1.9.1@cliutils/stable)
-find_conan_packages(REQUIRES ${CONAN_REQUIRES_PACKAGES})
+
+find_conan_packages(REQUIRES CLI11/1.9.1@cliutils/stable)
+find_conan_packages(REQUIRES boost/1.74.0 DO_NOT_FIND)
+find_package(Boost REQUIRED)
 
 include(cmake/GetFrontendpy.cmake)
 get_frontend_py(ASSET_NAME Frontend.py-${CMAKE_SYSTEM_NAME}-master.tar.gz)
@@ -68,11 +69,13 @@ configure_file(
   ${CMAKE_CURRENT_LIST_DIR}/src/TolcInternal/getSystemIncludes.cpp @ONLY)
 
 add_library(
-  TolcInternal src/TolcInternal/run.cpp src/TolcInternal/buildConfig.cpp
-               src/CommandLine/parse.cpp src/TolcInternal/getSystemIncludes.cpp)
+  TolcInternal
+  src/TolcInternal/run.cpp src/TolcInternal/getExecutablePath.cpp
+  src/TolcInternal/buildConfig.cpp src/CommandLine/parse.cpp
+  src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(TolcInternal PRIVATE Tolc::Parser Tolc::Frontend.py
-                                           CLI11::CLI11)
+                                           CLI11::CLI11 Boost::Boost)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 

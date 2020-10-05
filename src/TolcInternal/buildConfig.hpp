@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CommandLine/parse.hpp"
+#include <Parser/Config.hpp>
 #include <filesystem>
 #include <optional>
 #include <string>
@@ -12,6 +13,9 @@ namespace TolcInternal {
 */
 struct Config {
 	enum class Language { Python };
+
+	// Tells the parser what to do
+	Parser::Config parserConfig;
 
 	// The language chosen to translate to
 	Language language;
