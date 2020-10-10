@@ -19,6 +19,10 @@ struct CLIResult {
 	// The language chosen by the user to translate to
 	std::string language;
 
+	// Was the help flag set? Then the parsing is successful,
+	// but the objects are default constructed
+	bool isHelp = false;
+
 	// Include directories for the input file
 	std::vector<std::string> includes;
 };

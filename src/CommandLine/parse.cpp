@@ -12,7 +12,9 @@ namespace {
 * It assumes that a failed parse -> return non zero values.
 * This wraps this functionality and just returns the exit status from this function
 */
-int parseInternal(CLI::App& app, int argc, const char** argv) {
+int parseInternal(CLI::App& app,
+                  int argc,
+                  const char** argv) {
 	// Will return if something goes wrong
 	// Therefore it has to be at this level
 	CLI11_PARSE(app, argc, argv);
@@ -21,14 +23,12 @@ int parseInternal(CLI::App& app, int argc, const char** argv) {
 }    // namespace
 
 /**
-* Add options according to CLI11, and add hooks so that the values will be stored in result
+* Adds the python subcommand with hooks to the rootApp
 */
-void addOptions(CLI::App& app, CommandLine::CLIResult& result) {
-	// One language must be chosen
-	app.require_subcommand(1);
-
+[[nodiscard]] CLI::App* addPythonCommands(CLI::App& rootApp,
+                                          CommandLine::CLIResult& result) {
 	auto* python =
-	    app.add_subcommand("python", "Translate input for use from python");
+	    rootApp.add_subcommand("python", "Translate input for use from python");
 
 	// Adding directly to python since these options
 	// should come after the language subcommand in the CLI
@@ -49,18 +49,38 @@ void addOptions(CLI::App& app, CommandLine::CLIResult& result) {
 	    result.includes,
 	    "Path to search for when resolving #include statements.");
 
-	python->callback([&result]() {
-		result.language = "python";
-	});
+	python->callback([&result]() { result.language = "python"; });
+
+	return python;
+}
+
+/**
+* Add options according to CLI11, and add hooks so that the values will be stored in result
+*/
+[[nodiscard]] std::vector<CLI::App*>
+addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
+	// One language must be chosen
+	std::vector<CLI::App*> apps = {&app};
+
+	apps.push_back(addPythonCommands(app, result));
+
+	// The number of subcommands added (as of writing only python => 1)
+	app.require_subcommand(1);
+
+	return apps;
 }
 
 std::optional<CommandLine::CLIResult> parse(int argc, const char** argv) {
 	CLI::App app {"Tolc is an automatic translator for C++"};
 
 	CommandLine::CLIResult result;
-	CommandLine::addOptions(app, result);
+	auto apps = CommandLine::addSubcommandsAndOptions(app, result);
 
 	if (auto exitStatus = parseInternal(app, argc, argv); exitStatus == 0) {
+		// Final check if CLI11 exited early due to a --help flag
+		for (auto const& a : apps) {
+			result.isHelp = result.isHelp || !a->get_help_ptr()->empty();
+		}
 		return result;
 	}
 	return std::nullopt;

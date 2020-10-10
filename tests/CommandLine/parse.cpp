@@ -18,6 +18,9 @@ int main() {
 			expect(parsed.outputDirectory.empty());
 			expect(parsed.language.empty());
 			expect(parsed.includes.size() == 0_u);
+
+			// And has help flag set
+			expect(parsed.isHelp);
 		}
 	};
 
@@ -33,6 +36,9 @@ int main() {
 		expect(parsed.language == "python");
 		expect((parsed.includes.size() == 1_u) >> fatal);
 		expect(parsed.includes[0] == "include");
+
+		// And has not help flag set
+		expect(!parsed.isHelp);
 	};
 
 	"Fails for invalid input"_test = [] {
