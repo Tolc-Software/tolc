@@ -55,6 +55,7 @@ if(NOT parser_source_switch)
   # Set the include path for the system library in the variable
   # We are using the standard library shipped
   # with the downloaded llvm for include paths in the parsing
+  set(PARSER_LLVM_DIR ${parser_SOURCE_DIR}/lib/Parser)
   get_parser_system_include(
     VARIABLE
     SYSTEM_INCLUDE_PATHS
@@ -65,13 +66,25 @@ if(NOT parser_source_switch)
     LLVM_VERSION
     ${PARSER_LLVM_VERSION})
 
+  # These uppercase variables will be used when configuring getSystemIncludes.cpp
   set(SYSTEM_INCLUDES "")
   set(TOKEN_STRING "{replaceme}")
+  # Used as a root directory for system header files to be placed next to tolc executable
+  set(relativeIncludeDir system_include)
   foreach(include ${SYSTEM_INCLUDE_PATHS})
-    string(REPLACE ${parser_SOURCE_DIR}/lib/Parser ${TOKEN_STRING}
-                   formated_include ${include})
+    string(REPLACE ${parser_SOURCE_DIR}/lib/Parser
+                   ${TOKEN_STRING}/${relativeIncludeDir} formated_include
+                   ${include})
     list(APPEND SYSTEM_INCLUDES ${formated_include})
   endforeach()
+
+  include(cmake/copyLLVMIncludes.cmake)
+  # Copy the llvm headers relative to the tolc executable
+  # (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
+  #  this is called in the same faile as the add_executable)
+  copy_llvm_includes(
+    OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
+    ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
 endif()
 
 configure_file(
@@ -97,13 +110,6 @@ target_link_libraries(tolc PRIVATE TolcInternal)
 set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                OFF)
 
-include(cmake/copyLLVMIncludes.cmake)
-# Copy the llvm headers relative to the tolc executable
-# (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
-#  this is called in the same faile as the add_executable)
-copy_llvm_includes(
-  OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
-  ${parser_SOURCE_DIR}/lib/Parser LLVM_VERSION ${PARSER_LLVM_VERSION})
 # Only build tests and benchmarks if building this project directly
 if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(ENABLE_TESTING "Build the testing tree" OFF)
