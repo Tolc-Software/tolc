@@ -97,6 +97,13 @@ target_link_libraries(tolc PRIVATE TolcInternal)
 set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                OFF)
 
+include(cmake/copyLLVMIncludes.cmake)
+# Copy the llvm headers relative to the tolc executable
+# (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
+#  this is called in the same faile as the add_executable)
+copy_llvm_includes(
+  OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
+  ${parser_SOURCE_DIR}/lib/Parser LLVM_VERSION ${PARSER_LLVM_VERSION})
 # Only build tests and benchmarks if building this project directly
 if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(ENABLE_TESTING "Build the testing tree" OFF)
