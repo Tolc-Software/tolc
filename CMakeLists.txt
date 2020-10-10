@@ -93,7 +93,7 @@ configure_file(
 
 add_library(
   TolcInternal
-  src/TolcInternal/run.cpp src/TolcInternal/getExecutablePath.cpp
+  src/TolcInternal/run.cpp src/TolcInternal/getExecutableDirectoryPath.cpp
   src/TolcInternal/buildConfig.cpp src/CommandLine/parse.cpp
   src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)

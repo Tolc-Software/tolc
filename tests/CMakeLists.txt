@@ -23,8 +23,9 @@ endif()
 
 include(${PROJECT_SOURCE_DIR}/cmake/Sanitizers.cmake)
 
-foreach(testFile CommandLine/parse.cpp TolcInternal/getExecutablePath.cpp
-                 TolcInternal/getSystemIncludes.cpp)
+foreach(testFile
+        CommandLine/parse.cpp TolcInternal/getExecutableDirectoryPath.cpp
+        TolcInternal/getSystemIncludes.cpp)
 
   # Ex: CommandLine/parse.cpp -> parse
   get_filename_component(testName ${testFile} NAME_WLE)

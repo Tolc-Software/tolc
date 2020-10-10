@@ -1,4 +1,5 @@
 #include "TolcInternal/buildConfig.hpp"
+#include "TolcInternal/getExecutableDirectoryPath.hpp"
 #include "TolcInternal/getSystemIncludes.hpp"
 #include <filesystem>
 #include <optional>
@@ -17,9 +18,14 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 
 	config.outputDirectory = std::filesystem::path(cli.outputDirectory);
 
-	config.includes.reserve(cli.includes.size());
+	auto& parserConfig = config.parserConfig;
+	// Add the includes from libcpp
+	parserConfig.m_systemIncludes = TolcInternal::getSystemIncludes(
+	    TolcInternal::getExecutableDirectoryPath());
+
+	// Add the user includes
 	for (auto const& include : cli.includes) {
-		config.includes.emplace_back(include);
+		parserConfig.m_systemIncludes.emplace_back("-I" + include);
 	}
 
 	if (cli.language == "python") {

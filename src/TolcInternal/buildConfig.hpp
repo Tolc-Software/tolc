@@ -25,9 +25,6 @@ struct Config {
 
 	// Where tolc is allowed to put output
 	std::filesystem::path outputDirectory;
-
-	// Include directories for the input file
-	std::vector<std::filesystem::path> includes;
 };
 
 /**
