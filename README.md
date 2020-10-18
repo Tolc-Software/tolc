@@ -51,20 +51,20 @@ The support libraries typically means the [`Parser`](https://github.com/srydell/
 What happens when the user types;
 
 ```shell
-$ tolc python -i include/myLib.hpp -o ./pythonBindings
+$ tolc python -i include/myLib.hpp -o ./pythonBindings -m myModule
 ```
 
 1. `tolc` parses the command line to see that the user wants to use the `python` translator
 2. `tolc` gives the file `include/myLib.hpp` to `Parser` which may return an `AST`
 3. `tolc` takes the `AST` and passes it to `frontend.py` which gives back a string containing the interface code
-4. `tolc` writes the interface code to the directory `./pythonBindings`
+4. `tolc` writes the interface code to the directory `./pythonBindings` under the module name `myModule`
 
 The user can then build this code to generate a library which can be used from `python`, typically like
 
 ```python
-import myLib
+import myModule
 
-print(myLib.do_stuff())
+print(myModule.do_stuff())
 ```
 
 
