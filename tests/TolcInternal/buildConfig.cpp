@@ -1,11 +1,13 @@
 #include "TolcInternal/buildConfig.hpp"
 #include "CommandLine/parse.hpp"
+#include <TestUtil/getTestFilesDirectory.hpp>
 #include <boost/ut.hpp>
 
 CommandLine::CLIResult buildMockCLI() {
 	CommandLine::CLIResult cli;
-	// NOTE: This is a valid file since it is the name of the test executable
-	cli.inputFile = "buildConfig";
+	// "Borrow" one of the test files
+	// Just need a file that exists
+	cli.inputFile = TestUtil::getTestFilesDirectory() / "base.hpp";
 	cli.outputDirectory = "out";
 	cli.language = "python";
 	cli.moduleName = "myModule";

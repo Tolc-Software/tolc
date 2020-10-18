@@ -10,6 +10,11 @@ FetchContent_MakeAvailable(u_test)
 
 find_package(fmt REQUIRED)
 
+set(TEST_FILES_DIR ${CMAKE_CURRENT_LIST_DIR}/TestFiles)
+configure_file(
+  TestUtil/include/TestUtil/getTestFilesDirectory.hpp.in
+  ${CMAKE_CURRENT_LIST_DIR}/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
+  @ONLY)
 add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp)
 target_include_directories(TestUtil PUBLIC TestUtil/include)
 
@@ -25,7 +30,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/Sanitizers.cmake)
 
 foreach(
   testFile
-  CommandLine/parse.cpp TolcInternal/buildConfig.cpp
+  CommandLine/parse.cpp TolcInternal/buildConfig.cpp TolcInternal/run.cpp
   TolcInternal/getExecutableDirectoryPath.cpp
   TolcInternal/getSystemIncludes.cpp)
 
