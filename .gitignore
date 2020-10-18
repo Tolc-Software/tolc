@@ -7,6 +7,7 @@
 
 # CMake generated files
 src/TolcInternal/getSystemIncludes.cpp
+tests/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
 
 # Except these
 # Files
