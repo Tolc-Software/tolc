@@ -26,7 +26,7 @@ int main() {
 
 	"Python language is chosen"_test = [] {
 		auto cli = TestUtil::CommandLineInput(
-		    "tolc python -i input -o output -I include");
+		    "tolc python -i input -o output -m myModule -I include");
 		auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
 		expect(maybeParsed.has_value());
 
@@ -34,6 +34,7 @@ int main() {
 		expect(parsed.inputFile == "input");
 		expect(parsed.outputDirectory == "output");
 		expect(parsed.language == "python");
+		expect(parsed.moduleName == "myModule");
 		expect((parsed.includes.size() == 1_u) >> fatal);
 		expect(parsed.includes[0] == "include");
 
@@ -51,5 +52,12 @@ int main() {
 			// Parsed correctly
 			expect(maybeParsed.has_value() == false);
 		}
+	};
+
+	"Module name is required"_test = [] {
+		auto cli = TestUtil::CommandLineInput("tolc python -i input -o output");
+		auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+		// Parsed correctly
+		expect(maybeParsed.has_value() == false);
 	};
 }

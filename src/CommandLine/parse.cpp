@@ -38,6 +38,15 @@ int parseInternal(CLI::App& app,
 	                 "The interface file to be translated.")
 	    ->required();
 
+	// E.g. moduleName = defaultModule
+	// -> import defaultModule
+	// will be valid python
+	python
+	    ->add_option("-m,--module-name",
+	                 result.moduleName,
+	                 "The name of the exported library.")
+	    ->required();
+
 	python
 	    ->add_option("-o,--output",
 	                 result.outputDirectory,

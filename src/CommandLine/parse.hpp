@@ -19,6 +19,9 @@ struct CLIResult {
 	// The language chosen by the user to translate to
 	std::string language;
 
+	// The name that will be used when importing the module from some other language
+	std::string moduleName;
+
 	// Was the help flag set? Then the parsing is successful,
 	// but the objects are default constructed
 	bool isHelp = false;
