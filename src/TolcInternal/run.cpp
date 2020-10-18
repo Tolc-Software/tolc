@@ -22,7 +22,6 @@ int run(int argc, const char** argv) {
 			if (auto maybeGlobalNamespace =
 			        Parser::parseFile(config.inputFile, config.parserConfig)) {
 				auto globalNamespace = maybeGlobalNamespace.value();
-				std::cout << "Parsed a file!" << '\n';
 				globalNamespace.m_name = "MyModule";
 				auto [path, content] =
 				    Frontend::Python::createModule(globalNamespace);

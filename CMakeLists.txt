@@ -97,8 +97,8 @@ add_library(
   src/TolcInternal/buildConfig.cpp src/CommandLine/parse.cpp
   src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)
-target_link_libraries(TolcInternal PRIVATE Tolc::Parser Tolc::Frontend.py
-                                           CLI11::CLI11 Boost::Boost)
+target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
+                                          CLI11::CLI11 Boost::Boost)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 

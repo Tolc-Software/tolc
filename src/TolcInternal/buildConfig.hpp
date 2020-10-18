@@ -20,6 +20,10 @@ struct Config {
 	// The language chosen to translate to
 	Language language;
 
+	// Name of the exported library
+	// TODO: Maybe add to a Frontend::Python::Config?
+	std::string moduleName;
+
 	// What file should be translated
 	std::filesystem::path inputFile;
 

@@ -18,6 +18,8 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 
 	config.outputDirectory = std::filesystem::path(cli.outputDirectory);
 
+	config.moduleName = cli.moduleName;
+
 	auto& parserConfig = config.parserConfig;
 	// Add the includes from libcpp
 	parserConfig.m_systemIncludes = TolcInternal::getSystemIncludes(
