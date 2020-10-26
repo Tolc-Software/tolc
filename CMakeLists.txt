@@ -81,7 +81,7 @@ if(NOT parser_source_switch)
   include(cmake/copyLLVMIncludes.cmake)
   # Copy the llvm headers relative to the tolc executable
   # (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
-  #  this is called in the same faile as the add_executable)
+  #  this is called in the same file as the add_executable)
   copy_llvm_includes(
     OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
     ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})

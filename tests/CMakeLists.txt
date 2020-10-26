@@ -10,6 +10,12 @@ FetchContent_MakeAvailable(u_test)
 
 find_package(fmt REQUIRED)
 
+# Make sure the Parser in the tests can find the standard library headers
+include(${PROJECT_SOURCE_DIR}/cmake/copyLLVMIncludes.cmake)
+copy_llvm_includes(
+  OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
+  ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
+
 set(TEST_FILES_DIR ${CMAKE_CURRENT_LIST_DIR}/TestFiles)
 configure_file(
   TestUtil/include/TestUtil/getTestFilesDirectory.hpp.in
