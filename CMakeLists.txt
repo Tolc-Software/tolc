@@ -122,4 +122,9 @@ if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   if(ENABLE_BENCHMARKS)
     # TODO: Add benchmarks
   endif()
+
+  option(ENABLE_PACKAGING "Enables install and packaging via CPack" OFF)
+  if(ENABLE_PACKAGING)
+    add_subdirectory(tools/packaging)
+  endif()
 endif()

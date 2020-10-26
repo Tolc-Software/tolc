@@ -1,12 +1,13 @@
 include_guard()
 
 include(FetchContent)
-FetchContent_Declare(
-  u_test
-  GIT_REPOSITORY https://github.com/boost-ext/ut.git
-  GIT_TAG v1.1.8)
+FetchContent_Declare(u_test
+                     URL https://github.com/boost-ext/ut/archive/v1.1.8.tar.gz)
 
-FetchContent_MakeAvailable(u_test)
+if(NOT u_test_POPULATED)
+  FetchContent_Populate(u_test)
+endif()
+set(utest_include_dir ${u_test_SOURCE_DIR}/include)
 
 find_package(fmt REQUIRED)
 
@@ -46,10 +47,9 @@ foreach(
   add_executable(${testName} ${testFile})
 
   # Don't parse boost::ut for diagnostics
-  get_target_property(utIncludes boost::ut INTERFACE_INCLUDE_DIRECTORIES)
-  target_include_directories(${testName} SYSTEM PRIVATE ${utIncludes})
+  target_include_directories(${testName} SYSTEM PRIVATE ${utest_include_dir})
 
-  target_link_libraries(${testName} PRIVATE boost::ut TolcInternal TestUtil)
+  target_link_libraries(${testName} PRIVATE TolcInternal TestUtil)
 
   set(ENABLE_SANITIZER_ADDRESS TRUE)
   set(ENABLE_SANITIZER_MEMORY TRUE)
