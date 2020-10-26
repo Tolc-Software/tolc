@@ -18,6 +18,7 @@ tests/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
 !README.md
 
 # Directories
+!.github
 !cmake
 !src
 !tests
