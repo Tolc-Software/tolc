@@ -1,3 +1,5 @@
+![Ubuntu](https://github.com/srydell/tolc/workflows/Ubuntu/badge.svg) ![MacOS](https://github.com/srydell/tolc/workflows/MacOS/badge.svg)
+
 # `Tolc` #
 
 `Tolc` is a tool for automatically creating an interface from an existing `C++` library to another language.
