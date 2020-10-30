@@ -1,0 +1,99 @@
+name: MacOS
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Python cache
+      uses: actions/cache@v2
+      with:
+        path: ~/Library/Caches/pip
+        key: ${{ runner.os }}-pip-refreshed-at-20200621-1
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Download python dependencies
+      run: |
+        python -m pip install setuptools wheel
+        python -m pip install conan ninja
+        python -m pip install -r tools/requirements.txt
+
+    - name: Conan cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.conan
+        key: ${{ runner.os }}-conan-refreshed-at-20200716
+        restore-keys: |
+          ${{ runner.os }}-conan-
+
+    - name: Configure
+      env:
+        GITHUB_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        cmake -S. -Bbuild -G Ninja -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" -DCMAKE_BUILD_TYPE="Release" -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON
+
+    - name: Build
+      run: cmake --build build -j4
+
+    - name: Run tests
+      run: |
+        cd build
+        ctest --cores 4 --output-on-failure
+
+    - name: Build the release tar.gzip package
+      if: github.ref == 'refs/heads/master'
+      run: cpack -G TGZ --config build/CPackConfig.cmake
+
+    - name: Setup go
+      if: github.ref == 'refs/heads/master'
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.14'
+
+    - name: Setup go cache
+      if: github.ref == 'refs/heads/master'
+      uses: actions/cache@v2
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
+    - name: Push master release
+      if: github.ref == 'refs/heads/master'
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        go get -v github.com/github-release/github-release
+        echo "Checking if a new release is needed"
+        github-release release --user srydell --repo tolc --tag master-release --name "Head release" --description "This release gets updated with each commit to master" || true
+        echo "Pushing the release"
+        github-release upload --user srydell --repo tolc --tag master-release --name "tolc-$(uname)-master.tar.gz" --file tolc-*.tar.gz --replace
+
