@@ -1,13 +1,14 @@
+[settings]
 arch=x86_64
 arch_build=x86_64
 build_type=Release
 compiler=clang
 compiler.libcxx=libc++
-compiler.version=10
+compiler.version=@COMPILER_MAJOR_VERSION@
 os=Macos
 os_build=Macos
 [options]
 [build_requires]
 [env]
-CC=/usr/local/opt/llvm/bin/clang
-CXX=/usr/local/opt/llvm/bin/clang++
+CC=@CMAKE_C_COMPILER@
+CXX=@CMAKE_CXX_COMPILER@
