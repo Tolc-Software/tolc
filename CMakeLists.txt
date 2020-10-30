@@ -15,24 +15,6 @@ include(cmake/Sanitizers.cmake)
 
 include(cmake/StaticAnalyzers.cmake)
 
-include(cmake/ConanHelpers.cmake)
-# Create the profile from variables known during configure
-setup_conan_profile()
-
-find_conan_packages(
-  REQUIRES CLI11/1.9.1@cliutils/stable PROFILE
-  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
-find_conan_packages(
-  REQUIRES
-  boost/1.74.0
-  DO_NOT_FIND
-  OPTIONS
-  boost:zlib=False
-  boost:bzip2=False
-  PROFILE
-  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
-find_package(Boost REQUIRED)
-
 include(cmake/GetFrontendpy.cmake)
 get_frontend_py(ASSET_NAME Frontend.py-${CMAKE_SYSTEM_NAME}-master.tar.gz)
 
@@ -85,6 +67,24 @@ if(NOT parser_source_switch)
     OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
     ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
 endif()
+
+include(cmake/ConanHelpers.cmake)
+# Create the profile from variables known during configure
+setup_conan_profile()
+
+find_conan_packages(
+  REQUIRES CLI11/1.9.1@cliutils/stable PROFILE
+  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
+find_conan_packages(
+  REQUIRES
+  boost/1.74.0
+  DO_NOT_FIND
+  OPTIONS
+  boost:zlib=False
+  boost:bzip2=False
+  PROFILE
+  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
+find_package(Boost REQUIRED)
 
 configure_file(
   src/TolcInternal/getSystemIncludes.cpp.in
