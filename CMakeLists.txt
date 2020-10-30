@@ -15,8 +15,6 @@ include(cmake/Sanitizers.cmake)
 
 include(cmake/StaticAnalyzers.cmake)
 
-include(cmake/CodeCoverage.cmake)
-
 # Define run_conan
 include(cmake/ConanHelpers.cmake)
 

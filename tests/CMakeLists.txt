@@ -28,7 +28,7 @@ target_include_directories(TestUtil PUBLIC TestUtil/include)
 if(ENABLE_COVERAGE)
   include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
 
-  # Use coverage of parser
+  # Use coverage of tolc libs
   target_code_coverage(TolcInternal)
   add_code_coverage_all_targets()
 endif()
