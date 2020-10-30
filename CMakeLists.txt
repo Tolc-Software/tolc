@@ -15,8 +15,9 @@ include(cmake/Sanitizers.cmake)
 
 include(cmake/StaticAnalyzers.cmake)
 
-# Define run_conan
 include(cmake/ConanHelpers.cmake)
+# Create the profile from variables known during configure
+setup_conan_profile()
 
 find_conan_packages(
   REQUIRES CLI11/1.9.1@cliutils/stable PROFILE

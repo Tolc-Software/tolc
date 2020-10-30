@@ -108,3 +108,42 @@ function(run_conan)
     BUILD
     missing)
 endfunction()
+
+# Configure a conan profile that has '.in' as an extension with configure_file
+# and puts the output next to the configured file.
+# With no input it configures
+#   ${PROJECT_SOURCE_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang.in
+function(setup_conan_profile)
+  # Define the supported set of keywords
+  set(prefix ARG)
+  set(noValues)
+  set(singleValues PROFILE_TO_CONFIGURE)
+  set(multiValues)
+  # Process the arguments passed in
+  # can be used e.g. via ARG_TARGET
+  cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
+                        "${multiValues}" ${ARGN})
+
+  # Get variables for writing the conan profile
+  string(REPLACE "." ";" versionList ${CMAKE_CXX_COMPILER_VERSION})
+  list(GET versionList 0 COMPILER_MAJOR_VERSION)
+
+  if(ARG_PROFILE_TO_CONFIGURE)
+    set(inProfile ${ARG_PROFILE_TO_CONFIGURE})
+  else()
+    # Default to tools/conan_profiles/{OS}/clang.in
+    set(inProfile
+        ${PROJECT_SOURCE_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang.in
+    )
+  endif()
+  if(NOT EXISTS ${inProfile})
+    message(FATAL_ERROR "The profile to configure does not exist. Got the profile: ${inProfile}")
+  endif()
+  # {[outProfile, 'anythingDotSeparated'], 'in'}
+  # Get the profile path without the '.in' extension
+  string(REPLACE "." ";" profileList ${inProfile})
+  list(REMOVE_AT profileList -1)
+  list(JOIN profileList "." outProfile)
+
+  configure_file(${inProfile} ${outProfile} @ONLY)
+endfunction()
