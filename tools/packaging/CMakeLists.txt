@@ -2,8 +2,9 @@ include_guard()
 
 include(GNUInstallDirs)
 
-# Export the Frontend.py library
+# Install the tolc executable
 install(TARGETS tolc DESTINATION ${CMAKE_INSTALL_BINDIR})
+# The system includes should be next to the binary
 install(DIRECTORY ${CMAKE_BINARY_DIR}/system_include
         DESTINATION ${CMAKE_INSTALL_BINDIR})
 

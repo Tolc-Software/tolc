@@ -33,7 +33,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-refreshed-at-20200621-1
+        key: ${{ runner.os }}-pip-refreshed-at-20201030
         restore-keys: |
           ${{ runner.os }}-pip-
 
@@ -46,7 +46,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.conan
-        key: ${{ runner.os }}-conan-refreshed-at-20200716
+        key: ${{ runner.os }}-conan-refreshed-at-20201030
         restore-keys: |
           ${{ runner.os }}-conan-
 
