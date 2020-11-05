@@ -8,6 +8,9 @@ install(TARGETS tolc DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(DIRECTORY ${CMAKE_BINARY_DIR}/system_include
         DESTINATION ${CMAKE_INSTALL_BINDIR})
 
+install(FILES ${PROJECT_SOURCE_DIR}/cmake/packaging/tolcConfig.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tolc)
+
 set(CPACK_VERBATIM_VARIABLES YES)
 # Allow packaging
 include(CPack)
