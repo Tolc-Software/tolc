@@ -103,19 +103,19 @@ function(tolc_translate_file)
   endif()
 endfunction()
 
-tolc_translate_file(
-  MODULE_NAME
-  myLib
-  LANGUAGE
-  python
-  FILE
-  /home/simon/code/cpp/tolc/tests/TestFiles/std.hpp
-  OUTPUT_DIR
-  out
-  INCLUDES
-  myDir
-  yourDir
-  ourDir)
+# tolc_translate_file(
+#   MODULE_NAME
+#   myLib
+#   LANGUAGE
+#   python
+#   FILE
+#   /home/simon/code/cpp/tolc/tests/TestFiles/std.hpp
+#   OUTPUT_DIR
+#   out
+#   INCLUDES
+#   myDir
+#   yourDir
+#   ourDir)
 # tolc_translate_file(MODULE_NAME myLib LANGUAGE python FILE include/myLib.hpp)
 # tolc_translate_file(LANGUAGE python FILE include/myLib.hpp)
 # tolc_translate_file(MODULE_NAME myLib FILE include/myLib.hpp)
