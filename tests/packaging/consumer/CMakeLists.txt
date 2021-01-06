@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(
-  consumer
-  VERSION 0.1
-  LANGUAGES CXX)
-
 # NOTE: Assumes tolc package is put into following path before executing this test
 if(NOT tolc_ROOT)
   message(FATAL_ERROR "Project ${PROJECT_NAME} did not recieve the tolc_ROOT variable. When configuring this project, inject it with -Dtolc_ROOT=...")
@@ -23,9 +18,7 @@ tolc_translate_file(
   FILE
   include/consumer.hpp
   OUTPUT_DIR
-  ${CMAKE_CURRENT_BINARY_DIR}/out
-  INCLUDES
-  include)
+  ${CMAKE_CURRENT_BINARY_DIR}/out)
 
 set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
 if(NOT EXISTS ${expected_out_file})

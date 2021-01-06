@@ -1,0 +1,8 @@
+include_guard()
+
+# NOTE: This file (without '.in' extension) is generated via CMake.
+#       Do not change that file.
+#       Find the corresponding not configured file (with '.in' extension) and change that.
+
+# Ensure that tolc is available
+find_package(tolc CONFIG PATHS @test_package@ REQUIRED)
