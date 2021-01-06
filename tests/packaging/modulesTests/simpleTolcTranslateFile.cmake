@@ -13,7 +13,3 @@ tolc_translate_file(
   ${CMAKE_CURRENT_BINARY_DIR}/out
   INCLUDES
   doesNotMatter)
-# tolc_translate_file(MODULE_NAME myLib LANGUAGE python FILE include/myLib.hpp)
-# tolc_translate_file(LANGUAGE python FILE include/myLib.hpp)
-# tolc_translate_file(MODULE_NAME myLib FILE include/myLib.hpp)
-# tolc_translate_file(MODULE_NAME myLib LANGUAGE python)
