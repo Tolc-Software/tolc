@@ -11,4 +11,4 @@ set_tests_properties(InstallPackage PROPERTIES FIXTURES_SETUP
                                                FixtureInstallPackage)
 
 add_subdirectory(systemTests)
-add_subdirectory(modulesTests)
+add_subdirectory(moduleTests)
