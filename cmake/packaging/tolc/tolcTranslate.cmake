@@ -69,6 +69,7 @@ function(tolc_translate_file)
       ${includes})
   execute_process(
     COMMAND ${command}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     RESULT_VARIABLE errorCode
     OUTPUT_VARIABLE errorMessage)
 
