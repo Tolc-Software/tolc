@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.17)
+# Need 3.11 for FetchContent module
+cmake_minimum_required(VERSION 3.11)
 
 project(Consumer)
 

@@ -115,7 +115,7 @@ function(tolc_translate_target)
   endif()
 
   # Get the public include directories
-  get_target_property(includeDirectories ${ARG_TARGET} INCLUDE_DIRECTORIES)
+  get_target_property(includeDirectories ${ARG_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
   # Go through the includes and find the public headers
   set(headersToCombine "")
   if(includeDirectories)
@@ -139,7 +139,7 @@ function(tolc_translate_target)
   endforeach()
 
   # NOTE: This is done at configure time
-  set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc_${ARG_TARGET}_public_headers.hpp)
+  set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc_${ARG_TARGET}.hpp)
   file(WRITE
     ${combinedHeader}
     ${combinedHeadersString})
