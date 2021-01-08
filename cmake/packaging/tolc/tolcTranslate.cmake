@@ -109,22 +109,48 @@ function(tolc_translate_target)
     error_with_usage(
       "Missing TARGET argument. What predefined target to translate.")
   endif()
-endfunction()
+  if(NOT TARGET ${ARG_TARGET})
+    error_with_usage(
+      "Argument TARGET is not a previously known CMake target. Got: ${ARG_TARGET}.")
+  endif()
 
-# tolc_translate_file(
-#   MODULE_NAME
-#   myLib
-#   LANGUAGE
-#   python
-#   FILE
-#   /home/simon/code/cpp/tolc/tests/TestFiles/std.hpp
-#   OUTPUT_DIR
-#   out
-#   INCLUDES
-#   myDir
-#   yourDir
-#   ourDir)
-# tolc_translate_file(MODULE_NAME myLib LANGUAGE python FILE include/myLib.hpp)
-# tolc_translate_file(LANGUAGE python FILE include/myLib.hpp)
-# tolc_translate_file(MODULE_NAME myLib FILE include/myLib.hpp)
-# tolc_translate_file(MODULE_NAME myLib LANGUAGE python)
+  # Get the public include directories
+  get_target_property(includeDirectories ${ARG_TARGET} INCLUDE_DIRECTORIES)
+  # Go through the includes and find the public headers
+  set(headersToCombine "")
+  if(includeDirectories)
+    foreach(includeDir ${includeDirectories})
+      # NOTE: This is done at configure time
+      file(GLOB_RECURSE headers "${includeDir}/*.hpp" "${includeDir}/*.h")
+      list(APPEND headersToCombine ${headers})
+    endforeach()
+  endif()
+
+  if(NOT headersToCombine)
+    error_with_usage(
+      "Did not find any headers to translate in the public include directories (searched ${includeDirectories}) for target ${ARG_TARGET}")
+  endif()
+  list(REMOVE_DUPLICATES headersToCombine)
+
+  # Combine to a parseable file
+  set(combinedHeadersString "")
+  foreach(header ${headersToCombine})
+    string(APPEND combinedHeadersString "#include \"${header}\"\n")
+  endforeach()
+
+  # NOTE: This is done at configure time
+  set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc_${ARG_TARGET}_public_headers.hpp)
+  file(WRITE
+    ${combinedHeader}
+    ${combinedHeadersString})
+
+  tolc_translate_file(
+    MODULE_NAME
+    ${ARG_TARGET}
+    LANGUAGE
+    ${ARG_LANGUAGE}
+    FILE
+    ${combinedHeader}
+    OUTPUT_DIR
+    ${CMAKE_CURRENT_BINARY_DIR}/out)
+endfunction()

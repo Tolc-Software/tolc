@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 
+project(Consumer)
+
 # NOTE: Assumes tolc package is put into following path before executing this test
 if(NOT tolc_ROOT)
   message(FATAL_ERROR "Project ${PROJECT_NAME} did not recieve the tolc_ROOT variable. When configuring this project, inject it with -Dtolc_ROOT=...")
