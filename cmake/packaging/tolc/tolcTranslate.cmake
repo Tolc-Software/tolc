@@ -4,7 +4,7 @@ function(tolc_translate_file)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues FILE LANGUAGE MODULE_NAME OUTPUT_DIR)
+  set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT_DIR)
   set(multiValues INCLUDES)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -14,7 +14,7 @@ function(tolc_translate_file)
   # Cannot assume too new CMake version
   set(function_name tolc_translate_file)
   set(usage
-      "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python FILE include/myLibrary.hpp OUTPUT_DIR out [INCLUDES include])"
+    "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT_DIR out [INCLUDES include])"
   )
 
   # Helper function
@@ -32,9 +32,9 @@ function(tolc_translate_file)
     error_with_usage(
       "Missing LANGUAGE argument. Stores what language to translate to.")
   endif()
-  if(NOT ARG_FILE)
+  if(NOT ARG_INPUT)
     error_with_usage(
-      "Missing FILE argument. Stores which file to translate from.")
+      "Missing INPUT argument. Stores which file to translate from.")
   endif()
   if(NOT ARG_OUTPUT_DIR)
     error_with_usage(
@@ -63,7 +63,7 @@ function(tolc_translate_file)
       --module-name
       ${ARG_MODULE_NAME}
       --input
-      ${ARG_FILE}
+      ${ARG_INPUT}
       --output
       ${ARG_OUTPUT_DIR}
       ${includes})
@@ -150,7 +150,7 @@ function(tolc_translate_target)
     ${ARG_TARGET}
     LANGUAGE
     ${ARG_LANGUAGE}
-    FILE
+    INPUT
     ${combinedHeader}
     OUTPUT_DIR
     ${CMAKE_CURRENT_BINARY_DIR}/out)

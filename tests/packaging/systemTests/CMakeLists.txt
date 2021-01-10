@@ -1,7 +1,7 @@
 include_guard()
 
 # See the README for more detailed documentation
-foreach(systemTestName translateFileTest translateLibraryTest)
+foreach(systemTestName translateFileTest translateLibraryTest addLibraryTest)
   # Path to the consumer project
   set(consumer ${CMAKE_CURRENT_LIST_DIR}/${systemTestName})
 

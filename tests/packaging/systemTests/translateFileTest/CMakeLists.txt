@@ -18,7 +18,7 @@ tolc_translate_file(
   consumer
   LANGUAGE
   python
-  FILE
+  INPUT
   include/consumer.hpp
   OUTPUT_DIR
   ${CMAKE_CURRENT_BINARY_DIR}/out)

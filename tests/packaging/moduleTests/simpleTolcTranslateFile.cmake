@@ -7,7 +7,7 @@ tolc_translate_file(
   myLib
   LANGUAGE
   python
-  FILE
+  INPUT
   ${CMAKE_CURRENT_LIST_DIR}/headers/simple.hpp
   OUTPUT_DIR
   ${CMAKE_CURRENT_BINARY_DIR}/out
