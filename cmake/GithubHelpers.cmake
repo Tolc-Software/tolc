@@ -50,6 +50,7 @@ function(fetch_asset_from_github)
     OUTPUT_VARIABLE asset_id)
 
   if(NOT result EQUAL 0)
+    message(WARNING "${asset_id}")
     message(
       FATAL_ERROR
         "Something went wrong trying to find the asset id. Exit code: ${result}"
