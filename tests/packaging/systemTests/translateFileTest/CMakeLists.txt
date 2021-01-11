@@ -20,7 +20,7 @@ tolc_translate_file(
   python
   INPUT
   include/consumer.hpp
-  OUTPUT_DIR
+  OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out)
 
 set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)

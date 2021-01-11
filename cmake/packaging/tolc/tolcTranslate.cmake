@@ -4,7 +4,7 @@ function(tolc_translate_file)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT_DIR)
+  set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT)
   set(multiValues INCLUDES)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -14,7 +14,7 @@ function(tolc_translate_file)
   # Cannot assume too new CMake version
   set(function_name tolc_translate_file)
   set(usage
-    "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT_DIR out [INCLUDES include])"
+    "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT out [INCLUDES include])"
   )
 
   # Helper function
@@ -36,9 +36,9 @@ function(tolc_translate_file)
     error_with_usage(
       "Missing INPUT argument. Stores which file to translate from.")
   endif()
-  if(NOT ARG_OUTPUT_DIR)
+  if(NOT ARG_OUTPUT)
     error_with_usage(
-      "Missing OUTPUT_DIR argument. The directory to write translation files to."
+      "Missing OUTPUT argument. The directory to write translation files to."
     )
   endif()
   if(NOT tolc_EXECUTABLE)
@@ -65,7 +65,7 @@ function(tolc_translate_file)
       --input
       ${ARG_INPUT}
       --output
-      ${ARG_OUTPUT_DIR}
+      ${ARG_OUTPUT}
       ${includes})
   execute_process(
     COMMAND ${command}
@@ -87,7 +87,7 @@ function(tolc_translate_target)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues TARGET LANGUAGE OUTPUT_DIR)
+  set(singleValues TARGET LANGUAGE OUTPUT)
   set(multiValues)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -97,7 +97,7 @@ function(tolc_translate_target)
   # Cannot assume too new CMake version
   set(function_name tolc_translate_target)
   set(usage
-      "Usage: ${function_name}(TARGET myLibrary LANGUAGE python OUTPUT_DIR out)"
+      "Usage: ${function_name}(TARGET myLibrary LANGUAGE python OUTPUT out)"
   )
 
   # Helper function
@@ -152,6 +152,6 @@ function(tolc_translate_target)
     ${ARG_LANGUAGE}
     INPUT
     ${combinedHeader}
-    OUTPUT_DIR
+    OUTPUT
     ${CMAKE_CURRENT_BINARY_DIR}/out)
 endfunction()

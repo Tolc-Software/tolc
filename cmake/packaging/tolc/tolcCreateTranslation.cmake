@@ -4,7 +4,7 @@ function(tolc_create_translation)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues TARGET LANGUAGE OUTPUT_DIR)
+  set(singleValues TARGET LANGUAGE OUTPUT MODULE_NAME)
   set(multiValues INCLUDES INPUT)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -26,7 +26,7 @@ function(tolc_create_translation)
   # Error checks on input
   if(NOT ARG_TARGET)
     error_with_usage(
-      "Missing TARGET argument. The name of the library.")
+      "Missing TARGET argument. The name of the library to base the translation off.")
   endif()
   if(NOT ARG_LANGUAGE)
     error_with_usage(
@@ -36,14 +36,10 @@ function(tolc_create_translation)
     error_with_usage(
       "Missing INPUT argument. The source file(s) to be compiled.")
   endif()
-
-  if(ARG_LANGUAGE EQUAL "python")
-    # NOTE: Variable injected from tolcConfig file
-    get_pybind11(VERSION ${tolc_pybind11_version})
-    # Create the python module
-    pybind11_add_module(${ARG_TARGET} ${ARG_INPUT} SYSTEM)
-  else()
-    error_with_usage(
-      "Unknown language input: ${ARG_LANGUAGE}. Valid input: [${tolc_supported_languages}]")
+  set(moduleName ${ARG_MODULE_NAME})
+  if(NOT ARG_MODULE_NAME)
+    set(moduleName ${ARG_TARGET})
   endif()
+
+  tolc_translate_target(TARGET ${ARG_TARGET} LANGUAGE ${ARG_LANGUAGE} OUTPUT ${ARG_OUTPUT})
 endfunction()
