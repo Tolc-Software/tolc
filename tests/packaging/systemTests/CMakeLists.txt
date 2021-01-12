@@ -1,7 +1,15 @@
 include_guard()
 
+# TODO: Remove this
+# NOTE: Temporarily needed since the currently used pybind11
+#       cannot find the correct python version on MacOS.
+#       See the root README.md for more details
+find_package(Python3 REQUIRED)
+
 # See the README for more detailed documentation
-foreach(systemTestName translateFileTest translateLibraryTest)
+
+# Generate helpers for the tests
+foreach(systemTestName translateFileTest translateLibraryTest addLibraryTest createTranslationTest)
   # Path to the consumer project
   set(consumer ${CMAKE_CURRENT_LIST_DIR}/${systemTestName})
 
@@ -13,7 +21,7 @@ foreach(systemTestName translateFileTest translateLibraryTest)
     COMMAND
       ${CMAKE_COMMAND} -S. -Bbuild -GNinja
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-      -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_BUILD_TYPE=Debug -Dtolc_ROOT=${test_package})
+      -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_BUILD_TYPE=Debug -Dtolc_ROOT=${test_package} -DPYTHON_EXECUTABLE=${Python3_EXECUTABLE})
   set_tests_properties(Generate${systemTestName} PROPERTIES FIXTURES_SETUP
                                                    FixtureGenerate${systemTestName})
   # Need to install package before generating

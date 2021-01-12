@@ -13,23 +13,12 @@ if(NOT tolc_FOUND)
   message(FATAL_ERROR "No tolc package found! To test a specific version, place a prebuilt tolc package in ${tolc_ROOT}. This is normally done automatically.")
 endif()
 
-tolc_translate_file(
-  MODULE_NAME
-  consumer
+add_executable(consumer src/consumer.cpp)
+
+tolc_add_library(
+  TARGET
+  myPythonModule
   LANGUAGE
   python
   INPUT
-  include/consumer.hpp
-  OUTPUT
-  ${CMAKE_CURRENT_BINARY_DIR}/out)
-
-set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
-if(NOT EXISTS ${expected_out_file})
-  message(
-    FATAL_ERROR
-      "Tolc did not create an output file. Expected file does not exist: ${expected_out_file}"
-  )
-endif()
-
-add_executable(consumer src/consumer.cpp)
-target_include_directories(consumer PUBLIC include)
+  src/myPythonModule.cpp)
