@@ -29,4 +29,4 @@ set(tolc_supported_languages "python")
 include(${CMAKE_CURRENT_LIST_DIR}/tolcTranslate.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/GetPybind11.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/tolcAddTarget.cmake)
-
+include(${CMAKE_CURRENT_LIST_DIR}/tolcCreateTranslation.cmake)

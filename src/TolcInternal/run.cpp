@@ -51,7 +51,9 @@ int run(int argc, const char** argv) {
 				std::ofstream outFile;
 				outFile.open(config.outputDirectory / file);
 				if (outFile.is_open()) {
-					outFile << content;
+					// Inject the input file aswell
+					outFile << "#include <" << config.inputFile.c_str() << ">\n"
+					        << content;
 				}
 
 				return 0;
