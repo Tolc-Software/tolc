@@ -153,5 +153,5 @@ function(tolc_translate_target)
     INPUT
     ${combinedHeader}
     OUTPUT
-    ${CMAKE_CURRENT_BINARY_DIR}/out)
+    ${ARG_OUTPUT})
 endfunction()
