@@ -97,3 +97,12 @@ jobs:
         echo "Pushing the release"
         github-release upload --user srydell --repo tolc --tag master-release --name "tolc-$(uname)-master.tar.gz" --file tolc-*.tar.gz --replace
 
+    - name: Push beta release to Tolc-Softwar/tolc-beta
+      if: github.ref == 'refs/heads/master'
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        echo "Checking if a new release is needed"
+        github-release release --user Tolc-Software --repo tolc-beta --tag beta-release --name "Beta release" --description "Beta release" || true
+        echo "Pushing the release"
+        github-release upload --user Tolc-Software --repo tolc-beta --tag beta-release --name "tolc-$(uname)-beta.tar.gz" --file tolc-*.tar.gz --replace
