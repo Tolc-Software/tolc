@@ -1,0 +1,5 @@
+#include <filesystem>
+
+std::filesystem::path getExpectedOutFile() {
+	return "@expected_out_file@";
+}
