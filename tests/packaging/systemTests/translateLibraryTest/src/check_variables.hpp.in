@@ -1,0 +1,14 @@
+#include <filesystem>
+#include <vector>
+
+std::vector<std::filesystem::path> getPublicHeaders() {
+	return {@public_headers@};
+}
+
+std::filesystem::path getExpectedOutFile() {
+	return "@expected_out_file@";
+}
+
+std::filesystem::path getExpectedCombinedHeader() {
+	return "@expected_combined_header@";
+}

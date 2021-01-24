@@ -46,7 +46,13 @@ function(tolc_create_translation)
   # Add a new target, representing the translation
   # TODO: This should be changed when tolc can handle outputs explicitly (not just a directory, but a file)
   tolc_add_library(TARGET ${tolcTargetName} LANGUAGE ${ARG_LANGUAGE} INPUT ${ARG_OUTPUT}/${ARG_TARGET}.cpp)
+
+  # The added library target depends on the target being translated
+  add_dependencies(${ARG_TARGET}_${ARG_LANGUAGE} tolc_translate_file_${ARG_TARGET})
+
+  # NOTE: The user may need to provide additional links if they have their PUBLIC/PRIVATE dependencies missmatched
   target_link_libraries(${tolcTargetName} PRIVATE ${ARG_TARGET})
 
+  # This allows the target to be called target_language, but still be imported e.g. in python as 'import target'
   set_target_properties(${tolcTargetName} PROPERTIES OUTPUT_NAME ${ARG_TARGET})
 endfunction()

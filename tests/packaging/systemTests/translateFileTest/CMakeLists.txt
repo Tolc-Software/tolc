@@ -23,13 +23,16 @@ tolc_translate_file(
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out)
 
+# These will be made available to the consumer executable,
+# which will run the tests (see src/consumer.cpp)
 set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
-if(NOT EXISTS ${expected_out_file})
-  message(
-    FATAL_ERROR
-      "Tolc did not create an output file. Expected file does not exist: ${expected_out_file}"
-  )
-endif()
+configure_file(src/check_variables.hpp.in
+               ${CMAKE_CURRENT_LIST_DIR}/src/check_variables.hpp @ONLY)
 
 add_executable(consumer src/consumer.cpp)
 target_include_directories(consumer PUBLIC include)
+target_include_directories(consumer PRIVATE src)
+set_target_properties(consumer
+                      PROPERTIES CXX_STANDARD_REQUIRED ON
+                                 CXX_STANDARD 17
+                                 CXX_EXTENSIONS OFF)

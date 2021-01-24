@@ -67,20 +67,14 @@ function(tolc_translate_file)
       --output
       ${ARG_OUTPUT}
       ${includes})
-  execute_process(
-    COMMAND ${command}
+  # TODO: This should be changed when tolc can handle outputs explicitly (not just a directory, but a file)
+  add_custom_target(
+    tolc_translate_file_${ARG_MODULE_NAME}
+    ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
-    RESULT_VARIABLE errorCode
-    OUTPUT_VARIABLE errorMessage)
-
-  if(NOT errorCode EQUAL 0)
-    # Convert to string
-    string(REPLACE ";" " " commandString "${command}")
-    message(WARNING "Failed running the following command: ${commandString}")
-    message(
-      FATAL_ERROR
-        "Tolc failed to run with the following error message:\n${errorMessage}")
-  endif()
+    COMMAND ${command}
+    BYPRODUCTS ${ARG_OUTPUT}/${ARG_MODULE_NAME}.cpp
+  )
 endfunction()
 
 function(tolc_translate_target)
@@ -114,36 +108,33 @@ function(tolc_translate_target)
     error_with_usage(
       "Argument TARGET is not a previously known CMake target. Got: ${ARG_TARGET}.")
   endif()
+  if(NOT tolc_EXECUTABLE)
+    message(FATAL_ERROR "${function_name} called without setting tolc_EXECUTABLE. Please use this module only after calling find_package(tolc).")
+  endif()
+  if(NOT EXISTS ${tolc_BIN_DIR}/gather_headers.sh)
+    message(FATAL_ERROR "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.sh")
+  endif()
 
   # Get the public include directories
   get_target_property(includeDirectories ${ARG_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
-  # Go through the includes and find the public headers
-  set(headersToCombine "")
-  if(includeDirectories)
-    foreach(includeDir ${includeDirectories})
-      # NOTE: This is done at configure time
-      file(GLOB_RECURSE headers "${includeDir}/*.hpp" "${includeDir}/*.h")
-      list(APPEND headersToCombine ${headers})
-    endforeach()
-  endif()
+  string(REPLACE ";" " " shellIncludes ${includeDirectories})
 
-  if(NOT headersToCombine)
-    error_with_usage(
-      "Did not find any headers to translate in the public include directories (searched ${includeDirectories}) for target ${ARG_TARGET}")
-  endif()
-  list(REMOVE_DUPLICATES headersToCombine)
-
-  # Combine to a parseable file
-  set(combinedHeadersString "")
-  foreach(header ${headersToCombine})
-    string(APPEND combinedHeadersString "#include \"${header}\"\n")
-  endforeach()
-
-  # NOTE: This is done at configure time
+  # Go through the include directories for headers and build the combined header.
+  # After this command, the combined header will look like:
+  #   #include </home/user/project/include/h0.hpp>
+  #   #include </home/user/project/someOtherInclude/h1.hpp>
+  #   ...
+  # NOTE: This is meant to be in POSIX shell
   set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc_${ARG_TARGET}.hpp)
-  file(WRITE
-    ${combinedHeader}
-    ${combinedHeadersString})
+  add_custom_target(
+    tolc_get_public_headers_${ARG_TARGET}
+    ALL
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMAND ${tolc_BIN_DIR}/gather_headers.sh ${combinedHeader} ${includeDirectories}
+    BYPRODUCTS ${combinedHeader}
+  )
+  # Rerun when target needs to be rebuilt
+  add_dependencies(tolc_get_public_headers_${ARG_TARGET} ${ARG_TARGET})
 
   tolc_translate_file(
     MODULE_NAME
@@ -154,4 +145,6 @@ function(tolc_translate_target)
     ${combinedHeader}
     OUTPUT
     ${ARG_OUTPUT})
+  # Rerun when regathering headers
+  add_dependencies(tolc_translate_file_${ARG_TARGET} tolc_get_public_headers_${ARG_TARGET})
 endfunction()

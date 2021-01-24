@@ -13,3 +13,6 @@
 # Directories
 !src
 !include
+
+# Generated file
+src/check_variables.hpp
