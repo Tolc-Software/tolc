@@ -14,8 +14,23 @@ if(NOT tolc_FOUND)
 endif()
 
 add_executable(consumer src/consumer.cpp)
+set_target_properties(consumer
+                      PROPERTIES CXX_STANDARD_REQUIRED ON
+                                 CXX_STANDARD 17
+                                 CXX_EXTENSIONS OFF)
 target_include_directories(consumer PUBLIC include)
 target_include_directories(consumer PRIVATE src)
+
+# These will be made available to the consumer executable,
+# which will run the tests (see src/consumer.cpp)
+set(public_headers
+  "\"${PROJECT_SOURCE_DIR}/include/consumer.hpp\",
+  \"${PROJECT_SOURCE_DIR}/include/cStyleHeader.h\",
+  \"${PROJECT_SOURCE_DIR}/include/SubDir/oneLevelDeep.hpp\"")
+set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
+set(expected_combined_header ${CMAKE_CURRENT_BINARY_DIR}/tolc_consumer.hpp)
+configure_file(src/check_variables.hpp.in
+               ${CMAKE_CURRENT_LIST_DIR}/src/check_variables.hpp @ONLY)
 
 tolc_translate_target(
   TARGET
@@ -24,24 +39,3 @@ tolc_translate_target(
   python
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out)
-
-set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
-if(NOT EXISTS ${expected_out_file})
-  message(
-    FATAL_ERROR
-      "Tolc did not create an output file. Expected file does not exist: ${expected_out_file}"
-  )
-endif()
-
-set(expectedCombinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc_consumer.hpp)
-if(NOT EXISTS ${expectedCombinedHeader})
-  message(FATAL_ERROR "The combined header does not exist. Expected: ${expectedCombinedHeader}")
-endif()
-
-# Check that it found all of the public headers
-file(STRINGS ${expectedCombinedHeader} combinedHeaderLines)
-list(LENGTH combinedHeaderLines numberOfHeadersFound)
-set(expectedNumberOfHeaders 3)
-if(NOT ${numberOfHeadersFound} EQUAL ${expectedNumberOfHeaders})
-  message(FATAL_ERROR "Tolc CMake module did not find all of the public headers to combine. Expected to find ${expectedNumberOfHeaders}, but found ${numberOfHeadersFound}")
-endif()
