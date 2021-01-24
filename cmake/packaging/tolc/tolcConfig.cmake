@@ -10,9 +10,13 @@ function(find_tolc)
   get_filename_component(root_dir ${lib_dir} DIRECTORY)
 
   # Try to find the executable
-  find_program(tolc_EXECUTABLE tolc PATHS ${root_dir}/bin REQUIRED)
+  set(tolc_BIN_DIR ${root_dir}/bin)
+  find_program(tolc_EXECUTABLE tolc PATHS ${tolc_BIN_DIR} REQUIRED)
 
-  # Export it
+  # Export the variables
+  set(tolc_BIN_DIR
+      ${tolc_BIN_DIR}
+      PARENT_SCOPE)
   set(tolc_EXECUTABLE
       ${tolc_EXECUTABLE}
       PARENT_SCOPE)

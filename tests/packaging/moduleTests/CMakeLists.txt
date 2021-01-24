@@ -13,7 +13,7 @@ macro(add_module_test testName)
                                      FixtureInstallPackage)
 endmacro()
 
-foreach(shouldSucceed simpleTolcTranslateFile)
+foreach(shouldSucceed)
   add_module_test(${shouldSucceed})
 endforeach()
 
