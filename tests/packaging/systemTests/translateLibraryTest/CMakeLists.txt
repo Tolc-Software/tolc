@@ -28,7 +28,7 @@ set(public_headers
   \"${PROJECT_SOURCE_DIR}/include/cStyleHeader.h\",
   \"${PROJECT_SOURCE_DIR}/include/SubDir/oneLevelDeep.hpp\"")
 set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
-set(expected_combined_header ${CMAKE_CURRENT_BINARY_DIR}/tolc_consumer.hpp)
+set(expected_combined_header ${CMAKE_CURRENT_BINARY_DIR}/tolc/tolc_consumer.hpp)
 configure_file(src/check_variables.hpp.in
                ${CMAKE_CURRENT_LIST_DIR}/src/check_variables.hpp @ONLY)
 

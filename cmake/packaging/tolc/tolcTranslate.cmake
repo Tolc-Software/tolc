@@ -125,7 +125,7 @@ function(tolc_translate_target)
   #   #include </home/user/project/someOtherInclude/h1.hpp>
   #   ...
   # NOTE: This is meant to be in POSIX shell
-  set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc_${ARG_TARGET}.hpp)
+  set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc/tolc_${ARG_TARGET}.hpp)
   add_custom_target(
     tolc_get_public_headers_${ARG_TARGET}
     ALL
