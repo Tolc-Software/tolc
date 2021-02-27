@@ -3,6 +3,7 @@
 #include "TolcInternal/getSystemIncludes.hpp"
 #include <filesystem>
 #include <optional>
+#include <spdlog/spdlog.h>
 
 namespace TolcInternal {
 
@@ -13,6 +14,7 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 	    std::filesystem::is_regular_file(input)) {
 		config.inputFile = input;
 	} else {
+		spdlog::error("Input file could not be found: {}", input.c_str());
 		return {};
 	}
 
@@ -33,6 +35,7 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 	if (cli.language == "python") {
 		config.language = Config::Language::Python;
 	} else {
+		spdlog::error("Unknonwn language: {}", cli.language);
 		return {};
 	}
 

@@ -78,6 +78,8 @@ find_conan_packages(
 find_conan_packages(
   REQUIRES
   boost/1.74.0
+  spdlog/1.8.0
+  fmt/7.1.3
   DO_NOT_FIND
   OPTIONS
   boost:zlib=False
@@ -97,7 +99,8 @@ add_library(
   src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
-                                          CLI11::CLI11 Boost::Boost)
+                                          CLI11::CLI11 Boost::Boost
+                                          spdlog::spdlog fmt::fmt)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 
