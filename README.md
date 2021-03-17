@@ -1,4 +1,4 @@
-![Ubuntu](https://github.com/srydell/tolc/workflows/Ubuntu/badge.svg) ![MacOS](https://github.com/srydell/tolc/workflows/MacOS/badge.svg)
+![Ubuntu](https://github.com/srydell/tolc/workflows/Ubuntu/badge.svg) ![MacOS](https://github.com/srydell/tolc/workflows/MacOS/badge.svg) ![Windows](https://github.com/srydell/tolc/workflows/Windows/badge.svg)
 
 # `Tolc` #
 
