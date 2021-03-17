@@ -112,4 +112,4 @@ jobs:
         echo "Checking if a new release is needed"
         github-release release --user Tolc-Software --repo tolc-beta --tag beta-release --name "Beta release" --description "Beta release" || true
         echo "Pushing the release"
-        github-release upload --user Tolc-Software --repo tolc-beta --tag beta-release --name "tolc-Windows-beta.tar.gz" --file tolc-*.tar.gz --replace
+        github-release upload --user Tolc-Software --repo tolc-beta --tag beta-release --name "tolc-Windows-beta.tar.gz" --file tolc.tar.gz --replace
