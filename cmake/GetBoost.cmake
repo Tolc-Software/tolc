@@ -66,4 +66,6 @@ function(target_link_boost)
 
   # Do not try to link against static libraries (only using headers for now)
   target_compile_definitions(${ARG_TARGET} PRIVATE BOOST_ALL_NO_LIB)
+  # Prefer std::filesystem over boost::filesystem
+  target_compile_definitions(${ARG_TARGET} PRIVATE BOOST_DLL_USE_STD_FS)
 endfunction()
