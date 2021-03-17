@@ -1,13 +1,18 @@
 include_guard()
 
 include(FetchContent)
-FetchContent_Declare(u_test
-                     URL https://github.com/boost-ext/ut/archive/v1.1.8.tar.gz)
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY git@github.com:catchorg/Catch2.git
+  GIT_TAG v2.12.1)
+FetchContent_MakeAvailable(Catch2)
 
-if(NOT u_test_POPULATED)
-  FetchContent_Populate(u_test)
-endif()
-set(utest_include_dir ${u_test_SOURCE_DIR}/include)
+# These are needed to use create_catch2_test
+set(Catch2_FOUND TRUE)
+set(Catch2_INCLUDE_DIRS ${Catch2_SOURCE_DIR}/single_include)
+
+# Defines create_catch2_test
+include(${PROJECT_SOURCE_DIR}/cmake/SetupTest.cmake)
 
 find_package(fmt REQUIRED)
 
@@ -44,16 +49,17 @@ foreach(
   # Ex: CommandLine/parse.cpp -> parse
   get_filename_component(testName ${testFile} NAME_WLE)
 
-  add_executable(${testName} ${testFile})
-
-  # Don't parse boost::ut for diagnostics
-  target_include_directories(${testName} SYSTEM PRIVATE ${utest_include_dir})
-
-  target_link_libraries(${testName} PRIVATE TolcInternal TestUtil)
+  setup_test(
+    TEST_NAME
+    ${testName}
+    SOURCE
+    ${testFile}
+    LIBRARIES
+    TestUtil
+    TolcInternal
+    fmt::fmt)
 
   set(ENABLE_SANITIZER_ADDRESS TRUE)
   set(ENABLE_SANITIZER_MEMORY TRUE)
   enable_sanitizers(${testName})
-
-  add_test(NAME ${testName} COMMAND ${testName})
 endforeach()

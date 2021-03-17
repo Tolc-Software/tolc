@@ -52,7 +52,7 @@ int run(int argc, const char** argv) {
 				outFile.open(config.outputDirectory / file);
 				if (outFile.is_open()) {
 					// Inject the input file aswell
-					outFile << "#include <" << config.inputFile.c_str() << ">\n"
+					outFile << "#include <" << config.inputFile.string() << ">\n"
 					        << content;
 				}
 

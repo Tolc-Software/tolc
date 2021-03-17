@@ -14,7 +14,7 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 	    std::filesystem::is_regular_file(input)) {
 		config.inputFile = input;
 	} else {
-		spdlog::error("Input file could not be found: {}", input.c_str());
+		spdlog::error("Input file could not be found: {}", input.string());
 		return {};
 	}
 
@@ -25,7 +25,7 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 	auto& parserConfig = config.parserConfig;
 	// Add the includes from libcpp
 	parserConfig.m_systemIncludes = TolcInternal::getSystemIncludes(
-	    TolcInternal::getExecutableDirectoryPath());
+	    TolcInternal::getExecutableDirectoryPath().string());
 
 	// Add the user includes
 	for (auto const& include : cli.includes) {

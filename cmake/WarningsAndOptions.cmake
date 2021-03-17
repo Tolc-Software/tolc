@@ -39,6 +39,11 @@ function(add_warnings)
 
   # Set warning flags for different compilers
   if(MSVC)
+    # This allows SYSTEM includes to actually not put diagnostics on the included headers
+    # This should be removed in some future version of CMake:
+    # https://gitlab.kitware.com/cmake/cmake/-/commit/bb61c2d024d508e623813423de3404c63a2232b9#89d801773a4603a18572684211c4c26c1a069d06
+    set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "-imsvc " CACHE STRING "This is used before SYSTEM includes." FORCE)
+
     target_compile_options(
       ${ARG_TARGET}
       PRIVATE /W4

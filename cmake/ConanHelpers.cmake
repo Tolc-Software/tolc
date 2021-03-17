@@ -117,12 +117,21 @@ function(setup_conan_profile)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues PROFILE_TO_CONFIGURE)
+  set(singleValues VARIABLE PROFILE_TO_CONFIGURE)
   set(multiValues)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
                         "${multiValues}" ${ARGN})
+
+  # Set compiler specific flags that will be expanded in the profiles
+  if(MSVC)
+    if("${CMAKE_BUILD_TYPE}" MATCHES "Debug")
+      set(MSVC_RUNTIME_LIBRARY "MTd")
+    else()
+      set(MSVC_RUNTIME_LIBRARY "MT")
+    endif()
+  endif()
 
   # Get variables for writing the conan profile
   string(REPLACE "." ";" versionList ${CMAKE_CXX_COMPILER_VERSION})
@@ -146,4 +155,9 @@ function(setup_conan_profile)
   list(JOIN profileList "." outProfile)
 
   configure_file(${inProfile} ${outProfile} @ONLY)
+  if(ARG_VARIABLE)
+    set(${ARG_VARIABLE}
+        ${outProfile}
+        PARENT_SCOPE)
+  endif()
 endfunction()

@@ -16,7 +16,11 @@ include(cmake/Sanitizers.cmake)
 include(cmake/StaticAnalyzers.cmake)
 
 include(cmake/GetFrontendpy.cmake)
-get_frontend_py(ASSET_NAME Frontend.py-${CMAKE_SYSTEM_NAME}-master.tar.gz)
+set(frontendpy_asset_name "Frontend.py-${CMAKE_SYSTEM_NAME}-master")
+if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
+  set(frontendpy_asset_name "${frontendpy_asset_name}-${CMAKE_BUILD_TYPE}")
+endif()
+get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.gz)
 
 include(cmake/GetParser.cmake)
 
@@ -27,7 +31,11 @@ set(parser_source_switch "")
 if(BUILD_DEPENDENCIES_FROM_SOURCE)
   set(parser_source_switch "BUILD_FROM_SOURCE")
 endif()
-get_parser(ASSET_NAME Parser-${CMAKE_SYSTEM_NAME}-master.tar.gz
+set(parser_asset_name "Parser-${CMAKE_SYSTEM_NAME}-master")
+if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
+  set(parser_asset_name "${parser_asset_name}-${CMAKE_BUILD_TYPE}")
+endif()
+get_parser(ASSET_NAME ${parser_asset_name}.tar.gz
            ${parser_source_switch})
 
 # If we are not building from source we need to create some variables
@@ -70,23 +78,18 @@ endif()
 
 include(cmake/ConanHelpers.cmake)
 # Create the profile from variables known during configure
-setup_conan_profile()
+setup_conan_profile(VARIABLE tolc_conan_profile)
 
 find_conan_packages(
-  REQUIRES CLI11/1.9.1@cliutils/stable PROFILE
-  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
-find_conan_packages(
   REQUIRES
-  boost/1.74.0
-  spdlog/1.8.0
-  fmt/7.1.3
-  DO_NOT_FIND
-  OPTIONS
-  boost:zlib=False
-  boost:bzip2=False
+    CLI11/1.9.1@cliutils/stable
+    spdlog/1.8.0
+    fmt/7.1.3
   PROFILE
-  ${CMAKE_CURRENT_LIST_DIR}/tools/conan_profiles/${CMAKE_SYSTEM_NAME}/clang)
-find_package(Boost REQUIRED)
+    ${tolc_conan_profile})
+
+include(cmake/GetBoost.cmake)
+get_boost(VERSION 1.75.0)
 
 configure_file(
   src/TolcInternal/getSystemIncludes.cpp.in
@@ -99,13 +102,14 @@ add_library(
   src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
-                                          CLI11::CLI11 Boost::Boost
+                                          CLI11::CLI11
                                           spdlog::spdlog fmt::fmt)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 
 add_warnings(TARGET TolcInternal)
 add_options(TARGET TolcInternal)
+target_link_boost(TARGET TolcInternal)
 
 add_executable(tolc src/tolc.main.cpp)
 target_link_libraries(tolc PRIVATE TolcInternal)
