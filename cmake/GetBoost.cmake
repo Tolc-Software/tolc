@@ -1,6 +1,6 @@
 include_guard()
 
-# Downloads the boost project either from 
+# Downloads the boost project either from
 # VERSION - version of boost used
 # Variables exported:
 #   boost_SOURCE_DIR
@@ -62,7 +62,7 @@ function(target_link_boost)
   endif()
 
   # Make boost headers avalable
-  target_include_directories(${ARG_TARGET} PRIVATE ${boost_SOURCE_DIR})
+  target_include_directories(${ARG_TARGET} SYSTEM PRIVATE ${boost_SOURCE_DIR})
 
   # Do not try to link against static libraries (only using headers for now)
   target_compile_definitions(${ARG_TARGET} PRIVATE BOOST_ALL_NO_LIB)
