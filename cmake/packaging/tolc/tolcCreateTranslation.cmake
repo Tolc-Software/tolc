@@ -48,11 +48,17 @@ function(tolc_create_translation)
   tolc_add_library(TARGET ${tolcTargetName} LANGUAGE ${ARG_LANGUAGE} INPUT ${ARG_OUTPUT}/${ARG_TARGET}.cpp)
 
   # The added library target depends on the target being translated
-  add_dependencies(${ARG_TARGET}_${ARG_LANGUAGE} tolc_translate_file_${ARG_TARGET})
+  add_dependencies(${tolcTargetName} tolc_translate_file_${ARG_TARGET})
 
   # NOTE: The user may need to provide additional links if they have their PUBLIC/PRIVATE dependencies missmatched
   target_link_libraries(${tolcTargetName} PRIVATE ${ARG_TARGET})
 
+  set_target_properties(${tolcTargetName}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
+  )
   # This allows the target to be called target_language, but still be imported e.g. in python as 'import target'
   set_target_properties(${tolcTargetName} PROPERTIES OUTPUT_NAME ${ARG_TARGET})
 endfunction()

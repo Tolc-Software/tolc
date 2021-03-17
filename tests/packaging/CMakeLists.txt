@@ -6,7 +6,7 @@ set(test_package ${CMAKE_CURRENT_BINARY_DIR}/test_package/tolc)
 add_test(
   NAME InstallPackage
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-  COMMAND ${CMAKE_COMMAND} --install build --prefix ${test_package})
+  COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR} --prefix ${test_package})
 set_tests_properties(InstallPackage PROPERTIES FIXTURES_SETUP
                                                FixtureInstallPackage)
 

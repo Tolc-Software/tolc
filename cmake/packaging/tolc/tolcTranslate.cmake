@@ -111,8 +111,8 @@ function(tolc_translate_target)
   if(NOT tolc_EXECUTABLE)
     message(FATAL_ERROR "${function_name} called without setting tolc_EXECUTABLE. Please use this module only after calling find_package(tolc).")
   endif()
-  if(NOT EXISTS ${tolc_BIN_DIR}/gather_headers.sh)
-    message(FATAL_ERROR "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.sh")
+  if(NOT EXISTS ${tolc_BIN_DIR}/gather_headers.py)
+    message(FATAL_ERROR "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.py")
   endif()
 
   # Get the public include directories
@@ -124,13 +124,13 @@ function(tolc_translate_target)
   #   #include </home/user/project/include/h0.hpp>
   #   #include </home/user/project/someOtherInclude/h1.hpp>
   #   ...
-  # NOTE: This is meant to be in POSIX shell
+  find_package(Python3 REQUIRED)
   set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc/tolc_${ARG_TARGET}.hpp)
   add_custom_target(
     tolc_get_public_headers_${ARG_TARGET}
     ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMAND ${tolc_BIN_DIR}/gather_headers.sh ${combinedHeader} ${includeDirectories}
+    COMMAND ${Python3_EXECUTABLE} ${tolc_BIN_DIR}/gather_headers.py --combined-header ${combinedHeader} --includes ${includeDirectories}
     BYPRODUCTS ${combinedHeader}
   )
   # Rerun when target needs to be rebuilt

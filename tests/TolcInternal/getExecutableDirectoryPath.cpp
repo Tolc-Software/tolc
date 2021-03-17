@@ -1,18 +1,15 @@
 #include "TolcInternal/getExecutableDirectoryPath.hpp"
-#include <boost/ut.hpp>
+#include <catch2/catch.hpp>
 #include <filesystem>
 
-int main() {
-	using namespace boost::ut;
-
-	"getExecutableDirectoryPath() returns the full path to this test executable"_test =
-	    [] {
-		    auto exePath = TolcInternal::getExecutableDirectoryPath();
-		    // We should get something
-		    expect((!std::filesystem::is_empty(exePath)) >> fatal);
-		    // It has to be the full path
-		    expect(exePath.is_absolute());
-		    // It should be a directory
-		    expect(std::filesystem::is_directory(exePath));
-	    };
+TEST_CASE(
+    "getExecutableDirectoryPath() returns the full path to this test executable",
+    "[getExecutableDirectoryPath]") {
+	auto exePath = TolcInternal::getExecutableDirectoryPath();
+	// We should get something
+	REQUIRE(!std::filesystem::is_empty(exePath));
+	// It has to be the full path
+	REQUIRE(exePath.is_absolute());
+	// It should be a directory
+	REQUIRE(std::filesystem::is_directory(exePath));
 }

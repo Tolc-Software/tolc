@@ -1,5 +1,5 @@
-namespace myLibNS {
-int add(int a, int b) {
-	return a + b;
+namespace myLib {
+int getNumber() {
+	return 3;
 }
 }    // namespace myLibNS

@@ -1,5 +1,5 @@
 # Need 3.11 for FetchContent module
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.15)
 
 project(Consumer)
 
@@ -31,7 +31,7 @@ find_package(Python3 REQUIRED)
 # NOTE: If this fails, the test automatically fails
 add_custom_target(
   importCreatedPyLib ALL
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tolc
   COMMAND ${Python3_EXECUTABLE} -c \"import myLib\"
 )
 # Make sure it only runs after myLib_python is built

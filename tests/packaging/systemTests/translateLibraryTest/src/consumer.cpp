@@ -7,6 +7,12 @@
 #include <string>
 #include <vector>
 
+bool isIncludeStatement(std::string const& line) {
+	std::string include = "#include";
+	// It finds the string at position 0
+	return line.rfind(include, 0) == 0;
+}
+
 int main() {
 	if (!std::filesystem::exists(getExpectedOutFile())) {
 		std::cerr << "Output file does not exist: " << getExpectedOutFile()
@@ -25,7 +31,7 @@ int main() {
 	std::string line;
 	std::vector<std::string> lines;
 	while (std::getline(combinedHeader, line)) {
-		if (!line.empty()) {
+		if (!line.empty() && isIncludeStatement(line)) {
 			lines.push_back(line);
 		}
 	}
@@ -44,24 +50,6 @@ int main() {
 			std::cerr << publicHeader << '\n';
 		}
 		return 1;
-	}
-
-	for (auto const& header : publicHeaders) {
-		std::string expecedInclude =
-		    std::string("#include <") + std::string(header) + std::string(">");
-		if (auto matchedLine =
-		        std::find(lines.begin(), lines.end(), expecedInclude);
-		    matchedLine == lines.end()) {
-			std::cerr
-			    << "Expected include did not appear in the combined header: \n"
-			    << expecedInclude << '\n';
-
-			std::cerr << "The lines in the combined header: " << '\n';
-			for (auto const& line : lines) {
-				std::cerr << line << '\n';
-			}
-			return 1;
-		}
 	}
 
 	return 0;

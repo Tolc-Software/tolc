@@ -9,7 +9,7 @@ install(DIRECTORY ${CMAKE_BINARY_DIR}/system_include
         DESTINATION ${CMAKE_INSTALL_BINDIR})
 # Scripts that will be used by the support libraries
 # Depends on them being next to the tolc executable
-install(PROGRAMS ${PROJECT_SOURCE_DIR}/cmake/packaging/scripts/gather_headers.sh
+install(PROGRAMS ${PROJECT_SOURCE_DIR}/cmake/packaging/scripts/gather_headers.py
         DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install the whole cmake/packaging/tolc directory to be where all the cmake modules lie
