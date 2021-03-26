@@ -41,7 +41,7 @@ function(tolc_add_library)
     # NOTE: Variable injected from tolcConfig file
     get_pybind11(VERSION ${tolc_pybind11_version})
     # Create the python module
-    pybind11_add_module(${ARG_TARGET} ${ARG_INPUT} SYSTEM)
+    pybind11_add_module(${ARG_TARGET} ${ARG_INPUT})
   else()
     error_with_usage(
       "Unknown language input: ${ARG_LANGUAGE}. Valid input: [${tolc_supported_languages}]")

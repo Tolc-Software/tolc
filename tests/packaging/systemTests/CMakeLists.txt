@@ -2,12 +2,6 @@ include_guard()
 
 # See the README for more detailed documentation
 
-# TODO: Remove this
-# NOTE: Temporarily needed since the currently used pybind11
-#       cannot find the correct python version on MacOS.
-#       See the root README.md for more details
-find_package(Python3 REQUIRED)
-
 # On Windows CMAKE_C_COMPILER is not set by default
 if(MSVC)
   set(c_compiler clang-cl)
@@ -30,7 +24,7 @@ foreach(systemTestName translateFileTest translateLibraryTest addLibraryTest cre
     COMMAND
       ${CMAKE_COMMAND} -S. -Bbuild -GNinja
       -DCMAKE_CXX_COMPILER=${cxx_compiler}
-      -DCMAKE_C_COMPILER=${c_compiler} -DCMAKE_BUILD_TYPE=Debug -Dtolc_ROOT=${test_package} -DPYTHON_EXECUTABLE=${Python3_EXECUTABLE})
+      -DCMAKE_C_COMPILER=${c_compiler} -DCMAKE_BUILD_TYPE=Debug -Dtolc_ROOT=${test_package})
   set_tests_properties(Generate${systemTestName} PROPERTIES FIXTURES_SETUP
                                                    FixtureGenerate${systemTestName})
   # Need to install package before generating

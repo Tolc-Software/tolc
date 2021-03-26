@@ -29,6 +29,10 @@ message(STATUS "Using tolc executable: ${tolc_EXECUTABLE}")
 set(tolc_pybind11_version 2.6.2)
 # Comma separated list of supported languages
 set(tolc_supported_languages "python")
+# This will use the latest CMake version of FindPython.
+# The default is a builtin copy of an old CMake version.
+# See https://pybind11.readthedocs.io/en/stable/faq.html#cmake-doesn-t-detect-the-right-python-version
+set(PYBIND11_FINDPYTHON ON)
 
 include(${CMAKE_CURRENT_LIST_DIR}/tolcTranslate.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/GetPybind11.cmake)
