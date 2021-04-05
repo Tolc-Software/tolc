@@ -38,6 +38,7 @@ function(tolc_add_library)
   endif()
 
   if(${ARG_LANGUAGE} MATCHES "python")
+    find_package(Python3 REQUIRED)
     # NOTE: Variable injected from tolcConfig file
     get_pybind11(VERSION ${tolc_pybind11_version})
     # Create the python module
