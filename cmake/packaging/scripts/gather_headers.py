@@ -29,7 +29,6 @@ def main():
     args = parseArguments()
 
     with open(args.combined_header, 'w') as output:
-        output.write("#pragma once\n\n")
         for include_directory in args.includes:
             p = Path(include_directory)
             headers = []
