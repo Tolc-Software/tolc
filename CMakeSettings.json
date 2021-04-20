@@ -3,14 +3,13 @@
     {
       "name": "x64-Clang-Release",
       "generator": "Ninja",
-      "configurationType": "RelWithDebInfo",
+      "configurationType": "Release",
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "-DENABLE_TESTING=ON -DENABLE_PACKAGING=ON",
       "buildCommandArgs": "",
       "ctestCommandArgs": "-j ${env.NUMBER_OF_PROCESSORS} --output-on-failure",
-      "inheritEnvironments": [ "clang_cl_x64_x64" ],
-      "variables": []
+      "inheritEnvironments": [ "clang_cl_x64_x64" ]
     },
     {
       "name": "x64-Clang-Debug",
@@ -21,8 +20,7 @@
       "cmakeCommandArgs": "-DENABLE_TESTING=ON -DENABLE_PACKAGING=ON",
       "buildCommandArgs": "",
       "ctestCommandArgs": "-j ${env.NUMBER_OF_PROCESSORS} --output-on-failure",
-      "inheritEnvironments": [ "clang_cl_x64_x64" ],
-      "variables": []
+      "inheritEnvironments": [ "clang_cl_x64_x64" ]
     }
   ]
 }
