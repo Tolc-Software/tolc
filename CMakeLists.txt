@@ -20,7 +20,7 @@ set(frontendpy_asset_name "Frontend.py-${CMAKE_SYSTEM_NAME}-master")
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
   set(frontendpy_asset_name "${frontendpy_asset_name}-${CMAKE_BUILD_TYPE}")
 endif()
-get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.gz)
+get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.xz)
 
 include(cmake/GetParser.cmake)
 
@@ -35,7 +35,7 @@ set(parser_asset_name "Parser-${CMAKE_SYSTEM_NAME}-master")
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
   set(parser_asset_name "${parser_asset_name}-${CMAKE_BUILD_TYPE}")
 endif()
-get_parser(ASSET_NAME ${parser_asset_name}.tar.gz
+get_parser(ASSET_NAME ${parser_asset_name}.tar.xz
            ${parser_source_switch})
 
 # If we are not building from source we need to create some variables
