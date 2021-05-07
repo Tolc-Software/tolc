@@ -25,7 +25,7 @@ function(get_boost)
   include(FetchContent)
   string(REPLACE "." "_" underscore_version ${ARG_VERSION})
   FetchContent_Declare(boost
-                       URL https://dl.bintray.com/boostorg/release/${ARG_VERSION}/source/boost_${underscore_version}.tar.gz)
+                       URL https://boostorg.jfrog.io/artifactory/main/release/${ARG_VERSION}/source/boost_${underscore_version}.tar.gz)
 
   if(NOT boost_POPULATED)
     FetchContent_Populate(boost)
