@@ -1,0 +1,10 @@
+site_name: tolc
+site_description: 'tolc: Making C++ reusable from other languages'
+site_author: 'Simon Rydell'
+strict: true
+nav:
+  - Introduction: 'index.md'
+  - Installing: 'getting_tolc.md'
+  - Usage: 'usage.md'
+theme:
+  name: material

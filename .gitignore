@@ -23,6 +23,7 @@ tools/conan_profiles/Windows/clang
 # Directories
 !.github
 !cmake
+!docs
 !src
 !tests
 !tools

@@ -80,7 +80,8 @@ addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
 }
 
 std::optional<CommandLine::CLIResult> parse(int argc, const char** argv) {
-	CLI::App app {"Tolc is an automatic translator for C++"};
+	CLI::App app {
+	    "Tolc is an automatic bindings generator between C++ and other languages"};
 
 	CommandLine::CLIResult result;
 	auto apps = CommandLine::addSubcommandsAndOptions(app, result);
