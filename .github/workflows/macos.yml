@@ -97,7 +97,7 @@ jobs:
         echo "Pushing the release"
         github-release upload --user srydell --repo tolc --tag master-release --name "tolc-$(uname)-master.tar.gz" --file tolc-*.tar.gz --replace
 
-    - name: Push beta release to Tolc-Softwar/tolc-beta
+    - name: Push beta release to Tolc-Software/tolc-beta
       if: github.ref == 'refs/heads/master'
       env:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

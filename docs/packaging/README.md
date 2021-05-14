@@ -25,3 +25,14 @@ $ mkdocs build
 ```
 
 The static page will be available under the `site` directory.
+
+## Deploying the site ##
+
+**NOTE:** This is done by the CI/CD system and should not be done manually unless explicitly intended.
+
+```shell
+$ mkdocs gh-deploy --strict --config-file ./mkdocs.yml
+```
+
+This will push a commit to the `gh-pages` branch on the repository containing the content of the `site` directory.
+
