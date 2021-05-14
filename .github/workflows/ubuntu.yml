@@ -99,7 +99,7 @@ jobs:
       run: |
         python -m pip install mkdocs-material
         cd docs/packaging
-        mkdocs gh-deploy --strict --config-file ./mkdocs.yml
+        mkdocs gh-deploy --strict --force --config-file ./mkdocs.yml
 
     - name: Push beta release to Tolc-Software/tolc-beta
       if: github.ref == 'refs/heads/master'

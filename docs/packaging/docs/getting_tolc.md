@@ -1,7 +1,5 @@
 # Installing
 
-You can get `tolc` by either copying some lines of `CMake` into your project, or download the binary from the release page.
-
 ## Via the `CMake` bootstrapper
 
 The easiest and recommended way is to use [the bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake). Just drop the following lines in your `CMake` project.
@@ -15,7 +13,7 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(tolc_bootstrap)
-# Download and uses find_package to locate tolc
+# Download and use find_package to locate tolc
 get_tolc()
 ```
 
