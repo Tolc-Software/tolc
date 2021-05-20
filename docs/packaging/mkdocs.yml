@@ -6,5 +6,6 @@ nav:
   - Introduction: 'index.md'
   - Installing: 'getting_tolc.md'
   - Usage: 'usage.md'
+  - Signup: 'signup.md'
 theme:
   name: material
