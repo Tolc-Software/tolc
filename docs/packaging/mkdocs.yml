@@ -6,6 +6,12 @@ nav:
   - Introduction: 'index.md'
   - Installing: 'getting_tolc.md'
   - Usage: 'usage.md'
+  - Tutorials:
+    - Translating a C++ library: 'translating_an_existing_library.md'
   - Signup: 'signup.md'
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
 theme:
   name: material
