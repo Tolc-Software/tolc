@@ -16,3 +16,8 @@ markdown_extensions:
   - pymdownx.superfences
 theme:
   name: material
+  logo: assets/tolc-symbol-color-RGB.png
+  favicon: assets/tolc-symbol-color-RGB.png
+  palette:
+    primary: black
+    accent: deep purple
