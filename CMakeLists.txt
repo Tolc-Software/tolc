@@ -76,13 +76,19 @@ if(NOT parser_source_switch)
     ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
 endif()
 
+include(FetchContent)
+FetchContent_Declare(
+  cli11_content
+  GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+  GIT_TAG v2.1.1)
+FetchContent_Populate(cli11_content)
+
 include(cmake/ConanHelpers.cmake)
 # Create the profile from variables known during configure
 setup_conan_profile(VARIABLE tolc_conan_profile)
 
 find_conan_packages(
   REQUIRES
-    CLI11/1.9.1@cliutils/stable
     spdlog/1.8.0
     fmt/7.1.3
   PROFILE
@@ -101,8 +107,8 @@ add_library(
   src/TolcInternal/buildConfig.cpp src/CommandLine/parse.cpp
   src/TolcInternal/getSystemIncludes.cpp)
 target_include_directories(TolcInternal PUBLIC src)
+target_include_directories(TolcInternal SYSTEM PRIVATE ${cli11_content_SOURCE_DIR}/include)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
-                                          CLI11::CLI11
                                           spdlog::spdlog fmt::fmt)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)

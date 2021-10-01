@@ -14,7 +14,7 @@ function(add_options)
                         "${multiValues}"
                         ${ARGN})
 
-  target_compile_features(${ARG_TARGET} PRIVATE cxx_std_17)
+  target_compile_features(${ARG_TARGET} PRIVATE cxx_std_20)
   if(NOT MSVC)
     # Create Position Independent Executables when building this lib/executable
     # NOTE: Also needed for static libraries
