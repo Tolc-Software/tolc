@@ -18,6 +18,11 @@ theme:
   name: material
   logo: assets/tolc-symbol-color-RGB.png
   favicon: assets/tolc-symbol-color-RGB.png
+  font:
+    text: IBM Plex
+    code: IBM Plex mono
   palette:
     primary: black
     accent: deep purple
+extra:
+  generator: false
