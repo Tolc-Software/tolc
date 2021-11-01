@@ -42,7 +42,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/Sanitizers.cmake)
 
 foreach(
   testFile
-  CommandLine/parse.cpp TolcInternal/buildConfig.cpp TolcInternal/run.cpp
+  CommandLine/parse.cpp Log/postJSON.cpp TolcInternal/buildConfig.cpp TolcInternal/run.cpp
   TolcInternal/getExecutableDirectoryPath.cpp
   TolcInternal/getSystemIncludes.cpp)
 

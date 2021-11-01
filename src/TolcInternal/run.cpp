@@ -7,6 +7,9 @@
 #include <filesystem>
 #include <fstream>
 
+#include <chrono>
+#include <iostream>
+
 namespace TolcInternal {
 
 /**
@@ -27,7 +30,20 @@ callFrontend(TolcInternal::Config::Language language,
 	return {file, content};
 }
 
+/**
+* Logs the time taken from start
+*/
+void logTimeTaken(decltype(std::chrono::high_resolution_clock::now()) start) {
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto duration =
+	    std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+	std::cout << duration.count() << '\n';
+}
+
 int run(int argc, const char** argv) {
+	// Used to time execution
+	auto start = std::chrono::high_resolution_clock::now();
+
 	if (auto maybeResult = CommandLine::parse(argc, argv)) {
 		auto cliResult = maybeResult.value();
 		// Check if user asked for --help
@@ -56,11 +72,13 @@ int run(int argc, const char** argv) {
 					        << content;
 				}
 
+				logTimeTaken(start);
 				return 0;
 			}
 		}
 	}
 
+	logTimeTaken(start);
 	return 1;
 }
 
