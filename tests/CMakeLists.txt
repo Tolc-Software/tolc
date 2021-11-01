@@ -23,6 +23,7 @@ copy_llvm_includes(
   ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
 
 set(TEST_FILES_DIR ${CMAKE_CURRENT_LIST_DIR}/TestFiles)
+set(TEST_PYTHON_DIR ${CMAKE_CURRENT_LIST_DIR}/TestUtil/python)
 configure_file(
   TestUtil/include/TestUtil/getTestFilesDirectory.hpp.in
   ${CMAKE_CURRENT_LIST_DIR}/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
