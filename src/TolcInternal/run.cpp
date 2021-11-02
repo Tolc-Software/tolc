@@ -7,7 +7,9 @@
 #include <filesystem>
 #include <fstream>
 
+#include "Log/postJSON.hpp"
 #include <chrono>
+#include <fmt/format.h>
 #include <iostream>
 
 namespace TolcInternal {
@@ -33,11 +35,16 @@ callFrontend(TolcInternal::Config::Language language,
 /**
 * Logs the time taken from start
 */
-void logTimeTaken(decltype(std::chrono::high_resolution_clock::now()) start) {
+void logTimeTaken(decltype(std::chrono::high_resolution_clock::now()) start,
+                  bool success) {
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration =
 	    std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	std::cout << duration.count() << '\n';
+	std::string hasSucceeded = success ? "true" : "false";
+	std::string json =
+	    R"({"success": )" + hasSucceeded + std::string(R"(, "time_taken": )") +
+	    std::to_string(static_cast<int64_t>(duration.count())) + "}";
+	Log::postJSON("localhost", "4000", "/report", json);
 }
 
 int run(int argc, const char** argv) {
@@ -72,13 +79,13 @@ int run(int argc, const char** argv) {
 					        << content;
 				}
 
-				logTimeTaken(start);
+				logTimeTaken(start, true);
 				return 0;
 			}
 		}
 	}
 
-	logTimeTaken(start);
+	logTimeTaken(start, false);
 	return 1;
 }
 

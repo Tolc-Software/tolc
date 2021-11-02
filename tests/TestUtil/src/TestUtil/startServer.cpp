@@ -7,7 +7,8 @@
 
 namespace TestUtil {
 
-void startServer(std::filesystem::path serverScript) {
+void startServer(std::filesystem::path serverScript,
+                 std::filesystem::path outFile) {
 	auto venv = std::filesystem::temp_directory_path() / "venv";
 	auto python = venv / "bin" / "python";
 	if (!std::filesystem::exists(venv)) {
@@ -20,7 +21,6 @@ void startServer(std::filesystem::path serverScript) {
 	}
 
 	// Start the server in a new thread (assumes it gets closed gracefully elsewhere)
-	auto outFile = std::filesystem::temp_directory_path() / "out.json";
 	auto serverProcess = std::thread([python, serverScript, outFile]() {
 		std::system(fmt::format("{} {} {}",
 		                        python.string(),
@@ -33,7 +33,7 @@ void startServer(std::filesystem::path serverScript) {
 
 	// Try to ensure the server started, not the cleanest but gets the job done
 	using namespace std::chrono_literals;
-	std::this_thread::sleep_for(2000ms);
+	std::this_thread::sleep_for(4000ms);
 }
 
 }    // namespace TestUtil

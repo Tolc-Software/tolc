@@ -4,7 +4,8 @@
 
 namespace TestUtil {
 /*
- * Creates a server that can be used in tests
+ * Starts the python script stored in serverScript and passes it outFile
  */
-void startServer(std::filesystem::path serverScript);
+void startServer(std::filesystem::path serverScript,
+                 std::filesystem::path outFile);
 }
