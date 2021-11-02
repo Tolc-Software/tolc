@@ -20,8 +20,9 @@ queue = multiprocessing.Queue()
 
 @app.route('/report', methods=['POST'])
 def result():
-    # json (if content-type of application/json is sent with the request)
-    print(f"Json: {request.json}")
+    print(f"Recieved request on /report")
+
+    print(f"JSON: {request.json}")
     with open(sys.argv[1], 'w') as out_file:
         print(f"Writing JSON to {sys.argv[1]}")
         out_file.write(json.dumps(request.json))
