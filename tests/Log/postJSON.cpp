@@ -1,5 +1,6 @@
 #include "Log/postJSON.hpp"
 #include <TestUtil/getTestFilesDirectory.hpp>
+#include <TestUtil/startServer.hpp>
 #include <catch2/catch.hpp>
 #include <filesystem>
 #include <fstream>
@@ -15,6 +16,7 @@ std::string getResult() {
 
 TEST_CASE("Post JSON to localhost", "[postJSON]") {
 	std::string json = R"([{"success": true, "time_taken": 1234}])";
+	TestUtil::startServer(TestUtil::getPythonDirectory() / "server.py");
 	REQUIRE(Log::postJSON("localhost", "5000", "/report", json));
 	auto result = getResult();
 	REQUIRE(json == result);

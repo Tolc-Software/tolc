@@ -28,8 +28,12 @@ configure_file(
   TestUtil/include/TestUtil/getTestFilesDirectory.hpp.in
   ${CMAKE_CURRENT_LIST_DIR}/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
   @ONLY)
-add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp)
+add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp TestUtil/src/TestUtil/startServer.cpp)
+add_warnings(TARGET TestUtil)
+add_options(TARGET TestUtil)
 target_include_directories(TestUtil PUBLIC TestUtil/include)
+find_package(Threads REQUIRED)
+target_link_libraries(TestUtil PRIVATE fmt::fmt Threads::Threads)
 
 if(ENABLE_COVERAGE)
   include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
@@ -64,3 +68,4 @@ foreach(
   set(ENABLE_SANITIZER_MEMORY TRUE)
   enable_sanitizers(${testName})
 endforeach()
+
