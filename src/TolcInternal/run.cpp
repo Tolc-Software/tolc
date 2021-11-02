@@ -44,7 +44,7 @@ void logTimeTaken(decltype(std::chrono::high_resolution_clock::now()) start,
 	std::string json =
 	    R"({"success": )" + hasSucceeded + std::string(R"(, "time_taken": )") +
 	    std::to_string(static_cast<int64_t>(duration.count())) + "}";
-	Log::postJSON("localhost", "4000", "/report", json);
+	Log::postJSON("api.tolc.io", "4000", "/report", json);
 }
 
 int run(int argc, const char** argv) {

@@ -4,7 +4,6 @@
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
-#include <iostream>
 #include <string>
 
 namespace Log {
@@ -61,7 +60,7 @@ bool postJSON(std::string const& host,
 
 		// If we get here then the connection is closed gracefully
 	} catch (std::exception const& e) {
-		std::cerr << "Error: " << e.what() << std::endl;
+		// std::cerr << "Error: " << e.what() << std::endl;
 		return false;
 	}
 	return true;
