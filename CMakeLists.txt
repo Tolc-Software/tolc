@@ -86,13 +86,11 @@ find_conan_packages(
 find_conan_packages(
   REQUIRES
     boost/1.77.0
-    openssl/1.1.1l
   PROFILE
     ${tolc_conan_profile}
   DO_NOT_FIND
 )
 find_package(Boost REQUIRED)
-find_package(OpenSSL REQUIRED)
 
 configure_file(
   src/TolcInternal/getSystemIncludes.cpp.in
@@ -109,7 +107,7 @@ add_library(
 target_include_directories(TolcInternal PUBLIC src)
 target_include_directories(TolcInternal SYSTEM PRIVATE ${cli11_content_SOURCE_DIR}/include)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
-                                          spdlog::spdlog fmt::fmt Boost::headers OpenSSL::OpenSSL)
+                                          spdlog::spdlog fmt::fmt Boost::headers)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 
