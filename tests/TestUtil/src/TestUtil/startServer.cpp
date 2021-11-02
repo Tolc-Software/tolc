@@ -10,11 +10,11 @@ namespace TestUtil {
 void startServer(std::filesystem::path serverScript,
                  std::filesystem::path outFile) {
 	auto venv = std::filesystem::temp_directory_path() / "venv";
-	auto python = venv / "bin" / "python";
+	auto python = venv / "bin" / "python3";
 	if (!std::filesystem::exists(venv)) {
 		// Setup virtualenv
 		// Assumes python is in path
-		std::system(fmt::format("python -m venv {}", venv.string()).c_str());
+		std::system(fmt::format("python3 -m venv {}", venv.string()).c_str());
 		// Install flask
 		std::system(
 		    fmt::format("{} -m pip install flask", python.string()).c_str());
