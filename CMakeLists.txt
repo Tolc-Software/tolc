@@ -83,14 +83,8 @@ find_conan_packages(
   PROFILE
     ${tolc_conan_profile})
 
-find_conan_packages(
-  REQUIRES
-    boost/1.77.0
-  PROFILE
-    ${tolc_conan_profile}
-  DO_NOT_FIND
-)
-find_package(Boost REQUIRED)
+include(cmake/GetBoost.cmake)
+get_boost(VERSION 1.77.0)
 
 configure_file(
   src/TolcInternal/getSystemIncludes.cpp.in
@@ -107,12 +101,13 @@ add_library(
 target_include_directories(TolcInternal PUBLIC src)
 target_include_directories(TolcInternal SYSTEM PRIVATE ${cli11_content_SOURCE_DIR}/include)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
-                                          spdlog::spdlog fmt::fmt Boost::headers)
+                                          spdlog::spdlog fmt::fmt)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 
 add_warnings(TARGET TolcInternal)
 add_options(TARGET TolcInternal)
+target_link_boost(TARGET TolcInternal)
 # Do not try to link against static libraries (only using headers for now)
 target_compile_definitions(TolcInternal PRIVATE BOOST_ALL_NO_LIB)
 # Prefer std::filesystem over boost::filesystem
