@@ -23,12 +23,18 @@ copy_llvm_includes(
   ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
 
 set(TEST_FILES_DIR ${CMAKE_CURRENT_LIST_DIR}/TestFiles)
+set(TEST_PYTHON_DIR ${CMAKE_CURRENT_LIST_DIR}/TestUtil/python)
 configure_file(
   TestUtil/include/TestUtil/getTestFilesDirectory.hpp.in
   ${CMAKE_CURRENT_LIST_DIR}/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
   @ONLY)
-add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp)
+add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp TestUtil/src/TestUtil/startServer.cpp)
+add_warnings(TARGET TestUtil)
+add_options(TARGET TestUtil)
 target_include_directories(TestUtil PUBLIC TestUtil/include)
+find_package(Threads REQUIRED)
+target_link_libraries(TestUtil PRIVATE fmt::fmt Threads::Threads)
+target_link_boost(TARGET TestUtil)
 
 if(ENABLE_COVERAGE)
   include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
@@ -42,7 +48,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/Sanitizers.cmake)
 
 foreach(
   testFile
-  CommandLine/parse.cpp TolcInternal/buildConfig.cpp TolcInternal/run.cpp
+  CommandLine/parse.cpp Log/postJSON.cpp TolcInternal/buildConfig.cpp TolcInternal/run.cpp
   TolcInternal/getExecutableDirectoryPath.cpp
   TolcInternal/getSystemIncludes.cpp)
 
@@ -63,3 +69,4 @@ foreach(
   set(ENABLE_SANITIZER_MEMORY TRUE)
   enable_sanitizers(${testName})
 endforeach()
+

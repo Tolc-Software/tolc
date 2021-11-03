@@ -23,58 +23,47 @@ endif()
 get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.xz)
 
 include(cmake/GetParser.cmake)
-
-option(BUILD_DEPENDENCIES_FROM_SOURCE
-       "Building dependencies from source instead of downloading an asset"
-       FALSE)
-set(parser_source_switch "")
-if(BUILD_DEPENDENCIES_FROM_SOURCE)
-  set(parser_source_switch "BUILD_FROM_SOURCE")
-endif()
 set(parser_asset_name "Parser-${CMAKE_SYSTEM_NAME}-master")
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
   set(parser_asset_name "${parser_asset_name}-${CMAKE_BUILD_TYPE}")
 endif()
-get_parser(ASSET_NAME ${parser_asset_name}.tar.xz
-           ${parser_source_switch})
+get_parser(ASSET_NAME ${parser_asset_name}.tar.xz)
 
 # If we are not building from source we need to create some variables
 # containing the paths to the included system library
-if(NOT parser_source_switch)
-  # Set the include path for the system library in the variable
-  # We are using the standard library shipped
-  # with the downloaded llvm for include paths in the parsing
-  set(PARSER_LLVM_DIR ${parser_SOURCE_DIR}/lib/Parser)
-  get_parser_system_include(
-    VARIABLE
-    SYSTEM_INCLUDE_PATHS
-    PARSER_SOURCE_DIR
-    ${parser_SOURCE_DIR}
-    LIBCPP_ROOT_DIR
-    ${parser_SOURCE_DIR}/lib/Parser
-    LLVM_VERSION
-    ${PARSER_LLVM_VERSION})
+# Set the include path for the system library in the variable
+# We are using the standard library shipped
+# with the downloaded llvm for include paths in the parsing
+set(PARSER_LLVM_DIR ${parser_SOURCE_DIR}/lib/Parser)
+get_parser_system_include(
+  VARIABLE
+  SYSTEM_INCLUDE_PATHS
+  PARSER_SOURCE_DIR
+  ${parser_SOURCE_DIR}
+  LIBCPP_ROOT_DIR
+  ${parser_SOURCE_DIR}/lib/Parser
+  LLVM_VERSION
+  ${PARSER_LLVM_VERSION})
 
-  # These uppercase variables will be used when configuring getSystemIncludes.cpp
-  set(SYSTEM_INCLUDES "")
-  set(TOKEN_STRING "{replaceme}")
-  # Used as a root directory for system header files to be placed next to tolc executable
-  set(relativeIncludeDir system_include)
-  foreach(include ${SYSTEM_INCLUDE_PATHS})
-    string(REPLACE ${parser_SOURCE_DIR}/lib/Parser
-                   ${TOKEN_STRING}/${relativeIncludeDir} formated_include
-                   ${include})
-    list(APPEND SYSTEM_INCLUDES ${formated_include})
-  endforeach()
+# These uppercase variables will be used when configuring getSystemIncludes.cpp
+set(SYSTEM_INCLUDES "")
+set(TOKEN_STRING "{replaceme}")
+# Used as a root directory for system header files to be placed next to tolc executable
+set(relativeIncludeDir system_include)
+foreach(include ${SYSTEM_INCLUDE_PATHS})
+  string(REPLACE ${parser_SOURCE_DIR}/lib/Parser
+                 ${TOKEN_STRING}/${relativeIncludeDir} formated_include
+                 ${include})
+  list(APPEND SYSTEM_INCLUDES ${formated_include})
+endforeach()
 
-  include(cmake/copyLLVMIncludes.cmake)
-  # Copy the llvm headers relative to the tolc executable
-  # (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
-  #  this is called in the same file as the add_executable)
-  copy_llvm_includes(
-    OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
-    ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
-endif()
+include(cmake/copyLLVMIncludes.cmake)
+# Copy the llvm headers relative to the tolc executable
+# (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
+#  this is called in the same file as the add_executable)
+copy_llvm_includes(
+  OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
+  ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
 
 include(FetchContent)
 FetchContent_Declare(
@@ -95,7 +84,7 @@ find_conan_packages(
     ${tolc_conan_profile})
 
 include(cmake/GetBoost.cmake)
-get_boost(VERSION 1.75.0)
+get_boost(VERSION 1.77.0)
 
 configure_file(
   src/TolcInternal/getSystemIncludes.cpp.in
@@ -103,9 +92,12 @@ configure_file(
 
 add_library(
   TolcInternal
-  src/TolcInternal/run.cpp src/TolcInternal/getExecutableDirectoryPath.cpp
-  src/TolcInternal/buildConfig.cpp src/CommandLine/parse.cpp
-  src/TolcInternal/getSystemIncludes.cpp)
+  src/CommandLine/parse.cpp
+  src/Log/postJSON.cpp
+  src/TolcInternal/buildConfig.cpp
+  src/TolcInternal/getExecutableDirectoryPath.cpp
+  src/TolcInternal/getSystemIncludes.cpp
+  src/TolcInternal/run.cpp)
 target_include_directories(TolcInternal PUBLIC src)
 target_include_directories(TolcInternal SYSTEM PRIVATE ${cli11_content_SOURCE_DIR}/include)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
@@ -116,6 +108,10 @@ set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
 add_warnings(TARGET TolcInternal)
 add_options(TARGET TolcInternal)
 target_link_boost(TARGET TolcInternal)
+# Do not try to link against static libraries (only using headers for now)
+target_compile_definitions(TolcInternal PRIVATE BOOST_ALL_NO_LIB)
+# Prefer std::filesystem over boost::filesystem
+target_compile_definitions(TolcInternal PRIVATE BOOST_DLL_USE_STD_FS)
 
 add_executable(tolc src/tolc.main.cpp)
 target_link_libraries(tolc PRIVATE TolcInternal)
