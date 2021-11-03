@@ -1,11 +1,11 @@
 #pragma once
 
-#include <filesystem>
+#include <string>
 
 namespace TestUtil {
 /*
- * Starts the python script stored in serverScript and passes it outFile
+ * Starts a server on ipAdress:port and returns the first request body it gets
+ * NOTE: Blocks
  */
-void startServer(std::filesystem::path serverScript,
-                 std::filesystem::path outFile);
-}
+std::string startServer(std::string const& ipAddress, unsigned short port);
+}    // namespace TestUtil

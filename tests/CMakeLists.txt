@@ -34,6 +34,7 @@ add_options(TARGET TestUtil)
 target_include_directories(TestUtil PUBLIC TestUtil/include)
 find_package(Threads REQUIRED)
 target_link_libraries(TestUtil PRIVATE fmt::fmt Threads::Threads)
+target_link_boost(TARGET TestUtil)
 
 if(ENABLE_COVERAGE)
   include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
