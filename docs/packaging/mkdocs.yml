@@ -9,6 +9,10 @@ nav:
   - Usage: 'usage.md'
   - Tutorials:
     - Translating a C++ library: 'translating_an_existing_library.md'
+  - CMake:
+    - Interface: 'cmake/cmake.md'
+  - Python:
+    - Conversions: 'python/conversions.md'
   - Signup: 'signup.md'
 markdown_extensions:
   - pymdownx.highlight

@@ -5,7 +5,7 @@ function(tolc_create_translation)
   set(prefix ARG)
   set(noValues)
   set(singleValues TARGET LANGUAGE OUTPUT)
-  set(multiValues INCLUDES)
+  set(multiValues)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
