@@ -21,6 +21,7 @@ if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
   set(frontendpy_asset_name "${frontendpy_asset_name}-${CMAKE_BUILD_TYPE}")
 endif()
 get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.xz)
+copy_frontend_py_docs(SRC_DIR ${frontend_py_SOURCE_DIR})
 
 include(cmake/GetParser.cmake)
 set(parser_asset_name "Parser-${CMAKE_SYSTEM_NAME}-master")
