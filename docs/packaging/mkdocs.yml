@@ -12,7 +12,9 @@ nav:
   - CMake:
     - Interface: 'cmake/cmake.md'
   - Python:
+    - Introduction: 'python/introduction.md'
     - Conversions: 'python/conversions.md'
+    - Template Naming Convention: 'python/template_naming_convention.md'
   - Signup: 'signup.md'
 markdown_extensions:
   - pymdownx.highlight

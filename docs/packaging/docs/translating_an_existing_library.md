@@ -1,4 +1,4 @@
-# Using an existing C++ library from python #
+# Translating a C++ library #
 
 In this tutorial we are going to use `tolc` to create `python` bindings to the `C++` library [tolc-demo](https://github.com/Tolc-Software/tolc-demo). Start by cloning the library
 
