@@ -15,6 +15,7 @@ nav:
     - Introduction: 'python/introduction.md'
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
+    - FAQ: 'python/FAQ.md'
   - Signup: 'signup.md'
 markdown_extensions:
   - pymdownx.highlight

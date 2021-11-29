@@ -26,7 +26,7 @@ find_tolc()
 message(STATUS "Using tolc executable: ${tolc_EXECUTABLE}")
 
 ### Config variables: These determine the behaviour of tolc ###
-set(tolc_pybind11_version 2.7.1)
+set(tolc_pybind11_version 2.8.1)
 # Comma separated list of supported languages
 set(tolc_supported_languages "python")
 
