@@ -12,7 +12,7 @@ function(get_pybind11)
 
   if(NOT ARG_VERSION)
     message(
-      FATAL_ERROR "Must provide a version. e.g. getPybind11(VERSION 2.6.2)")
+      FATAL_ERROR "Must provide a version. e.g. getPybind11(VERSION 2.8.1)")
   endif()
 
   # All fetchcontent stuff uses lowercase names

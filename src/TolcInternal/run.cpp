@@ -17,19 +17,16 @@ namespace TolcInternal {
 /**
   * Check the language passed in an call the appropriate frontend on the input namespace
   */
-std::pair<std::filesystem::path, std::string>
+std::optional<std::pair<std::filesystem::path, std::string>>
 callFrontend(TolcInternal::Config::Language language,
              IR::Namespace const& globalNamespace,
              std::string const& moduleName) {
-	std::filesystem::path file;
-	std::string content;
 	switch (language) {
 		case TolcInternal::Config::Language::Python:
-			std::tie(file, content) =
-			    Frontend::Python::createModule(globalNamespace, moduleName);
+			return Frontend::Python::createModule(globalNamespace, moduleName);
 			break;
 	}
-	return {file, content};
+	return std::nullopt;
 }
 
 /**
@@ -65,22 +62,23 @@ int run(int argc, const char** argv) {
 			// Try to parse it
 			if (auto maybeGlobalNamespace =
 			        Parser::parseFile(config.inputFile, config.parserConfig)) {
-				auto [file, content] =
-				    callFrontend(config.language,
-				                 maybeGlobalNamespace.value(),
-				                 config.moduleName);
+				if (auto output = callFrontend(config.language,
+				                               maybeGlobalNamespace.value(),
+				                               config.moduleName)) {
+					auto& [file, content] = output.value();
+					std::filesystem::create_directories(config.outputDirectory);
+					std::ofstream outFile;
+					outFile.open(config.outputDirectory / file);
+					if (outFile.is_open()) {
+						// Inject the input file aswell
+						outFile << "#include <" << config.inputFile.string()
+						        << ">\n"
+						        << content;
+					}
 
-				std::filesystem::create_directories(config.outputDirectory);
-				std::ofstream outFile;
-				outFile.open(config.outputDirectory / file);
-				if (outFile.is_open()) {
-					// Inject the input file aswell
-					outFile << "#include <" << config.inputFile.string() << ">\n"
-					        << content;
+					logTimeTaken(start, true);
+					return 0;
 				}
-
-				logTimeTaken(start, true);
-				return 0;
 			}
 		}
 	}
