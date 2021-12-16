@@ -97,7 +97,7 @@ jobs:
     - name: Deploy documentation to github-pages
       if: github.ref == 'refs/heads/master'
       run: |
-        python -m pip install mkdocs
+        python -m pip install mkdocs-material
         cd docs/packaging
         mkdocs gh-deploy --strict --force --config-file ./mkdocs.yml
 
