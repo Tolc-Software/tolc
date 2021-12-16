@@ -1,0 +1,17 @@
+<!--
+
+-->
+{% if not nav_item.children %}
+<li {% if nav_item.active %}class="active nav-el" {% else %} class="nav-el" {% endif %}>
+    <a href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
+</li>
+{% else %}
+<li class="nav-el">
+    <a class="nav-group has-text-bold">{{ nav_item.title }} <span class="nav-arrow">&#9656;</span></a>
+    <ul class="nested-nav-el is-hidden ml-4">
+        {% for nav_item in nav_item.children %}
+        {% include "nav.html" %}
+        {% endfor %}
+    </ul>
+</li>
+{% endif %}
