@@ -5,6 +5,7 @@
 
 hljs.highlightAll();
 
+/* side navbar with nested elements */
 $(".nav-group").click(function() {
 	let nestedNav = $(this).parent().find(".nested-nav-el");
 	if (nestedNav.hasClass("is-hidden")) {

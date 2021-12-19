@@ -1,0 +1,35 @@
+/* Tab botom line color */
+.tabs ul {
+	border-bottom-color: #1e1e1e !important;
+}
+
+/* Tab color when active */
+.tabs.is-boxed li.is-active a {
+	background-color: #1e1e1e;
+	border-color: #1e1e1e;
+	border-bottom-color: transparent !important;
+}
+
+/* Tab color when hovered */
+.tabs.is-boxed a:hover {
+	background-color: #1e1e1e;
+	border-bottom-color: #1e1e1e;
+	color: #00dcff;
+}
+
+/* Tab font color when active */
+.tabs li.is-active a {
+	color: #00dcff;
+}
+
+/* Tab font color */
+.tabs a {
+	font-family: 'IBM Plex Mono', monospace;
+	color: #fff;
+}
+
+/* Tab font color when hovered */
+.tabs a:hover {
+	color: #fff;
+}
+

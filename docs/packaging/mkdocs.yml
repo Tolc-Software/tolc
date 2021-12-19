@@ -5,7 +5,7 @@ site_url: 'https://srydell.github.io/tolc/'
 strict: true
 nav:
   - Introduction: 'index.md'
-  - Installing: 'getting_tolc.md'
+  - Installing: 'installing.md'
   - Usage: 'usage.md'
   - Guides:
     - Translating a C++ library: 'guides/translating_a_cpp_library.md'
@@ -16,7 +16,7 @@ nav:
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
   - FAQ: 'python/FAQ.md'
-  - Signup: 'signup.md'
+  - Newsletter: 'newsletter.md'
 markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite

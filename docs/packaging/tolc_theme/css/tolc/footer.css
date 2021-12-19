@@ -1,0 +1,16 @@
+/* link font color */
+.footer-link {
+	color: #fff;
+}
+
+/* link font color when hovered */
+.footer-link:hover {
+	color: #00dcff;
+}
+
+.vert-mirrored {
+	display: inline-block;
+	-webkit-transform:rotate(180deg);
+	-moz-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+}

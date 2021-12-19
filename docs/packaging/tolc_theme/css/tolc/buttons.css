@@ -1,0 +1,28 @@
+.red-button {
+	background-color: #ff1500;
+	border-color: #ff1500;
+	color: #fff;
+	font-weight: bold;
+}
+
+.red-button:hover {
+	/* Two shades darker red */
+	background-color: #cc1100;
+	border-color: #cc1100;
+	color: #fff;
+	font-weight: bold;
+}
+
+.red-outline-button {
+	background-color: #000;
+	border-color: #ff1500;
+	color: #fff;
+	font-weight: bold;
+}
+
+.red-outline-button:hover {
+	color: #fff;
+	/* Two shades darker red */
+	border-color: #cc1100;
+	font-weight: bold;
+}

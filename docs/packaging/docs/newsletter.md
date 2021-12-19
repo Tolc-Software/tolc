@@ -1,4 +1,4 @@
-# Sign up for newsletter #
+# Sign Up for Newsletter #
 
 <div id="mc_embed_signup">
   <form action="https://gmail.us1.list-manage.com/subscribe/post?u=61a322dd0db4f4d2d884afc72&amp;id=7518ea45f7" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -22,7 +22,7 @@
       </div>
       <div class="indicates-required mt-1"><span class="asterisk">*</span> indicates required
       <div class="clear">
-        <input type="submit" value="Sign Up" name="subscribe" id="sign-up" class="button mt-4">
+        <input type="submit" value="Sign Up" name="subscribe" id="sign-up" class="button red-button mt-4">
       </div>
     </div>
   </form>

@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans+Condensed:ital@0;1&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ "assets/tolc-symbol-color-RGB.png"|url }}">
 
@@ -35,21 +36,22 @@
 <body>
     <main class="container">
 
-        <nav class="navbar has-background-black" role="navigation" aria-label="main navigation">
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
             <div class="navbar-brand has-background-black">
                 <a class="navbar-item" href="https://docs.tolc.io">
                     <img src="{{ "assets/tolc-symbol-color-RGB.png"|url }}">
                 </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu has-background-black">
-                <div class="navbar-start">
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
                     <a class="navbar-item is-size-4" href="https://docs.tolc.io/">Documentation</a>
+                    <a class="navbar-item is-size-4" href="https://live.tolc.io/">Live Demo</a>
                 </div>
             </div>
         </nav>
@@ -62,7 +64,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div id="main-content" class="column is-half has-text-white mb-4 mx-4">
+            <div id="main-markdown" class="column is-half has-text-white mb-4 mx-4">
                 {% block content %}
                 {{ page.content }}
                 {% endblock %}
@@ -71,23 +73,23 @@
             </div>
         </div>
 
-        <footer class="footer has-background-black">
+        <footer id="footer" class="footer has-background-black">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-narrow">
                     {% if page.previous_page %}
-                    <a href="{{ page.previous_page.url|url }}" title="{{ page.previous_page.title }}">&#8592; Previous Page</a>
+                    <a class="footer-link" href="{{ page.previous_page.url|url }}" title="{{ page.previous_page.title }}"><span class="vert-mirrored">&#10142;</span> Previous Page</a>
                     {% else %}
-                    &#8592; Previous Page
+                    <span class="vert-mirrored">&#10142;</span> Previous Page
                     {% endif %}
                 </div>
                 <div class="column is-narrow">
-                    <a id="sign-up" href="https://docs.tolc.io/signup/">Sign Up for Newsletter</a>
+                    <a id="sign-up" class="footer-link" href="https://docs.tolc.io/signup/">Sign Up for Newsletter</a>
                 </div>
                 <div class="column is-narrow">
                     {% if page.next_page %}
-                    <a href="{{ page.next_page.url|url }}" title="{{ page.next_page.title }}" />Next Page &#8594;</a>
+                    <a class="footer-link" href="{{ page.next_page.url|url }}" title="{{ page.next_page.title }}" />Next Page &#10142;</a>
                     {% else %}
-                    Next Page &#8594;
+                    Next Page &#10142;
                     {% endif %}
                 </div>
             </div>

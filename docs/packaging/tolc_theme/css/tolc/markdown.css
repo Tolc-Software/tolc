@@ -1,0 +1,114 @@
+#main-markdown code, pre {
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+#main-markdown h1 {
+	font-size: 2.5rem;
+	margin-bottom: .5rem;
+}
+
+#main-markdown h2 {
+	font-size: 2rem;
+	margin-bottom: .5rem;
+	margin-top: .5rem;
+}
+
+#main-markdown h3 {
+	font-size: 1.5rem;
+	margin-bottom: .5rem;
+	margin-top: .5rem;
+}
+
+#main-markdown h4 {
+	font-size: 1.25rem;
+	margin-bottom: .5rem;
+	margin-top: .5rem;
+}
+
+#main-markdown table {
+	margin-bottom: .75rem;
+	margin-top: .75rem;
+}
+
+/* Headers */
+#main-markdown table th {
+	font-weight: bold;
+	font-size: 1.25rem;
+	color: #fff;
+}
+
+/* Data entry in table */
+#main-markdown td, th {
+	padding-bottom: .25rem;
+	padding-top: .25rem;
+	padding-left: .5rem;
+	padding-right: .5rem;
+	border-bottom: 1px solid #9600ff;
+}
+
+#main-markdown .toc {
+	font-size: 1rem;
+	/* To line up with side nav */
+	padding-top: .75rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #9600ff;
+}
+
+#main-markdown .toc::before {
+	content: "Table of Contents:";
+	color: #9600ff;
+	font-weight: bold;
+}
+
+#main-markdown div.toc a {
+	color: #fff;
+}
+
+#main-markdown div.toc a:hover {
+	color: #00dcff;
+}
+
+#main-markdown div.toc li {
+	padding-top: 0.125rem;
+	padding-bottom: 0.125rem;
+}
+
+#main-markdown div.toc a:before {
+	/* Four spaces and a bullet */
+	content: "\00a0\00a0\00a0\00a0\2022\ ";
+}
+
+#main-markdown pre {
+	background-color: #000;
+	margin-bottom: .75rem;
+	margin-top: .75rem;
+}
+
+#main-markdown code {
+	/* Same as editors on live.tolc.io */
+	background-color: #1e1e1e;
+}
+
+#main-markdown p > a {
+	font-style: italic;
+	color: #fff;
+}
+
+#main-markdown p > a:hover {
+	font-style: italic;
+	color: #00dcff;
+}
+
+#main-markdown .asterisk {
+	color: #ff1500;
+}
+
+#main-markdown > ol {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+#main-markdown > ul {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
