@@ -9,25 +9,25 @@
 
 #main-markdown h2 {
 	font-size: 2rem;
-	margin-bottom: .5rem;
-	margin-top: .5rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 #main-markdown h3 {
 	font-size: 1.5rem;
-	margin-bottom: .5rem;
-	margin-top: .5rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 #main-markdown h4 {
 	font-size: 1.25rem;
-	margin-bottom: .5rem;
-	margin-top: .5rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 #main-markdown table {
-	margin-bottom: .75rem;
-	margin-top: .75rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 /* Headers */
@@ -47,7 +47,7 @@
 }
 
 #main-markdown .toc {
-	font-size: 1rem;
+	font-size: 1.25rem;
 	/* To line up with side nav */
 	padding-top: .75rem;
 	padding-bottom: 1rem;
@@ -58,6 +58,7 @@
 	content: "Table of Contents:";
 	color: #9600ff;
 	font-weight: bold;
+	font-size: 1.5rem;
 }
 
 #main-markdown div.toc a {
@@ -80,8 +81,8 @@
 
 #main-markdown pre {
 	background-color: #000;
-	margin-bottom: .75rem;
-	margin-top: .75rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 #main-markdown code {
@@ -92,6 +93,11 @@
 #main-markdown p > a {
 	font-style: italic;
 	color: #fff;
+}
+
+#main-markdown p > img {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
 #main-markdown p > a:hover {
