@@ -18,12 +18,24 @@ The language to translate to. Will determine the output format of `tolc`. Will a
 
 Determines the output directory for the bindings.
 
+* `HEADERS`
+
+Takes a list of headers relative the current file. Adds headers to be translated. Useful for adding forward declarated templates or together with `DO_NOT_SEARCH_FOR_HEADERS` to declare which part of the public interface to translate.
+
+* `DO_NOT_SEARCH_FOR_HEADERS`
+
+Disable searching the public interface of `TARGET` for header files.
+
 ## Example ##
 
 ```cmake
 tolc_create_translation(
   TARGET MyLib
   LANGUAGE python
+  HEADERS
+    include/MyLib.hpp
+    include/myForwardDeclarations.hpp
+  DO_NOT_SEARCH_FOR_HEADERS
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings
 )
 ```

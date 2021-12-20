@@ -3,9 +3,9 @@ include_guard()
 function(tolc_create_translation)
   # Define the supported set of keywords
   set(prefix ARG)
-  set(noValues)
+  set(noValues DO_NOT_SEARCH_FOR_HEADERS)
   set(singleValues TARGET LANGUAGE OUTPUT)
-  set(multiValues)
+  set(multiValues HEADERS)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -32,9 +32,15 @@ function(tolc_create_translation)
     error_with_usage(
       "Missing LANGUAGE argument. The language module to download. E.g. for 'python', this would automatically download pybind11.")
   endif()
-  set(moduleName ${ARG_MODULE_NAME})
-  if(NOT ARG_MODULE_NAME)
-    set(moduleName ${ARG_TARGET})
+
+  # Make sure the headers flag gets propadated correctly
+  set(headers "")
+  if(ARG_HEADERS)
+    set(headers HEADERS ${ARG_HEADERS})
+  endif()
+  set(doNotSearchForHeaders "")
+  if(ARG_DO_NOT_SEARCH_FOR_HEADERS)
+    set(doNotSearchForHeaders DO_NOT_SEARCH_FOR_HEADERS)
   endif()
 
   # What the actual target name will be
@@ -42,7 +48,7 @@ function(tolc_create_translation)
   message(STATUS "Creating translation to language ${ARG_LANGUAGE} in target ${tolcTargetName}")
 
   # Use the input target to create the translation
-  tolc_translate_target(TARGET ${ARG_TARGET} LANGUAGE ${ARG_LANGUAGE} OUTPUT ${ARG_OUTPUT})
+  tolc_translate_target(TARGET ${ARG_TARGET} ${doNotSearchForHeaders} ${headers} LANGUAGE ${ARG_LANGUAGE} OUTPUT ${ARG_OUTPUT})
   # Add a new target, representing the translation
   # TODO: This should be changed when tolc can handle outputs explicitly (not just a directory, but a file)
   tolc_add_library(TARGET ${tolcTargetName} LANGUAGE ${ARG_LANGUAGE} INPUT ${ARG_OUTPUT}/${ARG_TARGET}.cpp)
