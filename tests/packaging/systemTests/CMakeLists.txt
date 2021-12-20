@@ -18,7 +18,7 @@ else()
 endif()
 
 # Generate helpers for the tests
-foreach(systemTestName translateFileTest translateLibraryTest addLibraryTest createTranslationTest)
+foreach(systemTestName translateFileTest translateLibraryWithHeaders translateLibraryTest addLibraryTest createTranslationTest)
   # Path to the consumer project
   set(consumer ${CMAKE_CURRENT_LIST_DIR}/${systemTestName})
 

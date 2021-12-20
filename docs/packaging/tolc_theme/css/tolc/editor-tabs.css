@@ -25,6 +25,7 @@
 /* Tab font color */
 .tabs a {
 	font-family: 'IBM Plex Mono', monospace;
+	font-size: 16px;
 	color: #fff;
 }
 

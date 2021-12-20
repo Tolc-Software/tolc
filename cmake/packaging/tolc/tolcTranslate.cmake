@@ -80,9 +80,9 @@ endfunction()
 function(tolc_translate_target)
   # Define the supported set of keywords
   set(prefix ARG)
-  set(noValues)
+  set(noValues DO_NOT_SEARCH_FOR_HEADERS)
   set(singleValues TARGET LANGUAGE OUTPUT)
-  set(multiValues)
+  set(multiValues HEADERS)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -115,6 +115,17 @@ function(tolc_translate_target)
     message(FATAL_ERROR "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.py")
   endif()
 
+  set(extraHeaders "")
+  if(ARG_HEADERS)
+    set(extraHeaders --extra-headers)
+  endif()
+
+  set(doNotSearchForHeaders "")
+  if(ARG_DO_NOT_SEARCH_FOR_HEADERS)
+    set(doNotSearchForHeaders "--do-not-search-for-headers")
+  endif()
+
+
   # Get the public include directories
   get_target_property(includeDirectories ${ARG_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
   string(REPLACE ";" " " shellIncludes ${includeDirectories})
@@ -130,7 +141,7 @@ function(tolc_translate_target)
     tolc_get_public_headers_${ARG_TARGET}
     ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMAND ${Python3_EXECUTABLE} ${tolc_BIN_DIR}/gather_headers.py --combined-header ${combinedHeader} --includes ${includeDirectories}
+    COMMAND ${Python3_EXECUTABLE} ${tolc_BIN_DIR}/gather_headers.py --combined-header ${combinedHeader} --includes ${includeDirectories} ${doNotSearchForHeaders} ${extraHeaders} ${ARG_HEADERS}
     BYPRODUCTS ${combinedHeader}
   )
   # Rerun when target needs to be rebuilt

@@ -11,6 +11,7 @@ nav:
     - Translating a C++ library: 'guides/translating_a_cpp_library.md'
   - CMake:
     - Interface: 'cmake/interface.md'
+    - Reference: 'cmake/reference.md'
   - Python:
     - Introduction: 'python/introduction.md'
     - Conversions: 'python/conversions.md'

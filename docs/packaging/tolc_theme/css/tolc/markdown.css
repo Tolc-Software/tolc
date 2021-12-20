@@ -3,24 +3,20 @@
 }
 
 #main-markdown h1 {
-	font-size: 2.5rem;
 	margin-bottom: .5rem;
 }
 
 #main-markdown h2 {
-	font-size: 2rem;
 	margin-bottom: 1.5rem;
 	margin-top: 1.5rem;
 }
 
 #main-markdown h3 {
-	font-size: 1.5rem;
 	margin-bottom: 1.5rem;
 	margin-top: 1.5rem;
 }
 
 #main-markdown h4 {
-	font-size: 1.25rem;
 	margin-bottom: 1.5rem;
 	margin-top: 1.5rem;
 }
@@ -33,7 +29,6 @@
 /* Headers */
 #main-markdown table th {
 	font-weight: bold;
-	font-size: 1.25rem;
 	color: #fff;
 }
 
@@ -46,8 +41,14 @@
 	border-bottom: 1px solid #9600ff;
 }
 
+#main-markdown ul > li::before {
+	/* A bullet and a space */
+	content: "\2022\00a0";
+	color: #9600ff;
+	font-weight: bold;
+}
+
 #main-markdown .toc {
-	font-size: 1.25rem;
 	/* To line up with side nav */
 	padding-top: .75rem;
 	padding-bottom: 1rem;
@@ -58,7 +59,6 @@
 	content: "Table of Contents:";
 	color: #9600ff;
 	font-weight: bold;
-	font-size: 1.5rem;
 }
 
 #main-markdown div.toc a {

@@ -1,0 +1,18 @@
+# Ignore everything
+/*
+
+# Ignore all files named (wherever they are):
+.DS_Store
+.log
+
+# Except these
+# Files
+!.gitignore
+!CMakeLists.txt
+
+# Directories
+!src
+!include
+
+# Generated file
+src/check_variables.hpp

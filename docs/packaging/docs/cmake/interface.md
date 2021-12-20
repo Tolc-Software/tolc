@@ -57,7 +57,7 @@ set_target_properties(
   Math
   PROPERTIES
     CXX_STANDARD
-      14
+      17
     CXX_STANDARD_REQUIRED
       ON
     CXX_EXTENSIONS
