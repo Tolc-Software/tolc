@@ -1,28 +1,46 @@
 .red-button {
 	background-color: #ff1500;
 	border-color: #ff1500;
-	color: #fff;
-	font-weight: bold;
+	color: #fff !important;
 }
 
-.red-button:hover {
+.red-button.is-hovered, .red-button:hover {
 	/* Two shades darker red */
-	background-color: #cc1100;
 	border-color: #cc1100;
+	background-color: #cc1100 !important;
+	color: #fff !important;
+}
+
+.red-button.is-active, .red-button:active {
+	border-color: #cc1100;
+	background-color: #cc1100 !important;
 	color: #fff;
-	font-weight: bold;
+}
+
+.red-button:focus {
+	box-shadow: 0 0 0 .125em #cc1100 !important;
+	border-color: #cc1100 !important;
 }
 
 .red-outline-button {
 	background-color: #000;
 	border-color: #ff1500;
 	color: #fff;
-	font-weight: bold;
 }
 
 .red-outline-button:hover {
 	color: #fff;
 	/* Two shades darker red */
 	border-color: #cc1100;
-	font-weight: bold;
+}
+
+.red-outline-button.is-active, .red-outline-button:active {
+	border-color: #cc1100 !important;
+	color: #fff !important;
+}
+
+.red-outline-button.is-focused, .red-outline-button:focus {
+	border-color: #cc1100 !important;
+	color: #fff !important;
+	box-shadow: 0 0 0 .125em #cc1100 !important;
 }

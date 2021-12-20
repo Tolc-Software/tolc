@@ -65,10 +65,10 @@ tolc_create_translation(
 This will read the public API of `Math`, create bindings to `python` and put them in `${CMAKE_CURRENT_BINARY_DIR}/python-bindings` (typically `build/python-bindings`). It also created the target `Math_python` (`<TARGET>_<LANGUAGE>`) for the bindings, and is just a normal build target. Configuring the project
 
 ```shell
-cmake -S. -Bbuild -DPYTHON_EXECUTABLE=$(which python3)
+cmake -S. -Bbuild
 ```
 
-Note that the `-DPYTHON_EXECUTABLE=$(which python3)` is only strictly necessary on MacOS since it might otherwise use the system install of `python`. We can build the project
+We can build the project
 
 ```shell
 cmake --build build

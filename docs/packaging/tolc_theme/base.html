@@ -50,21 +50,21 @@
 
             <div id="navbar-links" class="navbar-menu has-background-black">
                 <div class="navbar-end">
-                    <a class="navbar-item is-size-3" href="https://docs.tolc.io/">Documentation</a>
-                    <a class="navbar-item is-size-3" href="https://live.tolc.io/">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://docs.tolc.io/">Documentation</a>
+                    <a class="navbar-item is-size-5" href="https://live.tolc.io/">Live Demo</a>
                 </div>
             </div>
         </nav>
 
         <div class="columns is-multiline">
-            <div id="side-nav" class="column is-one-quarter is-size-3 mt-2">
+            <div id="side-nav" class="column is-one-quarter is-size-5">
                 <ul>
                     {% for nav_item in nav %}
                     {% include "nav.html" %}
                     {% endfor %}
                 </ul>
             </div>
-            <div id="main-markdown" class="column is-half is-size-4 has-text-white mb-4 mx-4">
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
                 {% block content %}
                 {{ page.content }}
                 {% endblock %}
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <footer id="footer" class="footer has-background-black is-size-4">
+        <footer id="footer" class="footer has-background-black is-size-5">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-narrow">
                     {% if page.previous_page %}
