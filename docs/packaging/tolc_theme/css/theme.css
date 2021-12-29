@@ -13,6 +13,10 @@ html, body {
 	font-family: 'IBM Plex Sans', sans-serif;
 }
 
+#sign-up {
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .has-background-black {
 	background-color: #000 !important;
 }
