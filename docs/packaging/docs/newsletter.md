@@ -5,13 +5,13 @@
     <div id="mc_embed_signup_scroll">
       </div>
       <div class="mc-field-group field">
-        <label class="label has-text-white mt-4" for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+        <label class="label has-text-white mt-4 is-size-5 has-text-weight-medium" for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
         </label>
-        <input type="email" value="" name="EMAIL" class="required email input" placeholder="me@example.com" id="mce-EMAIL">
+        <input type="email" value="" name="EMAIL" class="required email input is-size-5" placeholder="me@example.com" id="mce-EMAIL">
       </div>
       <div class="mc-field-group">
-      <label for="mce-FNAME" class="label has-text-white mt-4">What do you want to use tolc for?</label>
-      <input type="text" value="" name="FNAME" class="input" id="mce-FNAME">
+      <label for="mce-FNAME" class="label has-text-white mt-4 is-size-5 has-text-weight-medium">What do you want to use tolc for?</label>
+      <input type="text" value="" name="FNAME" class="input is-size-5" id="mce-FNAME">
       </div>
       <div id="mce-responses" class="clear">
         <div class="response" id="mce-error-response" style="display:none"></div>
@@ -20,9 +20,9 @@
       <div style="position: absolute; left: -5000px;" aria-hidden="true">
         <input type="text" name="b_61a322dd0db4f4d2d884afc72_7518ea45f7" tabindex="-1" value="">
       </div>
-      <div class="indicates-required mt-1"><span class="asterisk">*</span> indicates required
+      <div class="indicates-required mt-1 is-size-5"><span class="asterisk">*</span> indicates required
       <div class="clear">
-        <input type="submit" value="Sign Up" name="subscribe" id="sign-up" class="button red-button mt-4">
+        <input type="submit" value="Sign Up" name="subscribe" id="sign-up" class="button red-button mt-4 is-size-5">
       </div>
     </div>
   </form>
