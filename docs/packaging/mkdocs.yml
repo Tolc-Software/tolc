@@ -12,16 +12,14 @@ nav:
   - CMake:
     - Interface: 'cmake/interface.md'
     - Reference: 'cmake/reference.md'
-  - Python Frontend:
+  - Python Interface:
     - Introduction: 'python/introduction.md'
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
   - FAQ: 'python/FAQ.md'
   - Newsletter: 'newsletter.md'
 markdown_extensions:
-  - pymdownx.highlight
-  - pymdownx.inlinehilite
-  - pymdownx.superfences
+  - fenced_code
 theme:
   name: null
   custom_dir: 'tolc_theme'

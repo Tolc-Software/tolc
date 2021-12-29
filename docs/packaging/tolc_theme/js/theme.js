@@ -5,11 +5,6 @@
 
 hljs.highlightAll();
 
-/* side navbar with nested elements */
-$(".nav-group").click(function() {
-	$(this).parent().find(".nested-nav-el").toggleClass("is-hidden");
-});
-
 // Expand navburger on small screens
 document.addEventListener('DOMContentLoaded', () => {
 	// Get all "navbar-burger" elements

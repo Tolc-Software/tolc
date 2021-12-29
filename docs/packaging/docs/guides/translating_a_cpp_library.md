@@ -76,7 +76,7 @@ cmake --build build
 
 Now `tolc` has read the public API of `Math`, created a set of `python` bindings, and then we used our normal compiler to build a `CPython` extension. We can now find and use the extension from `build/tolc`
 
-```shell
+```python
 cd build/tolc
 python3
 >>> import Math
