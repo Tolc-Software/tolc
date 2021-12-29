@@ -10,10 +10,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans+Condensed:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ "assets/tolc-symbol-color-RGB.png"|url }}">
 
@@ -38,7 +38,7 @@
 
         <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
             <div class="navbar-brand has-background-black">
-                <a class="navbar-item" href="https://docs.tolc.io">
+                <a class="navbar-item" href="https://tolc.io">
                     <img src="{{ "assets/tolc-symbol-color-RGB.png"|url }}">
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
@@ -49,9 +49,13 @@
             </div>
 
             <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-start">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                </div>
                 <div class="navbar-end">
                     <a class="navbar-item is-size-5" href="https://docs.tolc.io/">Documentation</a>
                     <a class="navbar-item is-size-5" href="https://live.tolc.io/">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://docs.tolc.io/newsletter/">Newsletter</a>
                 </div>
             </div>
         </nav>
@@ -73,27 +77,6 @@
             </div>
         </div>
 
-        <footer id="footer" class="footer has-background-black is-size-5">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-narrow">
-                    {% if page.previous_page %}
-                    <a class="footer-link" href="{{ page.previous_page.url|url }}" title="{{ page.previous_page.title }}"><span class="vert-mirrored">&#10142;</span> Previous Page</a>
-                    {% else %}
-                    <span class="vert-mirrored">&#10142;</span> Previous Page
-                    {% endif %}
-                </div>
-                <div class="column is-narrow">
-                    <a id="sign-up" class="footer-link" href="https://docs.tolc.io/newsletter/">Sign Up for Newsletter</a>
-                </div>
-                <div class="column is-narrow">
-                    {% if page.next_page %}
-                    <a class="footer-link" href="{{ page.next_page.url|url }}" title="{{ page.next_page.title }}" />Next Page &#10142;</a>
-                    {% else %}
-                    Next Page &#10142;
-                    {% endif %}
-                </div>
-            </div>
-        </footer>
     </main>
 </body>
 

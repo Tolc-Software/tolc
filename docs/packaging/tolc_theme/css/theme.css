@@ -10,7 +10,7 @@
 html, body {
 	height: 100%;
 	background-color: #000;
-	font-family: 'IBM Plex Sans Condensed', sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .has-background-black {

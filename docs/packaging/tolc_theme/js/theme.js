@@ -7,16 +7,7 @@ hljs.highlightAll();
 
 /* side navbar with nested elements */
 $(".nav-group").click(function() {
-	let nestedNav = $(this).parent().find(".nested-nav-el");
-	if (nestedNav.hasClass("is-hidden")) {
-		// Arrow pointing down
-		$(this).find(".nav-arrow").text("\u25BE");
-		nestedNav.removeClass("is-hidden");
-	} else {
-		// Arrow pointing to the right
-		$(this).find(".nav-arrow").text("\u25B8");
-		nestedNav.addClass("is-hidden");
-	}
+	$(this).parent().find(".nested-nav-el").toggleClass("is-hidden");
 });
 
 // Expand navburger on small screens

@@ -12,7 +12,7 @@ nav:
   - CMake:
     - Interface: 'cmake/interface.md'
     - Reference: 'cmake/reference.md'
-  - Python:
+  - Python Frontend:
     - Introduction: 'python/introduction.md'
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
