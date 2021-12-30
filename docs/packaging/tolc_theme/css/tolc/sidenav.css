@@ -14,3 +14,7 @@
 	color: #00dcff !important;
 	font-weight: bold;
 }
+
+.nav-group {
+	cursor: default;
+}
