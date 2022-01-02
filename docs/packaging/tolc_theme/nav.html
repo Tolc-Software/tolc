@@ -3,7 +3,7 @@
 -->
 {% if not nav_item.children %}
 <li class="nav-el">
-    <a {% if nav_item.active %}id="active-side-item" {% endif %} href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
+    <a {% if nav_item.active %}id="active-item" {% endif %} href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
 </li>
 {% else %}
 <li class="nav-el">

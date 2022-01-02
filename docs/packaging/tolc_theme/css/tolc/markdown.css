@@ -74,8 +74,8 @@
 }
 
 #main-markdown div.toc li {
-	padding-top: 0.125rem;
-	padding-bottom: 0.125rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
 }
 
 #main-markdown pre {

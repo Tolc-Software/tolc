@@ -17,6 +17,10 @@ html, body {
 	font-family: 'IBM Plex Sans', sans-serif;
 }
 
+#active-item {
+	color: #00dcff !important;
+}
+
 .has-background-black {
 	background-color: #000 !important;
 }
