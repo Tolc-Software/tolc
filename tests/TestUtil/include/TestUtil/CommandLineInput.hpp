@@ -3,6 +3,9 @@
 #include <string>
 
 namespace TestUtil {
+/**
+* Converts string input into argc and argv
+*/
 struct CommandLineInput {
 	int argc;
 	const char** argv;

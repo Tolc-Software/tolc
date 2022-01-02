@@ -1,4 +1,4 @@
-# Reference #
+# CMake Reference #
 
 # `tolc_create_translation` #
 
@@ -22,11 +22,15 @@ Determines the output directory for the bindings.
 
 * `HEADERS`
 
-Takes a list of headers relative the current file. Adds headers to be translated. Useful for adding forward declarated templates or together with `DO_NOT_SEARCH_FOR_HEADERS` to declare which part of the public interface to translate.
+Takes a list of headers relative the current file. Adds headers to be translated. Useful for adding forward declarated templates or together with `DO_NOT_SEARCH_TARGET_INCLUDES` to declare which part of the public interface to translate.
 
-* `DO_NOT_SEARCH_FOR_HEADERS`
+* `DO_NOT_SEARCH_TARGET_INCLUDES`
 
-Disable searching the public interface of `TARGET` for header files.
+Disable searching the public interface of `TARGET` for header files. This can be used in tandem with `HEADERS` to only translate a specific part of the public interface.
+
+* `NO_ANALYTICS`
+
+Disable analytics.
 
 ## Example ##
 
@@ -37,7 +41,7 @@ tolc_create_translation(
   HEADERS
     include/MyLib.hpp
     include/myForwardDeclarations.hpp
-  DO_NOT_SEARCH_FOR_HEADERS
+  DO_NOT_SEARCH_TARGET_INCLUDES
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings
 )
 ```

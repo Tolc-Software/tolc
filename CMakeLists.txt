@@ -91,6 +91,7 @@ add_library(
   TolcInternal
   src/CommandLine/parse.cpp
   src/Log/postJSON.cpp
+  src/Log/log.cpp
   src/TolcInternal/buildConfig.cpp
   src/TolcInternal/getExecutableDirectoryPath.cpp
   src/TolcInternal/getSystemIncludes.cpp
