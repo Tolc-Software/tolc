@@ -6,8 +6,7 @@
 #include <Parser/Parse.hpp>
 #include <filesystem>
 #include <fstream>
-
-#include "Log/postJSON.hpp"
+#include "Log/log.hpp"
 #include <chrono>
 #include <fmt/format.h>
 #include <iostream>
@@ -30,23 +29,25 @@ callFrontend(TolcInternal::Config::Language language,
 }
 
 /**
-* Logs the time taken from start
+* Write content to file
+* Makes sure the directory the file is in exists
+* Injects include to the input file
 */
-void logTimeTaken(decltype(std::chrono::high_resolution_clock::now()) start,
-                  bool success) {
-	auto stop = std::chrono::high_resolution_clock::now();
-	auto duration =
-	    std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	std::string hasSucceeded = success ? "true" : "false";
-	std::string json =
-	    R"({"success": )" + hasSucceeded + std::string(R"(, "time_taken": )") +
-	    std::to_string(static_cast<int64_t>(duration.count())) + "}";
-	Log::postJSON("api.tolc.io", "4000", "/report", json);
+void writeFile(TolcInternal::Config const& config,
+               std::filesystem::path const& file,
+               std::string const& content) {
+	std::filesystem::create_directories(config.outputDirectory);
+	std::ofstream outFile;
+	outFile.open(config.outputDirectory / file);
+	if (outFile.is_open()) {
+		// Inject the input file aswell
+		outFile << "#include <" << config.inputFile.string() << ">\n"
+		        << content;
+	}
 }
 
 int run(int argc, const char** argv) {
-	// Used to time execution
-	auto start = std::chrono::high_resolution_clock::now();
+	Log::Data logData {};
 
 	if (auto maybeResult = CommandLine::parse(argc, argv)) {
 		auto cliResult = maybeResult.value();
@@ -54,6 +55,8 @@ int run(int argc, const char** argv) {
 		if (cliResult.isHelp) {
 			return 0;
 		}
+
+		logData.noAnalytics = cliResult.noAnalytics;
 
 		// Validate user input
 		if (auto maybeConfig = buildConfig(cliResult)) {
@@ -66,24 +69,17 @@ int run(int argc, const char** argv) {
 				                               maybeGlobalNamespace.value(),
 				                               config.moduleName)) {
 					auto& [file, content] = output.value();
-					std::filesystem::create_directories(config.outputDirectory);
-					std::ofstream outFile;
-					outFile.open(config.outputDirectory / file);
-					if (outFile.is_open()) {
-						// Inject the input file aswell
-						outFile << "#include <" << config.inputFile.string()
-						        << ">\n"
-						        << content;
-					}
+					writeFile(config, file, content);
 
-					logTimeTaken(start, true);
+					logData.success = true;
+					Log::logTimeTaken(logData);
 					return 0;
 				}
 			}
 		}
 	}
 
-	logTimeTaken(start, false);
+	Log::logTimeTaken(logData);
 	return 1;
 }
 

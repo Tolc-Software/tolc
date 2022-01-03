@@ -41,12 +41,16 @@
 	border-bottom: 1px solid #9600ff;
 }
 
-#main-markdown ul > li::before {
+#main-markdown ul li::marker {
 	/* A bullet and a space */
 	content: "\2022\00a0";
 	color: #9600ff;
-	font-weight: bold;
 }
+
+#main-markdown ol li::marker {
+	color: #9600ff;
+}
+
 
 #main-markdown .toc {
 	/* To line up with side nav */
@@ -70,19 +74,18 @@
 }
 
 #main-markdown div.toc li {
-	padding-top: 0.125rem;
-	padding-bottom: 0.125rem;
-}
-
-#main-markdown div.toc a:before {
-	/* Four spaces and a bullet */
-	content: "\00a0\00a0\00a0\00a0\2022\ ";
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
 }
 
 #main-markdown pre {
 	background-color: #000;
 	margin-bottom: 1.5rem;
 	margin-top: 1.5rem;
+	padding-left: 0;
+	padding-left: 0;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 #main-markdown code {

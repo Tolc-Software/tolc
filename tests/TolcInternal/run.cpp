@@ -16,6 +16,8 @@ TestUtil::CommandLineInput getValidCLI(std::filesystem::path const& inputFile,
 		input += " -I " + include;
 	}
 
+	input += " --no-analytics";
+
 	return TestUtil::CommandLineInput(input);
 }
 

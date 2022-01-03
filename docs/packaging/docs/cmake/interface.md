@@ -1,4 +1,4 @@
-# Interface #
+# CMake Interface #
 
 The `CMake` interface is used to gather information about the library you wish to translate to another language. It is a convenient wrapper around the `tolc` executable for those who use `CMake` as their build suite. It consists of two levels; the `bootstrapper`, to download and install `tolc` locally within your build directory, and the `CMake` modules shipped with the resulting `tolc` installation.
 

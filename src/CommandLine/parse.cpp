@@ -58,6 +58,9 @@ int parseInternal(CLI::App& app,
 	    result.includes,
 	    "Path to search for when resolving #include statements.");
 
+	python->add_flag(
+	    "--no-analytics", result.noAnalytics, "Don't gather analytics.");
+
 	python->callback([&result]() { result.language = "python"; });
 
 	return python;
@@ -79,7 +82,8 @@ addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
 	return apps;
 }
 
-std::optional<CommandLine::CLIResult> parse(int argc, const char** argv) {
+[[nodiscard]] std::optional<CommandLine::CLIResult> parse(int argc,
+                                                          const char** argv) {
 	CLI::App app {
 	    "Tolc is an automatic bindings generator between C++ and other languages"};
 

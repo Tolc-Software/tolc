@@ -77,12 +77,8 @@ include(cmake/ConanHelpers.cmake)
 # Create the profile from variables known during configure
 setup_conan_profile(VARIABLE tolc_conan_profile)
 
-find_conan_packages(
-  REQUIRES
-    spdlog/1.8.0
-    fmt/7.1.3
-  PROFILE
-    ${tolc_conan_profile})
+find_conan_packages(REQUIRES spdlog/1.8.0 fmt/7.1.3 PROFILE
+                    ${tolc_conan_profile})
 
 include(cmake/GetBoost.cmake)
 get_boost(VERSION 1.77.0)
@@ -95,12 +91,14 @@ add_library(
   TolcInternal
   src/CommandLine/parse.cpp
   src/Log/postJSON.cpp
+  src/Log/log.cpp
   src/TolcInternal/buildConfig.cpp
   src/TolcInternal/getExecutableDirectoryPath.cpp
   src/TolcInternal/getSystemIncludes.cpp
   src/TolcInternal/run.cpp)
 target_include_directories(TolcInternal PUBLIC src)
-target_include_directories(TolcInternal SYSTEM PRIVATE ${cli11_content_SOURCE_DIR}/include)
+target_include_directories(TolcInternal SYSTEM
+                           PRIVATE ${cli11_content_SOURCE_DIR}/include)
 target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
                                           spdlog::spdlog fmt::fmt)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON

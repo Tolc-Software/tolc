@@ -10,7 +10,15 @@
 html, body {
 	height: 100%;
 	background-color: #000;
-	font-family: 'IBM Plex Sans Condensed', sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#sign-up {
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#active-item {
+	color: #00dcff !important;
 }
 
 .has-background-black {

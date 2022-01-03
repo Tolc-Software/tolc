@@ -9,3 +9,7 @@
 	background-color: #000;
 	color: #00dcff;
 }
+
+.nav-group {
+	cursor: default;
+}

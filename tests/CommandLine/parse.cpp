@@ -15,6 +15,7 @@ TEST_CASE("Help is valid input", "[parse]") {
 		REQUIRE(parsed.outputDirectory.empty());
 		REQUIRE(parsed.language.empty());
 		REQUIRE(parsed.includes.size() == 0);
+		REQUIRE(parsed.noAnalytics == false);
 
 		// And has help flag set
 		REQUIRE(parsed.isHelp);
@@ -34,10 +35,22 @@ TEST_CASE("Python language is chosen", "[parse]") {
 	REQUIRE(parsed.moduleName == "myModule");
 	REQUIRE(parsed.includes.size() == 1);
 	REQUIRE(parsed.includes[0] == "include");
+	REQUIRE(parsed.noAnalytics == false);
 
 	// And has not help flag set
 	REQUIRE(!parsed.isHelp);
 }
+
+TEST_CASE("No analytics flag", "[parse]") {
+	auto cli = TestUtil::CommandLineInput(
+	    "tolc python -i input -o output -m myModule -I include --no-analytics");
+	auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+	// Parsed correctly
+	REQUIRE(maybeParsed.has_value());
+
+	auto parsed = maybeParsed.value();
+	REQUIRE(parsed.noAnalytics == true);
+};
 
 TEST_CASE("Fails for invalid input", "[parse]") {
 	for (auto const* invalidInput : {"tolc python",

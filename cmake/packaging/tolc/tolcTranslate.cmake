@@ -3,7 +3,7 @@ include_guard()
 function(tolc_translate_file)
   # Define the supported set of keywords
   set(prefix ARG)
-  set(noValues)
+  set(noValues NO_ANALYTICS)
   set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT)
   set(multiValues INCLUDES)
   # Process the arguments passed in
@@ -14,7 +14,7 @@ function(tolc_translate_file)
   # Cannot assume too new CMake version
   set(function_name tolc_translate_file)
   set(usage
-    "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT out [INCLUDES include])"
+      "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT out [INCLUDES include])"
   )
 
   # Helper function
@@ -38,13 +38,17 @@ function(tolc_translate_file)
   endif()
   if(NOT ARG_OUTPUT)
     error_with_usage(
-      "Missing OUTPUT argument. The directory to write translation files to."
-    )
+      "Missing OUTPUT argument. The directory to write translation files to.")
   endif()
   if(NOT tolc_EXECUTABLE)
     error_with_usage(
       "The variable tolc_EXECUTABLE must be set prior to calling ${function_name}. It should contain the full path of the tolc executable."
     )
+  endif()
+
+  set(noAnalytics "")
+  if(ARG_NO_ANALYTICS)
+    set(noAnalytics "--no-analytics")
   endif()
 
   # Turn the include directories to valid input flags
@@ -66,21 +70,21 @@ function(tolc_translate_file)
       ${ARG_INPUT}
       --output
       ${ARG_OUTPUT}
-      ${includes})
+      ${includes}
+      ${noAnalytics})
+
   # TODO: This should be changed when tolc can handle outputs explicitly (not just a directory, but a file)
   add_custom_target(
-    tolc_translate_file_${ARG_MODULE_NAME}
-    ALL
+    tolc_translate_file_${ARG_MODULE_NAME} ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     COMMAND ${command}
-    BYPRODUCTS ${ARG_OUTPUT}/${ARG_MODULE_NAME}.cpp
-  )
+    BYPRODUCTS ${ARG_OUTPUT}/${ARG_MODULE_NAME}.cpp)
 endfunction()
 
 function(tolc_translate_target)
   # Define the supported set of keywords
   set(prefix ARG)
-  set(noValues DO_NOT_SEARCH_FOR_HEADERS)
+  set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
   set(singleValues TARGET LANGUAGE OUTPUT)
   set(multiValues HEADERS)
   # Process the arguments passed in
@@ -91,8 +95,7 @@ function(tolc_translate_target)
   # Cannot assume too new CMake version
   set(function_name tolc_translate_target)
   set(usage
-      "Usage: ${function_name}(TARGET myLibrary LANGUAGE python OUTPUT out)"
-  )
+      "Usage: ${function_name}(TARGET myLibrary LANGUAGE python OUTPUT out)")
 
   # Helper function
   function(error_with_usage msg)
@@ -106,13 +109,20 @@ function(tolc_translate_target)
   endif()
   if(NOT TARGET ${ARG_TARGET})
     error_with_usage(
-      "Argument TARGET is not a previously known CMake target. Got: ${ARG_TARGET}.")
+      "Argument TARGET is not a previously known CMake target. Got: ${ARG_TARGET}."
+    )
   endif()
   if(NOT tolc_EXECUTABLE)
-    message(FATAL_ERROR "${function_name} called without setting tolc_EXECUTABLE. Please use this module only after calling find_package(tolc).")
+    message(
+      FATAL_ERROR
+        "${function_name} called without setting tolc_EXECUTABLE. Please use this module only after calling find_package(tolc)."
+    )
   endif()
   if(NOT EXISTS ${tolc_BIN_DIR}/gather_headers.py)
-    message(FATAL_ERROR "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.py")
+    message(
+      FATAL_ERROR
+        "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.py"
+    )
   endif()
 
   set(extraHeaders "")
@@ -121,13 +131,18 @@ function(tolc_translate_target)
   endif()
 
   set(doNotSearchForHeaders "")
-  if(ARG_DO_NOT_SEARCH_FOR_HEADERS)
+  if(ARG_DO_NOT_SEARCH_TARGET_INCLUDES)
     set(doNotSearchForHeaders "--do-not-search-for-headers")
   endif()
 
+  set(noAnalytics "")
+  if(ARG_NO_ANALYTICS)
+    set(noAnalytics "NO_ANALYTICS")
+  endif()
 
   # Get the public include directories
-  get_target_property(includeDirectories ${ARG_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
+  get_target_property(includeDirectories ${ARG_TARGET}
+                      INTERFACE_INCLUDE_DIRECTORIES)
   string(REPLACE ";" " " shellIncludes ${includeDirectories})
 
   # Go through the include directories for headers and build the combined header.
@@ -138,12 +153,13 @@ function(tolc_translate_target)
   find_package(Python3 REQUIRED)
   set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc/tolc_${ARG_TARGET}.hpp)
   add_custom_target(
-    tolc_get_public_headers_${ARG_TARGET}
-    ALL
+    tolc_get_public_headers_${ARG_TARGET} ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMAND ${Python3_EXECUTABLE} ${tolc_BIN_DIR}/gather_headers.py --combined-header ${combinedHeader} --includes ${includeDirectories} ${doNotSearchForHeaders} ${extraHeaders} ${ARG_HEADERS}
-    BYPRODUCTS ${combinedHeader}
-  )
+    COMMAND
+      ${Python3_EXECUTABLE} ${tolc_BIN_DIR}/gather_headers.py --combined-header
+      ${combinedHeader} --includes ${includeDirectories}
+      ${doNotSearchForHeaders} ${extraHeaders} ${ARG_HEADERS}
+    BYPRODUCTS ${combinedHeader})
   # Rerun when target needs to be rebuilt
   add_dependencies(tolc_get_public_headers_${ARG_TARGET} ${ARG_TARGET})
 
@@ -155,7 +171,9 @@ function(tolc_translate_target)
     INPUT
     ${combinedHeader}
     OUTPUT
-    ${ARG_OUTPUT})
+    ${ARG_OUTPUT}
+    ${noAnalytics})
   # Rerun when regathering headers
-  add_dependencies(tolc_translate_file_${ARG_TARGET} tolc_get_public_headers_${ARG_TARGET})
+  add_dependencies(tolc_translate_file_${ARG_TARGET}
+                   tolc_get_public_headers_${ARG_TARGET})
 endfunction()

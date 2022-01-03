@@ -1,8 +1,6 @@
 # Installing
 
-## Via the `CMake` bootstrapper
-
-The easiest and recommended way is to use [the bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake). Just drop the following lines in your `CMake` project.
+The recommended and easiest way is to use the `CMake` [bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake). Just drop the following lines in your `CMake` project.
 
 ```CMake
 include(FetchContent)
