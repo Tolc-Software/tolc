@@ -1,13 +1,13 @@
 # tolc documentation #
 
-This is where the documentation lives that gets showed on the site. It uses [mkdocs](https://www.mkdocs.org/) together with [the material theme.](https://squidfunk.github.io/mkdocs-material/getting-started/). Both need to be installed to build the documentation.
+This is where the documentation lives that gets showed on the site. It uses [mkdocs](https://www.mkdocs.org/) together with [the `tolc` theme](./tolc_theme).
 
 ## Installation ##
 
-Installing the material theme automatically installs `mkdocs` as a dependency:
+Installing the `mkdocs`:
 
 ```shell
-$ pip install mkdocs-material
+$ pip install mkdocs
 ```
 
 ## Usage ##

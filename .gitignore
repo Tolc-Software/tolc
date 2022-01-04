@@ -18,6 +18,7 @@ tools/conan_profiles/Windows/clang
 !.gitignore
 !CMakeLists.txt
 !CMakeSettings.json
+!LICENSE.md
 !README.md
 
 # Directories
