@@ -1,7 +1,7 @@
 site_name: tolc
 site_description: 'tolc: Making C++ reusable from other languages'
 site_author: 'Simon Rydell'
-site_url: 'https://srydell.github.io/tolc/'
+site_url: 'https://Tolc-Software.github.io/tolc/'
 strict: true
 nav:
   - Introduction: 'index.md'

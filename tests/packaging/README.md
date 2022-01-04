@@ -1,6 +1,6 @@
 # Testing packages #
 
-This part of the test suite is meant to test each part of the installation sent to a customer. It is split into two part, `systemTests` and `moduleTests`.
+This part of the test suite is meant to test each part of the installation sent to a user. It is split into two part, `systemTests` and `moduleTests`.
 
 **NOTE:** The `CMakeLists.txt` at this level also provides access to an install of the `tolc` version in this repo automatically.
 
@@ -8,7 +8,7 @@ This part of the test suite is meant to test each part of the installation sent 
 
 ## System tests ##
 
-These simulate a full project that will be using a tolc installation. It should be as close as possible to a customer project.
+These simulate a full project that will be using a tolc installation. It should be as close as possible to a user project.
 
 ## Module tests ##
 
