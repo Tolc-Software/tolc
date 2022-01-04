@@ -41,6 +41,17 @@
 	border-bottom: 1px solid #9600ff;
 }
 
+/* Link in table */
+#main-markdown a {
+	font-style: italic;
+	color: #fff;
+}
+
+#main-markdown a:hover {
+	font-style: italic;
+	color: #00dcff;
+}
+
 #main-markdown ul li::marker {
 	/* A bullet and a space */
 	content: "\2022\00a0";
