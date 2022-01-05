@@ -43,7 +43,6 @@ jobs:
       run: |
         python -m pip install setuptools wheel
         python -m pip install conan ninja
-        python -m pip install -r tools/requirements.txt
 
     - name: Conan cache
       uses: actions/cache@v2
@@ -54,8 +53,6 @@ jobs:
           ${{ runner.os }}-conan-
 
     - name: Configure
-      env:
-        GITHUB_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         cmake -S. -Bbuild -G Ninja -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" -DCMAKE_BUILD_TYPE="Release" -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON
 

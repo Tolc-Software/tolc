@@ -17,6 +17,9 @@ install(PROGRAMS ${PROJECT_SOURCE_DIR}/cmake/packaging/scripts/gather_headers.py
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/cmake/packaging/tolc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake)
 
+# Add License
+install(FILES ${CMAKE_SOURCE_DIR}/LICENSE.md DESTINATION .)
+
 set(CPACK_VERBATIM_VARIABLES YES)
 # Allow packaging
 include(CPack)
