@@ -52,8 +52,6 @@ jobs:
 
     - name: Configure
       shell: cmd
-      env:
-        GITHUB_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         call "%VCVARS%"
         cmake -S. -Bbuild -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON -DCMAKE_BUILD_TYPE=Release -DCPACK_PACKAGE_FILE_NAME=tolc -G Ninja
