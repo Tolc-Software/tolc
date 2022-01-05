@@ -15,10 +15,12 @@ function(get_parser)
   set(multiValues)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
-  cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
-                        "${multiValues}" ${ARGN})
+  cmake_parse_arguments(${prefix}
+                        "${noValues}"
+                        "${singleValues}"
+                        "${multiValues}"
+                        ${ARGN})
 
-  include(FetchContent)
   if(ARG_BUILD_FROM_SOURCE)
     # Download source
     FetchContent_Declare(
@@ -27,26 +29,34 @@ function(get_parser)
       GIT_TAG main)
     FetchContent_MakeAvailable(Parser)
   else()
+    # On Windows you can't link a Debug build to a Release build,
+    # therefore there are two binary versions available.
+    # Need to distinguish between them.
+    set(windows_config "")
+    if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
+      set(windows_config "-${CMAKE_BUILD_TYPE}")
+    endif()
     # Download binary
-    FetchContent_Declare(
-      parser_entry
-      URL https://github.com/Tolc-Software/Parser/releases/download/main-release/Parser-${CMAKE_HOST_SYSTEM_NAME}-main.tar.xz
-    )
+    FetchContent_Declare(parser_entry
+      URL
+      https://github.com/Tolc-Software/Parser/releases/download/main-release/Parser-${CMAKE_HOST_SYSTEM_NAME}-main${windows_config}.tar.xz)
 
     message(STATUS "Checking if Parser needs to be downloaded...")
     FetchContent_Populate(parser_entry)
 
     set(Parser_ROOT ${parser_entry_SOURCE_DIR})
-    find_package(Parser REQUIRED CONFIG PATHS ${Parser_ROOT} REQUIRED)
+    find_package(
+      Parser
+      REQUIRED
+      CONFIG
+      PATHS
+      ${Parser_ROOT}
+      REQUIRED)
   endif()
 
   # Export the variables
-  set(parser_SOURCE_DIR
-      ${parser_entry_SOURCE_DIR}
-      PARENT_SCOPE)
-  set(PARSER_LLVM_VERSION
-      ${PARSER_LLVM_VERSION}
-      PARENT_SCOPE)
+  set(parser_SOURCE_DIR ${parser_entry_SOURCE_DIR} PARENT_SCOPE)
+  set(PARSER_LLVM_VERSION ${PARSER_LLVM_VERSION} PARENT_SCOPE)
 endfunction()
 
 function(get_parser_system_include)
@@ -57,8 +67,11 @@ function(get_parser_system_include)
   set(multiValues)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
-  cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
-                        "${multiValues}" ${ARGN})
+  cmake_parse_arguments(${prefix}
+                        "${noValues}"
+                        "${singleValues}"
+                        "${multiValues}"
+                        ${ARGN})
 
   # Defines get_system_include and format_includes
   include(${ARG_PARSER_SOURCE_DIR}/lib/cmake/Parser/IncludePathHelpers.cmake)
@@ -66,12 +79,16 @@ function(get_parser_system_include)
   # Set the include path for the system library in the variable
   # We are using the standard library shipped
   # with the downloaded llvm for include paths in the parsing
-  get_system_include(VARIABLE platform_include LLVM_DIRECTORY
-                     ${ARG_LIBCPP_ROOT_DIR} LLVM_VERSION ${ARG_LLVM_VERSION})
+  get_system_include(
+    VARIABLE
+      platform_include
+    LLVM_DIRECTORY
+      ${ARG_LIBCPP_ROOT_DIR}
+    LLVM_VERSION
+      ${ARG_LLVM_VERSION})
 
-  format_includes(VARIABLE ${ARG_VARIABLE} INCLUDES ${platform_include} SYSTEM)
+  format_includes(VARIABLE ${ARG_VARIABLE} INCLUDES
+                  ${platform_include} SYSTEM)
 
-  set(${ARG_VARIABLE}
-      ${${ARG_VARIABLE}}
-      PARENT_SCOPE)
+  set(${ARG_VARIABLE} ${${ARG_VARIABLE}} PARENT_SCOPE)
 endfunction()

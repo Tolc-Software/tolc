@@ -16,10 +16,17 @@ function(get_frontend_py)
                         "${multiValues}" ${ARGN})
 
   include(FetchContent)
+  # On Windows you can't link a Debug build to a Release build,
+  # therefore there are two binary versions available.
+  # Need to distinguish between them.
+  set(windows_config "")
+  if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
+    set(windows_config "-${CMAKE_BUILD_TYPE}")
+  endif()
   # Download binary
   FetchContent_Declare(
     frontend_py_entry
-    URL https://github.com/Tolc-Software/frontend.py/releases/download/main-release/frontend.py-${CMAKE_HOST_SYSTEM_NAME}-main.tar.xz
+    URL https://github.com/Tolc-Software/frontend.py/releases/download/main-release/frontend.py-${CMAKE_HOST_SYSTEM_NAME}-main${windows_config}.tar.xz
   )
 
   message(STATUS "Checking if frontend.py needs to be downloaded...")
