@@ -1,17 +1,61 @@
-![Ubuntu](https://github.com/Tolc-Software/tolc/workflows/Ubuntu/badge.svg) ![MacOS](https://github.com/Tolc-Software/tolc/workflows/MacOS/badge.svg) ![Windows](https://github.com/Tolc-Software/tolc/workflows/Windows/badge.svg)
+<div align="center">
+  <h3>
+    <img src="docs/tolc_logo.png" alt="Tolc logo" style="width:100px;"/>
+    </br>
+    Write once, Use Everywhere
+  </h3>
 
-# `Tolc` #
+  <div align="center">
+    <!-- Ubuntu CICD pipeline -->
+    <a href="https://github.com/Tolc-Software/tolc/actions/workflows/ubuntu.yml">
+      <img src="https://github.com/Tolc-Software/tolc/workflows/Ubuntu/badge.svg" alt="Ubuntu CICD pipeline" />
+    </a>
+    <!-- MacOS CICD pipeline -->
+    <a href="https://github.com/Tolc-Software/tolc/actions/workflows/macos.yml">
+      <img src="https://github.com/Tolc-Software/tolc/workflows/MacOS/badge.svg" alt="MacOS CICD pipeline" />
+    </a>
+    <!-- MacOS CICD pipeline -->
+    <a href="https://github.com/Tolc-Software/tolc/actions/workflows/windows.yml">
+      <img src="https://github.com/Tolc-Software/tolc/workflows/Windows/badge.svg" alt="Windows CICD pipeline" />
+    </a>
+  </div>
 
-`Tolc` is a tool for automatically creating bindings from an existing `C++` library to another language. `Tolc` does not require you to change any of your existing `C++` interface. It should feel natural to use it from other languages. `Tolc` works with any compiler, and on Linux, MacOS, and Windows.
+  <div align="center">
+    <!-- docs -->
+    <a href="https://docs.tolc.io/">
+      <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat" alt="Documentation Website" />
+    </a>
+    <!-- Discord -->
+    <a href="https://discord.gg/NwDxCGztjN">
+      <img src="https://badgen.net/badge/tolc/discord?icon=discord&label" alt="Awesome Page" />
+    </a>
+  </div>
 
-This repository only holds the command line interface for `tolc`, see [the Parser](https://github.com/Tolc-Software/Parser) for how the `C++` to be translated is parsed, or [one of the language modules](https://github.com/Tolc-Software/frontend.py) to see how the output is written. You can find the official documentation for tolc over at [docs.tolc.io](https://docs.tolc.io).
+
+  <div align="center">
+    <h3>
+      <a href="https://tolc.io/"> Website </a>
+      <span> | </span>
+      <a href="https://docs.tolc.io/guides/translating_a_cpp_library/"> Guide </a>
+      <span> | </span>
+      <a href="https://tolc.io/live"> Try Online </a>
+    </h3>
+  </div>
+</div>
+
+`Tolc` aims to make it trivial to use `C++` from other languages. It does not require you to change any code, and it's integrable in any project. Make `C++` libraries feel natural to use in any language!
+
+### Design goals: ###
+
+* **No, or minimal overhead** - You are using `C++` for a reason
+* **Cross platform/compiler** - Works in the same way on Linux, MacOS, and Windows, across compilers
+* **No vendor-lockin** - Generated bindings are readable, go back to writing manually at any time
 
 ## Usage ##
 
 `Tolc` provides convenient `CMake` helpers and is usually downloaded via the [`CMake` bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake). It is as easy as putting the following in your `CMakeLists.txt`:
 
 ```cmake
-# Download bootstrapper
 include(FetchContent)
 FetchContent_Declare(
   tolc_bootstrap
@@ -26,11 +70,8 @@ get_tolc()
 # From the tolc package
 # Creates the target MyLib_python for the CPython library.
 tolc_create_translation(
-  # Target to translate from
   TARGET MyLib
-  # Language to target
   LANGUAGE python
-  # Where to put the bindings
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings
 )
 ```
@@ -49,7 +90,7 @@ See the [system tests](./tests/packaging/systemTests/) for more examples.
 
 ## Building ##
 
-`Tolc` can be built on Linux, MacOS, and Windows. See the [CI pipelines for more platform specific information.](./.github/workflows/).
+`Tolc` can be built on Linux, MacOS, and Windows. See the [CI pipelines for more platform specific information](./.github/workflows/).
 
 Here is a general overview:
 
@@ -72,9 +113,18 @@ Build `tolc`:
 cmake --build build
 ```
 
+Test with `ctest`:
+
+```shell
+cd build
+ctest
+```
+
 Install with `CPack`:
 
 ```shell
 $ cpack -G TGZ --config build/CPackConfig.cmake
 ```
+
+This repository holds the command line interface for `tolc`, see [the Parser](https://github.com/Tolc-Software/Parser) for how the `C++` to be translated is parsed, or [one of the language modules](https://github.com/Tolc-Software/frontend.py) to see how the output is written.
 
