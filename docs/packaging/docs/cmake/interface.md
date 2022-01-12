@@ -1,26 +1,6 @@
 # CMake Interface #
 
-The `CMake` interface is used to gather information about the library you wish to translate to another language. It is a convenient wrapper around the `tolc` executable for those who use `CMake` as their build suite. It consists of two levels; the `bootstrapper`, to download and install `tolc` locally within your build directory, and the `CMake` modules shipped with the resulting `tolc` installation.
-
-## Bootstrapper ##
-
-The `CMake` code for the bootstrapper can be found in the [bootstrap repository](https://github.com/Tolc-Software/bootstrap-tolc-cmake). To include it in your project add the following to your root `CMakeLists.txt`:
-
-```cmake
-include(FetchContent)
-FetchContent_Declare(
-  tolc_bootstrap
-  GIT_REPOSITORY https://github.com/Tolc-Software/bootstrap-tolc-cmake
-  GIT_TAG        main
-)
-
-FetchContent_MakeAvailable(tolc_bootstrap)
-
-# Download and uses find_package to locate tolc
-get_tolc()
-```
-
-You can also download it and add it manually with `add_subdirectory(path/to/bootstrapper)`. After the call to `get_tolc` you can use any function from the `tolc CMake` interface.
+The `CMake` interface is used to gather information about the library you wish to translate to another language. It is a convenient wrapper around the `tolc` executable for those who use `CMake` as their build suite.
 
 ## Tolc CMake interface ##
 
