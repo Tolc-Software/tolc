@@ -1,6 +1,7 @@
 # Usage
 
-Given that you have installed `tolc`, either via the [bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake), or by downloading the package from the [release page](https://github.com/Tolc-Software/tolc-beta/releases/tag/beta-release), you should be able to use the `CMake` interface.
+Given that you have installed `tolc` you should be able to use the `CMake` interface.
+
 ## Via `CMake`
 
 ### `tolc_create_translation`

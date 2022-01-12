@@ -53,22 +53,9 @@
 
 ## Usage ##
 
-`Tolc` provides convenient `CMake` helpers and is usually downloaded via the [`CMake` bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake). It is as easy as putting the following in your `CMakeLists.txt`:
+`Tolc` provides easy to use abstractions to create a bindings library directly from `CMake`:
 
 ```cmake
-include(FetchContent)
-FetchContent_Declare(
-  tolc_bootstrap
-  GIT_REPOSITORY https://github.com/Tolc-Software/bootstrap-tolc-cmake
-  GIT_TAG        main
-)
-FetchContent_MakeAvailable(tolc_bootstrap)
-
-# Downloads and uses locates tolc
-get_tolc()
-
-# From the tolc package
-# Creates the target MyLib_python for the CPython library.
 tolc_create_translation(
   TARGET MyLib
   LANGUAGE python
@@ -76,17 +63,39 @@ tolc_create_translation(
 )
 ```
 
-`tolc_create_translation` wraps the `tolc` executable and makes sure that the `CPython` library that `python` understands gets built correctly.
+This will extract the public API from the target `MyLib`, give it to `Tolc` to create bindings, and expose it to `CMake` as the target `MyLib_python`. To see all options available for `tolc_create_translation`, please see the [the documentation](https://docs.tolc.io/cmake/reference/).
 
-With a simple enough interface, you can call the executable from this repository directly;
+In this example you will find the built `CPython` library under `<build_directory>/tolc`, so you can use it straight away with:
 
 ```shell
-$ ./tolc python --input myLib.hpp --module-name MyLib --output python-bindings -I include
+$ cd build/tolc
+$ python3
+>>> import MyLib
+>>> MyLib.myCppFunction()
 ```
 
-This will create a bindings file in the directory `python-bindings` for the header `myLib` with the include directory `include`. Your `C++` functions and classes can then be used from python as `import MyLib`.
+## Installing ##
 
-See the [system tests](./tests/packaging/systemTests/) for more examples.
+The prebuilt binaries are available under [the releases tab](https://github.com/Tolc-Software/tolc/releases/tag/main-release) in this repository. You may simply install them directly from there, or use `CMake` to download the binary for your platform directly:
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(
+  tolc_entry
+  URL https://github.com/Tolc-Software/tolc/releases/download/main-release/tolc-${CMAKE_HOST_SYSTEM_NAME}-main.tar.gz
+)
+FetchContent_Populate(tolc_entry)
+
+find_package(
+  tolc
+  CONFIG
+  PATHS
+  ${tolc_entry_SOURCE_DIR}
+  REQUIRED
+  NO_DEFAULT_PATH)
+```
+
+This will download the `Tolc` binary locally for Linux, MacOS, or Windows, depending on the expansion of `${CMAKE_HOST_SYSTEM_NAME}`. After the call to `find_package`, you can use any `CMake` function provided by `Tolc`.
 
 ## Building ##
 
@@ -120,7 +129,7 @@ cd build
 ctest
 ```
 
-Install with `CPack`:
+Create install package with `CPack`:
 
 ```shell
 $ cpack -G TGZ --config build/CPackConfig.cmake

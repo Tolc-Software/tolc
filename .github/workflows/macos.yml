@@ -93,13 +93,3 @@ jobs:
         github-release release --user Tolc-Software --repo tolc --tag main-release --name "Head release" --description "This release gets updated with each commit to main" || true
         echo "Pushing the release"
         github-release upload --user Tolc-Software --repo tolc --tag main-release --name "tolc-$(uname)-main.tar.gz" --file tolc-*.tar.gz --replace
-
-    - name: Push beta release to Tolc-Software/tolc-beta
-      if: github.ref == 'refs/heads/main'
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      run: |
-        echo "Checking if a new release is needed"
-        github-release release --user Tolc-Software --repo tolc-beta --tag beta-release --name "Beta release" --description "Beta release" || true
-        echo "Pushing the release"
-        github-release upload --user Tolc-Software --repo tolc-beta --tag beta-release --name "tolc-$(uname)-beta.tar.gz" --file tolc-*.tar.gz --replace

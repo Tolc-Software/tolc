@@ -36,22 +36,27 @@ add_library(Math src/Demo/demo.cpp)
 target_include_directories(Math PUBLIC include)
 ```
 
-Below this code we download and install `tolc` locally into the project using [the bootstrapper](https://github.com/Tolc-Software/bootstrap-tolc-cmake)
+Below this code we download and install `tolc` locally into the project from [the release page](https://github.com/Tolc-Software/tolc/releases/tag/main-release)
 
 ```cmake
 # CMakeLists.txt
 include(FetchContent)
 FetchContent_Declare(
-  tolc_bootstrap
-  GIT_REPOSITORY https://github.com/Tolc-Software/bootstrap-tolc-cmake
-  GIT_TAG        main
+  tolc_entry
+  URL https://github.com/Tolc-Software/tolc/releases/download/main-release/tolc-${CMAKE_HOST_SYSTEM_NAME}-main.tar.gz
 )
+FetchContent_Populate(tolc_entry)
 
-FetchContent_MakeAvailable(tolc_bootstrap)
-get_tolc()
+find_package(
+  tolc
+  CONFIG
+  PATHS
+  ${tolc_entry_SOURCE_DIR}
+  REQUIRED
+  NO_DEFAULT_PATH)
 ```
 
-After the call to `get_tolc()` we are free to use the `CMake` functions available in the `tolc` installation. To create bindings for `Math` we have to call the `tolc_create_translation` function
+After the call to `find_package` we are free to use the `CMake` functions available in the `tolc` installation. To create bindings for `Math` we have to call the `tolc_create_translation` function
 
 ```cmake
 # CMakeLists.txt

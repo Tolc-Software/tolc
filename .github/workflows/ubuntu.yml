@@ -98,13 +98,3 @@ jobs:
         python -m pip install mkdocs-material
         cd docs/packaging
         mkdocs gh-deploy --strict --force --config-file ./mkdocs.yml
-
-    - name: Push beta release to Tolc-Software/tolc-beta
-      if: github.ref == 'refs/heads/main'
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      run: |
-        echo "Checking if a new release is needed"
-        github-release release --user Tolc-Software --repo tolc-beta --tag beta-release --name "Beta release" --description "Beta release" || true
-        echo "Pushing the release"
-        github-release upload --user Tolc-Software --repo tolc-beta --tag beta-release --name "tolc-$(uname)-beta.tar.gz" --file tolc-*.tar.gz --replace
