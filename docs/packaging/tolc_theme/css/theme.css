@@ -1,5 +1,8 @@
 /* This file is for your main application CSS */
 
+@import "fontawesome/css/fontawesome.css";
+@import "fontawesome/css/solid.css";
+@import "fontawesome/css/brands.css";
 @import 'tolc/mailchimp.css';
 @import 'tolc/markdown.css';
 @import 'tolc/footer.css';
@@ -27,4 +30,12 @@ html, body {
 
 #download-link {
 	color: #fff;
+}
+
+.link {
+	color: #fff;
+}
+
+.link:hover {
+	color: #00dcff !important;
 }

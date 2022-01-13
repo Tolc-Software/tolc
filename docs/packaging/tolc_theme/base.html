@@ -56,7 +56,6 @@
                     <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
                     <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
                     <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
-                    <a class="navbar-item is-size-5" href="https://tolc.io/newsletter/">Newsletter</a>
                 </div>
             </div>
         </nav>
@@ -78,6 +77,38 @@
             </div>
         </div>
 
+        <footer id="footer" class="footer has-background-black">
+            <div class="columns is-vcentered is-centered has-text-centered">
+                <div class="column is-one-quarter">
+                </div>
+                <div class="column is-one-quarter is-size-5">
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href={Routes.contact_path(TolcMainWeb.Endpoint, :index)}>Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href={Routes.newsletter_path(TolcMainWeb.Endpoint, :index)}>Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-one-quarter is-size-3">
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-one-quarter">
+                </div>
+            </div>
+        </footer>
     </main>
 </body>
 
