@@ -92,7 +92,7 @@ find_package(
   PATHS
   ${tolc_entry_SOURCE_DIR}
   REQUIRED
-  NO_DEFAULT_PATH)
+)
 ```
 
 This will download the `Tolc` binary locally for Linux, MacOS, or Windows, depending on the expansion of `${CMAKE_HOST_SYSTEM_NAME}`. After the call to `find_package`, you can use any `CMake` function provided by `Tolc`.
