@@ -49,7 +49,7 @@
 
 * **No, or minimal overhead** - You are using `C++` for a reason
 * **Cross platform/compiler** - Works in the same way on Linux, MacOS, and Windows, across compilers
-* **No vendor-lockin** - Generated bindings are readable, go back to writing manually at any time
+* **No vendor-lockin** - Generated bindings are readable, start writing them manually at any time
 
 ## Usage ##
 
