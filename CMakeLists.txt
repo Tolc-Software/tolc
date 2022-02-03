@@ -5,17 +5,29 @@ project(
   VERSION 0.1
   LANGUAGES CXX)
 
+include(FetchContent)
+FetchContent_Declare(
+  cmake_modules
+  GIT_REPOSITORY https://github.com/Tolc-Software/cmake-modules.git
+  GIT_TAG main)
+FetchContent_MakeAvailable(cmake_modules)
+# Basis of all shared CMake modules
+set(modules ${cmake_modules_SOURCE_DIR}/cmake)
+
 # Define add_{warnings,options}
-include(cmake/WarningsAndOptions.cmake)
+include(${modules}/WarningsAndOptions.cmake)
+# Need a special options since the used version of Boost::asio
+# doesn't support C++20 on MacOS
+include(cmake/Options.cmake)
 
 # Define options such as ccache
-include(cmake/ProjectSettings.cmake)
+include(${modules}/ProjectSettings.cmake)
 
-include(cmake/Sanitizers.cmake)
+include(${modules}/Sanitizers.cmake)
 
-include(cmake/StaticAnalyzers.cmake)
+include(${modules}/StaticAnalyzers.cmake)
 
-include(cmake/GetFrontendpy.cmake)
+include(${modules}/GetFrontendpy.cmake)
 set(frontendpy_asset_name "Frontend.py-${CMAKE_SYSTEM_NAME}-main")
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
   set(frontendpy_asset_name "${frontendpy_asset_name}-${CMAKE_BUILD_TYPE}")
@@ -23,7 +35,7 @@ endif()
 get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.xz)
 copy_frontend_py_docs(SRC_DIR ${frontend_py_SOURCE_DIR})
 
-include(cmake/GetParser.cmake)
+include(${modules}/GetParser.cmake)
 set(parser_asset_name "Parser-${CMAKE_SYSTEM_NAME}-main")
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
   set(parser_asset_name "${parser_asset_name}-${CMAKE_BUILD_TYPE}")
@@ -58,7 +70,7 @@ foreach(include ${SYSTEM_INCLUDE_PATHS})
   list(APPEND SYSTEM_INCLUDES ${formated_include})
 endforeach()
 
-include(cmake/copyLLVMIncludes.cmake)
+include(${modules}/copyLLVMIncludes.cmake)
 # Copy the llvm headers relative to the tolc executable
 # (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
 #  this is called in the same file as the add_executable)
@@ -73,14 +85,14 @@ FetchContent_Declare(
   GIT_TAG v2.1.1)
 FetchContent_Populate(cli11_content)
 
-include(cmake/ConanHelpers.cmake)
+include(${modules}/ConanHelpers.cmake)
 # Create the profile from variables known during configure
 setup_conan_profile(VARIABLE tolc_conan_profile)
 
 find_conan_packages(REQUIRES spdlog/1.8.0 fmt/7.1.3 PROFILE
                     ${tolc_conan_profile})
 
-include(cmake/GetBoost.cmake)
+include(${modules}/GetBoost.cmake)
 get_boost(VERSION 1.77.0)
 
 configure_file(
@@ -105,7 +117,7 @@ set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 
 add_warnings(TARGET TolcInternal)
-add_options(TARGET TolcInternal)
+tolc_add_options(TARGET TolcInternal)
 target_link_boost(TARGET TolcInternal)
 # Do not try to link against static libraries (only using headers for now)
 target_compile_definitions(TolcInternal PRIVATE BOOST_ALL_NO_LIB)
