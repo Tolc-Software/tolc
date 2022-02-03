@@ -16,6 +16,9 @@ set(modules ${cmake_modules_SOURCE_DIR}/cmake)
 
 # Define add_{warnings,options}
 include(${modules}/WarningsAndOptions.cmake)
+# Need a special options since the used version of Boost::asio
+# doesn't support C++20 on MacOS
+include(cmake/Options.cmake)
 
 # Define options such as ccache
 include(${modules}/ProjectSettings.cmake)
@@ -114,7 +117,7 @@ set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 
 add_warnings(TARGET TolcInternal)
-add_options(TARGET TolcInternal)
+tolc_add_options(TARGET TolcInternal)
 target_link_boost(TARGET TolcInternal)
 # Do not try to link against static libraries (only using headers for now)
 target_compile_definitions(TolcInternal PRIVATE BOOST_ALL_NO_LIB)

@@ -31,7 +31,7 @@ configure_file(
 add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp
                      TestUtil/src/TestUtil/startServer.cpp)
 add_warnings(TARGET TestUtil)
-add_options(TARGET TestUtil)
+tolc_add_options(TARGET TestUtil)
 target_include_directories(TestUtil PUBLIC TestUtil/include)
 find_package(Threads REQUIRED)
 target_link_libraries(TestUtil PRIVATE fmt::fmt Threads::Threads)
@@ -69,7 +69,7 @@ foreach(
     fmt::fmt)
 
   add_warnings(TARGET ${testName})
-  add_options(TARGET ${testName})
+  tolc_add_options(TARGET ${testName})
 
   set(ENABLE_SANITIZER_ADDRESS TRUE)
   set(ENABLE_SANITIZER_MEMORY TRUE)
