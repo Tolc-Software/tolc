@@ -28,3 +28,4 @@ tools/conan_profiles/Windows/clang
 !src
 !tests
 !tools
+!COPYRIGHT.md
