@@ -1,18 +1,9 @@
 include_guard()
 
-include(FetchContent)
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG v2.12.1)
-FetchContent_MakeAvailable(Catch2)
-
-# These are needed to use create_catch2_test
-set(Catch2_FOUND TRUE)
-set(Catch2_INCLUDE_DIRS ${Catch2_SOURCE_DIR}/single_include)
-
-# Defines create_catch2_test
+# Defines create_catch2_test and get_catch2
 include(${modules}/Catch2Helpers.cmake)
+
+get_catch2(VERSION v2.13.8)
 
 find_package(fmt REQUIRED)
 
