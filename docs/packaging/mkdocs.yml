@@ -14,6 +14,7 @@ nav:
     - Reference: 'cmake/reference.md'
   - Python Interface:
     - Introduction: 'python/introduction.md'
+    - Examples: 'python/examples.md'
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
   - FAQ: 'FAQ.md'

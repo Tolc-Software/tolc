@@ -16,7 +16,7 @@ namespace TolcInternal {
 /**
   * Check the language passed in an call the appropriate frontend on the input namespace
   */
-std::optional<std::pair<std::filesystem::path, std::string>>
+std::optional<std::vector<std::pair<std::filesystem::path, std::string>>>
 callFrontend(TolcInternal::Config::Language language,
              IR::Namespace const& globalNamespace,
              std::string const& moduleName) {
@@ -68,9 +68,9 @@ int run(int argc, const char** argv) {
 				if (auto output = callFrontend(config.language,
 				                               maybeGlobalNamespace.value(),
 				                               config.moduleName)) {
-					auto& [file, content] = output.value();
-					writeFile(config, file, content);
-
+					for (auto const& [file, content] : output.value()) {
+						writeFile(config, file, content);
+					}
 					logData.success = true;
 					Log::logTimeTaken(logData);
 					return 0;
