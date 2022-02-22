@@ -1,6 +1,6 @@
 /*!
-  Highlight.js v11.3.1 (git: 2a972d8658)
-  (c) 2006-2021 Ivan Sagalaev and other contributors
+  Highlight.js v11.4.0 (git: 2d0e7c1094)
+  (c) 2006-2022 Ivan Sagalaev and other contributors
   License: BSD-3-Clause
  */
 var deepFreezeEs6 = {exports: {}};
@@ -425,11 +425,13 @@ function stripOptionsFromArgs(args) {
   }
 }
 
+/** @typedef { {capture?: boolean} } RegexEitherOptions */
+
 /**
  * Any of the passed expresssions may match
  *
  * Creates a huge this | this | that | that match
- * @param {(RegExp | string)[] } args
+ * @param {(RegExp | string)[] | [...(RegExp | string)[], RegexEitherOptions]} args
  * @returns {string}
  */
 function either(...args) {
@@ -1553,7 +1555,7 @@ function expandOrCloneMode(mode) {
   return mode;
 }
 
-var version = "11.3.1";
+var version = "11.4.0";
 
 class HTMLInjectionError extends Error {
   constructor(reason, html) {
@@ -2287,7 +2289,8 @@ const HLJS = function(hljs) {
     if (element.children.length > 0) {
       if (!options.ignoreUnescapedHTML) {
         console.warn("One of your code blocks includes unescaped HTML. This is a potentially serious security risk.");
-        console.warn("https://github.com/highlightjs/highlight.js/issues/2886");
+        console.warn("https://github.com/highlightjs/highlight.js/wiki/security");
+        console.warn("The element with unescaped HTML:");
         console.warn(element);
       }
       if (options.throwUnescapedHTML) {
