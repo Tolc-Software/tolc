@@ -32,13 +32,3 @@ tolc_create_translation(
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out
   NO_ANALYTICS)
-
-# Generate helpers for the tests
-find_package(Python3 REQUIRED)
-# NOTE: If this fails, the test automatically fails
-add_custom_target(
-  importCreatedPyLib ALL
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tolc
-  COMMAND ${Python3_EXECUTABLE} -c \"import myLib\")
-# Make sure it only runs after myLib_python is built
-add_dependencies(importCreatedPyLib myLib_python)
