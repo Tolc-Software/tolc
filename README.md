@@ -79,10 +79,12 @@ $ python3
 The prebuilt binaries are available under [the releases tab](https://github.com/Tolc-Software/tolc/releases/tag/main-release) in this repository. You may simply install them directly from there, or use `CMake` to download the binary for your platform directly:
 
 ```cmake
+# Can be ["latest", "v0.2.0", ...]
+set(tolc_version latest)
 include(FetchContent)
 FetchContent_Declare(
   tolc_entry
-  URL https://github.com/Tolc-Software/tolc/releases/download/main-release/tolc-${CMAKE_HOST_SYSTEM_NAME}-main.tar.gz
+  URL https://github.com/Tolc-Software/tolc/releases/download/${tolc_version}/tolc-${CMAKE_HOST_SYSTEM_NAME}.tar.xz
 )
 FetchContent_Populate(tolc_entry)
 

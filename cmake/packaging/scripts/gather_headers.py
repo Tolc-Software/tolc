@@ -36,6 +36,8 @@ def main():
     args = parseArguments()
     print(args)
 
+    # Make sure the directory of the output exists
+    Path(args.combined_header).parent.mkdir(parents=True, exist_ok=True)
     with open(args.combined_header, 'w') as output:
         if not args.do_not_search_for_headers:
             for include_directory in args.includes:

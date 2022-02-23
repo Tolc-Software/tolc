@@ -2,21 +2,6 @@ include_guard()
 
 # See the README for more detailed documentation
 
-# TODO: Remove this
-# NOTE: Temporarily needed since the currently used pybind11
-#       cannot find the correct python version on MacOS.
-#       See the root README.md for more details
-find_package(Python3 REQUIRED)
-
-# On Windows CMAKE_C_COMPILER is not set by default
-if(MSVC)
-  set(c_compiler clang-cl)
-  set(cxx_compiler clang-cl)
-else()
-  set(c_compiler ${CMAKE_C_COMPILER})
-  set(cxx_compiler ${CMAKE_CXX_COMPILER})
-endif()
-
 # Generate helpers for the tests
 foreach(systemTestName translateFileTest translateLibraryWithHeaders translateLibraryTest addLibraryTest createTranslationTest)
   # Path to the consumer project
@@ -28,9 +13,7 @@ foreach(systemTestName translateFileTest translateLibraryWithHeaders translateLi
     NAME Generate${systemTestName}
     WORKING_DIRECTORY ${consumer}
     COMMAND
-      ${CMAKE_COMMAND} -S. -Bbuild -GNinja
-      -DCMAKE_CXX_COMPILER=${cxx_compiler}
-      -DCMAKE_C_COMPILER=${c_compiler} -DCMAKE_BUILD_TYPE=Debug -Dtolc_ROOT=${test_package} -DPYTHON_EXECUTABLE=${Python3_EXECUTABLE})
+      ${CMAKE_COMMAND} -S. -Bbuild -Dtolc_ROOT=${test_package})
   set_tests_properties(Generate${systemTestName} PROPERTIES FIXTURES_SETUP
                                                    FixtureGenerate${systemTestName})
   # Need to install package before generating
@@ -41,7 +24,7 @@ foreach(systemTestName translateFileTest translateLibraryWithHeaders translateLi
   add_test(
     NAME Build${systemTestName}
     WORKING_DIRECTORY ${consumer}
-    COMMAND ${CMAKE_COMMAND} --build ${consumer}/build)
+    COMMAND ${CMAKE_COMMAND} --build build)
   set_tests_properties(Build${systemTestName} PROPERTIES FIXTURES_SETUP
                                                 FixtureBuild${systemTestName})
   # Need to generate the build files before building
@@ -51,14 +34,16 @@ foreach(systemTestName translateFileTest translateLibraryWithHeaders translateLi
   # This requires that the project creates an executable called 'consumer' in the build directory
   add_test(NAME Run${systemTestName}
            COMMAND ${consumer}/build/consumer)
+  set_tests_properties(Run${systemTestName} PROPERTIES FIXTURES_SETUP
+                                                FixtureRun${systemTestName})
   # Need to build the consumer before running it
   set_tests_properties(Run${systemTestName} PROPERTIES FIXTURES_REQUIRED
                                               FixtureBuild${systemTestName})
 
-  add_test(NAME CleanUp${systemTestName}BuildDirectory
-           COMMAND ${CMAKE_COMMAND} -E rm -rf
-                   ${consumer}/build)
+  add_test(NAME CleanUp${systemTestName}
+           COMMAND ${CMAKE_COMMAND} -E rm -r -f
+                 ${consumer}/build)
   # After running the final test, cleanup the build directory
-  set_tests_properties(CleanUp${systemTestName}BuildDirectory PROPERTIES FIXTURES_CLEANUP
-                                                                Run${systemTestName})
+  set_tests_properties(CleanUp${systemTestName} PROPERTIES FIXTURES_REQUIRED
+                                              FixtureRun${systemTestName})
 endforeach()
