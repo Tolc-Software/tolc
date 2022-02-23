@@ -34,14 +34,16 @@ foreach(systemTestName translateFileTest translateLibraryWithHeaders translateLi
   # This requires that the project creates an executable called 'consumer' in the build directory
   add_test(NAME Run${systemTestName}
            COMMAND ${consumer}/build/consumer)
+  set_tests_properties(Run${systemTestName} PROPERTIES FIXTURES_SETUP
+                                                FixtureRun${systemTestName})
   # Need to build the consumer before running it
   set_tests_properties(Run${systemTestName} PROPERTIES FIXTURES_REQUIRED
                                               FixtureBuild${systemTestName})
 
-  add_test(NAME CleanUp${systemTestName}BuildDirectory
+  add_test(NAME CleanUp${systemTestName}
            COMMAND ${CMAKE_COMMAND} -E rm -r -f
-                   ${consumer}/build)
+                 ${consumer}/build)
   # After running the final test, cleanup the build directory
-  set_tests_properties(CleanUp${systemTestName}BuildDirectory PROPERTIES FIXTURES_CLEANUP
-                                                                Run${systemTestName})
+  set_tests_properties(CleanUp${systemTestName} PROPERTIES FIXTURES_REQUIRED
+                                              FixtureRun${systemTestName})
 endforeach()
