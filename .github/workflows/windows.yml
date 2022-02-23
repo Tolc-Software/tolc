@@ -77,18 +77,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         # Move to keep the directory on Github Actions free from filename clashes
-        mv tolc.tar.xz tolc-Windows-latest.tar.xz
+        mv tolc.tar.xz tolc-Windows.tar.xz
 
         echo "Pushing to the latest tag"
         gh release create latest --title "Latest release from main" --notes "This release gets updated on each commit to main" || true
-        gh release upload latest tolc-Windows-latest.tar.xz --clobber
-
-        version="$(cat docs/ReleaseNotes/version)"
-        # Move to keep the directory on Github Actions free from filename clashes
-        mv tolc-Windows-latest.tar.xz tolc-Windows-${version}.tar.xz
+        gh release upload latest tolc-Windows.tar.xz --clobber
 
         echo "Making sure the release ${version} is online"
+        version="$(cat docs/ReleaseNotes/version)"
         test -f docs/ReleaseNotes/${version}.md
         gh release create "${version}" --title "${version}" --notes-file "docs/ReleaseNotes/${version}.md" || true
-        gh release upload "${version}" tolc-Windows-${version}.tar.xz || true
+        gh release upload "${version}" tolc-Windows.tar.xz || true
 

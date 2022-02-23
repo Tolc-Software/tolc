@@ -65,18 +65,16 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         # Move to keep the directory on Github Actions free from filename clashes
-        mv tolc.tar.xz tolc-Darwin-main.tar.xz
+        mv tolc.tar.xz tolc-Darwin.tar.xz
 
         echo "Pushing to the latest tag"
         gh release create latest --title "Latest release from main" --notes "This release gets updated on each commit to main" || true
-        gh release upload latest tolc-Darwin-main.tar.xz --clobber
+        gh release upload latest tolc-Darwin.tar.xz --clobber
 
         version="$(cat docs/ReleaseNotes/version)"
-        # Move to keep the directory on Github Actions free from filename clashes
-        mv tolc-Darwin-main.tar.xz tolc-Darwin-${version}.tar.xz
 
         echo "Making sure the release ${version} is online"
         test -f docs/ReleaseNotes/${version}.md
         gh release create "${version}" --title "${version}" --notes-file "docs/ReleaseNotes/${version}.md" || true
-        gh release upload "${version}" "tolc-Darwin-${version}.tar.xz" || true
+        gh release upload "${version}" tolc-Darwin.tar.xz || true
 
