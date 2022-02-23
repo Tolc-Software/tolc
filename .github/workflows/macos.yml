@@ -55,9 +55,9 @@ jobs:
         cd build
         ctest --output-on-failure -j4
 
-    - name: Build the release tar.gzip package
+    - name: Build the release tar.xz package
       if: github.ref == 'refs/heads/main'
-      run: cpack -G TGZ --config build/CPackConfig.cmake
+      run: cpack -G TXZ --config build/CPackConfig.cmake
 
     - name: Push release
       if: github.ref == 'refs/heads/main'

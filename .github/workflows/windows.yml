@@ -63,12 +63,12 @@ jobs:
         cd build
         ctest --output-on-failure -j4
 
-    - name: Build the release tar.gzip package
+    - name: Build the release tar.xz package
       if: github.ref == 'refs/heads/main'
       shell: cmd
       run: |
         call "%VCVARS%"
-        cpack -G TGZ --config build/CPackConfig.cmake
+        cpack -G TXZ --config build/CPackConfig.cmake
 
     - name: Push release
       if: github.ref == 'refs/heads/main'
