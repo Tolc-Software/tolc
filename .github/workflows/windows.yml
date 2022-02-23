@@ -18,12 +18,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_KEY }}
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -67,7 +61,7 @@ jobs:
       run: |
         call "%VCVARS%"
         cd build
-        ctest --cores 4 --output-on-failure
+        ctest --output-on-failure -j4
 
     - name: Build the release tar.gzip package
       if: github.ref == 'refs/heads/main'
@@ -76,28 +70,25 @@ jobs:
         call "%VCVARS%"
         cpack -G TGZ --config build/CPackConfig.cmake
 
-    - name: Setup go
+    - name: Push release
       if: github.ref == 'refs/heads/main'
-      uses: actions/setup-go@v2
-      with:
-        go-version: '1.14'
-
-    - name: Setup go cache
-      if: github.ref == 'refs/heads/main'
-      uses: actions/cache@v2
-      with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-go-
-
-    - name: Push main release
-      if: github.ref == 'refs/heads/main'
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
-        go get -v github.com/github-release/github-release
-        echo "Checking if a new release is needed"
-        github-release release --user Tolc-Software --repo tolc --tag main-release --name "Head release" --description "This release gets updated with each commit to main" || true
-        echo "Pushing the release"
-        github-release upload --user Tolc-Software --repo tolc --tag main-release --name "tolc-Windows-main.tar.gz" --file tolc.tar.gz --replace
+        # Move to keep the directory on Github Actions free from filename clashes
+        mv tolc.tar.xz tolc-Windows-latest.tar.xz
+
+        echo "Pushing to the latest tag"
+        gh release create latest --title "Latest release from main" --notes "This release gets updated on each commit to main" || true
+        gh release upload latest tolc-Windows-latest.tar.xz --clobber
+
+        version="$(cat docs/ReleaseNotes/version)"
+        # Move to keep the directory on Github Actions free from filename clashes
+        mv tolc-Windows-latest.tar.xz tolc-Windows-${version}.tar.xz
+
+        echo "Making sure the release ${version} is online"
+        test -f docs/ReleaseNotes/${version}.md
+        gh release create "${version}" --title "${version}" --notes-file "docs/ReleaseNotes/${version}.md" || true
+        gh release upload "${version}" tolc-Windows-${version}.tar.xz || true
+

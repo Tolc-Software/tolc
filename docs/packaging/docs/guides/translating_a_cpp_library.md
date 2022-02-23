@@ -39,11 +39,12 @@ target_include_directories(Math PUBLIC include)
 Below this code we download and install `tolc` locally into the project from [the release page](https://github.com/Tolc-Software/tolc/releases/tag/main-release)
 
 ```cmake
-# CMakeLists.txt
+# Can be ["latest", "v0.2.0", ...]
+set(tolc_version latest)
 include(FetchContent)
 FetchContent_Declare(
   tolc_entry
-  URL https://github.com/Tolc-Software/tolc/releases/download/main-release/tolc-${CMAKE_HOST_SYSTEM_NAME}-main.tar.gz
+  URL https://github.com/Tolc-Software/tolc/releases/download/${tolc_version}/tolc-${CMAKE_HOST_SYSTEM_NAME}.tar.gz
 )
 FetchContent_Populate(tolc_entry)
 
@@ -52,8 +53,7 @@ find_package(
   CONFIG
   PATHS
   ${tolc_entry_SOURCE_DIR}
-  REQUIRED
-  NO_DEFAULT_PATH)
+  REQUIRED)
 ```
 
 After the call to `find_package` we are free to use the `CMake` functions available in the `tolc` installation. To create bindings for `Math` we have to call the `tolc_create_translation` function
@@ -63,8 +63,7 @@ After the call to `find_package` we are free to use the `CMake` functions availa
 tolc_create_translation(
   TARGET Math
   LANGUAGE python
-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings
-)
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings)
 ```
 
 This will read the public API of `Math`, create bindings to `python` and put them in `${CMAKE_CURRENT_BINARY_DIR}/python-bindings` (typically `build/python-bindings`). It also created the target `Math_python` (`<TARGET>_<LANGUAGE>`) for the bindings, and is just a normal build target. Configuring the project

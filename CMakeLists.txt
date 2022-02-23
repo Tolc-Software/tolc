@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.17)
 
 project(
   tolc
-  VERSION 0.1
+  VERSION 0.2.0
   LANGUAGES CXX)
+
+configure_file(docs/ReleaseNotes/version.in
+               ${CMAKE_CURRENT_LIST_DIR}/docs/ReleaseNotes/version @ONLY)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -27,23 +30,14 @@ include(${modules}/Sanitizers.cmake)
 
 include(${modules}/StaticAnalyzers.cmake)
 
-include(${modules}/GetFrontendpy.cmake)
-set(frontendpy_asset_name "Frontend.py-${CMAKE_SYSTEM_NAME}-main")
-if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
-  set(frontendpy_asset_name "${frontendpy_asset_name}-${CMAKE_BUILD_TYPE}")
-endif()
-get_frontend_py(ASSET_NAME ${frontendpy_asset_name}.tar.xz)
-copy_frontend_py_docs(SRC_DIR ${frontend_py_SOURCE_DIR})
+include(${modules}/GetFrontend.cmake)
+get_frontend(NAME Frontend.py VERSION v0.2.0)
+copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
+                   ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
 include(${modules}/GetParser.cmake)
-set(parser_asset_name "Parser-${CMAKE_SYSTEM_NAME}-main")
-if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
-  set(parser_asset_name "${parser_asset_name}-${CMAKE_BUILD_TYPE}")
-endif()
-get_parser(ASSET_NAME ${parser_asset_name}.tar.xz)
+get_parser(VERSION v0.2.0)
 
-# If we are not building from source we need to create some variables
-# containing the paths to the included system library
 # Set the include path for the system library in the variable
 # We are using the standard library shipped
 # with the downloaded llvm for include paths in the parsing
@@ -89,7 +83,7 @@ include(${modules}/ConanHelpers.cmake)
 # Create the profile from variables known during configure
 setup_conan_profile(VARIABLE tolc_conan_profile)
 
-find_conan_packages(REQUIRES spdlog/1.8.0 fmt/7.1.3 PROFILE
+find_conan_packages(REQUIRES spdlog/1.9.2 fmt/8.1.1 PROFILE
                     ${tolc_conan_profile})
 
 include(${modules}/GetBoost.cmake)
