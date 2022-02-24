@@ -22,48 +22,64 @@ int parseInternal(CLI::App& app,
 }
 }    // namespace
 
+void addCommonCommands(CLI::App& languageApp, CommandLine::CLIResult& result) {
+	// Adding directly to languageApp since these options
+	// should come after the language subcommand in the CLI
+	languageApp
+	    .add_option("-i,--input",
+	                result.inputFile,
+	                "The interface file to be translated.")
+	    ->required();
+
+	languageApp
+	    .add_option("-m,--module-name",
+	                result.moduleName,
+	                "The name of the exported library.")
+	    ->required();
+
+	languageApp
+	    .add_option("-o,--output",
+	                result.outputDirectory,
+	                "The output directory where the bindings will be stored.")
+	    ->required();
+
+	languageApp.add_option(
+	    "-I",
+	    result.includes,
+	    "Path to search for when resolving #include statements.");
+
+	languageApp.add_flag(
+	    "--no-analytics", result.noAnalytics, "Don't gather analytics.");
+}
+
 /**
 * Adds the python subcommand with hooks to the rootApp
 */
 [[nodiscard]] CLI::App* addPythonCommands(CLI::App& rootApp,
                                           CommandLine::CLIResult& result) {
-	auto* python =
-	    rootApp.add_subcommand("python", "Translate input for use from python");
+	auto* python = rootApp.add_subcommand(
+	    "python", "Create bindings to use C++ from python via CPython");
 
-	// Adding directly to python since these options
-	// should come after the language subcommand in the CLI
-	python
-	    ->add_option("-i,--input",
-	                 result.inputFile,
-	                 "The interface file to be translated.")
-	    ->required();
-
-	// E.g. moduleName = defaultModule
-	// -> import defaultModule
-	// will be valid python
-	python
-	    ->add_option("-m,--module-name",
-	                 result.moduleName,
-	                 "The name of the exported library.")
-	    ->required();
-
-	python
-	    ->add_option("-o,--output",
-	                 result.outputDirectory,
-	                 "The output directory where the bindings will be stored.")
-	    ->required();
-
-	python->add_option(
-	    "-I",
-	    result.includes,
-	    "Path to search for when resolving #include statements.");
-
-	python->add_flag(
-	    "--no-analytics", result.noAnalytics, "Don't gather analytics.");
+	addCommonCommands(*python, result);
 
 	python->callback([&result]() { result.language = "python"; });
 
 	return python;
+}
+
+/**
+* Adds the wasm subcommand with hooks to the rootApp
+*/
+[[nodiscard]] CLI::App* addWasmCommands(CLI::App& rootApp,
+                                        CommandLine::CLIResult& result) {
+	auto* wasm = rootApp.add_subcommand(
+	    "wasm", "Create bindings to use C++ from javascript via WebAssembly");
+
+	addCommonCommands(*wasm, result);
+
+	wasm->callback([&result]() { result.language = "wasm"; });
+
+	return wasm;
 }
 
 /**
@@ -75,6 +91,7 @@ addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
 	std::vector<CLI::App*> apps = {&app};
 
 	apps.push_back(addPythonCommands(app, result));
+	apps.push_back(addWasmCommands(app, result));
 
 	// The number of subcommands added (as of writing only python => 1)
 	app.require_subcommand(1);
@@ -85,7 +102,7 @@ addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
 [[nodiscard]] std::optional<CommandLine::CLIResult> parse(int argc,
                                                           const char** argv) {
 	CLI::App app {
-	    "Tolc is an automatic bindings generator between C++ and other languages"};
+	    "Tolc is a bindings compiler between C++ and other languages"};
 
 	CommandLine::CLIResult result;
 	auto apps = CommandLine::addSubcommandsAndOptions(app, result);

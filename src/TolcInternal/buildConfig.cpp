@@ -34,6 +34,8 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 
 	if (cli.language == "python") {
 		config.language = Config::Language::Python;
+	} else if (cli.language == "wasm") {
+		config.language = Config::Language::Wasm;
 	} else {
 		spdlog::error("Unknonwn language: {}", cli.language);
 		return {};

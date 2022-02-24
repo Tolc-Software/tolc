@@ -35,6 +35,11 @@ get_frontend(NAME Frontend.py VERSION v0.2.0)
 copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
                    ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
+get_frontend(NAME Frontend.wasm VERSION v0.3.0)
+copy_frontend_docs(
+  NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR} COPY_TO
+  ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
+
 include(${modules}/GetParser.cmake)
 get_parser(VERSION v0.2.0)
 
@@ -105,8 +110,9 @@ add_library(
 target_include_directories(TolcInternal PUBLIC src)
 target_include_directories(TolcInternal SYSTEM
                            PRIVATE ${cli11_content_SOURCE_DIR}/include)
-target_link_libraries(TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py
-                                          spdlog::spdlog fmt::fmt)
+target_link_libraries(
+  TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py Tolc::Frontend.wasm
+                      spdlog::spdlog fmt::fmt)
 set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
                                               CXX_EXTENSIONS OFF)
 

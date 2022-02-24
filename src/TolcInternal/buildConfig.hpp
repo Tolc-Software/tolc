@@ -12,7 +12,7 @@ namespace TolcInternal {
 * Stores everyting needed to use the Parser and Frontends
 */
 struct Config {
-	enum class Language { Python };
+	enum class Language { Python, Wasm };
 
 	// Tells the parser what to do
 	Parser::Config parserConfig;

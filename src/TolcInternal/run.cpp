@@ -1,14 +1,15 @@
 #include "TolcInternal/run.hpp"
 #include "CommandLine/parse.hpp"
+#include "Log/log.hpp"
 #include "TolcInternal/buildConfig.hpp"
 #include <Frontend/Python/frontend.hpp>
+#include <Frontend/Wasm/frontend.hpp>
 #include <IR/ir.hpp>
 #include <Parser/Parse.hpp>
-#include <filesystem>
-#include <fstream>
-#include "Log/log.hpp"
 #include <chrono>
+#include <filesystem>
 #include <fmt/format.h>
+#include <fstream>
 #include <iostream>
 
 namespace TolcInternal {
@@ -23,6 +24,9 @@ callFrontend(TolcInternal::Config::Language language,
 	switch (language) {
 		case TolcInternal::Config::Language::Python:
 			return Frontend::Python::createModule(globalNamespace, moduleName);
+			break;
+		case TolcInternal::Config::Language::Wasm:
+			return Frontend::Wasm::createModule(globalNamespace, moduleName);
 			break;
 	}
 	return std::nullopt;
@@ -41,8 +45,8 @@ void writeFile(TolcInternal::Config const& config,
 	outFile.open(config.outputDirectory / file);
 	if (outFile.is_open()) {
 		// Inject the input file aswell
-		outFile << "#include <" << config.inputFile.string() << ">\n"
-		        << content;
+		outFile << fmt::format(
+		    "#include <{}>\n{}", config.inputFile.string(), content);
 	}
 }
 
@@ -60,14 +64,17 @@ int run(int argc, const char** argv) {
 
 		// Validate user input
 		if (auto maybeConfig = buildConfig(cliResult)) {
+			std::cout << "Managed to build config" << '\n';
 			auto config = maybeConfig.value();
 
 			// Try to parse it
 			if (auto maybeGlobalNamespace =
 			        Parser::parseFile(config.inputFile, config.parserConfig)) {
+				std::cout << "Managed to parse code" << '\n';
 				if (auto output = callFrontend(config.language,
 				                               maybeGlobalNamespace.value(),
 				                               config.moduleName)) {
+					std::cout << "Managed to call frontend" << '\n';
 					for (auto const& [file, content] : output.value()) {
 						writeFile(config, file, content);
 					}
