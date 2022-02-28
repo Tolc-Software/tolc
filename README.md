@@ -56,14 +56,14 @@
 `Tolc` provides easy to use abstractions to create a bindings library directly from `CMake`:
 
 ```cmake
-tolc_create_translation(
+tolc_create_bindings(
   TARGET MyLib
   LANGUAGE python
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings
 )
 ```
 
-This will extract the public API from the target `MyLib`, give it to `Tolc` to create bindings, and expose it to `CMake` as the target `MyLib_python`. To see all options available for `tolc_create_translation`, please see the [the documentation](https://docs.tolc.io/cmake/reference/).
+This will extract the public API from the target `MyLib`, give it to `Tolc` to create bindings, and expose it to `CMake` as the target `MyLib_python`. To see all options available for `tolc_create_bindings`, please see the [the documentation](https://docs.tolc.io/cmake/reference/).
 
 In this example you will find the built `CPython` library under `<build_directory>/tolc`, so you can use it straight away with:
 

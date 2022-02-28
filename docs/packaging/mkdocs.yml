@@ -7,16 +7,20 @@ nav:
   - Introduction: 'index.md'
   - Installing: 'installing.md'
   - Usage: 'usage.md'
-  - Guides:
-    - Translating a C++ library: 'guides/translating_a_cpp_library.md'
-  - CMake:
-    - Interface: 'cmake/interface.md'
-    - Reference: 'cmake/reference.md'
   - Python Interface:
     - Introduction: 'python/introduction.md'
     - Examples: 'python/examples.md'
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
+  - WebAssembly Interface:
+    - Introduction: 'webassembly/introduction.md'
+    - Examples: 'webassembly/examples.md'
+    - Conversions: 'webassembly/conversions.md'
+  - Guides:
+    - Translating a C++ library: 'guides/translating_a_cpp_library.md'
+  - CMake:
+    - Interface: 'cmake/interface.md'
+    - Reference: 'cmake/reference.md'
   - FAQ: 'FAQ.md'
 markdown_extensions:
   - fenced_code

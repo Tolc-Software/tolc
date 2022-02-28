@@ -10,7 +10,6 @@
 #include <filesystem>
 #include <fmt/format.h>
 #include <fstream>
-#include <iostream>
 
 namespace TolcInternal {
 
@@ -42,11 +41,15 @@ void writeFile(TolcInternal::Config const& config,
                std::string const& content) {
 	std::filesystem::create_directories(config.outputDirectory);
 	std::ofstream outFile;
-	outFile.open(config.outputDirectory / file);
+	auto outPath = config.outputDirectory / file;
+	outFile.open(outPath);
 	if (outFile.is_open()) {
-		// Inject the input file aswell
-		outFile << fmt::format(
-		    "#include <{}>\n{}", config.inputFile.string(), content);
+		if (outPath.extension().string() == ".cpp") {
+			// Inject the input file aswell
+			outFile << fmt::format("#include <{}>\n",
+			                       config.inputFile.string());
+		}
+		outFile << content;
 	}
 }
 
@@ -64,17 +67,14 @@ int run(int argc, const char** argv) {
 
 		// Validate user input
 		if (auto maybeConfig = buildConfig(cliResult)) {
-			std::cout << "Managed to build config" << '\n';
 			auto config = maybeConfig.value();
 
 			// Try to parse it
 			if (auto maybeGlobalNamespace =
 			        Parser::parseFile(config.inputFile, config.parserConfig)) {
-				std::cout << "Managed to parse code" << '\n';
 				if (auto output = callFrontend(config.language,
 				                               maybeGlobalNamespace.value(),
 				                               config.moduleName)) {
-					std::cout << "Managed to call frontend" << '\n';
 					for (auto const& [file, content] : output.value()) {
 						writeFile(config, file, content);
 					}

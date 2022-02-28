@@ -4,12 +4,12 @@ Given that you have installed `tolc` you should be able to use the `CMake` inter
 
 ## Via `CMake`
 
-### `tolc_create_translation`
+### `tolc_create_bindings`
 
 Example usage:
 
 ```CMake
-tolc_create_translation(
+tolc_create_bindings(
   TARGET MyLib
   LANGUAGE python
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings
@@ -25,5 +25,5 @@ An overview of the internal process is described below:
 3. Download and make [`pybind11`](https://github.com/pybind/pybind11) available.
 4. Create the target `MyLib_python` and link it to `pybind11` aswell as `MyLib`.
 
-![Tolc tolc_create_translation overview](img/tolcCreateTranslationOverview.png "tolc_create_translation overview")
+![Tolc tolc_create_bindings overview](img/tolcCreateTranslationOverview.png "tolc_create_bindings overview")
 

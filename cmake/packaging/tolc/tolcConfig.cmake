@@ -26,11 +26,10 @@ find_tolc()
 message(STATUS "Using tolc executable: ${tolc_EXECUTABLE}")
 
 ### Config variables: These determine the behaviour of tolc ###
-set(tolc_pybind11_version 2.8.1)
+set(tolc_pybind11_version 2.9.1)
 # Comma separated list of supported languages
-set(tolc_supported_languages "python")
+set(tolc_supported_languages "python, wasm")
 
 include(${CMAKE_CURRENT_LIST_DIR}/tolcTranslate.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/GetPybind11.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/tolcAddTarget.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/tolcCreateTranslation.cmake)

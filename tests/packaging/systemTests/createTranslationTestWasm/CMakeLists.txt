@@ -21,7 +21,9 @@ tolc_create_bindings(
   TARGET
   myLib
   LANGUAGE
-  python
+  wasm
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out
   NO_ANALYTICS)
+
+target_link_libraries(myLib_wasm PRIVATE embind)
