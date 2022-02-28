@@ -32,7 +32,7 @@ function(add_system_test)
   add_test(
     NAME Generate${test_name}
     WORKING_DIRECTORY ${consumer}
-    COMMAND ${CMAKE_COMMAND} -S. -Bbuild
+    COMMAND ${CMAKE_COMMAND} -S. -Bbuild -G Ninja
             -Dtolc_DIR=${test_package}/lib/cmake/tolc ${extra_cmake})
   set_tests_properties(Generate${test_name}
                        PROPERTIES FIXTURES_SETUP FixtureGenerate${test_name})
@@ -83,3 +83,4 @@ foreach(test_name createTranslationTestWasm)
     node
     ${CMAKE_CURRENT_LIST_DIR}/${test_name}/test.js)
 endforeach()
+

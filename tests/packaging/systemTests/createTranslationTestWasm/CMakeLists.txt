@@ -25,5 +25,3 @@ tolc_create_bindings(
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out
   NO_ANALYTICS)
-
-target_link_libraries(myLib_wasm PRIVATE embind)

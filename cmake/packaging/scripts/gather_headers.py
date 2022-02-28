@@ -34,7 +34,6 @@ def parseArguments():
 
 def main():
     args = parseArguments()
-    print(args)
 
     # Make sure the directory of the output exists
     Path(args.combined_header).parent.mkdir(parents=True, exist_ok=True)
