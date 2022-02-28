@@ -1,8 +1,14 @@
 # Introduction #
 
-`tolc` is a bindings compiler that makes code written in `C++` callable from other languages. `tolc` reads the header files of a project and automatically generates the correct bindings.
+`Tolc` aims to make it as simple as possible to use `C++` from other languages. `Tolc` does not require you to change any part of your existing `C++` but simply reads your headers and automatically generates the correct bindings.
 
-`tolc` is easily integrated into any `C++` project, either via the provided CMake Interface, or directly as a simple executable.
+`Tolc` is easily integrated into any `C++` project, either via the provided CMake Interface, or directly as a simple executable.
 
-`tolc` is available on Windows, MacOS, and Debian flavours of Linux.
+`Tolc` is available on Windows, MacOS, and Debian flavours of Linux.
 
+---
+
+From here you can try any of the supported languages:
+
+* [Python](./python/introduction.md)
+* [WebAssembly](./webassembly/introduction.md)

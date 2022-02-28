@@ -2,7 +2,7 @@
 
 # `tolc_create_bindings` #
 
-Creates a target that is the library that can be consumed by some other language.
+Creates a target that is the library that can be consumed by some other language. The resulting target name is `${TARGET}_${LANGUAGE}` (e.g. `MyCppLib_python`).
 
 ## Parameters ##
 
