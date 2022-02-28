@@ -4,20 +4,13 @@ cmake_minimum_required(VERSION 3.11)
 project(Consumer)
 
 # NOTE: Assumes tolc package is put into following path before executing this test
-if(NOT tolc_ROOT)
+if(NOT tolc_DIR)
   message(
     FATAL_ERROR
-      "Project ${PROJECT_NAME} did not recieve the tolc_ROOT variable. When configuring this project, inject it with -Dtolc_ROOT=..."
+      "Project ${PROJECT_NAME} did not recieve the tolc_DIR variable. When configuring this project, inject it with -Dtolc_DIR=..."
   )
 endif()
-find_package(tolc CONFIG PATHS ${tolc_ROOT})
-
-if(NOT tolc_FOUND)
-  message(
-    FATAL_ERROR
-      "No tolc package found! To test a specific version, place a prebuilt tolc package in ${tolc_ROOT}. This is normally done automatically."
-  )
-endif()
+find_package(tolc CONFIG PATHS ${tolc_DIR} REQUIRED)
 
 add_executable(consumer src/consumer.cpp)
 set_target_properties(

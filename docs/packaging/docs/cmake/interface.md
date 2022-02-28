@@ -4,12 +4,12 @@ The `CMake` interface is used to gather information about the library you wish t
 
 ## Tolc CMake interface ##
 
-The main interface is through `tolc_create_translation`. Example usage:
+The main interface is through `tolc_create_bindings`. Example usage:
 
 ```cmake
 # This function comes from the tolc package itself
 # Creates the target example_python that can be imported and used from python
-tolc_create_translation(
+tolc_create_bindings(
   # Target to translate from
   TARGET example
   # Language to target
@@ -21,7 +21,7 @@ tolc_create_translation(
 
 This assumes there is a `CMake` target called `example` that has some include directories marked either `PUBLIC` or `INTERFACE`. It will look through these directories for header files (any files ending in `.h` or `.hpp`) and export everything inside them to `python` via [`pybind11`](https://github.com/pybind/pybind11). It will then create the target `example_python` that can be used to compile an importable `CPython` library. The following figure shows the whole process:
 
-![Tolc tolc_create_translation overview](../img/tolcCreateTranslationOverview.png "tolc_create_translation overview")
+![Tolc tolc_create_bindings overview](../img/tolcCreateTranslationOverview.png "tolc_create_bindings overview")
 
 ## Complete example ##
 
@@ -54,7 +54,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(tolc_bootstrap)
 get_tolc()
 
-tolc_create_translation(
+tolc_create_bindings(
   TARGET Math
   LANGUAGE python
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings

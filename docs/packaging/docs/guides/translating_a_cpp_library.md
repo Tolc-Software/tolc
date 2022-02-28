@@ -56,11 +56,11 @@ find_package(
   REQUIRED)
 ```
 
-After the call to `find_package` we are free to use the `CMake` functions available in the `tolc` installation. To create bindings for `Math` we have to call the `tolc_create_translation` function
+After the call to `find_package` we are free to use the `CMake` functions available in the `tolc` installation. To create bindings for `Math` we have to call the `tolc_create_bindings` function
 
 ```cmake
 # CMakeLists.txt
-tolc_create_translation(
+tolc_create_bindings(
   TARGET Math
   LANGUAGE python
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/python-bindings)

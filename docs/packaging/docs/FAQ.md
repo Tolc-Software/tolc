@@ -73,3 +73,15 @@ int const Example::i;
 
 For more information you can read about [static member declaration/instantiation on cppreference](https://en.cppreference.com/w/cpp/language/static), or [a discussion on this topic in the pybind repository](https://github.com/pybind/pybind11/issues/682).
 
+## I get a link error while building `WebAssembly` on Windows with `Visual Studio` ##
+
+At the time of writing there is only experimental support for the `Visual Studio` generator for `Emscripten`. If you see error such as:
+
+```shell
+LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [MyProject.vcxproj]
+LINK : fatal error LNK1104: cannot open file '.obj' [MyProject.vcxproj]
+cl : command line warning D9002: ignoring unknown option '-g' [MyProject_wasm.vcxproj] myLib.cpp
+```shell
+
+Then consider using the `Ninja` generator. It is the default on Windows with `Visual Studio`.
+

@@ -9,6 +9,7 @@
 # Files
 !.gitignore
 !CMakeLists.txt
+!test.js
 
 # Directories
 !src

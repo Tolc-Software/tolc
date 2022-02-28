@@ -1,15 +1,15 @@
 #include "TolcInternal/run.hpp"
 #include "CommandLine/parse.hpp"
+#include "Log/log.hpp"
 #include "TolcInternal/buildConfig.hpp"
 #include <Frontend/Python/frontend.hpp>
+#include <Frontend/Wasm/frontend.hpp>
 #include <IR/ir.hpp>
 #include <Parser/Parse.hpp>
-#include <filesystem>
-#include <fstream>
-#include "Log/log.hpp"
 #include <chrono>
+#include <filesystem>
 #include <fmt/format.h>
-#include <iostream>
+#include <fstream>
 
 namespace TolcInternal {
 
@@ -23,6 +23,9 @@ callFrontend(TolcInternal::Config::Language language,
 	switch (language) {
 		case TolcInternal::Config::Language::Python:
 			return Frontend::Python::createModule(globalNamespace, moduleName);
+			break;
+		case TolcInternal::Config::Language::Wasm:
+			return Frontend::Wasm::createModule(globalNamespace, moduleName);
 			break;
 	}
 	return std::nullopt;
@@ -38,11 +41,15 @@ void writeFile(TolcInternal::Config const& config,
                std::string const& content) {
 	std::filesystem::create_directories(config.outputDirectory);
 	std::ofstream outFile;
-	outFile.open(config.outputDirectory / file);
+	auto outPath = config.outputDirectory / file;
+	outFile.open(outPath);
 	if (outFile.is_open()) {
-		// Inject the input file aswell
-		outFile << "#include <" << config.inputFile.string() << ">\n"
-		        << content;
+		if (outPath.extension().string() == ".cpp") {
+			// Inject the input file aswell
+			outFile << fmt::format("#include <{}>\n",
+			                       config.inputFile.string());
+		}
+		outFile << content;
 	}
 }
 

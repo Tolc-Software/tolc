@@ -5,7 +5,7 @@ function(tolc_translate_file)
   set(prefix ARG)
   set(noValues NO_ANALYTICS)
   set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT)
-  set(multiValues INCLUDES)
+  set(multiValues)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -14,7 +14,7 @@ function(tolc_translate_file)
   # Cannot assume too new CMake version
   set(function_name tolc_translate_file)
   set(usage
-      "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT out [INCLUDES include])"
+      "Usage: ${function_name}(MODULE_NAME myLibrary LANGUAGE python INPUT include/myLibrary.hpp OUTPUT out)"
   )
 
   # Helper function
@@ -51,16 +51,6 @@ function(tolc_translate_file)
     set(noAnalytics "--no-analytics")
   endif()
 
-  # Turn the include directories to valid input flags
-  if(ARG_INCLUDES)
-    set(includes "")
-    foreach(include ${ARG_INCLUDES})
-      list(APPEND includes -I ${include})
-    endforeach()
-  else()
-    set(includes "")
-  endif()
-
   set(command
       ${tolc_EXECUTABLE}
       ${ARG_LANGUAGE}
@@ -70,10 +60,8 @@ function(tolc_translate_file)
       ${ARG_INPUT}
       --output
       ${ARG_OUTPUT}
-      ${includes}
       ${noAnalytics})
 
-  # TODO: This should be changed when tolc can handle outputs explicitly (not just a directory, but a file)
   add_custom_target(
     tolc_translate_file_${ARG_MODULE_NAME} ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}

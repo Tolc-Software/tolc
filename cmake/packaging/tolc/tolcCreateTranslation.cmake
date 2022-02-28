@@ -1,6 +1,6 @@
 include_guard()
 
-function(tolc_create_translation)
+function(tolc_create_bindings)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
@@ -13,7 +13,7 @@ function(tolc_create_translation)
 
   # Variables related to error messages:
   # Cannot assume too new CMake version
-  set(function_name tolc_create_translation)
+  set(function_name tolc_create_bindings)
   set(usage "Usage: ${function_name}(TARGET myLibrary LANGUAGE python)")
 
   # Helper function
@@ -48,11 +48,9 @@ function(tolc_create_translation)
   endif()
 
   # What the actual target name will be
-  set(tolcTargetName ${ARG_TARGET}_${ARG_LANGUAGE})
+  set(tolc_target_name ${ARG_TARGET}_${ARG_LANGUAGE})
   message(
-    STATUS
-      "Creating translation to language ${ARG_LANGUAGE} in target ${tolcTargetName}"
-  )
+    STATUS "Creating bindings to ${ARG_LANGUAGE} in target ${tolc_target_name}")
 
   # Use the input target to create the translation
   tolc_translate_target(
@@ -65,22 +63,45 @@ function(tolc_create_translation)
     ${ARG_LANGUAGE}
     OUTPUT
     ${ARG_OUTPUT})
-  # Add a new target, representing the translation
-  # TODO: This should be changed when tolc can handle outputs explicitly (not just a directory, but a file)
-  tolc_add_library(TARGET ${tolcTargetName} LANGUAGE ${ARG_LANGUAGE} INPUT
-                   ${ARG_OUTPUT}/${ARG_TARGET}.cpp)
+
+  if(${ARG_LANGUAGE} MATCHES "python")
+    # NOTE: Variable injected from tolcConfig file
+    get_pybind11(VERSION ${tolc_pybind11_version})
+    # Create the python module
+    pybind11_add_module(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}.cpp
+                        SYSTEM)
+  elseif(${ARG_LANGUAGE} MATCHES "wasm")
+    # Assumes that the Emscripten toolchain file is used
+    # Will result in a .js and a .wasm file
+    add_executable(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}.cpp)
+
+    # Export Promise as 'loadMyLib' for module 'MyLib'
+    # -s MODULARIZE=1 sets it as a promise based load
+    # Note that this is necessary for preJS to work properly
+    set_target_properties(
+      ${tolc_target_name}
+      PROPERTIES
+        LINK_FLAGS
+        "-s MODULARIZE=1 -s EXPORT_NAME=\"load${ARG_TARGET}\" --pre-js ${ARG_OUTPUT}/pre.js -lembind"
+    )
+  else()
+    error_with_usage(
+      "Unknown language input: ${ARG_LANGUAGE}. Valid input: [${tolc_supported_languages}]"
+    )
+  endif()
 
   # The added library target depends on the target being translated
-  add_dependencies(${tolcTargetName} tolc_translate_file_${ARG_TARGET})
+  add_dependencies(${tolc_target_name} tolc_translate_file_${ARG_TARGET})
 
   # NOTE: The user may need to provide additional links if they have their PUBLIC/PRIVATE dependencies missmatched
-  target_link_libraries(${tolcTargetName} PRIVATE ${ARG_TARGET})
+  target_link_libraries(${tolc_target_name} PRIVATE ${ARG_TARGET})
 
   set_target_properties(
-    ${tolcTargetName}
+    ${tolc_target_name}
     PROPERTIES ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
                RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc")
   # This allows the target to be called target_language, but still be imported e.g. in python as 'import target'
-  set_target_properties(${tolcTargetName} PROPERTIES OUTPUT_NAME ${ARG_TARGET})
+  set_target_properties(${tolc_target_name} PROPERTIES OUTPUT_NAME
+                                                       ${ARG_TARGET})
 endfunction()

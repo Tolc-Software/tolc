@@ -19,6 +19,16 @@ TEST_CASE("Translate valid cli to valid config", "[buildConfig]") {
 	REQUIRE(config.has_value());
 };
 
+TEST_CASE("Wasm gives Wasm :)", "[buildConfig]") {
+	auto cli = buildMockCLI();
+	cli.language = "wasm";
+	auto maybeConfig = TolcInternal::buildConfig(cli);
+	REQUIRE(maybeConfig.has_value());
+
+	auto config = maybeConfig.value();
+	REQUIRE(config.language == TolcInternal::Config::Language::Wasm);
+};
+
 TEST_CASE("Config has 'refined' the cli input", "[buildConfig]") {
 	auto cli = buildMockCLI();
 	// Make sure it is python so we can check enum
