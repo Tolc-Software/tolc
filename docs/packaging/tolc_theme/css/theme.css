@@ -39,3 +39,11 @@ html, body {
 .link:hover {
 	color: #00dcff !important;
 }
+
+.has-text-white {
+	color: #fff !important;
+}
+
+.has-text-weight-bold {
+	font-weight: 700 !important;
+}
