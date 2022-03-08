@@ -2,7 +2,7 @@
   <h3>
     <img src="docs/tolc_logo.png" alt="Tolc logo" style="width:100px;"/>
     </br>
-    Write once, Use Everywhere
+    Blurring the Language Lines
   </h3>
 
   <div align="center">
