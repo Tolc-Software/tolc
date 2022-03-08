@@ -25,3 +25,8 @@ tolc_create_bindings(
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out
   NO_ANALYTICS)
+
+set_property(
+  TARGET pybind11::pybind11
+  APPEND
+  PROPERTY NO_SYSTEM_FROM_IMPORTED)

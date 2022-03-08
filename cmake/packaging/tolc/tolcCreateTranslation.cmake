@@ -68,12 +68,12 @@ function(tolc_create_bindings)
     # NOTE: Variable injected from tolcConfig file
     get_pybind11(VERSION ${tolc_pybind11_version})
     # Create the python module
-    pybind11_add_module(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}.cpp
-                        SYSTEM)
+    pybind11_add_module(${tolc_target_name}
+                        ${ARG_OUTPUT}/${ARG_TARGET}_python.cpp)
   elseif(${ARG_LANGUAGE} MATCHES "wasm")
     # Assumes that the Emscripten toolchain file is used
     # Will result in a .js and a .wasm file
-    add_executable(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}.cpp)
+    add_executable(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}_wasm.cpp)
 
     # Export Promise as 'loadMyLib' for module 'MyLib'
     # -s MODULARIZE=1 sets it as a promise based load

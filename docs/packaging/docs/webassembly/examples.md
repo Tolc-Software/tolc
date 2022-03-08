@@ -133,6 +133,7 @@ withEnum.delete();
 ```
 
 
+
 ## Enums ##
 
 
@@ -210,6 +211,7 @@ expect(company).toBe(m.MyNamespace.Carrier.Translator.Tolc);
 ```
 
 
+
 ## Functions ##
 
 
@@ -252,6 +254,7 @@ expect(m.MyNamespace.Nested.increase(2)).toBe(3);
 ```
 
 
+
 ## Global Variables ##
 
 
@@ -286,6 +289,7 @@ expect(m.charPtr).toBe("Hello world");
 expect(m.MyNamespace.i).toBe(5);
 
 ```
+
 
 
 ## Namespaces ##
@@ -328,6 +332,7 @@ expect(m.MyLib.complexFunction()).toBe(5);
 expect(m.MyLib.We.Are.Going.Pretty.Deep.meaningOfLife()).toBe('42');
 
 ```
+
 
 
 ## Smart Pointers ##
@@ -374,6 +379,7 @@ s.delete();
 ```
 
 
+
 ## std::array ##
 
 
@@ -412,6 +418,7 @@ expect(data2).toStrictEqual([0, 1]);
 ```
 
 
+
 ## std::map ##
 
 
@@ -444,6 +451,7 @@ expect(data.size()).toBe(2);
 expect(data.get(50)).toBe("Stuff");
 
 ```
+
 
 
 ## std::pair ##
@@ -487,6 +495,7 @@ expect(withFunction.sum([1, 2])).toBe(3)
 withFunction.delete();
 
 ```
+
 
 
 ## std::tuple ##
@@ -547,6 +556,7 @@ withFunction.delete();
 ```
 
 
+
 ## std::vector ##
 
 
@@ -579,4 +589,5 @@ expect(data.size()).toBe(4);
 expect(data.get(3)).toBe(3);
 
 ```
+
 
