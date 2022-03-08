@@ -66,7 +66,7 @@ function(tolc_translate_file)
     tolc_translate_file_${ARG_MODULE_NAME} ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     COMMAND ${command}
-    BYPRODUCTS ${ARG_OUTPUT}/${ARG_MODULE_NAME}.cpp)
+    BYPRODUCTS ${ARG_OUTPUT}/${ARG_MODULE_NAME}_${ARG_LANGUAGE}.cpp)
 endfunction()
 
 function(tolc_translate_target)

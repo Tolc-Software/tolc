@@ -25,7 +25,7 @@ tolc_translate_file(
 
 # These will be made available to the consumer executable,
 # which will run the tests (see src/consumer.cpp)
-set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer.cpp)
+set(expected_out_file ${CMAKE_CURRENT_BINARY_DIR}/out/consumer_python.cpp)
 configure_file(src/check_variables.hpp.in
                ${CMAKE_CURRENT_LIST_DIR}/src/check_variables.hpp @ONLY)
 
