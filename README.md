@@ -36,7 +36,7 @@
     <h3>
       <a href="https://tolc.io/"> Website </a>
       <span> | </span>
-      <a href="https://docs.tolc.io/guides/translating_a_cpp_library/"> Guide </a>
+      <a href="https://docs.tolc.io/"> Getting Started </a>
       <span> | </span>
       <a href="https://tolc.io/live"> Try Online </a>
     </h3>
