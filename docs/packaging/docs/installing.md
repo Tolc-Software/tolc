@@ -12,12 +12,12 @@ FetchContent_Declare(
 )
 FetchContent_Populate(tolc_entry)
 
+set(tolc_DIR ${tolc_entry_SOURCE_DIR}/lib/cmake/tolc)
 find_package(
   tolc
   CONFIG
-  PATHS
-  ${tolc_entry_SOURCE_DIR}
-  REQUIRED)
+  REQUIRED
+)
 ```
 
 When reconfiguring your project, the `Tolc` `CMake` interface should be available automatically. Note that this requires `CMake 3.15` or later.

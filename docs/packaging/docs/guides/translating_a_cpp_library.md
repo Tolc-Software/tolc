@@ -48,12 +48,12 @@ FetchContent_Declare(
 )
 FetchContent_Populate(tolc_entry)
 
+set(tolc_DIR ${tolc_entry_SOURCE_DIR}/lib/cmake/tolc)
 find_package(
   tolc
   CONFIG
-  PATHS
-  ${tolc_entry_SOURCE_DIR}
-  REQUIRED)
+  REQUIRED
+)
 ```
 
 After the call to `find_package` we are free to use the `CMake` functions available in the `tolc` installation. To create bindings for `Math` we have to call the `tolc_create_bindings` function

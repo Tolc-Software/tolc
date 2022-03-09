@@ -31,11 +31,11 @@ include(${modules}/Sanitizers.cmake)
 include(${modules}/StaticAnalyzers.cmake)
 
 include(${modules}/GetFrontend.cmake)
-get_frontend(NAME Frontend.py VERSION v0.4.0)
+get_frontend(NAME Frontend.py VERSION latest)
 copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
                    ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
-get_frontend(NAME Frontend.wasm VERSION v0.4.2)
+get_frontend(NAME Frontend.wasm VERSION latest)
 copy_frontend_docs(
   NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR} COPY_TO
   ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
