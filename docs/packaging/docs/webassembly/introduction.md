@@ -1,7 +1,7 @@
 # WebAssembly with Tolc #
 
 In order for `C++` to be called from `javascript` there has to be an interface level. `tolc` generates this level from your already written `C++` interface.
-To be as close to what an engineer would have written, `tolc` generates human readable [`embind11`](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
+To be as close to what an engineer would have written, `tolc` generates human readable [`embind`](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
 This is then compiled to a `.wasm` and a `.js` file that `javascript` can import.
 
 ## Using a `C++` library from `javascript` ##
@@ -29,17 +29,18 @@ FetchContent_Declare(
 )
 FetchContent_Populate(tolc_entry)
 
+set(tolc_DIR ${tolc_entry_SOURCE_DIR}/lib/cmake/tolc)
 find_package(
   tolc
   CONFIG
-  PATHS
-  ${tolc_entry_SOURCE_DIR}
-  REQUIRED)
+  REQUIRED
+)
 
 tolc_create_bindings(
   TARGET MyLib
   LANGUAGE wasm
-  OUTPUT wasm-bindings)
+  OUTPUT wasm-bindings
+)
 ```
 
 Assuming your library is called `MyLib`, and the bindings should be generated to the directory `wasm-bindings`.
@@ -80,7 +81,8 @@ $ emsdk.bat activate 3.1.3
 
 ### Configuring Your Project ###
 
-Now when configuring your `CMake` project, pass the toolchain flag `-DCMAKE_TOOLCHAIN_FILE=${EMSDK_DIRECTORY}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake`. Where you need to replace `${EMSDK_DIRECTORY}` with the directory of the previously downloaded `Emscripten SDK`. Note that the directory separator used by `CMake` is always forward slash (`/`), even on Windows.
+Since `CMake` doesn't have native support for `WebAssembly` we have to provide a `toolchain` file, fortunately for us, `Emscripten` provides us with one.
+When configuring your `CMake` project, just pass the toolchain flag `-DCMAKE_TOOLCHAIN_FILE=${EMSDK_DIRECTORY}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake`. Where you need to replace `${EMSDK_DIRECTORY}` with the directory of the previously downloaded `Emscripten SDK`. Note that the directory separator used by `CMake` is always forward slash (`/`), even on Windows.
 
 Example:
 
@@ -88,6 +90,7 @@ Example:
 # Configures project to build using Emscripten
 $ cmake -S. -Bbuild -DCMAKE_TOOLCHAIN_FILE=${EMSDK_DIRECTORY}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
 ```
+
 
 ### Using From `javascript` ###
 
@@ -102,6 +105,59 @@ loadMyLib().then(MyLib => {
   MyLib.myCppFunction();
 });
 ```
+
+Running the file as normal:
+
+```shell
+$ node run.js
+```
+
+
+### Using from a web page ###
+
+By default `Emscripten` assumes that you're running your code in a `node` environment (e.g. having access to the filesystem).
+This is not the case on a web page served to a browser. If we add the link flag `-s ENVIRONMENT='web'` to `Emscripten` it will produce a serveable `WebAssembly` module.
+Since `Tolc` exposes a `CMake` build target for the module, all we have to do is add the flag ourself:
+
+```cmake
+# Creates the CMake target ${TARGET}_${LANGUAGE}
+# In this case: MyLib_wasm
+tolc_create_bindings(
+  TARGET MyLib
+  LANGUAGE wasm
+  OUTPUT wasm-bindings
+)
+
+# Want to deploy to a web page
+set_property(
+  TARGET MyLib_wasm
+  APPEND_STRING
+  PROPERTY LINK_FLAGS "-s ENVIRONMENT='web'")
+```
+
+Then we copy over `MyLib.js` and `MyLib.wasm` to our web application and load them as shown previously:
+
+```javascript
+// app.js
+const loadMyLib = require('./MyLib');
+
+loadMyLib().then(MyLib => {
+  // From here you can use the C++ functions of your library as usual
+  MyLib.myCppFunction();
+});
+```
+
+Assuming you've loaded the `javascript` within your page:
+
+```html
+<!-- index.html -->
+...
+<head>
+  <script type="text/javascript" src="./app.js"></script>
+</head>
+...
+```
+
 
 If you want to see what more is supported you can take a look at [the Examples section](./examples.md).
 

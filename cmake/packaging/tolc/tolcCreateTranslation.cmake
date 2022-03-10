@@ -64,13 +64,13 @@ function(tolc_create_bindings)
     OUTPUT
     ${ARG_OUTPUT})
 
-  if(${ARG_LANGUAGE} MATCHES "python")
+  if(ARG_LANGUAGE STREQUAL "python")
     # NOTE: Variable injected from tolcConfig file
     get_pybind11(VERSION ${tolc_pybind11_version})
     # Create the python module
     pybind11_add_module(${tolc_target_name}
                         ${ARG_OUTPUT}/${ARG_TARGET}_python.cpp)
-  elseif(${ARG_LANGUAGE} MATCHES "wasm")
+  elseif(ARG_LANGUAGE STREQUAL "wasm")
     # Assumes that the Emscripten toolchain file is used
     # Will result in a .js and a .wasm file
     add_executable(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}_wasm.cpp)
@@ -78,11 +78,11 @@ function(tolc_create_bindings)
     # Export Promise as 'loadMyLib' for module 'MyLib'
     # -s MODULARIZE=1 sets it as a promise based load
     # Note that this is necessary for preJS to work properly
-    set_target_properties(
-      ${tolc_target_name}
-      PROPERTIES
+    set_property(
+      TARGET ${tolc_target_name}
+      PROPERTY
         LINK_FLAGS
-        "-s MODULARIZE=1 -s EXPORT_NAME=\"load${ARG_TARGET}\" --pre-js ${ARG_OUTPUT}/pre.js -lembind"
+        "-s MODULARIZE=1 -s EXPORT_NAME='load${ARG_TARGET}' --pre-js ${ARG_OUTPUT}/pre.js -lembind "
     )
   else()
     error_with_usage(
