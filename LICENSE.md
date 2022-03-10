@@ -14,6 +14,12 @@ Distribute, modify, and/or integrate Tolc in multiple personal/open-source proje
 
 ## Commercial ##
 
-Purchase a Commercial License to use in commercial applications.
+Purchase a Commercial License to use in closed-source applications, such as:
+
+* Cross language data models
+* Language SDKs for a proprietary library
+* Web viewer using proprietary data formats
 
 Distribute, modify, and/or integrate Tolc in commercial applications.
+
+See [https://tolc.io/products](https://tolc.io/products) for more information.
