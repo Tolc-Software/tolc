@@ -104,6 +104,9 @@
 	background-color: #1e1e1e;
 }
 
+#main-markdown p {
+	word-break: break-all;
+}
 #main-markdown p > a {
 	font-style: italic;
 	color: #fff;

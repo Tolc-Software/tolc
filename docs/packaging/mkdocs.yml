@@ -16,8 +16,6 @@ nav:
     - Introduction: 'webassembly/introduction.md'
     - Examples: 'webassembly/examples.md'
     - Conversions: 'webassembly/conversions.md'
-  - Guides:
-    - Translating a C++ library: 'guides/translating_a_cpp_library.md'
   - CMake:
     - Interface: 'cmake/interface.md'
     - Reference: 'cmake/reference.md'
