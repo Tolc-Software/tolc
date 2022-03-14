@@ -105,8 +105,9 @@
 }
 
 #main-markdown p {
-	word-break: break-all;
+	hyphens: auto;
 }
+
 #main-markdown p > a {
 	font-style: italic;
 	color: #fff;
