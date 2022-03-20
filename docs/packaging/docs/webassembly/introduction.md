@@ -158,6 +158,7 @@ Assuming you've loaded the `javascript` within your page:
 ...
 ```
 
+For a complete example you can see the `Tolc-demo` repository: [https://github.com/Tolc-Software/tolc-demo](https://github.com/Tolc-Software/tolc-demo).
 
 If you want to see what more is supported you can take a look at [the Examples section](./examples.md).
 
