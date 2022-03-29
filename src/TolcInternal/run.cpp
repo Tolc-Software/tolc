@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <fmt/format.h>
 #include <fstream>
+#include <spdlog/spdlog.h>
 
 namespace TolcInternal {
 
@@ -53,8 +54,36 @@ void writeFile(TolcInternal::Config const& config,
 	}
 }
 
+enum class ErrorOrigin {
+	Parser,
+	FrontendPy,
+	FrontendWasm,
+};
+
+ErrorOrigin getOrigin(Config::Language language) {
+	switch (language) {
+		case Config::Language::Python: return ErrorOrigin::FrontendPy;
+		case Config::Language::Wasm: return ErrorOrigin::FrontendWasm;
+	}
+	// Should never happen :)
+	return ErrorOrigin::Parser;
+}
+
+void logError(ErrorOrigin origin) {
+	std::string repository;
+	switch (origin) {
+		case ErrorOrigin::Parser: repository = "Parser"; break;
+		case ErrorOrigin::FrontendPy: repository = "frontend.py"; break;
+		case ErrorOrigin::FrontendWasm: repository = "frontend.wasm"; break;
+	}
+	spdlog::error(
+	    "If this error is something Tolc can solve, please open a feature request or a bug report here: https://github.com/Tolc-Software/{}/issues/new",
+	    repository);
+}
+
 int run(int argc, const char** argv) {
 	Log::Data logData {};
+	spdlog::set_pattern("[Tolc][%l]: %v");
 
 	if (auto maybeResult = CommandLine::parse(argc, argv)) {
 		auto cliResult = maybeResult.value();
@@ -81,7 +110,11 @@ int run(int argc, const char** argv) {
 					logData.success = true;
 					Log::logTimeTaken(logData);
 					return 0;
+				} else {
+					logError(getOrigin(config.language));
 				}
+			} else {
+				logError(ErrorOrigin::Parser);
 			}
 		}
 	}
