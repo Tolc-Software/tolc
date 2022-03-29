@@ -8,12 +8,12 @@ nav:
   - Installing: 'installing.md'
   - Usage: 'usage.md'
   - Python Interface:
-    - Introduction: 'python/introduction.md'
+    - Quickstart: 'python/quickstart.md'
     - Examples: 'python/examples.md'
     - Conversions: 'python/conversions.md'
     - Template Naming Convention: 'python/template_naming_convention.md'
   - WebAssembly Interface:
-    - Introduction: 'webassembly/introduction.md'
+    - Quickstart: 'webassembly/quickstart.md'
     - Examples: 'webassembly/examples.md'
     - Conversions: 'webassembly/conversions.md'
   - CMake:

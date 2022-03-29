@@ -10,5 +10,5 @@
 
 From here you can try any of the supported languages:
 
-* [Python](./python/introduction.md)
-* [WebAssembly](./webassembly/introduction.md)
+* [Python](./python/quickstart.md)
+* [WebAssembly](./webassembly/quickstart.md)

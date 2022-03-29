@@ -13,7 +13,7 @@ double f(int);
 The two functions will be available from `javascript` as `f` and `f_int` respectively.
 
 ```python
-var loadMyLib = require('./myLib.js');
+const loadMyLib = require('./myLib.js');
 
 loadMyLib().then(MyLib => {
 	const result0 = MyLib.f();
