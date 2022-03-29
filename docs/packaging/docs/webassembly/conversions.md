@@ -14,6 +14,7 @@ Note that any restriction this poses only applies to the public interface of you
 | Class                               | Class                          |
 | Public function                     | Class function                 |
 | Private function                    | Not converted                  |
+| Virtual function                    | Overridable function           |
 | Static member function              | Static class function          |
 | Static member variable              | Static member variable         |
 | Public const member variable        | Read only property             |

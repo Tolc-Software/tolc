@@ -106,6 +106,7 @@
 
 #main-markdown p {
 	hyphens: auto;
+	word-break: break-word;
 }
 
 #main-markdown p > a {

@@ -18,7 +18,7 @@ template class Example<int>;
 The specialized `class` `Example<int>` will be available from `javascript` as `Example_int`:
 
 ```javascript
-var loadMyLib = require('./build/MyLib');
+const loadMyLib = require('./build/MyLib');
 
 loadm().then(MyLib => {
 	example = new MyLib.Example_int();

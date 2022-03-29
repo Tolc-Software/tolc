@@ -5,7 +5,7 @@ Each example is taken from the test suite for `Tolc` and, given that you use the
 To use `WebAssembly` from `javascript`, one has to load it in asynchronously. When using `Tolc` this is done with a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) on the `javascript` side. Each library named `MyLib` exports a `Promise` called `loadMyLib`, in every test the name is simply `m` for brevity. All tests use [`jest`](https://jestjs.io/), and the `javascript` test boiler plate is omitted:
 
 ```javascript
-var loadm = require('./build/m');
+const loadm = require('./build/m');
 
 test('Tolc Test', () => {
 	loadm().then(m => {
@@ -87,14 +87,14 @@ expect(m.WithConstructor.getStatic()).toBe(55);
 // Static variable
 expect(m.WithConstructor.i).toBe(5);
 
-var withConstructor = new m.WithConstructor("Hello");
+const withConstructor = new m.WithConstructor("Hello");
 expect(withConstructor.getS()).toBe("Hello");
 
 // Classes need to be deleted manually
 withConstructor.delete();
 
 // Const properties are read-only
-var withMembers = new m.WithMembers();
+const withMembers = new m.WithMembers();
 expect(withMembers.i).toBe(5);
 try {
 	withMembers.i = 10;
@@ -106,12 +106,12 @@ expect(withMembers.s).toBe("hello");
 withMembers.delete();
 
 // Public functions are available
-var withFunction = new m.WithFunction();
+const withFunction = new m.WithFunction();
 expect(withFunction.add(5, 10)).toBe(15);
 withFunction.delete();
 
 // Cannot access private functions
-var withPrivateFunction = new m.WithPrivateFunction();
+const withPrivateFunction = new m.WithPrivateFunction();
 try {
 	withPrivateFunction.multiply(5, 10);
 	expect(true).toBe(false);
@@ -121,12 +121,12 @@ try {
 withPrivateFunction.delete();
 
 // Classes can be found under their namespace
-var nested = new m.MyNamespace.Nested();
+const nested = new m.MyNamespace.Nested();
 expect(nested.i).toBe(42);
 nested.delete();
 
 // Ok to nest Enums within classes
-var withEnum = new m.WithEnum();
+const withEnum = new m.WithEnum();
 expect(withEnum.i).toBe(m.WithEnum.Instrument.Flute);
 withEnum.delete();
 
@@ -335,6 +335,129 @@ expect(m.MyLib.We.Are.Going.Pretty.Deep.meaningOfLife()).toBe('42');
 
 
 
+## Overriding virtual in javascript ##
+
+
+```cpp
+
+#include <string>
+
+class Animal {
+public:
+	virtual ~Animal() { }
+	virtual std::string sound(int n_times, bool grumpy) = 0;
+};
+
+class Dog : public Animal {
+public:
+	std::string sound(int n_times, bool grumpy) override {
+		if (grumpy) {
+			return "No.";
+		}
+
+		std::string result;
+		for (int i = 0; i < n_times; ++i) {
+			result += "woof! ";
+		}
+		return result;
+	}
+};
+
+std::string call_sound(Animal *animal) {
+	return animal->sound(3, false);
+}
+
+```
+
+
+```javascript
+
+const fido = new m.Dog();
+const grumpy = true;
+
+// Overloaded function in C++
+expect(fido.sound(1, grumpy)).toBe("No.")
+expect(fido.sound(1, !grumpy)).toBe("woof! ")
+
+// Polymorphic function in C++
+expect(m.call_sound(fido)).toBe("woof! woof! woof! ")
+fido.delete();
+
+// Inherit from virtual C++ classes in javascript
+const Cat = m.Animal.extend("Animal", {
+  // Override C++ function
+  sound: function(n_times, grumpy) {
+    return grumpy ? "No." : "meow! ".repeat(n_times);
+  },
+});
+
+const whiskers = new Cat();
+
+// Overloaded C++ function in javascript
+expect(whiskers.sound(1, grumpy)).toBe("No.")
+expect(whiskers.sound(1, !grumpy)).toBe("meow! ")
+
+// Polymorphic function in C++ called with javascript object
+// Automatic downcasting
+expect(m.call_sound(whiskers)).toBe("meow! meow! meow! ")
+
+whiskers.delete();
+
+// Another way is to just provide what is needed
+// to implement the Animal interface
+const tiger = m.Animal.implement({
+  // Put only the functions you want to implement here
+  sound: function(n_times, grumpy) {
+    return grumpy ? "No." : "roar! ".repeat(n_times);
+  },
+});
+
+expect(tiger.sound(1, grumpy)).toBe("No.")
+expect(tiger.sound(1, !grumpy)).toBe("roar! ")
+
+// Automatic downcasting works the same
+expect(m.call_sound(tiger)).toBe("roar! roar! roar! ")
+
+tiger.delete();
+
+```
+
+
+
+## Simple inheritence ##
+
+
+```cpp
+
+#include <string>
+
+struct Pet {
+    Pet(const std::string &name) : name(name) { }
+    std::string name;
+};
+
+struct Dog : public Pet {
+    Dog(const std::string &name) : Pet(name) { }
+    std::string bark() const { return "woof!"; }
+};
+
+```
+
+
+```javascript
+
+const fido = new m.Dog("Fido");
+
+// Inherits public properties
+expect(fido.name).toBe("Fido")
+
+// But has its new functions
+expect(fido.bark()).toBe("woof!")
+
+```
+
+
+
 ## Smart Pointers ##
 
 
@@ -403,14 +526,14 @@ std::array<int, 2> getData2() {
 
 ```javascript
 
-var data3 = m.getData3();
+const data3 = m.getData3();
 
 // It's just a normal JS array
 expect(data3.length).toBe(3);
 
 expect(data3).toStrictEqual([0, 1, 2]);
 
-var data2 = m.getData2();
+const data2 = m.getData2();
 expect(data2.length).toBe(2);
 
 expect(data2).toStrictEqual([0, 1]);
@@ -439,7 +562,7 @@ std::map<int, std::string> getData() {
 
 ```javascript
 
-var data = m.getData();
+const data = m.getData();
 
 expect(data.size()).toBe(1);
 
@@ -534,7 +657,7 @@ public:
 
 // Tuple converts from javascript array
 const myArray = ["Hello World", 42];
-var myClass = new m.MyClass(myArray);
+const myClass = new m.MyClass(myArray);
 expect(myClass.getTuple()).toStrictEqual(myArray);
 
 // The array still need to match the underlying std::tuple structure
@@ -548,7 +671,7 @@ try {
 myClass.delete();
 
 // Can handle different Number types
-var withFunction = new m.WithFunction();
+const withFunction = new m.WithFunction();
 expect(withFunction.sum([1, 2, 3.3, 2.0])).toBeCloseTo(8.3, 5);
 
 withFunction.delete();
@@ -574,11 +697,11 @@ std::vector<int> getData() {
 
 ```javascript
 
-var data = m.getData();
+const data = m.getData();
 
 expect(data.size()).toBe(3);
 
-for (var i = 0; i < data.size(); i++) {
+for (let i = 0; i < data.size(); i++) {
     expect(data.get(i)).toBe(i);
 }
 
