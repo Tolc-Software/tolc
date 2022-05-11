@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 
 project(
   tolc
-  VERSION 0.6.0
+  VERSION 0.6.1
   LANGUAGES CXX)
 
 configure_file(docs/ReleaseNotes/version.in
