@@ -31,17 +31,17 @@ include(${modules}/Sanitizers.cmake)
 include(${modules}/StaticAnalyzers.cmake)
 
 include(${modules}/GetFrontend.cmake)
-get_frontend(NAME Frontend.py VERSION v0.6.0)
+get_frontend(NAME Frontend.py VERSION v0.6.1)
 copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
                    ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
-get_frontend(NAME Frontend.wasm VERSION v0.5.0)
+get_frontend(NAME Frontend.wasm VERSION v0.5.1)
 copy_frontend_docs(
   NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR} COPY_TO
   ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
 
 include(${modules}/GetParser.cmake)
-get_parser(VERSION v0.4.1)
+get_parser(VERSION v0.5.6)
 
 # Set the include path for the system library in the variable
 # We are using the standard library shipped
