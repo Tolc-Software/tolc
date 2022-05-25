@@ -81,6 +81,6 @@ foreach(test_name createTranslationTestWasm)
     wasm
     RUN_COMMAND
     node
+    --no-experimental-fetch
     ${CMAKE_CURRENT_LIST_DIR}/${test_name}/test.js)
 endforeach()
-

@@ -5,7 +5,7 @@ build_type=@CMAKE_BUILD_TYPE@
 compiler=Visual Studio
 compiler.toolset=ClangCL
 compiler.runtime=@MSVC_RUNTIME_LIBRARY@
-compiler.version=16
+compiler.version=17
 os=Windows
 os_build=Windows
 [options]
