@@ -27,6 +27,8 @@ std::optional<Config> buildConfig(CommandLine::CLIResult const& cli) {
 	parserConfig.m_systemIncludes = TolcInternal::getSystemIncludes(
 	    TolcInternal::getExecutableDirectoryPath().string());
 
+	parserConfig.m_cppVersion = cli.cppVersion;
+
 	// Add the user includes
 	for (auto const& include : cli.includes) {
 		parserConfig.m_systemIncludes.emplace_back("-I" + include);

@@ -48,6 +48,10 @@ void addCommonCommands(CLI::App& languageApp, CommandLine::CLIResult& result) {
 	    result.includes,
 	    "Path to search for when resolving #include statements.");
 
+	languageApp.add_option("--std",
+	                       result.cppVersion,
+	                       "The C++ version to parse the interface with.");
+
 	languageApp.add_flag(
 	    "--no-analytics", result.noAnalytics, "Don't gather analytics.");
 }

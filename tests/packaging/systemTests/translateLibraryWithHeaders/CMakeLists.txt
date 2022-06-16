@@ -43,4 +43,6 @@ tolc_translate_target(
   ${CMAKE_CURRENT_BINARY_DIR}/out
   TOLC_OUTPUT_FILES
   ${CMAKE_CURRENT_BINARY_DIR}/out/consumer_python.cpp
+  CPP_VERSION
+  17
   NO_ANALYTICS)

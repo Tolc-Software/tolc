@@ -25,6 +25,9 @@ struct CLIResult {
 	// Include directories for the input file
 	std::vector<std::string> includes;
 
+	// C++ standard to parse headers with
+	int8_t cppVersion = 17;
+
 	// Was the help flag set? Then the parsing is successful,
 	// but the objects are default constructed
 	bool isHelp = false;

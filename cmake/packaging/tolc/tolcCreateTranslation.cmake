@@ -54,6 +54,9 @@ function(_tolc_create_bindings)
     STATUS "Creating bindings to ${ARG_LANGUAGE} in target ${tolc_target_name}")
 
   get_property(cpp_version TARGET ${ARG_TARGET} PROPERTY CXX_STANDARD)
+  if(NOT cpp_version)
+    set(cpp_version 17)
+  endif()
   if(ARG_LANGUAGE STREQUAL "python")
     # NOTE: Variable injected from tolcConfig file
     get_pybind11(VERSION ${tolc_pybind11_version})
@@ -108,6 +111,8 @@ function(_tolc_create_bindings)
     ${ARG_LANGUAGE}
     TOLC_OUTPUT_FILES
     ${expected_tolc_files}
+    CPP_VERSION
+    ${cpp_version}
     OUTPUT
     ${ARG_OUTPUT})
 

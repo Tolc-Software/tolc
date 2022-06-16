@@ -4,7 +4,7 @@ function(tolc_translate_file)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues NO_ANALYTICS)
-  set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT)
+  set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT CPP_VERSION)
   set(multiValues TOLC_OUTPUT_FILES)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -50,6 +50,11 @@ function(tolc_translate_file)
       "Missing TOLC_OUTPUT_FILES argument. The files Tolc is expected to produce for this language."
     )
   endif()
+  if(NOT ARG_CPP_VERSION)
+    error_with_usage(
+      "Missing CPP_VERSION argument. Used to call set the C++ standard of the underlying compiler instance."
+    )
+  endif()
 
   set(noAnalytics "")
   if(ARG_NO_ANALYTICS)
@@ -65,6 +70,8 @@ function(tolc_translate_file)
       ${ARG_INPUT}
       --output
       ${ARG_OUTPUT}
+      --std
+      ${ARG_CPP_VERSION}
       ${noAnalytics})
 
   add_custom_target(
@@ -78,7 +85,7 @@ function(tolc_translate_target)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
-  set(singleValues TARGET LANGUAGE OUTPUT)
+  set(singleValues TARGET LANGUAGE OUTPUT CPP_VERSION)
   set(multiValues HEADERS TOLC_OUTPUT_FILES)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -173,6 +180,8 @@ function(tolc_translate_target)
     ${ARG_OUTPUT}
     TOLC_OUTPUT_FILES
     ${ARG_TOLC_OUTPUT_FILES}
+    CPP_VERSION
+    ${ARG_CPP_VERSION}
     ${noAnalytics})
   # Rerun when regathering headers
   add_dependencies(tolc_translate_file_${ARG_TARGET}
