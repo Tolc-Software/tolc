@@ -10,7 +10,7 @@ endif()
 
 project(
   tolc
-  VERSION 0.6.3
+  VERSION 0.7.0
   LANGUAGES ${tolc_languages})
 
 configure_file(docs/ReleaseNotes/version.in
