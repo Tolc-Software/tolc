@@ -16,6 +16,11 @@ nav:
     - Quickstart: 'webassembly/quickstart.md'
     - Examples: 'webassembly/examples.md'
     - Conversions: 'webassembly/conversions.md'
+  - Objective-C Interface:
+    - Quickstart: 'objc/quickstart.md'
+    - Examples: 'objc/examples.md'
+    - Conversions: 'objc/conversions.md'
+    - Naming Convention: 'objc/naming_convention.md'
   - CMake:
     - Interface: 'cmake/interface.md'
     - Reference: 'cmake/reference.md'

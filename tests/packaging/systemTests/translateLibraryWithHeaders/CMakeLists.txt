@@ -41,4 +41,6 @@ tolc_translate_target(
   DO_NOT_SEARCH_TARGET_INCLUDES
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out
+  TOLC_OUTPUT_FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/out/consumer_python.cpp
   NO_ANALYTICS)

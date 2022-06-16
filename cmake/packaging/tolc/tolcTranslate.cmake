@@ -5,7 +5,7 @@ function(tolc_translate_file)
   set(prefix ARG)
   set(noValues NO_ANALYTICS)
   set(singleValues INPUT LANGUAGE MODULE_NAME OUTPUT)
-  set(multiValues)
+  set(multiValues TOLC_OUTPUT_FILES)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -45,6 +45,11 @@ function(tolc_translate_file)
       "The variable tolc_EXECUTABLE must be set prior to calling ${function_name}. It should contain the full path of the tolc executable."
     )
   endif()
+  if(NOT ARG_TOLC_OUTPUT_FILES)
+    error_with_usage(
+      "Missing TOLC_OUTPUT_FILES argument. The files Tolc is expected to produce for this language."
+    )
+  endif()
 
   set(noAnalytics "")
   if(ARG_NO_ANALYTICS)
@@ -66,7 +71,7 @@ function(tolc_translate_file)
     tolc_translate_file_${ARG_MODULE_NAME} ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     COMMAND ${command}
-    BYPRODUCTS ${ARG_OUTPUT}/${ARG_MODULE_NAME}_${ARG_LANGUAGE}.cpp)
+    BYPRODUCTS ${ARG_TOLC_OUTPUT_FILES})
 endfunction()
 
 function(tolc_translate_target)
@@ -74,7 +79,7 @@ function(tolc_translate_target)
   set(prefix ARG)
   set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
   set(singleValues TARGET LANGUAGE OUTPUT)
-  set(multiValues HEADERS)
+  set(multiValues HEADERS TOLC_OUTPUT_FILES)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
@@ -112,6 +117,11 @@ function(tolc_translate_target)
         "Internal error. Dependant script not found: ${tolc_BIN_DIR}/gather_headers.py"
     )
   endif()
+  if(NOT ARG_TOLC_OUTPUT_FILES)
+    error_with_usage(
+      "Missing TOLC_OUTPUT_FILES argument. The files Tolc is expected to produce for this language."
+    )
+  endif()
 
   set(extraHeaders "")
   if(ARG_HEADERS)
@@ -138,6 +148,7 @@ function(tolc_translate_target)
   #   #include </home/user/project/include/h0.hpp>
   #   #include </home/user/project/someOtherInclude/h1.hpp>
   #   ...
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tolc)
   find_package(Python3 REQUIRED)
   set(combinedHeader ${CMAKE_CURRENT_BINARY_DIR}/tolc/tolc_${ARG_TARGET}.hpp)
   add_custom_target(
@@ -160,6 +171,8 @@ function(tolc_translate_target)
     ${combinedHeader}
     OUTPUT
     ${ARG_OUTPUT}
+    TOLC_OUTPUT_FILES
+    ${ARG_TOLC_OUTPUT_FILES}
     ${noAnalytics})
   # Rerun when regathering headers
   add_dependencies(tolc_translate_file_${ARG_TARGET}

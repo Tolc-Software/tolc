@@ -1,10 +1,10 @@
 include_guard()
 
-function(tolc_create_bindings)
+function(_tolc_create_bindings)
   # Define the supported set of keywords
   set(prefix ARG)
-  set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
-  set(singleValues TARGET LANGUAGE OUTPUT)
+  set(noValues)
+  set(singleValues TARGET LANGUAGE OUTPUT DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
   set(multiValues HEADERS)
   # Process the arguments passed in
   # can be used e.g. via ARG_TARGET
@@ -49,31 +49,25 @@ function(tolc_create_bindings)
 
   # What the actual target name will be
   set(tolc_target_name ${ARG_TARGET}_${ARG_LANGUAGE})
+  set(expected_tolc_files)
   message(
     STATUS "Creating bindings to ${ARG_LANGUAGE} in target ${tolc_target_name}")
 
-  # Use the input target to create the translation
-  tolc_translate_target(
-    TARGET
-    ${ARG_TARGET}
-    ${doNotSearchTargetIncludes}
-    ${noAnalytics}
-    ${headers}
-    LANGUAGE
-    ${ARG_LANGUAGE}
-    OUTPUT
-    ${ARG_OUTPUT})
-
+  get_property(cpp_version TARGET ${ARG_TARGET} PROPERTY CXX_STANDARD)
   if(ARG_LANGUAGE STREQUAL "python")
     # NOTE: Variable injected from tolcConfig file
     get_pybind11(VERSION ${tolc_pybind11_version})
     # Create the python module
+    set(expected_tolc_files ${ARG_OUTPUT}/${ARG_TARGET}_python.cpp)
     pybind11_add_module(${tolc_target_name}
-                        ${ARG_OUTPUT}/${ARG_TARGET}_python.cpp)
+                        ${expected_tolc_files})
+
+    set_property(TARGET ${tolc_target_name} PROPERTY CXX_STANDARD ${cpp_version})
   elseif(ARG_LANGUAGE STREQUAL "wasm")
+    set(expected_tolc_files ${ARG_OUTPUT}/${ARG_TARGET}_wasm.cpp)
     # Assumes that the Emscripten toolchain file is used
     # Will result in a .js and a .wasm file
-    add_executable(${tolc_target_name} ${ARG_OUTPUT}/${ARG_TARGET}_wasm.cpp)
+    add_executable(${tolc_target_name} ${expected_tolc_files})
 
     # Export Promise as 'loadMyLib' for module 'MyLib'
     # -s MODULARIZE=1 sets it as a promise based load
@@ -84,11 +78,38 @@ function(tolc_create_bindings)
         LINK_FLAGS
         "-s MODULARIZE=1 -s EXPORT_NAME='load${ARG_TARGET}' --pre-js ${ARG_OUTPUT}/pre.js -lembind "
     )
+
+    set_property(TARGET ${tolc_target_name} PROPERTY CXX_STANDARD ${cpp_version})
+  elseif(ARG_LANGUAGE STREQUAL "objc")
+    enable_language(OBJC)
+    enable_language(OBJCXX)
+
+    # Create Objective-C++ middle layer
+    set(expected_tolc_files ${ARG_OUTPUT}/${ARG_TARGET}_objc.mm)
+    add_library(${tolc_target_name} ${expected_tolc_files})
+    target_link_libraries(${tolc_target_name} PRIVATE "-framework Foundation")
+    target_include_directories(${tolc_target_name} PUBLIC ${ARG_OUTPUT})
+    # Same as C++
+    set_property(TARGET ${tolc_target_name} PROPERTY OBJCXX_STANDARD ${cpp_version})
   else()
     error_with_usage(
       "Unknown language input: ${ARG_LANGUAGE}. Valid input: [${tolc_supported_languages}]"
     )
   endif()
+
+  # Use the input target to create the translation
+  tolc_translate_target(
+    TARGET
+    ${ARG_TARGET}
+    ${doNotSearchTargetIncludes}
+    ${noAnalytics}
+    ${headers}
+    LANGUAGE
+    ${ARG_LANGUAGE}
+    TOLC_OUTPUT_FILES
+    ${expected_tolc_files}
+    OUTPUT
+    ${ARG_OUTPUT})
 
   # The added library target depends on the target being translated
   add_dependencies(${tolc_target_name} tolc_translate_file_${ARG_TARGET})
@@ -105,3 +126,37 @@ function(tolc_create_bindings)
   set_target_properties(${tolc_target_name} PROPERTIES OUTPUT_NAME
                                                        ${ARG_TARGET})
 endfunction()
+
+# Need to enable languages in a global scope
+# => Wrap in a macro and create a "_" function so
+# we don't pollute the users variable name space
+macro(tolc_create_bindings)
+  # Define the supported set of keywords
+  set(prefix ARG)
+  set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
+  set(singleValues TARGET LANGUAGE OUTPUT)
+  set(multiValues HEADERS)
+  # Process the arguments passed in
+  # can be used e.g. via ARG_TARGET
+  cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
+                        "${multiValues}" ${ARGN})
+
+  if(ARG_LANGUAGE STREQUAL "objc")
+    enable_language(OBJCXX)
+  endif()
+
+  _tolc_create_bindings(
+    TARGET
+      ${ARG_TARGET}
+    LANGUAGE
+      ${ARG_LANGUAGE}
+    OUTPUT
+      ${ARG_OUTPUT}
+    HEADERS
+      ${ARG_HEADERS}
+    DO_NOT_SEARCH_TARGET_INCLUDES
+      ${ARG_DO_NOT_SEARCH_TARGET_INCLUDES}
+    NO_ANALYTICS
+      ${ARG_NO_ANALYTICS})
+
+endmacro()

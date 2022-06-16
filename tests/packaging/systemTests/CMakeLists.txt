@@ -74,6 +74,7 @@ foreach(test_name translateFileTest translateLibraryWithHeaders
 endforeach()
 
 foreach(test_name createTranslationTestWasm)
+  # Note: --no-experimental-fetch requires node>=v18
   add_system_test(
     NAME
     ${test_name}
@@ -84,3 +85,16 @@ foreach(test_name createTranslationTestWasm)
     --no-experimental-fetch
     ${CMAKE_CURRENT_LIST_DIR}/${test_name}/test.js)
 endforeach()
+
+if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Darwin)
+  foreach(test_name createTranslationTestObjc)
+    add_system_test(
+      NAME
+      ${test_name}
+      LANGUAGE
+      objc
+      RUN_COMMAND
+      ${CMAKE_CURRENT_LIST_DIR}/${test_name}/build/consumer)
+  endforeach()
+endif()
+

@@ -53,33 +53,19 @@ void addCommonCommands(CLI::App& languageApp, CommandLine::CLIResult& result) {
 }
 
 /**
-* Adds the python subcommand with hooks to the rootApp
+* Add a subcommand that corresponds to some language
 */
-[[nodiscard]] CLI::App* addPythonCommands(CLI::App& rootApp,
-                                          CommandLine::CLIResult& result) {
-	auto* python = rootApp.add_subcommand(
-	    "python", "Create bindings to use C++ from python via CPython");
+[[nodiscard]] CLI::App* addLanguageCommands(CLI::App& rootApp,
+                                            CommandLine::CLIResult& result,
+                                            std::string const& language,
+                                            std::string const& description) {
+	auto* lang = rootApp.add_subcommand(language, description);
 
-	addCommonCommands(*python, result);
+	addCommonCommands(*lang, result);
 
-	python->callback([&result]() { result.language = "python"; });
+	lang->callback([&result, language]() { result.language = language; });
 
-	return python;
-}
-
-/**
-* Adds the wasm subcommand with hooks to the rootApp
-*/
-[[nodiscard]] CLI::App* addWasmCommands(CLI::App& rootApp,
-                                        CommandLine::CLIResult& result) {
-	auto* wasm = rootApp.add_subcommand(
-	    "wasm", "Create bindings to use C++ from javascript via WebAssembly");
-
-	addCommonCommands(*wasm, result);
-
-	wasm->callback([&result]() { result.language = "wasm"; });
-
-	return wasm;
+	return lang;
 }
 
 /**
@@ -90,12 +76,21 @@ addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
 	// One language must be chosen
 	std::vector<CLI::App*> apps = {&app};
 
-	apps.push_back(addPythonCommands(app, result));
-	apps.push_back(addWasmCommands(app, result));
+	apps.push_back(addLanguageCommands(
+	    app,
+	    result,
+	    "python",
+	    "Create bindings to use C++ from python via CPython"));
+	apps.push_back(addLanguageCommands(
+	    app,
+	    result,
+	    "wasm",
+	    "Create bindings to use C++ from javascript via WebAssembly"));
+	apps.push_back(addLanguageCommands(
+	    app, result, "objc", "Create bindings to use C++ from Objective-C"));
 
-	// The number of subcommands added (as of writing only python => 1)
+	// At least one language need to be chosen
 	app.require_subcommand(1);
-
 	return apps;
 }
 

@@ -48,6 +48,11 @@ copy_frontend_docs(
   NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR} COPY_TO
   ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
 
+get_frontend(NAME Frontend.swift VERSION v0.2.0)
+copy_frontend_docs(
+  NAME Frontend.swift SRC_DIR ${frontend.swift_SOURCE_DIR} COPY_TO
+  ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/objc)
+
 include(${modules}/GetParser.cmake)
 get_parser(VERSION v0.6.0)
 
@@ -118,11 +123,18 @@ add_library(
 target_include_directories(TolcInternal PUBLIC src)
 target_include_directories(TolcInternal SYSTEM
                            PRIVATE ${cli11_content_SOURCE_DIR}/include)
-target_link_libraries(
-  TolcInternal PUBLIC Tolc::Parser Tolc::Frontend.py Tolc::Frontend.wasm
-                      spdlog::spdlog fmt::fmt)
-set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
-                                              CXX_EXTENSIONS OFF)
+target_link_libraries(TolcInternal
+  PUBLIC
+    Tolc::Parser
+    Tolc::Frontend.py
+    Tolc::Frontend.wasm
+    Tolc::Frontend.swift
+    spdlog::spdlog
+    fmt::fmt)
+set_target_properties(TolcInternal
+  PROPERTIES
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF)
 
 add_warnings(TARGET TolcInternal)
 tolc_add_options(TARGET TolcInternal)

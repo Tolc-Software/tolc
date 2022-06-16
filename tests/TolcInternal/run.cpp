@@ -29,7 +29,7 @@ TestUtil::CommandLineInput getValidCLI(std::filesystem::path const& inputFile,
 }
 
 TEST_CASE("Base cases", "[run]") {
-	for (std::string language : {"python", "wasm"}) {
+	for (std::string language : {"python", "wasm", "objc"}) {
 		CAPTURE(language);
 		auto cli = getValidCLI(
 		    TestUtil::getTestFilesDirectory() / "base.hpp", {}, language);

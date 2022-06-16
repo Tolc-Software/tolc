@@ -21,6 +21,8 @@ tolc_translate_file(
   include/consumer.hpp
   OUTPUT
   ${CMAKE_CURRENT_BINARY_DIR}/out
+  TOLC_OUTPUT_FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/out/comsumer_python.cpp
   NO_ANALYTICS)
 
 # These will be made available to the consumer executable,

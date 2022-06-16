@@ -2,6 +2,7 @@
 #include "CommandLine/parse.hpp"
 #include "Log/log.hpp"
 #include "TolcInternal/buildConfig.hpp"
+#include <Frontend/Objc/frontend.hpp>
 #include <Frontend/Python/frontend.hpp>
 #include <Frontend/Wasm/frontend.hpp>
 #include <IR/ir.hpp>
@@ -24,10 +25,10 @@ callFrontend(TolcInternal::Config::Language language,
 	switch (language) {
 		case TolcInternal::Config::Language::Python:
 			return Frontend::Python::createModule(globalNamespace, moduleName);
-			break;
 		case TolcInternal::Config::Language::Wasm:
 			return Frontend::Wasm::createModule(globalNamespace, moduleName);
-			break;
+		case TolcInternal::Config::Language::Objc:
+			return Frontend::Objc::createModule(globalNamespace, moduleName);
 	}
 	return std::nullopt;
 }
@@ -45,7 +46,8 @@ void writeFile(TolcInternal::Config const& config,
 	auto outPath = config.outputDirectory / file;
 	outFile.open(outPath);
 	if (outFile.is_open()) {
-		if (outPath.extension().string() == ".cpp") {
+		if (outPath.extension().string() == ".cpp" ||
+		    outPath.extension().string() == ".mm") {
 			// Inject the input file aswell
 			outFile << fmt::format("#include <{}>\n",
 			                       config.inputFile.string());
@@ -58,12 +60,14 @@ enum class ErrorOrigin {
 	Parser,
 	FrontendPy,
 	FrontendWasm,
+	FrontendObjc,
 };
 
 ErrorOrigin getOrigin(Config::Language language) {
 	switch (language) {
 		case Config::Language::Python: return ErrorOrigin::FrontendPy;
 		case Config::Language::Wasm: return ErrorOrigin::FrontendWasm;
+		case Config::Language::Objc: return ErrorOrigin::FrontendObjc;
 	}
 	// Should never happen :)
 	return ErrorOrigin::Parser;
@@ -75,6 +79,7 @@ void logError(ErrorOrigin origin) {
 		case ErrorOrigin::Parser: repository = "Parser"; break;
 		case ErrorOrigin::FrontendPy: repository = "frontend.py"; break;
 		case ErrorOrigin::FrontendWasm: repository = "frontend.wasm"; break;
+		case ErrorOrigin::FrontendObjc: repository = "frontend.swift"; break;
 	}
 	spdlog::error(
 	    "If this error is something Tolc can solve, please open a feature request or a bug report here: https://github.com/Tolc-Software/{}/issues/new",
