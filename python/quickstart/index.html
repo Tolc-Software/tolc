@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quickstart - tolc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="../../js/highlightjs/styles/vs2015.min.css">
+    <script src="../../js/highlightjs/highlight.min.js" charset="utf-8" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../assets/tolc-symbol-color-RGB.png">
+
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    
+    <script src="../../js/theme.js" charset="utf-8" defer></script>
+
+    
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+
+</head>
+
+<body>
+    <main id="root" class="mx-6">
+
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-background-black">
+                <a class="navbar-item" href="https://tolc.io">
+                    <img src="../../assets/tolc-symbol-color-RGB.png">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                    <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/blog">Blog</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/products">Products</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/account">Account</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="columns is-multiline">
+            <div id="side-nav" class="column ml-3 is-one-quarter is-size-5">
+                <ul>
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../..">Introduction</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../installing/">Installing</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../usage/">Usage</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Python Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a id="active-item"  href="./">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../template_naming_convention/">Template Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">WebAssembly Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/conversions/">Conversions</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Objective-C Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/naming_convention/">Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">CMake</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/interface/">Interface</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/reference/">Reference</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../FAQ/">FAQ</a>
+</li>
+
+                    
+                </ul>
+            </div>
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
+                
+                <h1 id="python-with-tolc">Python with Tolc</h1>
+<p>In order for <code>C++</code> to be called from <code>python</code> there has to be an interface level. <code>tolc</code> generates this level from your already written <code>C++</code> interface.
+To be as close to what an engineer would have written, <code>tolc</code> generates human readable <a href="https://github.com/pybind/pybind11"><code>pybind11</code></a>.
+This is then compiled to a <code>CPython</code> library that the <code>python</code> interpreter can understand.</p>
+<h2 id="using-a-c-library-from-python">Using a <code>C++</code> library from <code>python</code></h2>
+<p>This is a quick guide to using a <code>C++</code> library (here called <code>MyLib</code>) from <code>python</code>. We will:</p>
+<ol>
+<li>Download and use <code>Tolc</code></li>
+<li>Use the resulting <code>CPython</code> library from <code>python</code></li>
+</ol>
+<p>The following works on all supported platforms. On all platforms you need <code>git</code> available in your <code>path</code>. Commands that should be run from a terminal starts with <code>$</code>, while comments starts with <code>#</code>.</p>
+<h3 id="downloading-and-using-tolc">Downloading and Using <code>Tolc</code></h3>
+<p>Just add the following in a <code>CMakeLists.txt</code> below where the library you intend to use from <code>javascript</code> is defined:</p>
+<pre><code class="language-cmake"># Download Tolc
+# Can be [&quot;latest&quot;, &quot;v0.2.0&quot;, ...]
+set(tolc_version latest)
+include(FetchContent)
+FetchContent_Declare(
+  tolc_entry
+  URL https://github.com/Tolc-Software/tolc/releases/download/${tolc_version}/tolc-${CMAKE_HOST_SYSTEM_NAME}.tar.xz
+)
+FetchContent_Populate(tolc_entry)
+
+set(tolc_DIR ${tolc_entry_SOURCE_DIR}/lib/cmake/tolc)
+find_package(
+  tolc
+  CONFIG
+  REQUIRED
+)
+
+tolc_create_bindings(
+  TARGET MyLib
+  LANGUAGE python
+  OUTPUT python-bindings
+)
+</code></pre>
+<p>Assuming your library is called <code>MyLib</code>, and the bindings should be generated to the directory <code>python-bindings</code>.</p>
+<p>Now you can configure your project as normal (in Visual Studio, this is typically done automatically on save):</p>
+<pre><code class="language-shell">$ cmake -S. -Bbuild
+</code></pre>
+<p>And finally build it:</p>
+<pre><code class="language-shell">$ cmake --build build
+</code></pre>
+<p>This will produce a <code>CPython</code> library under <code>build/tolc</code> (with <code>MSVC</code> it will be under for example <code>build/tolc/Debug</code>), and you can use it as:</p>
+<pre><code class="language-shell"># With MSVC build\tolc\Debug
+$ cd build/tolc
+$ python
+&gt;&gt;&gt; import MyLib
+</code></pre>
+<p>If you want to see what more is supported you can take a look at <a href="../examples/">the Examples section</a>.</p>
+                
+            </div>
+            <div class="column is-one-quarter">
+            </div>
+        </div>
+
+        <footer id="footer" class="footer first-content has-background-black">
+            <div class="columns has-text-justified has-text-centered">
+                <div class="column is-2">
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">General</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/products">Products</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/contact">Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/newsletter">Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">Legal</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/privacy_policy">Privacy Policy</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/terms_of_service">Terms of Service</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/license">License</a>
+                    </p>
+                </div>
+                <div class="column is-2 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold is-size-5 has-text-white">Keep In Touch</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-2">
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

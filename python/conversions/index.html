@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversions - tolc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="../../js/highlightjs/styles/vs2015.min.css">
+    <script src="../../js/highlightjs/highlight.min.js" charset="utf-8" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../assets/tolc-symbol-color-RGB.png">
+
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    
+    <script src="../../js/theme.js" charset="utf-8" defer></script>
+
+    
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+
+</head>
+
+<body>
+    <main id="root" class="mx-6">
+
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-background-black">
+                <a class="navbar-item" href="https://tolc.io">
+                    <img src="../../assets/tolc-symbol-color-RGB.png">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                    <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/blog">Blog</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/products">Products</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/account">Account</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="columns is-multiline">
+            <div id="side-nav" class="column ml-3 is-one-quarter is-size-5">
+                <ul>
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../..">Introduction</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../installing/">Installing</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../usage/">Usage</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Python Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a id="active-item"  href="./">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../template_naming_convention/">Template Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">WebAssembly Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/conversions/">Conversions</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Objective-C Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/naming_convention/">Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">CMake</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/interface/">Interface</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/reference/">Reference</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../FAQ/">FAQ</a>
+</li>
+
+                    
+                </ul>
+            </div>
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
+                
+                <h1 id="c-to-python-conversions">C++ to python conversions</h1>
+<p>This page shows what is automatically translated and to what.
+On the left is the <code>C++</code> and to the right what the corresponding interface in <code>python</code> will be.
+Not converted means there will be no automatic translation to a corresponding <code>python</code> object (for example <code>std::queue</code> does not automatically translate to <code>queue.Queue</code>).
+Note that any restriction this poses only applies to the public interface of your code (e.g. your public headers).</p>
+<h2 id="conversion-tables">Conversion tables</h2>
+<table>
+<thead>
+<tr>
+<th align="left">C++</th>
+<th align="left">Python translation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Namespace</td>
+<td align="left">Module</td>
+</tr>
+<tr>
+<td align="left">Nested namespace</td>
+<td align="left">Submodule</td>
+</tr>
+<tr>
+<td align="left">Class</td>
+<td align="left">Class</td>
+</tr>
+<tr>
+<td align="left">Public function</td>
+<td align="left">Class function</td>
+</tr>
+<tr>
+<td align="left">Private function</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">Virtual function</td>
+<td align="left">Overridable function</td>
+</tr>
+<tr>
+<td align="left">Operator</td>
+<td align="left">Operator</td>
+</tr>
+<tr>
+<td align="left">Static member function</td>
+<td align="left">Static class function</td>
+</tr>
+<tr>
+<td align="left">Static member variable</td>
+<td align="left">Static class variable</td>
+</tr>
+<tr>
+<td align="left">Public const member variable</td>
+<td align="left">Read only property</td>
+</tr>
+<tr>
+<td align="left">Public non const member variable</td>
+<td align="left">Read write property</td>
+</tr>
+<tr>
+<td align="left">Private member variable</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">Global variable</td>
+<td align="left">Module variable</td>
+</tr>
+<tr>
+<td align="left">Global static variable</td>
+<td align="left">Static module variable</td>
+</tr>
+<tr>
+<td align="left">Free function</td>
+<td align="left">Module function</td>
+</tr>
+<tr>
+<td align="left">Overloaded function</td>
+<td align="left">Module function*</td>
+</tr>
+<tr>
+<td align="left">Enum</td>
+<td align="left">Enum</td>
+</tr>
+<tr>
+<td align="left">Scoped enum</td>
+<td align="left">Enum</td>
+</tr>
+<tr>
+<td align="left">Templated class/function</td>
+<td align="left">Not converted**</td>
+</tr>
+<tr>
+<td align="left">Specialized class template</td>
+<td align="left">Class***</td>
+</tr>
+<tr>
+<td align="left">Specialized function template</td>
+<td align="left">Function****</td>
+</tr>
+<tr>
+<td align="left">Documentation<strong>*</strong></td>
+<td align="left">Documentation</td>
+</tr>
+</tbody>
+</table>
+<p>* Will try to match arguments to types provided.</p>
+<p>** No direct translation to <code>python</code>. Will not emit warning.</p>
+<p>*** The naming convention for these classes can be found under the <a href="../template_naming_convention/">Template Naming Convention page</a>.</p>
+<p>**** Functions with different template arguments will behave as overloaded functions.</p>
+<p>***** Refers to documentation comments before namespaces, functions, classes etc. See <a href="../examples/">the examples for more information</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">C++ operator</th>
+<th align="left">Python operator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">operator+</td>
+<td align="left">__add__</td>
+</tr>
+<tr>
+<td align="left">operator-</td>
+<td align="left">__sub__</td>
+</tr>
+<tr>
+<td align="left">operator*</td>
+<td align="left">__mul__</td>
+</tr>
+<tr>
+<td align="left">operator/</td>
+<td align="left">__truediv__</td>
+</tr>
+<tr>
+<td align="left">operator%</td>
+<td align="left">__mod__</td>
+</tr>
+<tr>
+<td align="left">operator+=</td>
+<td align="left">__iadd__</td>
+</tr>
+<tr>
+<td align="left">operator-=</td>
+<td align="left">__isub__</td>
+</tr>
+<tr>
+<td align="left">operator*=</td>
+<td align="left">__imul__</td>
+</tr>
+<tr>
+<td align="left">operator/=</td>
+<td align="left">__itruediv__</td>
+</tr>
+<tr>
+<td align="left">operator%=</td>
+<td align="left">__imod__</td>
+</tr>
+<tr>
+<td align="left">operator==</td>
+<td align="left">__eq__</td>
+</tr>
+<tr>
+<td align="left">operator!=</td>
+<td align="left">__ne__</td>
+</tr>
+<tr>
+<td align="left">operator&gt;</td>
+<td align="left">__gt__</td>
+</tr>
+<tr>
+<td align="left">operator&gt;=</td>
+<td align="left">__ge__</td>
+</tr>
+<tr>
+<td align="left">operator&lt;</td>
+<td align="left">__lt__</td>
+</tr>
+<tr>
+<td align="left">operator&lt;=</td>
+<td align="left">__ge__</td>
+</tr>
+<tr>
+<td align="left">operator[]</td>
+<td align="left">__getitem__</td>
+</tr>
+<tr>
+<td align="left">operator()</td>
+<td align="left">__call__</td>
+</tr>
+<tr>
+<td align="left">operator=</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">operator&lt;&lt;</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">operator&gt;&gt;</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">operator++</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">operator--</td>
+<td align="left">Not converted</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">C++ Standard library class</th>
+<th align="left">Python translation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">std::array</td>
+<td align="left">array</td>
+</tr>
+<tr>
+<td align="left">std::complex</td>
+<td align="left"><a href="https://docs.python.org/3/library/cmath.html">complex</a></td>
+</tr>
+<tr>
+<td align="left">std::deque</td>
+<td align="left">array</td>
+</tr>
+<tr>
+<td align="left">std::filesystem::path</td>
+<td align="left"><a href="https://docs.python.org/3/library/pathlib.html">pathlib.Path</a></td>
+</tr>
+<tr>
+<td align="left">std::forward_list</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::function</td>
+<td align="left">function</td>
+</tr>
+<tr>
+<td align="left">std::list</td>
+<td align="left">array</td>
+</tr>
+<tr>
+<td align="left">std::map</td>
+<td align="left">dict</td>
+</tr>
+<tr>
+<td align="left">std::multimap</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::multiset</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::optional</td>
+<td align="left">None || value</td>
+</tr>
+<tr>
+<td align="left">std::pair</td>
+<td align="left">tuple</td>
+</tr>
+<tr>
+<td align="left">std::priority_queue</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::queue</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::set</td>
+<td align="left">set</td>
+</tr>
+<tr>
+<td align="left">std::shared_ptr</td>
+<td align="left">value</td>
+</tr>
+<tr>
+<td align="left">std::stack</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::tuple</td>
+<td align="left">tuple</td>
+</tr>
+<tr>
+<td align="left">std::unique_ptr</td>
+<td align="left">value*</td>
+</tr>
+<tr>
+<td align="left">std::shared_ptr</td>
+<td align="left">value**</td>
+</tr>
+<tr>
+<td align="left">std::unordered_map</td>
+<td align="left">dict</td>
+</tr>
+<tr>
+<td align="left">std::unordered_multimap</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::unordered_multiset</td>
+<td align="left">Not converted</td>
+</tr>
+<tr>
+<td align="left">std::unordered_set</td>
+<td align="left">set</td>
+</tr>
+<tr>
+<td align="left">std::valarray</td>
+<td align="left">array</td>
+</tr>
+<tr>
+<td align="left">std::variant</td>
+<td align="left">value</td>
+</tr>
+<tr>
+<td align="left">std::vector</td>
+<td align="left">array</td>
+</tr>
+</tbody>
+</table>
+<p>* Note that due to how python works internally, function argument of type <code>std::unique_ptr</code> is not allowed. For more info see <a href="https://pybind11.readthedocs.io/en/stable/advanced/smart_ptrs.html">the pybind11 documentation on smart pointers</a>.</p>
+<p>** When a user defined struct/class is managed by <code>std::shared_ptr</code>, it is marked as such in the resulting pybind11. For more info see <a href="https://pybind11.readthedocs.io/en/stable/advanced/smart_ptrs.html">the pybind11 documentation on smart pointers</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">C++ builtin type</th>
+<th align="left">Python translation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">bool</td>
+<td align="left">bool</td>
+</tr>
+<tr>
+<td align="left">char</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">char16_t</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">char32_t</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">double</td>
+<td align="left">float</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">float</td>
+</tr>
+<tr>
+<td align="left">int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">int8_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">int16_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">int32_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">int64_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">long double</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">long int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">long long int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">short int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">signed char</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">string_view</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">uint8_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">uint16_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">uint32_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">uint64_t</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">unsigned char</td>
+<td align="left">str</td>
+</tr>
+<tr>
+<td align="left">unsigned int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">unsigned long int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">unsigned long long int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">unsigned short int</td>
+<td align="left">int</td>
+</tr>
+<tr>
+<td align="left">wchar_t</td>
+<td align="left">str</td>
+</tr>
+</tbody>
+</table>
+                
+            </div>
+            <div class="column is-one-quarter">
+            </div>
+        </div>
+
+        <footer id="footer" class="footer first-content has-background-black">
+            <div class="columns has-text-justified has-text-centered">
+                <div class="column is-2">
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">General</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/products">Products</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/contact">Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/newsletter">Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">Legal</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/privacy_policy">Privacy Policy</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/terms_of_service">Terms of Service</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/license">License</a>
+                    </p>
+                </div>
+                <div class="column is-2 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold is-size-5 has-text-white">Keep In Touch</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-2">
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

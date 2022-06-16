@@ -1,0 +1,49 @@
+/* This file is for your main application CSS */
+
+@import "fontawesome/css/fontawesome.css";
+@import "fontawesome/css/solid.css";
+@import "fontawesome/css/brands.css";
+@import 'tolc/mailchimp.css';
+@import 'tolc/markdown.css';
+@import 'tolc/footer.css';
+@import 'tolc/topnav.css';
+@import 'tolc/sidenav.css';
+@import 'tolc/buttons.css';
+
+html, body {
+	height: 100%;
+	background-color: #000;
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#sign-up {
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#active-item {
+	color: #00dcff !important;
+}
+
+.has-background-black {
+	background-color: #000 !important;
+}
+
+#download-link {
+	color: #fff;
+}
+
+.link {
+	color: #fff;
+}
+
+.link:hover {
+	color: #00dcff !important;
+}
+
+.has-text-white {
+	color: #fff !important;
+}
+
+.has-text-weight-bold {
+	font-weight: 700 !important;
+}

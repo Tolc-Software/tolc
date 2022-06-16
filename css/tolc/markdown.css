@@ -1,0 +1,139 @@
+#main-markdown code, pre {
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+#main-markdown h1 {
+	margin-bottom: .5rem;
+}
+
+#main-markdown h2 {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+#main-markdown h3 {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+#main-markdown h4 {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+#main-markdown table {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+/* Headers */
+#main-markdown table th {
+	font-weight: bold;
+	color: #fff;
+}
+
+/* Data entry in table */
+#main-markdown td, th {
+	padding-bottom: .25rem;
+	padding-top: .25rem;
+	padding-left: .5rem;
+	padding-right: .5rem;
+	border-bottom: 1px solid #9600ff;
+}
+
+/* Link in table */
+#main-markdown a {
+	font-style: italic;
+	color: #fff;
+}
+
+#main-markdown a:hover {
+	font-style: italic;
+	color: #00dcff;
+}
+
+#main-markdown ul li::marker {
+	/* A bullet and a space */
+	content: "\2022\00a0";
+	color: #9600ff;
+}
+
+#main-markdown ol li::marker {
+	color: #9600ff;
+}
+
+
+#main-markdown .toc {
+	/* To line up with side nav */
+	padding-top: .75rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #9600ff;
+}
+
+#main-markdown .toc::before {
+	content: "Table of Contents:";
+	color: #9600ff;
+	font-weight: bold;
+}
+
+#main-markdown div.toc a {
+	color: #fff;
+}
+
+#main-markdown div.toc a:hover {
+	color: #00dcff;
+}
+
+#main-markdown div.toc li {
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+
+#main-markdown pre {
+	background-color: #000;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+	padding-left: 0;
+	padding-left: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#main-markdown code {
+	/* Same as editors on live.tolc.io */
+	background-color: #1e1e1e;
+}
+
+#main-markdown p {
+	hyphens: auto;
+	word-break: break-word;
+}
+
+#main-markdown p > a {
+	font-style: italic;
+	color: #fff;
+}
+
+#main-markdown p > img {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+#main-markdown p > a:hover {
+	font-style: italic;
+	color: #00dcff;
+}
+
+#main-markdown .asterisk {
+	color: #ff1500;
+}
+
+#main-markdown > ol {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+#main-markdown > ul {
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}

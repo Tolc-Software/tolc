@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examples - tolc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="../../js/highlightjs/styles/vs2015.min.css">
+    <script src="../../js/highlightjs/highlight.min.js" charset="utf-8" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../assets/tolc-symbol-color-RGB.png">
+
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    
+    <script src="../../js/theme.js" charset="utf-8" defer></script>
+
+    
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+
+</head>
+
+<body>
+    <main id="root" class="mx-6">
+
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-background-black">
+                <a class="navbar-item" href="https://tolc.io">
+                    <img src="../../assets/tolc-symbol-color-RGB.png">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                    <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/blog">Blog</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/products">Products</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/account">Account</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="columns is-multiline">
+            <div id="side-nav" class="column ml-3 is-one-quarter is-size-5">
+                <ul>
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../..">Introduction</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../installing/">Installing</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../usage/">Usage</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Python Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a id="active-item"  href="./">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../template_naming_convention/">Template Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">WebAssembly Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/conversions/">Conversions</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Objective-C Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/naming_convention/">Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">CMake</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/interface/">Interface</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/reference/">Reference</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../FAQ/">FAQ</a>
+</li>
+
+                    
+                </ul>
+            </div>
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
+                
+                <h1 id="examples">Examples</h1>
+<p>Each example is taken from the test suite for <code>Tolc</code> and, given that you use the latest version, you can expect them all to work.</p>
+<p>Each <code>C++</code> library named <code>MyLib</code> exports as a <code>python module</code> called <code>MyLib</code>, in every test the module name is simply <code>m</code> for brevity. All tests use the <code>python</code> builtin <a href="https://docs.python.org/3/library/unittest.html"><code>unittest</code></a> library. The examples that follow contains a bit of <code>C++</code> code, and the respective <code>python</code> code using it. Each <code>python</code> example is wrapped in the following boilerplate that is removed to make the examples more readable:</p>
+<pre><code class="language-python">import unittest
+import m
+
+class TestMyLib(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        pass
+
+    def test_m(self):
+        # The actual python example body goes here
+        self.assertEqual(m.sayTen(), 10)
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()
+</code></pre>
+<h2 id="classes">Classes</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+
+class WithConstructor {
+public:
+    explicit WithConstructor(std::string s) : m_s(s) {}
+
+    static int const i = 5;
+
+    // This class has a readwrite variable
+    int readwrite = 10;
+
+    std::string getS() { return m_s; }
+    std::string_view getSView() { return m_s; }
+
+private:
+    std::string m_s;
+};
+
+class WithFunction {
+public:
+    int add(int i, int j) {
+        return i + j;
+    }
+};
+
+class WithPrivateFunction {
+    double multiply(double i, double j) {
+        return i * j;
+    }
+};
+
+namespace MyLib {
+
+    class Nested {
+    public:
+        double divideByTwo(double d) {
+            return d / 2;
+        }
+    };
+}
+
+/** Documentation carries over */
+struct Documentation {};
+
+/*****************************
+* JavaDoc Style
+* is
+* boxy
+****************************/
+struct JavaDoc {};
+
+</code></pre>
+<pre><code class="language-python">
+# You can access static variables without instantiating class
+self.assertEqual(m.WithConstructor.i, 5)
+
+# Creating classes via their constructor
+with_constructor = m.WithConstructor(&quot;Hello&quot;)
+self.assertEqual(with_constructor.getS(), &quot;Hello&quot;)
+
+# Documentation for variables carries over aswell
+self.assertIn(&quot;This class has a readwrite variable&quot;, m.WithConstructor.readwrite.__doc__)
+
+# Named arguments in constructors
+with_constructor = m.WithConstructor(s=&quot;named argument&quot;)
+self.assertEqual(with_constructor.getS(), &quot;named argument&quot;)
+self.assertEqual(with_constructor.getSView(), &quot;named argument&quot;)
+
+# Member functions are available after construction
+with_function = m.WithFunction()
+self.assertEqual(with_function.add(2, 5), 7)
+
+# Private functions have no bindings
+with self.assertRaises(AttributeError) as error_context:
+    with_private_function = m.WithPrivateFunction()
+    with_private_function.multiply(3, 2)
+
+self.assertEqual(len(error_context.exception.args), 1)
+# print(error_context.test_case)
+self.assertEqual(
+    &quot;'m.WithPrivateFunction' object has no attribute 'multiply'&quot;,
+    error_context.exception.args[0],
+    &quot;Not correct exception on private functions&quot;,
+)
+
+# Classes under namespaces are available under the corresponding submodule
+nested = m.MyLib.Nested()
+self.assertEqual(nested.divideByTwo(10), 5)
+
+# Different styles of documentation on classes carries over
+self.assertIn(&quot;Documentation carries over&quot;, m.Documentation.__doc__)
+self.assertIn(&quot;JavaDoc Style&quot;, m.JavaDoc.__doc__)
+
+
+</code></pre>
+<h2 id="documentation-styles">Documentation Styles</h2>
+<pre><code class="language-cpp">
+// One line comment
+class OneLiner {};
+
+/** Single multi line comment */
+class SingleMulti {};
+
+/**
+* Multi
+* line
+* comment
+*/
+class Multi {};
+
+/**
+Bare multi
+Another line
+*/
+class BareMulti {};
+
+/*!
+* Qt style
+*/
+class QtStyle {};
+
+/*****************************
+* JavaDoc Style
+* is
+* boxy
+****************************/
+class JavaDoc {};
+
+///
+/// Triplets is a commitment
+///
+class Triplets {};
+
+//!
+//! This is one of the doxy styles
+//!
+class DoxyBang {};
+
+</code></pre>
+<pre><code class="language-python">
+# These types of documentations are supported for:
+#   Classes
+#   Member variables
+#   Enums
+#   Functions
+
+self.assertIn(&quot;One line comment&quot;, m.OneLiner.__doc__)
+
+self.assertIn(&quot;Single multi line&quot;, m.SingleMulti.__doc__)
+
+self.assertIn(&quot;Multi&quot;, m.Multi.__doc__)
+
+self.assertIn(&quot;Bare multi&quot;, m.BareMulti.__doc__)
+
+self.assertIn(&quot;Qt style&quot;, m.QtStyle.__doc__)
+
+self.assertIn(&quot;JavaDoc Style&quot;, m.JavaDoc.__doc__)
+
+self.assertIn(&quot;Triplets&quot;, m.Triplets.__doc__)
+
+self.assertIn(&quot;one of the doxy styles&quot;, m.DoxyBang.__doc__)
+
+</code></pre>
+<h2 id="enums">Enums</h2>
+<pre><code class="language-cpp">
+enum Unscoped {
+    Under,
+    Uboat,
+};
+
+enum class Scoped {
+    Sacred,
+    Snail,
+};
+
+class EnumTest {
+public:
+    explicit EnumTest(Scoped _s) : s(_s) {};
+
+    Scoped s;
+};
+
+Unscoped f(Unscoped u) {
+    return u;
+}
+
+namespace NS {
+    // Documentation describing the enum
+    enum class Deep {
+        Double,
+        Down,
+    };
+}
+
+
+</code></pre>
+<pre><code class="language-python">
+# C++11 enums work
+scoped = m.Scoped.Snail
+enumTest = m.EnumTest(scoped)
+self.assertEqual(enumTest.s, scoped)
+
+# Aswell as legacy enums
+unscoped = m.Unscoped.Uboat
+u = m.f(unscoped)
+self.assertEqual(u, unscoped)
+
+# Enums under namespaces are available under the corresponding submodule
+deep = m.NS.Deep.Down
+self.assertNotEqual(deep, m.NS.Deep.Double)
+
+# Documentation carries over from C++
+self.assertIn(&quot;Documentation describing the enum&quot;, m.NS.Deep.__doc__)
+
+</code></pre>
+<h2 id="functions">Functions</h2>
+<pre><code class="language-cpp">
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+
+void sayHello() {
+    std::ofstream f(&quot;hello.txt&quot;);
+    f &lt;&lt; &quot;Hello!&quot;;
+    f.close();
+}
+
+void addYourOwn(std::string content) {
+    std::ofstream f(&quot;hello.txt&quot;);
+    f &lt;&lt; content;
+    f.close();
+}
+
+/**
+* Documentation carries over
+*/
+int calculate() {
+    return 5;
+}
+
+// Different documentation styles are supported
+int missingArgumentsNaming(int, int i) {
+    return i;
+}
+
+char firstLetter(std::string_view s) {
+    return s[0];
+}
+
+int static getZero() {
+    return 0;
+}
+
+</code></pre>
+<pre><code class="language-python">
+m.sayHello()
+with open(&quot;hello.txt&quot;, &quot;r&quot;) as f:
+    self.assertEqual(f.readline(), &quot;Hello!&quot;)
+
+content = &quot;This is from python!&quot;
+m.addYourOwn(content)
+with open(&quot;hello.txt&quot;, &quot;r&quot;) as f:
+    self.assertEqual(f.readline(), content)
+
+result = m.calculate()
+self.assertEqual(result, 5)
+self.assertIn(&quot;Documentation carries over&quot;, m.calculate.__doc__)
+
+# Without naming variables is fine
+result = m.missingArgumentsNaming(2, 5)
+self.assertEqual(result, 5)
+self.assertIn(&quot;Different documentation styles are supported&quot;, \
+  m.missingArgumentsNaming.__doc__)
+
+# Not possible to name any variables unless they are all known
+with self.assertRaises(TypeError) as error_context:
+  result = m.missingArgumentsNaming(2, i=5)
+
+# std::string_view works fine
+result = m.firstLetter(&quot;Hello&quot;)
+self.assertEqual(result, &quot;H&quot;)
+
+# Static functions are just normal module functions in python
+self.assertEqual(m.getZero(), 0)
+
+</code></pre>
+<h2 id="global-variables">Global Variables</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+static int i = 0;
+namespace Nested {
+    int i = 0;
+    std::string s = &quot;Hello world&quot;;
+}
+
+</code></pre>
+<pre><code class="language-python">
+# Starts at 0 and can be changed
+self.assertEqual(m.i, 0)
+m.i = 5
+self.assertEqual(m.i, 5)
+
+# Nested with the same name
+self.assertEqual(m.Nested.i, 0)
+
+# More complex variables are available aswell
+self.assertEqual(m.Nested.s, &quot;Hello world&quot;)
+
+</code></pre>
+<h2 id="inheritence">Inheritence</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+struct Pet {
+    Pet(const std::string &amp;name) : name(name) { }
+    std::string name;
+};
+
+struct Dog : public Pet {
+    Dog(const std::string &amp;name) : Pet(name) { }
+    std::string bark() const { return &quot;woof!&quot;; }
+};
+
+</code></pre>
+<pre><code class="language-python">
+fido = m.Dog(&quot;Fido&quot;)
+
+# Inherits public properties
+self.assertEqual(fido.name, &quot;Fido&quot;)
+
+# But has its new functions
+self.assertEqual(fido.bark(), &quot;woof!&quot;)
+
+</code></pre>
+<h2 id="member-variables">Member Variables</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class SimpleMember {
+public:
+    explicit SimpleMember() : myString(&quot;Hello&quot;) {}
+
+    std::string myString;
+};
+
+class ConstMember {
+public:
+    const int i = 42;
+};
+
+class PrivateMember {
+public:
+    explicit PrivateMember(std::string s) : myString(s) {}
+
+private:
+    std::string myString;
+};
+
+namespace MyLib {
+
+    class Nested {
+    public:
+        double d = 4.3;
+    };
+}
+
+
+</code></pre>
+<pre><code class="language-python">
+# Mutable member variables can be changed
+simpleMember = m.SimpleMember()
+self.assertEqual(simpleMember.myString, &quot;Hello&quot;)
+simpleMember.myString = &quot;Changed now!&quot;
+self.assertEqual(simpleMember.myString, &quot;Changed now!&quot;)
+
+constMember = m.ConstMember()
+self.assertEqual(constMember.i, 42)
+
+# Const member variables cannot be changed
+with self.assertRaises(AttributeError) as error_context:
+    constMember.i = 0
+
+self.assertEqual(len(error_context.exception.args), 1)
+self.assertEqual(
+    &quot;can't set attribute&quot;,
+    error_context.exception.args[0],
+    &quot;Prohibiting changing const variables does not work!&quot;,
+)
+
+# Private member variables are not available
+with self.assertRaises(AttributeError) as error_context:
+    privateMember = m.PrivateMember(&quot;Hello&quot;)
+    print(privateMember.myString)
+
+self.assertEqual(len(error_context.exception.args), 1)
+self.assertEqual(
+    &quot;'m.PrivateMember' object has no attribute 'myString'&quot;,
+    error_context.exception.args[0],
+    &quot;Prohibiting changing const variables does not work!&quot;,
+)
+
+nested = m.MyLib.Nested()
+self.assertEqual(nested.d, 4.3)
+
+</code></pre>
+<h2 id="namespaces">Namespaces</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+/*
+* MyLib contains a bunch of MyLib functions
+*/
+namespace MyLib {
+
+int complexFunction() {
+    return 5;
+}
+
+    namespace We {
+        namespace Are {
+            namespace Going {
+                namespace Pretty {
+                    namespace Deep {
+                        std::string meaningOfLife() {
+                            return &quot;42&quot;;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+</code></pre>
+<pre><code class="language-python">
+# Namespaces corresponds to submodules
+result = m.MyLib.complexFunction()
+self.assertEqual(result, 5)
+
+# Documentation carries over for namespaces
+self.assertIn(&quot;MyLib contains a bunch of MyLib functions&quot;, \
+  m.MyLib.__doc__)
+
+# You can nest namespaces arbitrarily deep
+lifeProTips = m.MyLib.We.Are.Going.Pretty.Deep.meaningOfLife()
+self.assertEqual(lifeProTips, &quot;42&quot;)
+
+</code></pre>
+<h2 id="operators">Operators</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class MyClass {
+public:
+  explicit MyClass(int v) : value(v) {}
+
+  // +-*/&amp;
+  MyClass operator+(int i) { return MyClass(value + i); }
+  MyClass operator-(int i) { return MyClass(value - i); }
+  MyClass operator*(int i) { return MyClass(value * i); }
+  MyClass operator/(int i) { return MyClass(value / i); }
+  MyClass operator%(int i) { return MyClass(value % i); }
+
+  // Assignment
+  MyClass&amp; operator+=(const MyClass&amp; rhs) { value += rhs.value; return *this; }
+  MyClass&amp; operator-=(const MyClass&amp; rhs) { value -= rhs.value; return *this; }
+  MyClass&amp; operator*=(const MyClass&amp; rhs) { value *= rhs.value; return *this; }
+  MyClass&amp; operator/=(const MyClass&amp; rhs) { value /= rhs.value; return *this; }
+  MyClass&amp; operator%=(const MyClass&amp; rhs) { value %= rhs.value; return *this; }
+
+  // Comparisons
+  bool operator==(const MyClass &amp;rhs) { return value == rhs.value; }
+  bool operator!=(const MyClass &amp;rhs) { return value != rhs.value; }
+  bool operator&lt;(const MyClass &amp;rhs) { return value &lt; rhs.value; }
+  bool operator&gt;(const MyClass &amp;rhs) { return value &gt; rhs.value; }
+  bool operator&lt;=(const MyClass &amp;rhs) { return value &lt;= rhs.value; }
+  bool operator&gt;=(const MyClass &amp;rhs) { return value &gt;= rhs.value; }
+
+  // Subscript
+  MyClass operator[](unsigned idx) { return MyClass(static_cast&lt;int&gt;(idx)); }
+
+  // Call
+  int operator()(int x) { return value + x; }
+  std::string operator()(std::string const&amp; x) { return x + std::to_string(value); }
+
+  int value;
+};
+
+</code></pre>
+<pre><code class="language-python">
+my_class = m.MyClass(10)
+self.assertEqual(my_class.value, 10)
+
+# Normal operators translate as expected
+self.assertEqual((my_class + 5).value, 15)
+self.assertEqual((my_class - 5).value, 5)
+self.assertEqual((my_class * 5).value, 50)
+self.assertEqual((my_class / 5).value, 2)
+self.assertEqual((my_class % 3).value, 1)
+
+other = m.MyClass(5)
+# Comparison operators
+self.assertTrue(my_class != other)
+self.assertTrue(my_class &gt; other)
+self.assertTrue(my_class &gt;= other)
+
+self.assertFalse(my_class == other)
+self.assertFalse(my_class &lt; other)
+self.assertFalse(my_class &lt;= other)
+
+# Can also use the {operator}= functions
+# other.value = 5
+my_class += other
+self.assertEqual(my_class.value, 15)
+my_class -= other
+self.assertEqual(my_class.value, 10)
+my_class *= other
+self.assertEqual(my_class.value, 50)
+my_class /= other
+self.assertEqual(my_class.value, 10)
+my_class %= other
+self.assertEqual(my_class.value, 0)
+
+# Subscript []
+self.assertEqual(my_class[100].value, 100)
+
+# Call ()
+self.assertEqual(my_class(100), 100)
+# Overloading works
+self.assertEqual(my_class(&quot;The inner value is: &quot;), &quot;The inner value is: 0&quot;)
+
+</code></pre>
+<h2 id="overloaded-functions">Overloaded Functions</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+// Overloaded free functions
+std::string sayHello() {
+    return &quot;Hello!&quot;;
+}
+std::string sayHello(std::string to) {
+    return std::string(&quot;Hello &quot;) + to;
+}
+
+std::string safety() { return &quot;Safe!&quot;; }
+
+class Overload {
+public:
+    // Overloaded constructor
+    Overload() {};
+    Overload(std::string) {};
+
+    // Overloaded class functions
+    std::string getStuff() { return &quot;Stuff&quot;; }
+    std::string getStuff(std::string customStuff) { return customStuff; }
+
+    std::string safety() { return &quot;Safe!&quot;; }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# Overloaded functions work the same as in C++
+# Free function overload
+self.assertEqual(m.sayHello(), &quot;Hello!&quot;)
+self.assertEqual(m.sayHello(&quot;to me!&quot;), &quot;Hello to me!&quot;)
+
+# Class function overload
+overload = m.Overload()
+overload = m.Overload(&quot;Overloaded!&quot;)
+self.assertEqual(overload.getStuff(), &quot;Stuff&quot;)
+self.assertEqual(overload.getStuff(&quot;My stuff&quot;), &quot;My stuff&quot;)
+
+self.assertEqual(overload.safety(), &quot;Safe!&quot;)
+self.assertEqual(overload.safety(), m.safety())
+
+</code></pre>
+<h2 id="overriding-virtual-functions-in-python">Overriding virtual functions in python</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class Animal {
+public:
+    virtual ~Animal() { }
+    virtual std::string sound(int n_times, bool grumpy) = 0;
+};
+
+class Dog : public Animal {
+public:
+    std::string sound(int n_times, bool grumpy) override {
+        if (grumpy) {
+            return &quot;No.&quot;;
+        }
+
+        std::string result;
+        for (int i = 0; i &lt; n_times; ++i) {
+            result += &quot;woof! &quot;;
+        }
+        return result;
+    }
+};
+
+std::string call_sound(Animal *animal) {
+    return animal-&gt;sound(3, false);
+}
+
+</code></pre>
+<pre><code class="language-python">
+fido = m.Dog()
+grumpy = True
+
+# Overloaded function in C++
+self.assertEqual(fido.sound(1, not grumpy), &quot;woof! &quot;)
+
+# Polymorphic function in C++
+self.assertEqual(m.call_sound(fido), &quot;woof! woof! woof! &quot;)
+
+# Inherit from virtual C++ classes in python
+class Cat(m.Animal):
+  # Override C++ function
+  def sound(self, n_times, grumpy):
+    return &quot;No.&quot; if grumpy else &quot;meow! &quot; * n_times
+
+whiskers = Cat()
+
+# Overloaded C++ function in python
+self.assertEqual(whiskers.sound(1, grumpy), &quot;No.&quot;)
+self.assertEqual(whiskers.sound(1, not grumpy), &quot;meow! &quot;)
+
+# Polymorphic function in C++ called with python object
+self.assertEqual(m.call_sound(whiskers), &quot;meow! meow! meow! &quot;)
+
+</code></pre>
+<h2 id="overriding-virtual-in-python">Overriding virtual in python</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class Animal {
+public:
+    virtual ~Animal() { }
+    virtual std::string sound(int n_times, bool grumpy) = 0;
+};
+
+class Dog : public Animal {
+public:
+    std::string sound(int n_times, bool grumpy) override {
+        if (grumpy) {
+            return &quot;No.&quot;;
+        }
+
+        std::string result;
+        for (int i = 0; i &lt; n_times; ++i) {
+            result += &quot;woof! &quot;;
+        }
+        return result;
+    }
+};
+
+std::string call_sound(Animal *animal) {
+    return animal-&gt;sound(3, false);
+}
+
+</code></pre>
+<pre><code class="language-python">
+fido = m.Dog()
+grumpy = True
+
+# Overloaded function in C++
+self.assertEqual(fido.sound(1, grumpy), &quot;No.&quot;)
+self.assertEqual(fido.sound(1, not grumpy), &quot;woof! &quot;)
+
+# Polymorphic function in C++
+self.assertEqual(m.call_sound(fido), &quot;woof! woof! woof! &quot;)
+
+# Inherit from virtual C++ classes in python
+class Cat(m.Animal):
+  # Override C++ function
+  def sound(self, n_times, grumpy):
+    return &quot;No.&quot; if grumpy else &quot;meow! &quot; * n_times
+
+whiskers = Cat()
+
+# Overloaded C++ function in python
+self.assertEqual(whiskers.sound(1, grumpy), &quot;No.&quot;)
+self.assertEqual(whiskers.sound(1, not grumpy), &quot;meow! &quot;)
+
+# Polymorphic function in C++ called with python object
+self.assertEqual(m.call_sound(whiskers), &quot;meow! meow! meow! &quot;)
+
+</code></pre>
+<h2 id="simple-inheritence">Simple inheritence</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+struct Pet {
+    Pet(const std::string &amp;name) : name(name) { }
+    std::string name;
+};
+
+struct Dog : public Pet {
+    Dog(const std::string &amp;name) : Pet(name) { }
+    std::string bark() const { return &quot;woof!&quot;; }
+};
+
+</code></pre>
+<pre><code class="language-python">
+fido = m.Dog(&quot;Fido&quot;)
+
+# Inherits public properties
+self.assertEqual(fido.name, &quot;Fido&quot;)
+
+# But has its new functions
+self.assertEqual(fido.bark(), &quot;woof!&quot;)
+
+</code></pre>
+<h2 id="smart-pointers">Smart Pointers</h2>
+<pre><code class="language-cpp">
+#include &lt;memory&gt;
+
+struct Example {
+    int m_hi = 5;
+};
+
+struct ExampleShared {
+    int m_hi = 10;
+};
+
+std::unique_ptr&lt;Example&gt; create_unique() {
+    return std::make_unique&lt;Example&gt;();
+}
+
+std::shared_ptr&lt;ExampleShared&gt; create_shared() {
+    return std::make_shared&lt;ExampleShared&gt;();
+}
+
+</code></pre>
+<pre><code class="language-python">
+# std::unique_ptr acts as a normal value
+# Note that passing a std::unique_ptr as an argument gives an error
+#   See https://pybind11.readthedocs.io/en/stable/advanced/smart_ptrs.html
+u = m.create_unique()
+self.assertEqual(u.m_hi, 5)
+
+# std::shared_ptr acts as a normal value
+s = m.create_shared()
+self.assertEqual(s.m_hi, 10)
+
+</code></pre>
+<h2 id="stdarray">std::array</h2>
+<pre><code class="language-cpp">
+#include &lt;array&gt;
+#include &lt;string&gt;
+
+class WithMember {
+public:
+    explicit WithMember(std::array&lt;std::string, 2&gt; s) : m_s(s) {}
+
+    std::array&lt;std::string, 2&gt; getS() { return m_s; }
+
+private:
+    std::array&lt;std::string, 2&gt; m_s;
+};
+
+class WithFunction {
+public:
+    int sum(std::array&lt;int, 5&gt; v) {
+        int s = 0;
+        for (auto i : v) {
+            s += i;
+        }
+        return s;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::array translates to a normal array in python
+my_array = [&quot;hi&quot;, &quot;ho&quot;]
+with_member = m.WithMember(my_array)
+self.assertEqual(with_member.getS(), my_array)
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.sum([1, 2, 3, 4, 5]), 15)
+
+# It still corresponds to a fixed amount of elements
+for incompatible_array in [[&quot;too many&quot;, &quot;too many&quot;, &quot;too many&quot;], [&quot;too few&quot;]]:
+    with self.assertRaises(TypeError) as error_context:
+        with_member = m.WithMember(incompatible_array)
+
+    self.assertEqual(len(error_context.exception.args), 1)
+    self.assertTrue(
+        &quot;incompatible constructor arguments&quot; in error_context.exception.args[0],
+        &quot;Error msg does not mention incompatible arguments: &quot;
+        + str(error_context.exception.args[0]),
+    )
+    self.assertTrue(
+        &quot;Invoked with: &quot; + str(incompatible_array)
+        in error_context.exception.args[0],
+        &quot;Error msg does not mention the given arguments: &quot; + str(error_context.exception.args[0]),
+    )
+
+</code></pre>
+<h2 id="stdcomplex">std::complex</h2>
+<pre><code class="language-cpp">
+#include &lt;complex&gt;
+
+using namespace std::complex_literals;
+
+std::complex&lt;int&gt; i() {
+    return 5;
+}
+
+std::complex&lt;double&gt; d() {
+    return 1. + 2i;
+}
+
+std::complex&lt;float&gt; f() {
+    return 0.f + 5if;
+}
+
+std::complex&lt;double&gt; r(std::complex&lt;double&gt; d) {
+    return d;
+}
+
+</code></pre>
+<pre><code class="language-python">
+# std::complex translates to a complex in python
+i = m.i()
+self.assertEqual(i.real, 5)
+self.assertEqual(i.imag, 0)
+
+d = m.d()
+self.assertEqual(d.real, 1)
+self.assertEqual(d.imag, 2)
+
+f = m.f()
+self.assertEqual(f.real, 0)
+self.assertEqual(f.imag, 5)
+
+# Using python builtin complex class
+r = m.r(complex(1, 2))
+self.assertEqual(r.real, 1)
+self.assertEqual(r.imag, 2)
+
+</code></pre>
+<h2 id="stddeque">std::deque</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;deque&gt;
+
+class WithMember {
+public:
+    explicit WithMember(std::deque&lt;std::string&gt; s) : m_s(s) {}
+
+    std::deque&lt;std::string&gt; getS() { return m_s; }
+
+private:
+    std::deque&lt;std::string&gt; m_s;
+};
+
+class WithFunction {
+public:
+    int sum(std::deque&lt;int&gt; v) {
+        int s = 0;
+        for (auto i : v) {
+            s += i;
+        }
+        return s;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::deque translates to a normal array in python
+my_array = [&quot;hi&quot;, &quot;ho&quot;]
+with_member = m.WithMember(my_array)
+self.assertEqual(with_member.getS(), my_array)
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.sum([1, 2, 3]), 6)
+
+</code></pre>
+<h2 id="stdfilesystempath">std::filesystem::path</h2>
+<pre><code class="language-cpp">
+#include &lt;filesystem&gt;
+#include &lt;vector&gt;
+
+std::filesystem::path takingPath(std::filesystem::path p) {
+    return p;
+}
+
+std::string toString(std::filesystem::path p) {
+    return p.string();
+}
+
+std::filesystem::path joinPaths(std::vector&lt;std::filesystem::path&gt; arrayToSum) {
+    std::filesystem::path sum;
+    for (auto f : arrayToSum) {
+        sum /= f;
+    }
+    return sum;
+}
+
+</code></pre>
+<pre><code class="language-python">
+# std::filesystem::path translates to pathlib.Path in python
+from pathlib import Path
+
+p0 = Path(&quot;Hello&quot;)
+result0 = m.takingPath(p0)
+self.assertEqual(result0, p0)
+
+p1 = Path(&quot;Something&quot;)
+toString = m.toString(p1)
+self.assertEqual(toString, p1.name)
+
+result1 = m.joinPaths([p0, p1])
+self.assertEqual(result1, p0 / p1)
+
+</code></pre>
+<h2 id="stdfunction">std::function</h2>
+<pre><code class="language-cpp">
+#include &lt;functional&gt;
+#include &lt;vector&gt;
+
+double takingFunction(std::function&lt;double(int)&gt; callMe) {
+    return callMe(5);
+}
+
+std::function&lt;int(int)&gt; returnFunction(const std::function&lt;int(int)&gt; &amp;f) {
+    return [f](int i) {
+        return f(i) + 1;
+    };
+}
+
+int accumulateArrayOfFunctions(std::vector&lt;std::function&lt;int()&gt;&gt; arrayToSum) {
+    int sum = 0;
+    for (auto f : arrayToSum) {
+        sum += f();
+    }
+    return sum;
+}
+
+</code></pre>
+<pre><code class="language-python">
+def callback(i):
+  return i
+
+# You can send a python function as a C++ callback
+result0 = m.takingFunction(callback)
+self.assertEqual(result0, 5.0)
+
+# Or in the other direction
+inc_by_one = m.returnFunction(callback)
+self.assertEqual(inc_by_one(5), 6)
+
+def fiver():
+  return 5
+
+# Or a vector of functions
+result1 = m.accumulateArrayOfFunctions([fiver, fiver])
+self.assertEqual(result1, 10)
+
+</code></pre>
+<h2 id="stdlist">std::list</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;list&gt;
+
+class WithMember {
+public:
+    explicit WithMember(std::list&lt;std::string&gt; s) : m_s(s) {}
+
+    std::list&lt;std::string&gt; getS() { return m_s; }
+
+private:
+    std::list&lt;std::string&gt; m_s;
+};
+
+class WithFunction {
+public:
+    int sum(std::list&lt;int&gt; v) {
+        int s = 0;
+        for (auto i : v) {
+            s += i;
+        }
+        return s;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::list translates to a normal array in python
+my_array = [&quot;hi&quot;, &quot;ho&quot;]
+with_member = m.WithMember(my_array)
+self.assertEqual(with_member.getS(), my_array)
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.sum([1, 2, 3]), 6)
+
+</code></pre>
+<h2 id="stdmap">std::map</h2>
+<pre><code class="language-cpp">
+#include &lt;map&gt;
+#include &lt;string&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::map&lt;std::string, int&gt; s) : m_s(s) {}
+
+    std::map&lt;std::string, int&gt; getS() { return m_s; }
+
+    std::string getValue(std::map&lt;int, std::string&gt; const&amp; m, int key) {
+        auto it = m.find(key);
+        if (it != m.end()) {
+            return it-&gt;second;
+        }
+        return &quot;&quot;;
+    }
+
+private:
+    std::map&lt;std::string, int&gt; m_s;
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::map translates to a normal dictionary in python
+my_map = {&quot;hi&quot;: 4, &quot;ho&quot;: 5}
+c = m.MyClass(my_map)
+self.assertEqual(c.getS(), my_map)
+
+# The maps are typed on the C++ side
+for incopatible_map in [{&quot;key&quot;: &quot;value&quot;}, {5: 2}]:
+    with self.assertRaises(TypeError) as error_context:
+        c = m.MyClass(incopatible_map)
+        c.getValue(incopatible_map, 5)
+
+    self.assertEqual(len(error_context.exception.args), 1)
+    self.assertTrue(
+        &quot;incompatible function arguments&quot; in error_context.exception.args[0]
+        or &quot;incompatible constructor arguments&quot;
+        in error_context.exception.args[0],
+        &quot;Error msg does not mention incompatible arguments: \n\t&quot;
+        + str(error_context.exception.args[0]),
+    )
+    self.assertTrue(
+        str(incopatible_map) in error_context.exception.args[0],
+        &quot;Error msg does not mention the given arguments: \n\t&quot;
+        + str(error_context.exception.args[0]),
+    )
+
+</code></pre>
+<h2 id="stdoptional">std::optional</h2>
+<pre><code class="language-cpp">
+#include &lt;optional&gt;
+#include &lt;string&gt;
+
+class WithMember {
+public:
+    explicit WithMember(std::optional&lt;std::string&gt; s) : m_s(s) {}
+
+    std::optional&lt;std::string&gt; getS() { return m_s; }
+
+private:
+    std::optional&lt;std::string&gt; m_s;
+};
+
+class WithFunction {
+public:
+    std::optional&lt;int&gt; getNullopt() {
+        return std::nullopt;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::optional is either the value or None in python
+greeting = &quot;hello&quot;
+with_member = m.WithMember(greeting)
+self.assertEqual(with_member.getS(), greeting)
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.getNullopt(), None)
+
+</code></pre>
+<h2 id="stdpair">std::pair</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::pair&lt;std::string, int&gt; s) : m_s(s) {}
+
+    std::pair&lt;std::string, int&gt; getS() { return m_s; }
+
+private:
+    std::pair&lt;std::string, int&gt; m_s;
+};
+
+class WithFunction {
+public:
+    int sum(std::pair&lt;int, int&gt; v) {
+        return v.first + v.second;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# Converts to a tuple, but is convertible from array aswell
+my_array = [&quot;hi&quot;, 4]
+for t in [my_array, tuple(my_array)]:
+    with_member = m.MyClass(t)
+    self.assertEqual(with_member.getS(), tuple(t))
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.sum((1, 2)), 3)
+
+</code></pre>
+<h2 id="stdset">std::set</h2>
+<pre><code class="language-cpp">
+#include &lt;set&gt;
+#include &lt;string&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::set&lt;std::string&gt; s) : m_s(s) {}
+
+    std::set&lt;std::string&gt; getS() { return m_s; }
+
+    int getValue(std::set&lt;int&gt; const&amp; m, int key) {
+        auto it = m.find(key);
+        if (it != m.end()) {
+            return *it;
+        }
+        return -1;
+    }
+
+private:
+    std::set&lt;std::string&gt; m_s;
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::set translates to a normal array or a set in python
+mySet = {&quot;hi&quot;, &quot;this is a set&quot;}
+c = m.MyClass(mySet)
+self.assertEqual(c.getS(), mySet)
+
+self.assertEqual(c.getValue({1, 2, 3}, 3), 3)
+self.assertEqual(c.getValue({1, 2, 3}, 4), -1)
+
+# Test set of the wrong type
+for incompatibleset in [{&quot;key&quot;: &quot;value&quot;}, (5, 2)]:
+    with self.assertRaises(TypeError) as error_context:
+        c = m.MyClass(incompatibleset)
+        c.getValue(incompatibleset, 5)
+
+self.assertEqual(len(error_context.exception.args), 1)
+self.assertTrue(
+    &quot;incompatible function arguments&quot; in error_context.exception.args[0]
+    or &quot;incompatible constructor arguments&quot; in error_context.exception.args[0],
+    &quot;Error msg does not mention incompatible arguments: \n\t&quot;
+    + str(error_context.exception.args[0]),
+)
+self.assertTrue(
+    str(incompatibleset) in error_context.exception.args[0],
+    &quot;Error msg does not mention the given arguments: \n\t&quot;
+    + str(error_context.exception.args[0]),
+)
+
+
+
+</code></pre>
+<h2 id="stdtuple">std::tuple</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;tuple&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::tuple&lt;std::string, int&gt; s) : m_s(s) {}
+
+    std::tuple&lt;std::string, int&gt; getS() { return m_s; }
+
+    std::tuple&lt;std::string, int&gt; m_s;
+};
+
+class WithFunction {
+public:
+    double sum(std::tuple&lt;int, int, float, double&gt; t) {
+        return std::get&lt;0&gt;(t)
+               + std::get&lt;1&gt;(t)
+               + std::get&lt;2&gt;(t)
+               + std::get&lt;3&gt;(t);
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# Converts to a tuple, but is convertible from array aswell
+my_array = [&quot;hi&quot;, 4]
+for t in [my_array, tuple(my_array)]:
+    with_member = m.MyClass(t)
+    self.assertEqual(with_member.getS(), tuple(t))
+
+with_function = m.WithFunction()
+self.assertAlmostEqual(with_function.sum((1, 2, 3.3, 2.0)), 8.3, delta=0.0001)
+
+</code></pre>
+<h2 id="stdunordered_map">std::unordered_map</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;unordered_map&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::unordered_map&lt;std::string, int&gt; s) : m_s(s) {}
+
+    std::unordered_map&lt;std::string, int&gt; getS() { return m_s; }
+
+    std::string getValue(std::unordered_map&lt;int, std::string&gt; const&amp; m, int key) {
+        auto it = m.find(key);
+        if (it != m.end()) {
+            return it-&gt;second;
+        }
+        return &quot;&quot;;
+    }
+
+private:
+    std::unordered_map&lt;std::string, int&gt; m_s;
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::unordered_map translates to a normal dictionary in python
+myunordered_map = {&quot;hi&quot;: 4, &quot;ho&quot;: 5}
+c = m.MyClass(myunordered_map)
+self.assertEqual(c.getS(), myunordered_map)
+
+# Test unordered_map of the wrong type
+for incompatible_map in [{&quot;key&quot;: &quot;value&quot;}, {5: 2}]:
+    with self.assertRaises(TypeError) as error_context:
+        c = m.MyClass(incompatible_map)
+        c.getValue(incompatible_map, 5)
+
+    self.assertEqual(len(error_context.exception.args), 1)
+    self.assertTrue(
+        &quot;incompatible function arguments&quot; in error_context.exception.args[0]
+        or &quot;incompatible constructor arguments&quot;
+        in error_context.exception.args[0],
+        &quot;Error msg does not mention incompatible arguments: \n\t&quot;
+        + str(error_context.exception.args[0]),
+    )
+    self.assertTrue(
+        str(incompatible_map) in error_context.exception.args[0],
+        &quot;Error msg does not mention the given arguments: \n\t&quot;
+        + str(error_context.exception.args[0]),
+    )
+
+
+</code></pre>
+<h2 id="stdunordered_set">std::unordered_set</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;unordered_set&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::unordered_set&lt;std::string&gt; s) : m_s(s) {}
+
+    std::unordered_set&lt;std::string&gt; getS() { return m_s; }
+
+    int getValue(std::unordered_set&lt;int&gt; const&amp; m, int key) {
+        auto it = m.find(key);
+        if (it != m.end()) {
+            return *it;
+        }
+        return -1;
+    }
+
+private:
+    std::unordered_set&lt;std::string&gt; m_s;
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::unordered_set translates to a normal array or a set in python
+my_unordered_set = {&quot;hi&quot;, &quot;this is a unordered_set&quot;}
+c = m.MyClass(my_unordered_set)
+self.assertEqual(c.getS(), my_unordered_set)
+
+self.assertEqual(c.getValue({1, 2, 3}, 3), 3)
+self.assertEqual(c.getValue({1, 2, 3}, 4), -1)
+
+# Test unordered_set of the wrong type
+for incompatible_set in [{&quot;key&quot;: &quot;value&quot;}, (5, 2)]:
+    with self.assertRaises(TypeError) as error_context:
+        c = m.MyClass(incompatible_set)
+        c.getValue(incompatible_set, 5)
+
+self.assertEqual(len(error_context.exception.args), 1)
+self.assertTrue(
+    &quot;incompatible function arguments&quot; in error_context.exception.args[0]
+    or &quot;incompatible constructor arguments&quot; in error_context.exception.args[0],
+    &quot;Error msg does not mention incompatible arguments: \n\t&quot;
+    + str(error_context.exception.args[0]),
+)
+self.assertTrue(
+    str(incompatible_set) in error_context.exception.args[0],
+    &quot;Error msg does not mention the given arguments: \n\t&quot;
+    + str(error_context.exception.args[0]),
+)
+
+</code></pre>
+<h2 id="stdvalarray">std::valarray</h2>
+<pre><code class="language-cpp">
+#include &lt;valarray&gt;
+
+std::valarray&lt;int&gt; get() {
+    return {1, 2, 3};
+}
+
+</code></pre>
+<pre><code class="language-python">
+v = m.get()
+self.assertEqual(v, [1, 2, 3])
+
+</code></pre>
+<h2 id="stdvariant">std::variant</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;variant&gt;
+
+class WithMember {
+public:
+    explicit WithMember(std::variant&lt;int, bool&gt; s) : m_s(s) {}
+
+    std::variant&lt;int, bool&gt; getS() { return m_s; }
+
+private:
+    std::variant&lt;int, bool&gt; m_s;
+};
+
+class WithFunction {
+public:
+    std::variant&lt;int, std::string, bool&gt; getFive() {
+        return 5;
+    }
+
+    std::variant&lt;int, std::string, bool&gt; getHello() {
+        return std::string(&quot;Hello&quot;);
+    }
+
+    std::variant&lt;int, std::string, bool&gt; getTrue() {
+        return true;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::variant translates to one of the values in python
+number = 6
+withNumber = m.WithMember(number)
+self.assertEqual(withNumber.getS(), number)
+
+withBool = m.WithMember(True)
+self.assertEqual(withBool.getS(), True)
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.getFive(), 5)
+self.assertEqual(with_function.getHello(), &quot;Hello&quot;)
+self.assertEqual(with_function.getTrue(), True)
+
+</code></pre>
+<h2 id="stdvector">std::vector</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+class WithMember {
+public:
+    explicit WithMember(std::vector&lt;std::string&gt; s) : m_s(s) {}
+
+    std::vector&lt;std::string&gt; getS() { return m_s; }
+
+private:
+    std::vector&lt;std::string&gt; m_s;
+};
+
+class WithFunction {
+public:
+    int sum(std::vector&lt;int&gt; v) {
+        int s = 0;
+        for (auto i : v) {
+            s += i;
+        }
+        return s;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-python">
+# std::vector translates to a normal array in python
+my_array = [&quot;hi&quot;, &quot;ho&quot;]
+with_member = m.WithMember(my_array)
+self.assertEqual(with_member.getS(), my_array)
+
+with_function = m.WithFunction()
+self.assertEqual(with_function.sum([1, 2, 3]), 6)
+
+</code></pre>
+<h2 id="templates">Templates</h2>
+<pre><code class="language-cpp">
+#include &lt;array&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+template &lt;typename T&gt;
+T getSomething(T something) {
+  return something;
+}
+
+template std::string getSomething(std::string something);
+template int getSomething(int);
+template std::vector&lt;std::string&gt; getSomething(std::vector&lt;std::string&gt;);
+
+template &lt;typename T&gt;
+class MyClass {
+public:
+T myFun(T type) {
+    return type;
+}
+};
+
+template class MyClass&lt;int&gt;;
+template class MyClass&lt;std::map&lt;char, std::vector&lt;int&gt;&gt;&gt;;
+template class MyClass&lt;std::array&lt;int, 3&gt;&gt;;
+
+</code></pre>
+<pre><code class="language-python">
+# getSomething&lt;std::string&gt;
+hi = m.getSomething(&quot;hi&quot;)
+self.assertEqual(hi, &quot;hi&quot;)
+
+# getSomething&lt;int&gt;
+five = m.getSomething(5)
+self.assertEqual(five, 5)
+
+# getSomething&lt;std::vector&lt;std::string&gt;&gt;
+l = m.getSomething([&quot;hi&quot;])
+self.assertEqual(l, [&quot;hi&quot;])
+
+# MyClass&lt;int&gt;
+my_class_int = m.MyClass_int()
+self.assertEqual(my_class_int.myFun(25), 25)
+
+# MyClass&lt;std::map&lt;char, std::vector&lt;int&gt;&gt;&gt;
+my_class_map = m.MyClass_map_char_vector_int()
+self.assertEqual(my_class_map.myFun({'h': [1]}), {'h': [1]})
+
+# MyClass&lt;std::array&lt;int, 3&gt;&gt;
+my_class_array = m.MyClass_array_int_3()
+self.assertEqual(my_class_array.myFun([1, 2, 3]), [1, 2, 3])
+
+</code></pre>
+                
+            </div>
+            <div class="column is-one-quarter">
+            </div>
+        </div>
+
+        <footer id="footer" class="footer first-content has-background-black">
+            <div class="columns has-text-justified has-text-centered">
+                <div class="column is-2">
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">General</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/products">Products</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/contact">Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/newsletter">Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">Legal</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/privacy_policy">Privacy Policy</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/terms_of_service">Terms of Service</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/license">License</a>
+                    </p>
+                </div>
+                <div class="column is-2 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold is-size-5 has-text-white">Keep In Touch</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-2">
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

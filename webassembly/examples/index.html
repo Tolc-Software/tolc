@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examples - tolc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="../../js/highlightjs/styles/vs2015.min.css">
+    <script src="../../js/highlightjs/highlight.min.js" charset="utf-8" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../assets/tolc-symbol-color-RGB.png">
+
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    
+    <script src="../../js/theme.js" charset="utf-8" defer></script>
+
+    
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+
+</head>
+
+<body>
+    <main id="root" class="mx-6">
+
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-background-black">
+                <a class="navbar-item" href="https://tolc.io">
+                    <img src="../../assets/tolc-symbol-color-RGB.png">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                    <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/blog">Blog</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/products">Products</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/account">Account</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="columns is-multiline">
+            <div id="side-nav" class="column ml-3 is-one-quarter is-size-5">
+                <ul>
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../..">Introduction</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../installing/">Installing</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../usage/">Usage</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Python Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/template_naming_convention/">Template Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">WebAssembly Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a id="active-item"  href="./">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../conversions/">Conversions</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Objective-C Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../objc/naming_convention/">Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">CMake</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/interface/">Interface</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/reference/">Reference</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../FAQ/">FAQ</a>
+</li>
+
+                    
+                </ul>
+            </div>
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
+                
+                <h1 id="examples">Examples</h1>
+<p>Each example is taken from the test suite for <code>Tolc</code> and, given that you use the latest version, you can expect them all to work.</p>
+<p>To use <code>WebAssembly</code> from <code>javascript</code>, one has to load it in asynchronously. When using <code>Tolc</code> this is done with a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a> on the <code>javascript</code> side. Each library named <code>MyLib</code> exports a <code>Promise</code> called <code>loadMyLib</code>, in every test the name is simply <code>m</code> for brevity. All tests use <a href="https://jestjs.io/"><code>jest</code></a>, and the <code>javascript</code> test boiler plate is omitted:</p>
+<pre><code class="language-javascript">const loadm = require('./build/m');
+
+test('Tolc Test', () =&gt; {
+    loadm().then(m =&gt; {
+        // The actual javascript example body goes here
+        expect(m.sayTen()).toBe(10);
+    });
+});
+</code></pre>
+<h2 id="classes">Classes</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+
+class WithConstructor {
+public:
+    explicit WithConstructor(std::string s) : m_s(s) {}
+
+    // There is a separate .cpp file containing
+    // int const WithConstructor::i;
+    // To initialize i
+    static int const i = 5;
+
+    std::string getS() { return m_s; }
+
+    static int getStatic() { return 55; }
+
+private:
+    std::string m_s;
+};
+
+struct WithMembers {
+    int const i = 5;
+    std::string s = &quot;hello&quot;;
+};
+
+class WithFunction {
+public:
+    int add(int i, int j) {
+        return i + j;
+    }
+};
+
+class WithPrivateFunction {
+    double multiply(double i, double j) {
+        return i * j;
+    }
+};
+
+namespace MyNamespace {
+    struct Nested {
+        int const i = 42;
+    };
+}
+
+struct WithEnum {
+    enum class Instrument {
+        Guitarr,
+        Flute
+    };
+    Instrument i = Instrument::Flute;
+};
+
+
+
+
+</code></pre>
+<pre><code class="language-javascript">
+// Statics are available without instantiation
+// Static function
+expect(m.WithConstructor.getStatic()).toBe(55);
+// Static variable
+expect(m.WithConstructor.i).toBe(5);
+
+const withConstructor = new m.WithConstructor(&quot;Hello&quot;);
+expect(withConstructor.getS()).toBe(&quot;Hello&quot;);
+
+// Classes need to be deleted manually
+withConstructor.delete();
+
+// Const properties are read-only
+const withMembers = new m.WithMembers();
+expect(withMembers.i).toBe(5);
+try {
+    withMembers.i = 10;
+    expect(true).toBe(false);
+} catch (err) {
+    expect(err.toString()).toMatch(/BindingError: WithMembers.i is a read-only property/i);
+}
+expect(withMembers.s).toBe(&quot;hello&quot;);
+withMembers.delete();
+
+// Public functions are available
+const withFunction = new m.WithFunction();
+expect(withFunction.add(5, 10)).toBe(15);
+withFunction.delete();
+
+// Cannot access private functions
+const withPrivateFunction = new m.WithPrivateFunction();
+try {
+    withPrivateFunction.multiply(5, 10);
+    expect(true).toBe(false);
+} catch (err) {
+    expect(err.toString()).toMatch(/TypeError: withPrivateFunction.multiply is not a function/i);
+}
+withPrivateFunction.delete();
+
+// Classes can be found under their namespace
+const nested = new m.MyNamespace.Nested();
+expect(nested.i).toBe(42);
+nested.delete();
+
+// Ok to nest Enums within classes
+const withEnum = new m.WithEnum();
+expect(withEnum.i).toBe(m.WithEnum.Instrument.Flute);
+withEnum.delete();
+
+</code></pre>
+<h2 id="enums">Enums</h2>
+<pre><code class="language-cpp">
+enum Unscoped {
+    Under,
+    Uboat,
+};
+
+enum class Scoped {
+    Sacred,
+    Snail,
+};
+
+class EnumTest {
+public:
+    enum class Inside {
+        One,
+        Two
+    };
+
+    explicit EnumTest(Scoped s) : memberEnum(s), inside(Inside::One) {};
+
+    Inside inside;
+
+    Scoped memberEnum;
+};
+
+Unscoped echo(Unscoped s) {
+    return s;
+}
+
+namespace MyNamespace {
+    enum class Color {
+        Red,
+        Green,
+        Blue
+    };
+
+    struct Carrier {
+        enum class Translator {
+            Tolc
+        };
+    };
+}
+
+
+</code></pre>
+<pre><code class="language-javascript">
+// Can be passed as arguments
+const snail = m.Scoped.Snail;
+const enumTest = new m.EnumTest(snail);
+expect(enumTest.memberEnum).toBe(snail);
+
+// Nested enums within classes
+expect(enumTest.inside).toBe(m.EnumTest.Inside.One);
+enumTest.delete();
+
+// Unscoped enums work exactly the same
+const uboat = m.Unscoped.Uboat;
+expect(m.echo(uboat)).toBe(uboat);
+
+// Nested enums inside namespaces
+const green = m.MyNamespace.Color.Green;
+expect(green).toBe(m.MyNamespace.Color.Green);
+
+// Nested enums inside namespaces inside structs
+const company = m.MyNamespace.Carrier.Translator.Tolc;
+expect(company).toBe(m.MyNamespace.Carrier.Translator.Tolc);
+
+</code></pre>
+<h2 id="functions">Functions</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+int sayTen() {
+    return 10;
+}
+
+std::string giveBack(std::string const&amp; s) {
+    return s;
+}
+
+namespace MyNamespace {
+    int add(int x, int y) {
+        return x + y;
+    }
+    namespace Nested {
+        int increase(int x) {
+            return x + 1;
+        }
+    }
+}
+
+</code></pre>
+<pre><code class="language-javascript">
+expect(m.sayTen()).toBe(10);
+
+expect(m.giveBack(&quot;hello&quot;)).toBe(&quot;hello&quot;);
+
+// Nested functions are under their respective namespace
+expect(m.MyNamespace.add(1, 2)).toBe(3);
+expect(m.MyNamespace.Nested.increase(2)).toBe(3);
+
+</code></pre>
+<h2 id="global-variables">Global Variables</h2>
+<pre><code class="language-cpp">
+#include &lt;string_view&gt;
+
+int const i = 0;
+double const d = 55;
+std::string_view const stringView = &quot;Hello world&quot;;
+const char* charPtr = &quot;Hello world&quot;;
+
+namespace MyNamespace {
+    int const i = 5;
+}
+
+</code></pre>
+<pre><code class="language-javascript">
+expect(m.i).toBe(0);
+expect(m.d).toBe(55);
+
+// Global strings of type std::string_view and const char* are converted
+// Globals of type std::string has an open issue:
+//   https://github.com/emscripten-core/emscripten/issues/16275
+expect(m.stringView).toBe(&quot;Hello world&quot;);
+expect(m.charPtr).toBe(&quot;Hello world&quot;);
+
+// Globals within namespaces work
+expect(m.MyNamespace.i).toBe(5);
+
+</code></pre>
+<h2 id="namespaces">Namespaces</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+namespace MyLib {
+
+int complexFunction() {
+    return 5;
+}
+
+    namespace We {
+        namespace Are {
+            namespace Going {
+                namespace Pretty {
+                    namespace Deep {
+                        std::string meaningOfLife() {
+                            return &quot;42&quot;;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+</code></pre>
+<pre><code class="language-javascript">
+expect(m.MyLib.complexFunction()).toBe(5);
+
+// Namespaces can be nested arbitrarily
+expect(m.MyLib.We.Are.Going.Pretty.Deep.meaningOfLife()).toBe('42');
+
+</code></pre>
+<h2 id="overriding-virtual-in-javascript">Overriding virtual in javascript</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class Animal {
+public:
+    virtual ~Animal() { }
+    virtual std::string sound(int n_times, bool grumpy) = 0;
+};
+
+class Dog : public Animal {
+public:
+    std::string sound(int n_times, bool grumpy) override {
+        if (grumpy) {
+            return &quot;No.&quot;;
+        }
+
+        std::string result;
+        for (int i = 0; i &lt; n_times; ++i) {
+            result += &quot;woof! &quot;;
+        }
+        return result;
+    }
+};
+
+std::string call_sound(Animal *animal) {
+    return animal-&gt;sound(3, false);
+}
+
+</code></pre>
+<pre><code class="language-javascript">
+const fido = new m.Dog();
+const grumpy = true;
+
+// Overloaded function in C++
+expect(fido.sound(1, grumpy)).toBe(&quot;No.&quot;)
+expect(fido.sound(1, !grumpy)).toBe(&quot;woof! &quot;)
+
+// Polymorphic function in C++
+expect(m.call_sound(fido)).toBe(&quot;woof! woof! woof! &quot;)
+fido.delete();
+
+// Inherit from virtual C++ classes in javascript
+const Cat = m.Animal.extend(&quot;Animal&quot;, {
+  // Override C++ function
+  sound: function(n_times, grumpy) {
+    return grumpy ? &quot;No.&quot; : &quot;meow! &quot;.repeat(n_times);
+  },
+});
+
+const whiskers = new Cat();
+
+// Overloaded C++ function in javascript
+expect(whiskers.sound(1, grumpy)).toBe(&quot;No.&quot;)
+expect(whiskers.sound(1, !grumpy)).toBe(&quot;meow! &quot;)
+
+// Polymorphic function in C++ called with javascript object
+// Automatic downcasting
+expect(m.call_sound(whiskers)).toBe(&quot;meow! meow! meow! &quot;)
+
+whiskers.delete();
+
+// Another way is to just provide what is needed
+// to implement the Animal interface
+const tiger = m.Animal.implement({
+  // Put only the functions you want to implement here
+  sound: function(n_times, grumpy) {
+    return grumpy ? &quot;No.&quot; : &quot;roar! &quot;.repeat(n_times);
+  },
+});
+
+expect(tiger.sound(1, grumpy)).toBe(&quot;No.&quot;)
+expect(tiger.sound(1, !grumpy)).toBe(&quot;roar! &quot;)
+
+// Automatic downcasting works the same
+expect(m.call_sound(tiger)).toBe(&quot;roar! roar! roar! &quot;)
+
+tiger.delete();
+
+</code></pre>
+<h2 id="simple-inheritence">Simple inheritence</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+struct Pet {
+    Pet(const std::string &amp;name) : name(name) { }
+    std::string name;
+};
+
+struct Dog : public Pet {
+    Dog(const std::string &amp;name) : Pet(name) { }
+    std::string bark() const { return &quot;woof!&quot;; }
+};
+
+</code></pre>
+<pre><code class="language-javascript">
+const fido = new m.Dog(&quot;Fido&quot;);
+
+// Inherits public properties
+expect(fido.name).toBe(&quot;Fido&quot;)
+
+// But has its new functions
+expect(fido.bark()).toBe(&quot;woof!&quot;)
+
+</code></pre>
+<h2 id="smart-pointers">Smart Pointers</h2>
+<pre><code class="language-cpp">
+#include &lt;memory&gt;
+
+struct Example {
+    int m_value = 5;
+};
+
+struct ExampleShared {
+    int m_value = 10;
+};
+
+std::unique_ptr&lt;Example&gt; create_unique() {
+    return std::make_unique&lt;Example&gt;();
+}
+
+std::shared_ptr&lt;ExampleShared&gt; create_shared() {
+    return std::make_shared&lt;ExampleShared&gt;();
+}
+
+</code></pre>
+<pre><code class="language-javascript">
+// Note: Embind only supports *return*-values of std::unique_ptr
+//       An argument of type std::unique_ptr&lt;T&gt; will return in an error message
+
+// std::unique_ptr just corresponds to the value
+u = m.create_unique();
+expect(u.m_value).toBe(5);
+u.delete();
+
+// std::shared_ptr also just corresponds to the value
+s = m.create_shared();
+expect(s.m_value).toBe(10);
+s.delete();
+
+</code></pre>
+<h2 id="stdarray">std::array</h2>
+<pre><code class="language-cpp">
+#include &lt;array&gt;
+#include &lt;string&gt;
+
+std::array&lt;double, 3&gt; getData3() {
+    return {0.0, 1.0, 2.0};
+}
+
+// Multiple array types at the same time
+std::array&lt;int, 2&gt; getData2() {
+    return {0, 1};
+}
+
+
+</code></pre>
+<pre><code class="language-javascript">
+const data3 = m.getData3();
+
+// It's just a normal JS array
+expect(data3.length).toBe(3);
+
+expect(data3).toStrictEqual([0, 1, 2]);
+
+const data2 = m.getData2();
+expect(data2.length).toBe(2);
+
+expect(data2).toStrictEqual([0, 1]);
+
+</code></pre>
+<h2 id="stdmap">std::map</h2>
+<pre><code class="language-cpp">
+#include &lt;map&gt;
+#include &lt;string&gt;
+
+std::map&lt;int, std::string&gt; getData() {
+    std::map&lt;int, std::string&gt; m;
+    m.insert({10, &quot;hello&quot;});
+    return m;
+}
+
+
+</code></pre>
+<pre><code class="language-javascript">
+const data = m.getData();
+
+expect(data.size()).toBe(1);
+
+expect(data.get(10)).toBe(&quot;hello&quot;);
+
+data.set(50, &quot;Stuff&quot;);
+
+expect(data.size()).toBe(2);
+expect(data.get(50)).toBe(&quot;Stuff&quot;);
+
+</code></pre>
+<h2 id="stdpair">std::pair</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::pair&lt;std::string, int&gt; s) : m_s(s) {}
+
+    std::pair&lt;std::string, int&gt; getS() { return m_s; }
+
+private:
+    std::pair&lt;std::string, int&gt; m_s;
+};
+
+class WithFunction {
+public:
+    int sum(std::pair&lt;int, int&gt; v) {
+        return v.first + v.second;
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-javascript">
+// On the javascript side, std::pair&lt;std::string, int&gt; is a basic array
+const myArray = [&quot;hi&quot;, 4];
+withMember = new m.MyClass(myArray);
+expect(withMember.getS()).toStrictEqual(myArray);
+withMember.delete();
+
+const withFunction = new m.WithFunction()
+expect(withFunction.sum([1, 2])).toBe(3)
+withFunction.delete();
+
+</code></pre>
+<h2 id="stdtuple">std::tuple</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;tuple&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::tuple&lt;std::string, int&gt; _tuple) : m_tuple(_tuple) {}
+
+    std::tuple&lt;std::string, int&gt; getTuple() { return m_tuple; }
+
+    std::tuple&lt;std::string, int&gt; m_tuple;
+};
+
+class WithFunction {
+public:
+    double sum(std::tuple&lt;int, int, float, double&gt; t) {
+        return std::get&lt;0&gt;(t)
+               + std::get&lt;1&gt;(t)
+               + std::get&lt;2&gt;(t)
+               + std::get&lt;3&gt;(t);
+    }
+};
+
+
+</code></pre>
+<pre><code class="language-javascript">
+
+// Tuple converts from javascript array
+const myArray = [&quot;Hello World&quot;, 42];
+const myClass = new m.MyClass(myArray);
+expect(myClass.getTuple()).toStrictEqual(myArray);
+
+// The array still need to match the underlying std::tuple structure
+try {
+    // m_tuple is public
+    myClass.m_tuple = [1, 2, 3];
+} catch (err) {
+    expect(err.toString()).toMatch(/TypeError: Incorrect number of tuple elements for tuple_string_int: expected=2, actual=3/i);
+}
+
+myClass.delete();
+
+// Can handle different Number types
+const withFunction = new m.WithFunction();
+expect(withFunction.sum([1, 2, 3.3, 2.0])).toBeCloseTo(8.3, 5);
+
+withFunction.delete();
+
+</code></pre>
+<h2 id="stdvector">std::vector</h2>
+<pre><code class="language-cpp">
+#include &lt;vector&gt;
+
+std::vector&lt;int&gt; getData() {
+    return {0, 1, 2};
+}
+
+
+</code></pre>
+<pre><code class="language-javascript">
+const data = m.getData();
+
+expect(data.size()).toBe(3);
+
+for (let i = 0; i &lt; data.size(); i++) {
+    expect(data.get(i)).toBe(i);
+}
+
+data.push_back(3);
+
+expect(data.size()).toBe(4);
+
+expect(data.get(3)).toBe(3);
+
+</code></pre>
+                
+            </div>
+            <div class="column is-one-quarter">
+            </div>
+        </div>
+
+        <footer id="footer" class="footer first-content has-background-black">
+            <div class="columns has-text-justified has-text-centered">
+                <div class="column is-2">
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">General</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/products">Products</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/contact">Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/newsletter">Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">Legal</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/privacy_policy">Privacy Policy</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/terms_of_service">Terms of Service</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/license">License</a>
+                    </p>
+                </div>
+                <div class="column is-2 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold is-size-5 has-text-white">Keep In Touch</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-2">
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

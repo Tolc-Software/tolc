@@ -1,0 +1,15 @@
+/* link font color */
+#side-nav a {
+	background-color: #000;
+	color: #fff;
+}
+
+/* link font color when hovered */
+#side-nav a:hover {
+	background-color: #000;
+	color: #00dcff;
+}
+
+.nav-group {
+	cursor: default;
+}

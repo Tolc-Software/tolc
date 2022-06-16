@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examples - tolc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="../../js/highlightjs/styles/vs2015.min.css">
+    <script src="../../js/highlightjs/highlight.min.js" charset="utf-8" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../assets/tolc-symbol-color-RGB.png">
+
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    
+    <script src="../../js/theme.js" charset="utf-8" defer></script>
+
+    
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+
+</head>
+
+<body>
+    <main id="root" class="mx-6">
+
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-background-black">
+                <a class="navbar-item" href="https://tolc.io">
+                    <img src="../../assets/tolc-symbol-color-RGB.png">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                    <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/blog">Blog</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/products">Products</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/account">Account</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="columns is-multiline">
+            <div id="side-nav" class="column ml-3 is-one-quarter is-size-5">
+                <ul>
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../..">Introduction</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../installing/">Installing</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../usage/">Usage</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Python Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/template_naming_convention/">Template Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">WebAssembly Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/conversions/">Conversions</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Objective-C Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a id="active-item"  href="./">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../naming_convention/">Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">CMake</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/interface/">Interface</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/reference/">Reference</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../FAQ/">FAQ</a>
+</li>
+
+                    
+                </ul>
+            </div>
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
+                
+                <h1 id="examples">Examples</h1>
+<p>Each example is taken from the test suite for <code>Tolc</code> and, given that you use the latest version, you can expect them all to work.</p>
+<p>Each <code>C++</code> library named <code>MyLib</code> exports their functions and objects with a prefix of <code>MyLib</code>. In every test the library name is simply <code>m</code> for brevity. The examples that follow contains a bit of <code>C++</code> code, and the respective <code>Objective-C</code> and <code>Swift</code> code using it. Each <code>Objective-C</code> example is wrapped in the following boilerplate that is removed to make the examples more readable:</p>
+<pre><code class="language-objc">#include &lt;m.h&gt;
+
+int main() {
+  @autoreleasepool {
+    assert([m sayHello] == &quot;Hello&quot;);
+  }
+}
+</code></pre>
+<p>And the same for <code>Swift</code>:</p>
+<pre><code class="language-swift">import m_swift
+
+assert(m.sayHello() == &quot;Hello&quot;)
+</code></pre>
+<h2 id="classes">Classes</h2>
+<pre><code class="language-cpp">
+class WithConstructor {
+public:
+  explicit WithConstructor() : m_v(10) {}
+  explicit WithConstructor(int v) : m_v(v) {}
+
+  int getV() { return m_v; }
+private:
+  int m_v;
+};
+
+class WithFunction {
+public:
+  int add(int i, int j) {
+    return i + j;
+  }
+};
+
+class WithStatic {
+public:
+  static double getPi() {
+    return 3.14;
+  }
+
+  static int const answer = 42;
+};
+
+class WithMember {
+public:
+  explicit WithMember() : i(10), phi(1.618) {}
+
+  int i;
+  double const phi;
+};
+
+</code></pre>
+<pre><code class="language-objc">
+// Constructors are overloaded with their argument types
+mWithConstructor* ten = [[mWithConstructor alloc] init];
+assert([ten getV] == 10);
+
+mWithConstructor* five = [[mWithConstructor alloc] initWithInt:5];
+assert([five getV] == 5);
+
+// Member functions are available after construction
+mWithFunction* withFunction = [[mWithFunction alloc] init];
+assert([withFunction add: 2 j: 5] == 7);
+
+// Static functions can be called
+// without instantiating the class
+assert([mWithStatic getPi] == 3.14);
+// You can access static variables
+// without instantiating the class
+assert([mWithStatic answer] == 42);
+
+// Member variables
+mWithMember* member = [[mWithMember alloc] init];
+assert(member.i == 10);
+// i is not marked const
+member.i = 5;
+assert(member.i == 5);
+
+// phi is marked const
+// Cannot be assigned
+assert(member.phi == 1.618);
+
+</code></pre>
+<h2 id="enums">Enums</h2>
+<pre><code class="language-cpp">
+enum Unscoped {
+    Under,
+    Uboat,
+};
+
+enum class Scoped {
+    Sacred,
+    Snail,
+};
+
+class EnumTest {
+public:
+    explicit EnumTest(Scoped _s) : s(_s) {};
+
+    Unscoped f(Unscoped u) {
+        return u;
+    }
+
+    Scoped s;
+};
+
+namespace NS {
+    // Documentation describing the enum
+    enum class Deep {
+        Double,
+        Down,
+    };
+}
+
+
+</code></pre>
+<pre><code class="language-objc">
+// C++11 enums work
+mEnumTest* enumTest = [[mEnumTest alloc] initWithScoped:mScopedSnail];
+mScoped snail = mScopedSnail;
+assert(enumTest.s == snail);
+
+// Aswell as legacy enums
+mUnscoped uboat = mUnscopedUboat;
+assert([enumTest f:uboat] == uboat);
+
+// Enums under namespaces are available
+// under the corresponding submodule
+/* deep = m.NS.Deep.Down */
+/* assert(deep != m.NS.Deep.Double) */
+
+// Documentation carries over from C++
+// self.assertIn(&quot;Documentation describing the enum&quot;, m.NS.Deep.__doc__)
+
+</code></pre>
+<h2 id="functions">Functions</h2>
+<pre><code class="language-cpp">
+#include &lt;filesystem&gt;
+#include &lt;string&gt;
+
+int meaningOfLife() {
+    return 42;
+}
+
+std::string sayHello(std::string const&amp; name) {
+    return &quot;Hello &quot; + name;
+}
+
+std::filesystem::path getPath() {
+    return std::filesystem::path(&quot;/path/to/stuff.hpp&quot;);
+}
+
+namespace Inner {
+    double pi() {
+        return 3.14;
+    }
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// Global functions gets added to
+// a purely static class with
+// the name of the library
+assert([m meaningOfLife] == 42);
+
+// Strings can be used
+assert([[m sayHello:@&quot;Tolc&quot;] isEqualToString:@&quot;Hello Tolc&quot;]);
+
+// Aswell as filesystem paths
+assert([[m getPath] isEqualToString:@&quot;/path/to/stuff.hpp&quot;]);
+
+// Functions within namespaces
+// are available with the
+// namespaces names merged
+assert([mInner pi] == 3.14);
+
+</code></pre>
+<h2 id="global-variables">Global Variables</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+
+static int i = 0;
+namespace Nested {
+    int life = 42;
+    std::string s = &quot;Hello World&quot;;
+    constexpr std::string_view constant = &quot;A constant&quot;;
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// Starts at 0 and can be changed
+assert(m.i == 0);
+m.i = 5;
+assert(m.i == 5);
+
+// Nested with the same name
+assert(mNested.life == 42);
+
+// Strings also work
+assert([mNested.s isEqualToString:@&quot;Hello World&quot;]);
+
+// And string_view
+assert([mNested.constant isEqualToString:@&quot;A constant&quot;]);
+
+</code></pre>
+<h2 id="member-variables">Member Variables</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class SimpleMember {
+public:
+    explicit SimpleMember() : myString(&quot;Hello&quot;) {}
+
+    std::string myString;
+};
+
+class ConstMember {
+public:
+    const int i = 42;
+};
+
+class PrivateMember {
+public:
+    explicit PrivateMember(std::string s) : myString(s) {}
+
+private:
+    std::string myString;
+};
+
+namespace MyLib {
+
+    class Nested {
+    public:
+        double d = 4.3;
+    };
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// Mutable member variables can be changed
+mSimpleMember* simpleMember = [[mSimpleMember alloc] init];
+assert([simpleMember.myString isEqualToString:@&quot;Hello&quot;]);
+simpleMember.myString = @&quot;Changed now!&quot;;
+assert([simpleMember.myString isEqualToString:@&quot;Changed now!&quot;]);
+
+mConstMember* constMember = [[mConstMember alloc] init];
+assert(constMember.i == 42);
+
+mMyLibNested* nested = [[mMyLibNested alloc] init];
+assert(nested.d == 4.3);
+
+</code></pre>
+<h2 id="namespaces">Namespaces</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+/*
+* MyLib contains a bunch of MyLib functions
+*/
+namespace MyLib {
+
+int complexFunction() {
+    return 5;
+}
+
+    namespace We {
+        namespace Are {
+            namespace Going {
+                namespace Pretty {
+                    namespace Deep {
+                        std::string meaningOfLife() {
+                            return &quot;42&quot;;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+</code></pre>
+<pre><code class="language-objc">
+// Namespaces corresponds to classes
+// with {library name} + join(namespaces)
+// where functions are static class functions
+assert([mMyLib complexFunction] == 5);
+
+// You can nest namespaces arbitrarily deep
+NSString* lifeProTips = [mMyLibWeAreGoingPrettyDeep meaningOfLife];
+assert([lifeProTips isEqualToString:@&quot;42&quot;]);
+
+</code></pre>
+<h2 id="overloaded-functions">Overloaded Functions</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+// Overloaded free functions
+std::string sayHello() {
+    return &quot;Hello!&quot;;
+}
+
+std::string sayHello(std::string to) {
+    return std::string(&quot;Hello &quot;) + to;
+}
+
+std::string sayHello(size_t times) {
+    std::string greeting = &quot;&quot;;
+    for (size_t i = 0; i &lt; times; ++i) {
+        greeting += &quot;Hello!&quot;;
+    }
+    return greeting;
+}
+
+class Overload {
+public:
+    // Overloaded constructor
+    Overload() : m_s() {};
+    Overload(std::string s) : m_s(s) {};
+
+    // Overloaded class functions
+    std::string getStuff() { return &quot;Stuff&quot;; }
+    std::string getStuff(std::string customStuff) { return customStuff; }
+
+private:
+    std::string m_s;
+};
+
+</code></pre>
+<pre><code class="language-objc">
+// Overloaded functions work the same as in C++
+// Free function overload
+assert([[m sayHello] isEqualToString:@&quot;Hello!&quot;]);
+assert([[m sayHelloString:@&quot;Tolc&quot;] isEqualToString:@&quot;Hello Tolc&quot;]);
+assert([[m sayHelloUnsignedLongInt:2] isEqualToString:@&quot;Hello!Hello!&quot;]);
+
+// Class constructor overload
+mOverload* overload = [[mOverload alloc] init];
+mOverload* overloadWithString = [[mOverload alloc] initWithString:@&quot;Overloaded!&quot;];
+
+// Class function overload
+assert([[overload getStuff] isEqualToString:@&quot;Stuff&quot;]);
+assert([[overload getStuffString:@&quot;Other&quot;] isEqualToString:@&quot;Other&quot;]);
+
+</code></pre>
+<h2 id="passing-classes-between-languages">Passing classes between languages</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class MyClass {
+public:
+    explicit MyClass(std::string s) : m_s(s) {}
+
+    std::string* getS() { return &amp;m_s; }
+
+private:
+    std::string m_s;
+};
+
+MyClass buildMyClass(std::string const&amp; s) {
+    return MyClass(s);
+}
+
+class Owner {
+public:
+    explicit Owner(MyClass m) : m_myClass(m) {};
+
+    MyClass getMyClass() const { return m_myClass; }
+
+private:
+    MyClass m_myClass;
+};
+
+struct Point2d {
+    int x;
+    int y;
+};
+
+Point2d getMiddle(std::pair&lt;Point2d, Point2d&gt; p) {
+    return {(p.first.x + p.second.x) / 2, (p.first.y + p.second.y) / 2};
+}
+
+</code></pre>
+<pre><code class="language-objc">
+NSString* phrase = @&quot;Hello from Objective-C&quot;;
+mMyClass* myClass = [m buildMyClass:phrase];
+assert([[myClass getS] isEqualToString:phrase]);
+
+// Passing Objective-C classes to C++ classes
+mOwner* owner = [[mOwner alloc] initWithMyClass:myClass];
+assert([[[owner getMyClass] getS] isEqualToString:phrase]);
+
+// Container of user defined classes
+mPoint2d* a = [[mPoint2d alloc] init];
+a.x = 1;
+a.y = 0;
+mPoint2d* b = [[mPoint2d alloc] init];
+b.x = 3;
+b.y = 0;
+
+NSArray* points = [NSArray arrayWithObjects:a, b, nil];
+mPoint2d* middle = [m getMiddle:points];
+assert(middle.x == 2);
+assert(middle.y == 0);
+
+</code></pre>
+<h2 id="smart-pointers">Smart Pointers</h2>
+<pre><code class="language-cpp">
+#include &lt;memory&gt;
+
+struct Data {
+  int i = 5;
+};
+
+struct SharedData {
+  int i = 10;
+};
+
+std::unique_ptr&lt;Data&gt; createData() {
+  return std::make_unique&lt;Data&gt;();
+}
+
+// This moves the data,
+// destroying it at the end
+// Same as C++
+int consumeData(std::unique_ptr&lt;Data&gt; data) {
+  return data-&gt;i + 20;
+}
+
+std::shared_ptr&lt;SharedData&gt; createSharedData() {
+  return std::make_shared&lt;SharedData&gt;();
+}
+
+// Does not move the data
+// The pointer is valid after the function call
+int consumeSharedData(std::shared_ptr&lt;SharedData&gt; data) {
+  return data-&gt;i + 20;
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::unique_ptr acts as a normal value
+mData* data = [m createData];
+assert(data.i == 5);
+
+// This moves the data,
+// destroying it at the end
+// Same as C++
+assert([m consumeData:data] == 25);
+
+// Any access now results
+// in undefined behaviour
+// (possibly a crash)
+// NSLog(@&quot;%i&quot;, data.i);
+
+// std::shared_ptr acts as a normal value
+// But all mSharedData have their internal
+// classes handled by a std::shared_ptr
+mSharedData* sharedData = [m createSharedData];
+assert(sharedData.i == 10);
+
+// This copies the smart pointer,
+// incrementing its counter.
+// Valid to use sharedData after this call.
+assert([m consumeSharedData:sharedData] == 30);
+
+// No crash
+NSLog(@&quot;%i&quot;, sharedData.i);
+
+</code></pre>
+<h2 id="templates">Templates</h2>
+<pre><code class="language-cpp">
+#include &lt;array&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+template &lt;typename T&gt;
+T getSomething(T something) {
+  return something;
+}
+
+template std::string getSomething(std::string something);
+template int getSomething(int);
+template std::vector&lt;std::string&gt; getSomething(std::vector&lt;std::string&gt;);
+
+template &lt;typename T&gt;
+class MyClass {
+public:
+T myFun(T type) {
+    return type;
+}
+};
+
+MyClass&lt;char&gt; getMyClass(MyClass&lt;char&gt; c) {
+    return c;
+}
+
+template class MyClass&lt;int&gt;;
+template class MyClass&lt;std::array&lt;int, 3&gt;&gt;;
+
+</code></pre>
+<pre><code class="language-objc">
+// getSomething&lt;std::string&gt;
+NSString* hi = [m getSomethingString:@&quot;Hi&quot;];
+assert([hi isEqualToString:@&quot;Hi&quot;]);
+
+// getSomething&lt;int&gt;
+int five = [m getSomethingInt:5];
+assert(five == 5);
+
+// getSomething&lt;std::vector&lt;std::string&gt;&gt;
+NSArray* v = [m getSomethingVectorString:@[@&quot;Hi&quot;]];
+assert([v count] == 1);
+assert([[v objectAtIndex:0] isEqualToString:@&quot;Hi&quot;]);
+
+// MyClass&lt;char&gt;
+mMyClassChar* myClassChar = [[mMyClassChar alloc] init];;
+assert([myClassChar myFun:25] == 25);;
+// Still the same after passing through a function
+mMyClassChar* passedThrough = [m getMyClass:myClassChar];;
+assert([passedThrough myFun:25] == 25);;
+
+// MyClass&lt;int&gt;
+mMyClassInt* myClassInt = [[mMyClassInt alloc] init];
+assert([myClassInt myFun:25] == 25);
+
+// MyClass&lt;std::array&lt;int, 3&gt;&gt;
+mMyClassArrayInt3* myClassArray = [[mMyClassArrayInt3 alloc] init];
+NSArray* arr = [myClassArray myFun:@[@(0), @(1), @(2)]];
+assert([arr count] == 3);
+assert([[arr objectAtIndex:0] intValue] == 0);
+assert([[arr objectAtIndex:1] intValue] == 1);
+assert([[arr objectAtIndex:2] intValue] == 2);
+
+</code></pre>
+<h2 id="stdarray">std::array</h2>
+<pre><code class="language-cpp">
+#include &lt;algorithm&gt;
+#include &lt;array&gt;
+
+std::array&lt;int, 3&gt; const f() {
+  return {0, 1, 2};
+}
+
+bool allOf(std::array&lt;bool, 3&gt; const&amp; conditions) {
+  return std::all_of(
+      conditions.begin(), conditions.end(),
+      [](auto c) { return c; });
+}
+
+double sum(std::array&lt;double, 3&gt; const&amp; numbers) {
+  double sum = 0;
+  for (double number : numbers) {
+    sum += number;
+  }
+  return sum;
+}
+
+
+</code></pre>
+<pre><code class="language-objc">
+// std::array corresponds to NSArray
+NSArray* v = [m f];
+assert([v count] == 3);
+
+// The array contains {0, 1, 2}
+assert([[v objectAtIndex:0] intValue] == 0);
+assert([[v objectAtIndex:1] intValue] == 1);
+assert([[v objectAtIndex:2] intValue] == 2);
+
+// Sending NSArray into function works as well
+NSArray* conditions = @[@(YES), @(YES), @(NO)];
+assert([m allOf:conditions] == NO);
+
+NSArray&lt;NSNumber*&gt;* toSum = @[@(1.1), @(2.2), @(3.3)];
+assert([m sum:toSum] == 6.6);
+
+// Error handling
+@try {
+  // Array with the wrong size
+  NSArray&lt;NSNumber*&gt;* toSum = @[@(1.1), @(2.2)];
+  // Expected size == 3
+  [m sum:toSum];
+  // Should throw exception before
+  assert(NO);
+} @catch(NSException* error) {
+  assert([[error name] isEqualToString:@&quot;TypeException&quot;]);
+  NSString* reason =
+    @&quot;The size of the array does not match the expected fixed size. Expected: 3, Got: 2.&quot;;
+  assert([[error reason] isEqualToString:reason]);
+}
+
+</code></pre>
+<h2 id="stddeque">std::deque</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;deque&gt;
+
+std::deque&lt;std::string&gt;
+surround(std::deque&lt;std::string&gt; d,
+         std::string const&amp; message) {
+  d.push_front(message);
+  d.push_back(message);
+  return d;
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::deque corresponds to NSArray
+NSArray* myDeque = @[@&quot;middle&quot;];
+NSArray* surroundedDeque =
+  [m surround:myDeque message:@&quot;surrounded&quot;];
+assert([surroundedDeque count] == 3);
+
+assert([[surroundedDeque objectAtIndex:0]
+  isEqualToString:@&quot;surrounded&quot;]);
+
+assert([[surroundedDeque objectAtIndex:1]
+  isEqualToString:@&quot;middle&quot;]);
+
+assert([[surroundedDeque objectAtIndex:2]
+  isEqualToString:@&quot;surrounded&quot;]);
+
+</code></pre>
+<h2 id="stdfilesystempath">std::filesystem::path</h2>
+<pre><code class="language-cpp">
+#include &lt;filesystem&gt;
+#include &lt;vector&gt;
+
+std::filesystem::path
+takingPath(std::filesystem::path const&amp; p) {
+    return p;
+}
+
+std::filesystem::path
+parent(std::filesystem::path const&amp; p) {
+    return p.parent_path();
+}
+
+std::filesystem::path
+joinPaths(std::vector&lt;std::filesystem::path&gt; arrayToSum) {
+    std::filesystem::path sum;
+    for (auto f : arrayToSum) {
+        sum /= f;
+    }
+    return sum;
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::filesystem::path corresponds to NSString
+NSString* path = @&quot;Hello/my/name/is/Tolc&quot;;
+
+// Passing through a function
+NSString* result = [m takingPath:path];
+assert([result isEqualToString:path]);
+
+NSString* parent = [m parent:path];
+assert([parent isEqualToString:@&quot;Hello/my/name/is&quot;]);
+
+NSArray* paths = @[@&quot;to&quot;, @&quot;the&quot;, @&quot;heart&quot;];
+NSString* joined = [m joinPaths:paths];
+assert([joined isEqualToString:@&quot;to/the/heart&quot;]);
+
+</code></pre>
+<h2 id="stdlist">std::list</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;list&gt;
+
+std::list&lt;std::string&gt; getList() {
+  return {&quot;Linked&quot;, &quot;list&quot;, &quot;fun&quot;};
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::list corresponds to NSArray
+NSArray* words = [m getList];
+assert([words count] == 3);
+
+assert([[words objectAtIndex:0] isEqualToString:@&quot;Linked&quot;]);
+assert([[words objectAtIndex:1] isEqualToString:@&quot;list&quot;]);
+assert([[words objectAtIndex:2] isEqualToString:@&quot;fun&quot;]);
+
+</code></pre>
+<h2 id="stdmap">std::map</h2>
+<pre><code class="language-cpp">
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+std::map&lt;std::string, int&gt; getThings() {
+  return {{&quot;Greetings&quot;, 5}};
+}
+
+std::map&lt;std::string, std::vector&lt;double&gt;&gt; getCities() {
+  return {
+  {&quot;Stockholm&quot;,
+    {59.33, 18.06}},
+  {&quot;San Francisco&quot;,
+    {37.77, -122.43}}
+  };
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::map translates to a NSDictionary
+NSDictionary* dict = [m getThings];
+assert([dict count] == 1);
+NSNumber* n = [dict objectForKey:@&quot;Greetings&quot;];
+assert(n != nil);
+assert([n intValue] == 5);
+
+// Nested containers work as well
+NSDictionary* cities = [m getCities];
+assert([cities count] == 2);
+NSArray* stockholm = [cities objectForKey:@&quot;Stockholm&quot;];
+assert(stockholm != nil);
+assert([stockholm count] == 2);
+assert([[stockholm objectAtIndex:0] doubleValue] == 59.33);
+assert([[stockholm objectAtIndex:1] doubleValue] == 18.06);
+
+NSArray* sanFrancisco = [cities objectForKey:@&quot;San Francisco&quot;];
+assert(sanFrancisco != nil);
+assert([sanFrancisco count] == 2);
+assert([[sanFrancisco objectAtIndex:0] doubleValue] == 37.77);
+assert([[sanFrancisco objectAtIndex:1] doubleValue] == -122.43);
+
+</code></pre>
+<h2 id="stdoptional">std::optional</h2>
+<pre><code class="language-cpp">
+#include &lt;optional&gt;
+#include &lt;string&gt;
+
+std::string
+answer(std::optional&lt;std::string&gt; const&amp; question) {
+  if (question) {
+    return &quot;Please be more specific.&quot;;
+  }
+  return &quot;That's no question!&quot;;
+}
+
+
+</code></pre>
+<pre><code class="language-objc">
+// std::optional is either the value or nil
+NSString* answer = [m answer:@&quot;How do I take over the world?&quot;];
+assert([answer isEqualToString:@&quot;Please be more specific.&quot;]);
+
+// nil is the equivalent of std::nullopt on the C++ side
+NSString* noAnswer = [m answer:nil];
+assert([noAnswer isEqualToString:@&quot;That's no question!&quot;]);
+
+</code></pre>
+<h2 id="stdpair">std::pair</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+
+class Greeter {
+public:
+  explicit Greeter(std::pair&lt;std::string, int&gt; greetings)
+    : m_greetings(greetings) {}
+
+  std::pair&lt;std::string, int&gt; getGreetings() {
+    return m_greetings;
+  }
+
+  std::string joinGreetings() {
+    std::string joined;
+    for (int i = 0; i &lt; m_greetings.second; ++i) {
+      joined += m_greetings.first;
+    }
+    return joined;
+  }
+
+private:
+  std::pair&lt;std::string, int&gt; m_greetings;
+};
+
+</code></pre>
+<pre><code class="language-objc">
+// std::pair corresponds to a NSArray
+// with two values
+NSArray* greetings = [NSArray
+  arrayWithObjects:@&quot;Hey &quot;, @(3), nil];
+assert([greetings count] == 2);
+
+// Sending a pair to a function
+mGreeter* g = [[mGreeter alloc]
+  initWithPairStringInt:greetings];
+
+// Joining the greetings 3 times
+NSString* joined = [g joinGreetings];
+assert([joined isEqualToString:@&quot;Hey Hey Hey &quot;]);
+
+// Error handling
+@try {
+  // Sending an array with size != 2
+  NSArray* tooManyArgs =
+    [greetings arrayByAddingObject:@&quot;Oh no&quot;];
+  mGreeter* boom = [[mGreeter alloc]
+    initWithPairStringInt:tooManyArgs];
+  // Should throw exception before
+  assert(NO);
+} @catch(NSException* error) {
+  assert([[error name] isEqualToString:@&quot;TypeException&quot;]);
+  NSString* reason =
+    @&quot;The array passed does not match the number of types in a pair. Expected: 2, Got: 3.&quot;;
+  assert([[error reason] isEqualToString:reason]);
+}
+
+</code></pre>
+<h2 id="stdset">std::set</h2>
+<pre><code class="language-cpp">
+#include &lt;set&gt;
+#include &lt;string&gt;
+
+std::set&lt;std::string&gt; getLanguages() {
+    return {&quot;English&quot;, &quot;Spanish&quot;};
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::set corresponds to NSOrderedSet
+NSOrderedSet* languages = [m getLanguages];
+assert([languages count] == 2);
+assert([languages containsObject:@&quot;English&quot;]);
+assert([languages containsObject:@&quot;Spanish&quot;]);
+
+</code></pre>
+<h2 id="stdtuple">std::tuple</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;tuple&gt;
+
+std::tuple&lt;int, std::string&gt; sumInts(std::tuple&lt;int, int, std::string&gt; t) {
+  // Sum the first two elements
+  return {
+    std::get&lt;0&gt;(t) + std::get&lt;1&gt;(t),
+    std::get&lt;2&gt;(t)
+  };
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::tuple corresponds to a NSArray
+// with the same amount of values
+NSArray* toSum = [NSArray
+  arrayWithObjects:@(1), @(2), @&quot;Hello&quot;, nil];
+assert([toSum count] == 3);
+
+// Sending a tuple to a function
+NSArray* summed = [m sumInts:toSum];
+assert([summed count] == 2);
+assert([[summed objectAtIndex:0] intValue] == 3);
+assert([[summed objectAtIndex:1] isEqualToString:@&quot;Hello&quot;]);
+
+// Error handling
+@try {
+  // Sending an array with size != 3
+  NSArray* tooManyArgs =
+    [toSum arrayByAddingObject:@&quot;Boom&quot;];
+  [m sumInts:tooManyArgs];
+  // Should throw exception before
+  assert(NO);
+} @catch(NSException* error) {
+  assert([[error name] isEqualToString:@&quot;TypeException&quot;]);
+  NSString* reason =
+    @&quot;The array passed does not match the number of types expected in the tuple. Expected: 3, Got: 4.&quot;;
+  assert([[error reason] isEqualToString:reason]);
+}
+
+</code></pre>
+<h2 id="stdunordered_map">std::unordered_map</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;unordered_map&gt;
+
+std::unordered_map&lt;std::string, int&gt;
+getUnordered() {
+  return {{&quot;Unordered&quot;, 1}};
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::unordered_map translates to a NSDictionary
+NSDictionary* dict = [m getUnordered];
+assert([dict count] == 1);
+NSNumber* n = [dict objectForKey:@&quot;Unordered&quot;];
+assert(n != nil);
+assert([n intValue] == 1);
+
+</code></pre>
+<h2 id="stdunordered_set">std::unordered_set</h2>
+<pre><code class="language-cpp">
+#include &lt;string&gt;
+#include &lt;unordered_set&gt;
+
+std::unordered_set&lt;std::string&gt; getLanguages() {
+    return {&quot;C++&quot;, &quot;Objective-C&quot;};
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::unordered_set corresponds to NSSet
+NSSet* languages = [m getLanguages];
+assert([languages count] == 2);
+assert([languages containsObject:@&quot;C++&quot;]);
+assert([languages containsObject:@&quot;Objective-C&quot;]);
+
+</code></pre>
+<h2 id="stdvalarray">std::valarray</h2>
+<pre><code class="language-cpp">
+#include &lt;valarray&gt;
+
+std::valarray&lt;int&gt; getIt() {
+    return {0, 1, 2};
+}
+
+</code></pre>
+<pre><code class="language-objc">
+// std::valarray corresponds to NSArray
+NSArray* v = [m getIt];
+assert([v count] == 3);
+
+// The vector contains {0, 1, 2}
+assert([[v objectAtIndex:0] intValue] == 0);
+assert([[v objectAtIndex:1] intValue] == 1);
+assert([[v objectAtIndex:2] intValue] == 2);
+
+</code></pre>
+<h2 id="stdvector">std::vector</h2>
+<pre><code class="language-cpp">
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+std::vector&lt;int&gt; f() {
+  return {0, 1, 2};
+}
+
+bool allOf(std::vector&lt;bool&gt; const&amp; conditions) {
+  return std::all_of(
+      conditions.begin(), conditions.end(),
+      [](auto c) { return c; });
+}
+
+double sum(std::vector&lt;double&gt; const&amp; numbers) {
+  double sum = 0;
+  for (double number : numbers) {
+    sum += number;
+  }
+  return sum;
+}
+
+
+</code></pre>
+<pre><code class="language-objc">
+// std::vector corresponds to NSArray
+NSArray* v = [m f];
+assert([v count] == 3);
+
+// The vector contains {0, 1, 2}
+assert([[v objectAtIndex:0] intValue] == 0);
+assert([[v objectAtIndex:1] intValue] == 1);
+assert([[v objectAtIndex:2] intValue] == 2);
+
+// Sending NSArray into function works as well
+NSArray* conditions = @[@(YES), @(YES), @(NO)];
+assert([m allOf:conditions] == NO);
+
+NSArray&lt;NSNumber*&gt;* toSum = @[@(1.1), @(2.2), @(3.3)];
+assert([m sum:toSum] == 6.6);
+
+</code></pre>
+                
+            </div>
+            <div class="column is-one-quarter">
+            </div>
+        </div>
+
+        <footer id="footer" class="footer first-content has-background-black">
+            <div class="columns has-text-justified has-text-centered">
+                <div class="column is-2">
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">General</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/products">Products</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/contact">Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/newsletter">Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">Legal</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/privacy_policy">Privacy Policy</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/terms_of_service">Terms of Service</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/license">License</a>
+                    </p>
+                </div>
+                <div class="column is-2 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold is-size-5 has-text-white">Keep In Touch</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-2">
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

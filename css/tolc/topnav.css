@@ -1,0 +1,44 @@
+#topnavbar {
+	padding-top: 1rem;
+	padding-bottom: 0.5rem;
+}
+
+.navbar-burger {
+	height: inherit !important;
+}
+
+.navbar-item img {
+	/* Logo */
+	max-height: 2rem;
+}
+
+@media only screen and (max-width: 1024px) {
+	#side-nav {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+	.bottom-border {
+		border-bottom: 1px solid #9600ff;
+	}
+}
+
+.navbar-burger {
+	color: #fff;
+}
+
+.navbar-burger:hover {
+	color: #00dcff;
+	background-color: #000;
+}
+
+/* Navbar item default */
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item {
+	background-color: #000;
+	color: #fff;
+}
+
+/* Navbar item hovered */
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+	background-color: #000;
+	color: #00dcff;
+}

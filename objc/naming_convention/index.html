@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naming Convention - tolc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="../../js/highlightjs/styles/vs2015.min.css">
+    <script src="../../js/highlightjs/highlight.min.js" charset="utf-8" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../assets/tolc-symbol-color-RGB.png">
+
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    
+    <script src="../../js/theme.js" charset="utf-8" defer></script>
+
+    
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+
+</head>
+
+<body>
+    <main id="root" class="mx-6">
+
+        <nav id="topnavbar" class="navbar has-background-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-background-black">
+                <a class="navbar-item" href="https://tolc.io">
+                    <img src="../../assets/tolc-symbol-color-RGB.png">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar-links" class="navbar-menu has-background-black">
+                <div class="navbar-end">
+                    <a class="navbar-item is-size-5" href="https://tolc.io">Getting Started</a>
+                    <a id="active-item" class="navbar-item is-size-5" href="https://docs.tolc.io/">Docs</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/blog">Blog</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/live">Live Demo</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/products">Products</a>
+                    <a class="navbar-item is-size-5" href="https://tolc.io/account">Account</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="columns is-multiline">
+            <div id="side-nav" class="column ml-3 is-one-quarter is-size-5">
+                <ul>
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../..">Introduction</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../installing/">Installing</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../usage/">Usage</a>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Python Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../python/template_naming_convention/">Template Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">WebAssembly Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../webassembly/conversions/">Conversions</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">Objective-C Interface</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../quickstart/">Quickstart</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../examples/">Examples</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../conversions/">Conversions</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a id="active-item"  href="./">Naming Convention</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <span class="nav-group has-text-grey">CMake</span>
+    <ul class="nested-nav-el ml-4">
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/interface/">Interface</a>
+</li>
+
+        
+        <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../cmake/reference/">Reference</a>
+</li>
+
+        
+    </ul>
+</li>
+
+                    
+                    <!--
+
+-->
+
+<li class="nav-el">
+    <a  href="../../FAQ/">FAQ</a>
+</li>
+
+                    
+                </ul>
+            </div>
+            <div id="main-markdown" class="column is-half is-size-5 has-text-white mb-4 mx-4">
+                
+                <h1 id="naming-convention">Naming Convention</h1>
+<h2 id="signatures-which-depend-on-a-type">Signatures which depend on a type</h2>
+<p><code>Objective-C</code> does not have support for type dependent signatures so relies on each function and type signature to be unique. When <code>Tolc</code> encounters such a signature, it simply concatenates the related type into a <code>Type String</code>.</p>
+<p>Lets clear that up with some examples:</p>
+<h3 id="overloaded-functions">Overloaded Functions</h3>
+<p>The following <code>C++</code>:</p>
+<pre><code class="language-cpp">string sayHello() {
+  return &quot;Hi!&quot;;
+}
+
+string sayHello(string to) {
+  return &quot;Hi &quot; + to;
+}
+</code></pre>
+<p>Can be called from <code>Objective-C</code> as:</p>
+<pre><code class="language-objc">// Results in &quot;Hi!&quot;
+[MyLib sayHello];
+// Results in &quot;Hi Tolc&quot;
+[MyLib sayHelloString:@&quot;Tolc&quot;];
+</code></pre>
+<h3 id="templated-functions">Templated functions</h3>
+<p>The following <code>C++</code>:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+T getSomething(T something) {
+  return something;
+}
+
+template std::string getSomething(std::string something);
+</code></pre>
+<p>Can be called from <code>Objective-C</code> as:</p>
+<pre><code class="language-objc">NSString* hi = [m getSomethingString:@&quot;Hi&quot;];
+assert([hi isEqualToString:@&quot;Hi&quot;]);
+</code></pre>
+<h3 id="templated-classes">Templated classes</h3>
+<p>The following <code>C++</code>:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+T getSomething(T something) {
+  return something;
+}
+
+template std::string getSomething(std::string something);
+</code></pre>
+<p>Can be called from <code>Objective-C</code> as:</p>
+<pre><code class="language-objc">NSString* hi = [m getSomethingString:@&quot;Hi&quot;];
+assert([hi isEqualToString:@&quot;Hi&quot;]);
+</code></pre>
+<h2 id="type-string">Type String</h2>
+<p><code>Type String</code>s are used to make <code>C++</code> signatures unique on the <code>Objective-C</code> side.
+The names are meant to be as predictable as possible. The rules are:</p>
+<ul>
+<li><code>std::</code> is removed from any standard library type.</li>
+<li>User defined types are left untouched (i.e. the class <code>MyNamespace::MyClass</code> will result in appending <code>MyClass</code>).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">C++ type</th>
+<th align="left">Resulting name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">std::array</td>
+<td align="left">Array</td>
+</tr>
+<tr>
+<td align="left">std::complex</td>
+<td align="left">Complex</td>
+</tr>
+<tr>
+<td align="left">std::deque</td>
+<td align="left">Deque</td>
+</tr>
+<tr>
+<td align="left">std::filesystem::path</td>
+<td align="left">Path</td>
+</tr>
+<tr>
+<td align="left">std::forward_list</td>
+<td align="left">Forwardlist</td>
+</tr>
+<tr>
+<td align="left">std::function</td>
+<td align="left">Function</td>
+</tr>
+<tr>
+<td align="left">std::list</td>
+<td align="left">List</td>
+</tr>
+<tr>
+<td align="left">std::map</td>
+<td align="left">Map</td>
+</tr>
+<tr>
+<td align="left">std::multimap</td>
+<td align="left">MultiMap</td>
+</tr>
+<tr>
+<td align="left">std::multiset</td>
+<td align="left">MultiSet</td>
+</tr>
+<tr>
+<td align="left">std::optional</td>
+<td align="left">Optional</td>
+</tr>
+<tr>
+<td align="left">std::pair</td>
+<td align="left">Pair</td>
+</tr>
+<tr>
+<td align="left">std::priority_queue</td>
+<td align="left">PriorityQueue</td>
+</tr>
+<tr>
+<td align="left">std::queue</td>
+<td align="left">Queue</td>
+</tr>
+<tr>
+<td align="left">std::set</td>
+<td align="left">Set</td>
+</tr>
+<tr>
+<td align="left">std::shared_ptr</td>
+<td align="left">SharedPtr</td>
+</tr>
+<tr>
+<td align="left">std::stack</td>
+<td align="left">Stack</td>
+</tr>
+<tr>
+<td align="left">std::tuple</td>
+<td align="left">Tuple</td>
+</tr>
+<tr>
+<td align="left">std::unique_ptr</td>
+<td align="left">Uniqueptr</td>
+</tr>
+<tr>
+<td align="left">std::unordered_map</td>
+<td align="left">UnorderedMap</td>
+</tr>
+<tr>
+<td align="left">std::unordered_multimap</td>
+<td align="left">UnorderedMultiMap</td>
+</tr>
+<tr>
+<td align="left">std::unordered_multiset</td>
+<td align="left">UnorderedMultiSet</td>
+</tr>
+<tr>
+<td align="left">std::unordered_set</td>
+<td align="left">Unorderedset</td>
+</tr>
+<tr>
+<td align="left">std::valarray</td>
+<td align="left">Valarray</td>
+</tr>
+<tr>
+<td align="left">std::variant</td>
+<td align="left">Variant</td>
+</tr>
+<tr>
+<td align="left">std::vector</td>
+<td align="left">Vector</td>
+</tr>
+<tr>
+<td align="left">bool</td>
+<td align="left">Bool</td>
+</tr>
+<tr>
+<td align="left">char</td>
+<td align="left">Char</td>
+</tr>
+<tr>
+<td align="left">char16_t</td>
+<td align="left">Char16t</td>
+</tr>
+<tr>
+<td align="left">char32_t</td>
+<td align="left">Char32t</td>
+</tr>
+<tr>
+<td align="left">double</td>
+<td align="left">Double</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">Float</td>
+</tr>
+<tr>
+<td align="left">int</td>
+<td align="left">Int</td>
+</tr>
+<tr>
+<td align="left">Integral</td>
+<td align="left">Integral literal*</td>
+</tr>
+<tr>
+<td align="left">long double</td>
+<td align="left">LongDouble</td>
+</tr>
+<tr>
+<td align="left">long int</td>
+<td align="left">LongInt</td>
+</tr>
+<tr>
+<td align="left">long long int</td>
+<td align="left">LongLongInt</td>
+</tr>
+<tr>
+<td align="left">short int</td>
+<td align="left">ShortInt</td>
+</tr>
+<tr>
+<td align="left">signed char</td>
+<td align="left">SignedChar</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="left">string_view</td>
+<td align="left">StringView</td>
+</tr>
+<tr>
+<td align="left">unsigned char</td>
+<td align="left">UnsignedChar</td>
+</tr>
+<tr>
+<td align="left">unsigned int</td>
+<td align="left">UnsignedInt</td>
+</tr>
+<tr>
+<td align="left">unsigned long int</td>
+<td align="left">UnsignedLongInt</td>
+</tr>
+<tr>
+<td align="left">unsigned long long int</td>
+<td align="left">UnsignedLongLongInt</td>
+</tr>
+<tr>
+<td align="left">unsigned short int</td>
+<td align="left">UnsignedShortInt</td>
+</tr>
+<tr>
+<td align="left">wchar_t</td>
+<td align="left">Wchart</td>
+</tr>
+</tbody>
+</table>
+<p>* For example the <code>3</code> in <code>MyClass&lt;std::array&lt;int, 3&gt;&gt;</code> results in <code>MyClassArrayInt3</code>.</p>
+                
+            </div>
+            <div class="column is-one-quarter">
+            </div>
+        </div>
+
+        <footer id="footer" class="footer first-content has-background-black">
+            <div class="columns has-text-justified has-text-centered">
+                <div class="column is-2">
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">General</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link pt-2 pb-2" href="https://docs.tolc.io/">About</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/products">Products</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/contact">Contact</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/newsletter">Newsletter</a>
+                    </p>
+                </div>
+                <div class="column is-3 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold has-text-white">Legal</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/privacy_policy">Privacy Policy</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/terms_of_service">Terms of Service</a>
+                    </p>
+                    <p class="mt-2 mb-2">
+                        <a class="link" href="https://tolc.io/legal/license">License</a>
+                    </p>
+                </div>
+                <div class="column is-2 is-size-5">
+                    <h1 class="mt-2 mb-5 has-text-weight-bold is-size-5 has-text-white">Keep In Touch</h1>
+                    <p class="mt-2 mb-2">
+                        <a class="link mx-1" href="https://github.com/Tolc-Software/tolc">
+                            <i class="fab fa-github fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="https://discord.gg/NwDxCGztjN">
+                            <i class="fab fa-discord fa-lg"></i>
+                        </a>
+                        <a class="link mx-1" href="mailto:hello@tolc.io">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="column is-2">
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>
