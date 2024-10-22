@@ -33,7 +33,6 @@ FixNamespaceComments: true
 IncludeBlocks: Preserve
 IndentCaseLabels: true
 IndentPPDirectives: BeforeHash
-IndentWidth: 4
 IndentWrappedFunctionNames: false
 KeepEmptyLinesAtTheStartOfBlocks: false
 NamespaceIndentation: None
@@ -58,5 +57,6 @@ SpacesInContainerLiterals: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 Standard: Cpp11
-TabWidth: 4
-UseTab: ForIndentation
+UseTab: Never
+ConstructorInitializerIndentWidth: 2
+IndentWidth: 2

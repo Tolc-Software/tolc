@@ -1,17 +1,13 @@
 include_guard()
 
-# Defines create_catch2_test and get_catch2
-include(${modules}/Catch2Helpers.cmake)
-
-get_catch2(VERSION v2.13.8)
-
 find_package(fmt REQUIRED)
+find_package(Catch2 REQUIRED)
 
 # Make sure the Parser in the tests can find the standard library headers
-include(${modules}/copyLLVMIncludes.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/copyLLVMIncludes.cmake)
 copy_llvm_includes(
   OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
-  ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
+  ${llvm_entry_SOURCE_DIR} LLVM_MAJOR_VERSION ${llvm_entry_major_version})
 
 set(TEST_FILES_DIR ${CMAKE_CURRENT_LIST_DIR}/TestFiles)
 set(TEST_PYTHON_DIR ${CMAKE_CURRENT_LIST_DIR}/TestUtil/python)
@@ -29,35 +25,33 @@ target_link_libraries(TestUtil PRIVATE fmt::fmt Threads::Threads)
 target_link_boost(TARGET TestUtil)
 
 if(ENABLE_COVERAGE)
-  include(${modules}/CodeCoverage.cmake)
+  include(${CMAKE_SOURCE_DIR}/cmake/CodeCoverage.cmake)
 
   # Use coverage of tolc libs
   target_code_coverage(TolcInternal)
   add_code_coverage_all_targets()
 endif()
 
-include(${modules}/Sanitizers.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/Sanitizers.cmake)
 
 foreach(
-  testFile
+  test
   CommandLine/parse.cpp Log/postJSON.cpp TolcInternal/buildConfig.cpp
   TolcInternal/run.cpp TolcInternal/getExecutableDirectoryPath.cpp
   TolcInternal/getSystemIncludes.cpp)
 
   # Ex: CommandLine/parse.cpp -> parse
-  get_filename_component(testName ${testFile} NAME_WLE)
+  get_filename_component(testName ${test} NAME_WLE)
 
-  create_catch2_test(
-    TARGET
-    ${testName}
-    SOURCES
-    ${testFile}
-    INCLUDE
-    ${PROJECT_SOURCE_DIR}/src
-    LINK_LIBRARIES
-    TestUtil
-    TolcInternal
-    fmt::fmt)
+  add_executable(${testName} ${test})
+  target_link_libraries(${testName} PRIVATE Catch2::Catch2WithMain fmt::fmt
+                                            TolcInternal TestUtil)
+
+  target_include_directories(${testName} PRIVATE ${PROJECT_SOURCE_DIR}/src)
+  set_target_properties(${testName} PROPERTIES CXX_STANDARD_REQUIRED ON
+                                               CXX_EXTENSIONS OFF)
+
+  add_test(NAME ${testName} COMMAND ${testName})
 
   add_warnings(TARGET ${testName})
   tolc_add_options(TARGET ${testName})

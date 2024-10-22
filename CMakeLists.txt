@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.25)
 
 # Temporary workaround for clang 14
 # https://github.com/llvm/llvm-project/issues/53950
@@ -16,125 +16,175 @@ project(
 configure_file(docs/ReleaseNotes/version.in
                ${CMAKE_CURRENT_LIST_DIR}/docs/ReleaseNotes/version @ONLY)
 
-include(FetchContent)
-FetchContent_Declare(
-  cmake_modules
-  GIT_REPOSITORY https://github.com/Tolc-Software/cmake-modules.git
-  GIT_TAG main)
-FetchContent_MakeAvailable(cmake_modules)
-# Basis of all shared CMake modules
-set(modules ${cmake_modules_SOURCE_DIR}/cmake)
-
 # Define add_{warnings,options}
-include(${modules}/WarningsAndOptions.cmake)
-# Need a special options since the used version of Boost::asio
-# doesn't support C++20 on MacOS
+include(./cmake/WarningsAndOptions.cmake)
+# Need a special options since the used version of Boost::asio doesn't support
+# C++20 on MacOS
 include(cmake/Options.cmake)
 
 # Define options such as ccache
-include(${modules}/ProjectSettings.cmake)
+include(./cmake/ProjectSettings.cmake)
 
-include(${modules}/Sanitizers.cmake)
+include(./cmake/Sanitizers.cmake)
 
-include(${modules}/StaticAnalyzers.cmake)
+include(./cmake/StaticAnalyzers.cmake)
 
-include(${modules}/GetFrontend.cmake)
-get_frontend(NAME Frontend.py VERSION v0.7.0)
-copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
-                   ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
+find_package(CLI11 REQUIRED)
+find_package(fmt REQUIRED)
+find_package(spdlog REQUIRED)
+find_package(ctre REQUIRED)
 
-get_frontend(NAME Frontend.wasm VERSION v0.6.0)
-copy_frontend_docs(
-  NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR} COPY_TO
-  ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
+include(./cmake/GetBoost.cmake)
+get_boost(VERSION 1.77.0)
 
-get_frontend(NAME Frontend.swift VERSION v0.2.0)
-copy_frontend_docs(
-  NAME Frontend.swift SRC_DIR ${frontend.swift_SOURCE_DIR} COPY_TO
-  ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/objc)
+include(./cmake/LLVMUtilities.cmake)
+# Download if necessary and get the clang libs Defines
+# llvm_entry_{SOURCE_DIR,INCLUDE_DIR} variables LLVM-19.1.0-macOS-ARM64.tar.xz
+set(llvm_entry_version 19.1.0)
+set(llvm_entry_major_version 19)
+setup_llvm(NAME "LLVM_ENTRY" VERSION ${llvm_entry_version})
 
-include(${modules}/GetParser.cmake)
-get_parser(VERSION v0.6.0)
+# Macro to get downloaded Clang and llvm packages
+get_clang_and_llvm(PATH ${llvm_entry_SOURCE_DIR})
+# From the LLVM cmake module. Defines add_llvm_{executable,library}
+include(AddLLVM)
 
-# Set the include path for the system library in the variable
-# We are using the standard library shipped
-# with the downloaded llvm for include paths in the parsing
-set(PARSER_LLVM_DIR ${parser_SOURCE_DIR}/lib/Parser)
-get_parser_system_include(
-  VARIABLE
-  SYSTEM_INCLUDE_PATHS
-  PARSER_SOURCE_DIR
-  ${parser_SOURCE_DIR}
-  LIBCPP_ROOT_DIR
-  ${parser_SOURCE_DIR}/lib/Parser
-  LLVM_VERSION
-  ${PARSER_LLVM_VERSION})
+# Defines get_system_include and format_includes
+include(./cmake/IncludePathHelpers.cmake)
 
-# These uppercase variables will be used when configuring getSystemIncludes.cpp
+# Set the include path for the system library in the variable We are using the
+# standard library shipped with the downloaded llvm for include paths in the
+# parsing
+get_system_include(VARIABLE SYSTEM_INCLUDE_PATHS LLVM_DIRECTORY
+                   ${llvm_entry_SOURCE_DIR} LLVM_VERSION ${llvm_entry_version})
+
+# Set the include path for the system library in the variable We are using the
+# standard library shipped with the downloaded llvm for include paths in the
+# parsing These uppercase variables will be used when configuring
+# getSystemIncludes.cpp
 set(SYSTEM_INCLUDES "")
 set(TOKEN_STRING "{replaceme}")
-# Used as a root directory for system header files to be placed next to tolc executable
+# Used as a root directory for system header files to be placed next to tolc
+# executable
 set(relativeIncludeDir system_include)
 foreach(include ${SYSTEM_INCLUDE_PATHS})
-  string(REPLACE ${parser_SOURCE_DIR}/lib/Parser
-                 ${TOKEN_STRING}/${relativeIncludeDir} formated_include
-                 ${include})
-  list(APPEND SYSTEM_INCLUDES ${formated_include})
+  string(REPLACE ${llvm_entry_SOURCE_DIR} ${TOKEN_STRING}/${relativeIncludeDir}
+                 formatted_include ${include})
+  list(APPEND SYSTEM_INCLUDES ${formatted_include})
 endforeach()
 
-include(${modules}/copyLLVMIncludes.cmake)
-# Copy the llvm headers relative to the tolc executable
-# (will always be ${CMAKE_CURRENT_BINARY_DIR} as long as
-#  this is called in the same file as the add_executable)
+format_includes(VARIABLE SYSTEM_INCLUDES INCLUDES ${SYSTEM_INCLUDES} SYSTEM)
+
+include(./cmake/copyLLVMIncludes.cmake)
+# Copy the llvm headers relative to the tolc executable (will always be
+# ${CMAKE_CURRENT_BINARY_DIR} as long as this is called in the same file as the
+# add_executable)
 copy_llvm_includes(
   OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/system_include LLVM_DIR
-  ${PARSER_LLVM_DIR} LLVM_VERSION ${PARSER_LLVM_VERSION})
-
-include(FetchContent)
-FetchContent_Declare(
-  cli11_content
-  GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-  GIT_TAG v2.1.1)
-FetchContent_Populate(cli11_content)
-
-include(${modules}/ConanHelpers.cmake)
-# Create the profile from variables known during configure
-setup_conan_profile(VARIABLE tolc_conan_profile)
-
-find_conan_packages(REQUIRES spdlog/1.9.2 fmt/8.1.1 PROFILE
-                    ${tolc_conan_profile})
-
-include(${modules}/GetBoost.cmake)
-get_boost(VERSION 1.77.0)
+  ${llvm_entry_SOURCE_DIR} LLVM_MAJOR_VERSION ${llvm_entry_major_version})
 
 configure_file(
   src/TolcInternal/getSystemIncludes.cpp.in
   ${CMAKE_CURRENT_LIST_DIR}/src/TolcInternal/getSystemIncludes.cpp @ONLY)
 
+configure_file(src/Parser/Helpers/commandLineArgs.cpp.in
+               ${CMAKE_CURRENT_LIST_DIR}/src/Helpers/commandLineArgs.cpp @ONLY)
+
+add_llvm_library(
+  Parser
+  src/Parser/Builders/commonBuilder.cpp
+  src/Parser/Builders/enumBuilder.cpp
+  src/Parser/Builders/fieldBuilder.cpp
+  src/Parser/Builders/functionBuilder.cpp
+  src/Parser/Builders/namespaceBuilder.cpp
+  src/Parser/Builders/structBuilder.cpp
+  src/Parser/Builders/typeBuilder.cpp
+  src/Parser/Consumer/ParserConsumer.cpp
+  src/Parser/Factory/ParserFrontendActionFactory.cpp
+  src/Parser/Frontend/ParserFrontendAction.cpp
+  src/Parser/Helpers/Type/Matchers/base.cpp
+  src/Parser/Helpers/Type/Matchers/container.cpp
+  src/Parser/Helpers/Type/Matchers/function.cpp
+  src/Parser/Helpers/Type/matchers.cpp
+  src/Parser/Helpers/Type/utilities.cpp
+  src/Parser/Helpers/Utils/combine.cpp
+  src/Parser/Helpers/Utils/split.cpp
+  src/Parser/Helpers/Utils/string.cpp
+  src/Parser/Helpers/commandLineArgs.cpp
+  src/Parser/Helpers/getStructData.cpp
+  src/Parser/Helpers/walkIRStructure.cpp
+  src/Parser/Parser/Parse.cpp
+  src/Parser/Parser/Windows/systemIncludeHelper.cpp
+  src/Parser/Template/cache.cpp
+  src/Parser/Visitor/Helpers/addId.cpp
+  src/Parser/Visitor/Helpers/getDocumentation.cpp
+  src/Parser/Visitor/Helpers/parseFunction.cpp
+  src/Parser/Visitor/ParserVisitor.cpp
+  src/Parser/Visitor/VisitCXXRecordDecl.cpp
+  src/Parser/Visitor/VisitClassTemplateSpecializationDecl.cpp
+  src/Parser/Visitor/VisitEnumDecl.cpp
+  src/Parser/Visitor/VisitFieldDecl.cpp
+  src/Parser/Visitor/VisitFunctionDecl.cpp
+  src/Parser/Visitor/VisitFunctionTemplateDecl.cpp
+  src/Parser/Visitor/VisitNamespaceDecl.cpp
+  src/Parser/Visitor/VisitVarDecl.cpp)
+
+target_link_libraries(
+  Parser
+  PUBLIC IR::IR
+  PRIVATE clangASTMatchers clangBasic clangTooling spdlog::spdlog fmt::fmt
+          ctre::ctre)
+
+add_warnings(TARGET Parser)
+add_options(TARGET Parser)
+
+# Set sanitizer options on Parser if options defined
+enable_sanitizers(Parser)
+
+# Ignore warnings from {clang} as if they were system headers.
+target_include_directories(Parser SYSTEM PRIVATE ${llvm_entry_INCLUDE_DIR})
+target_include_directories(Parser PRIVATE src/Parser)
+target_include_directories(
+  Parser PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/Parser>
+                $<INSTALL_INTERFACE:include/Parser>)
+
+set_target_properties(Parser PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
+                                                                 OFF)
+
+include(./cmake/GetFrontend.cmake)
+get_frontend_from_source(NAME Frontend.py BRANCH feature/arm)
+# copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
+# ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
+
+get_frontend_from_source(NAME Frontend.wasm BRANCH feature/arm)
+# copy_frontend_docs( NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR}
+# COPY_TO ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
+
+get_frontend_from_source(NAME Frontend.swift BRANCH feature/arm)
+# copy_frontend_docs(NAME Frontend.swift SRC_DIR ${frontend.swift_SOURCE_DIR}
+# COPY_TO ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/objc)
+
 add_library(
   TolcInternal
   src/CommandLine/parse.cpp
-  src/Log/postJSON.cpp
+  # src/Log/postJSON.cpp
   src/Log/log.cpp
   src/TolcInternal/buildConfig.cpp
   src/TolcInternal/getExecutableDirectoryPath.cpp
   src/TolcInternal/getSystemIncludes.cpp
   src/TolcInternal/run.cpp)
 target_include_directories(TolcInternal PUBLIC src)
-target_include_directories(TolcInternal SYSTEM
-                           PRIVATE ${cli11_content_SOURCE_DIR}/include)
-target_link_libraries(TolcInternal
-  PUBLIC
-    Tolc::Parser
-    Tolc::Frontend.py
-    Tolc::Frontend.wasm
-    Tolc::Frontend.swift
-    spdlog::spdlog
-    fmt::fmt)
-set_target_properties(TolcInternal
-  PROPERTIES
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF)
+target_link_libraries(
+  TolcInternal
+  PUBLIC Parser
+         Tolc::Frontend.py
+         Tolc::Frontend.wasm
+         Tolc::Frontend.swift
+         spdlog::spdlog
+         fmt::fmt
+         CLI11::CLI11)
+set_target_properties(TolcInternal PROPERTIES CXX_STANDARD_REQUIRED ON
+                                              CXX_EXTENSIONS OFF)
 
 add_warnings(TARGET TolcInternal)
 tolc_add_options(TARGET TolcInternal)
@@ -151,18 +201,18 @@ set_target_properties(tolc PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
 
 # Only build tests and benchmarks if building this project directly
 if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  option(ENABLE_TESTING "Build the testing tree" OFF)
+  option(ENABLE_TESTING "Build the testing tree" ON)
   if(ENABLE_TESTING)
     enable_testing()
     add_subdirectory(tests)
   endif()
 
-  option(ENABLE_BENCHMARKS "Build the benchmarks" OFF)
+  option(ENABLE_BENCHMARKS "Build the benchmarks" ON)
   if(ENABLE_BENCHMARKS)
     # TODO: Add benchmarks
   endif()
 
-  option(ENABLE_PACKAGING "Enables install and packaging via CPack" OFF)
+  option(ENABLE_PACKAGING "Enables install and packaging via CPack" ON)
   if(ENABLE_PACKAGING)
     add_subdirectory(tools/packaging)
     if(ENABLE_TESTING)

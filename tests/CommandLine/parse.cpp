@@ -1,72 +1,73 @@
 #include "CommandLine/parse.hpp"
+
 #include <TestUtil/CommandLineInput.hpp>
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("Help is valid input", "[parse]") {
-	for (auto const* helpCall : {"tolc --help", "tolc python --help"}) {
-		auto cli = TestUtil::CommandLineInput(helpCall);
-		auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
-		// Parsed correctly
-		REQUIRE(maybeParsed.has_value());
+  for (auto const* helpCall : {"tolc --help", "tolc python --help"}) {
+    auto cli = TestUtil::CommandLineInput(helpCall);
+    auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+    // Parsed correctly
+    REQUIRE(maybeParsed.has_value());
 
-		// But is empty
-		auto parsed = maybeParsed.value();
-		REQUIRE(parsed.inputFile.empty());
-		REQUIRE(parsed.outputDirectory.empty());
-		REQUIRE(parsed.language.empty());
-		REQUIRE(parsed.includes.size() == 0);
-		REQUIRE(parsed.noAnalytics == false);
+    // But is empty
+    auto parsed = maybeParsed.value();
+    REQUIRE(parsed.inputFile.empty());
+    REQUIRE(parsed.outputDirectory.empty());
+    REQUIRE(parsed.language.empty());
+    REQUIRE(parsed.includes.size() == 0);
+    REQUIRE(parsed.noAnalytics == false);
 
-		// And has help flag set
-		REQUIRE(parsed.isHelp);
-	}
+    // And has help flag set
+    REQUIRE(parsed.isHelp);
+  }
 }
 
 TEST_CASE("Python language is chosen", "[parse]") {
-	auto cli = TestUtil::CommandLineInput(
-	    "tolc python -i input -o output -m myModule -I include");
-	auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
-	REQUIRE(maybeParsed.has_value());
+  auto cli = TestUtil::CommandLineInput(
+      "tolc python -i input -o output -m myModule -I include");
+  auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+  REQUIRE(maybeParsed.has_value());
 
-	auto parsed = maybeParsed.value();
-	REQUIRE(parsed.inputFile == "input");
-	REQUIRE(parsed.outputDirectory == "output");
-	REQUIRE(parsed.language == "python");
-	REQUIRE(parsed.moduleName == "myModule");
-	REQUIRE(parsed.includes.size() == 1);
-	REQUIRE(parsed.includes[0] == "include");
-	REQUIRE(parsed.noAnalytics == false);
+  auto parsed = maybeParsed.value();
+  REQUIRE(parsed.inputFile == "input");
+  REQUIRE(parsed.outputDirectory == "output");
+  REQUIRE(parsed.language == "python");
+  REQUIRE(parsed.moduleName == "myModule");
+  REQUIRE(parsed.includes.size() == 1);
+  REQUIRE(parsed.includes[0] == "include");
+  REQUIRE(parsed.noAnalytics == false);
 
-	// And has not help flag set
-	REQUIRE(!parsed.isHelp);
+  // And has not help flag set
+  REQUIRE(!parsed.isHelp);
 }
 
 TEST_CASE("No analytics flag", "[parse]") {
-	auto cli = TestUtil::CommandLineInput(
-	    "tolc python -i input -o output -m myModule -I include --no-analytics");
-	auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
-	// Parsed correctly
-	REQUIRE(maybeParsed.has_value());
+  auto cli = TestUtil::CommandLineInput(
+      "tolc python -i input -o output -m myModule -I include --no-analytics");
+  auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+  // Parsed correctly
+  REQUIRE(maybeParsed.has_value());
 
-	auto parsed = maybeParsed.value();
-	REQUIRE(parsed.noAnalytics == true);
+  auto parsed = maybeParsed.value();
+  REQUIRE(parsed.noAnalytics == true);
 };
 
 TEST_CASE("Fails for invalid input", "[parse]") {
-	for (auto const* invalidInput : {"tolc python",
-	                                 "tolc fakeLanguage",
-	                                 "tolc python --output noInput",
-	                                 "tolc python --input noOutput"}) {
-		auto cli = TestUtil::CommandLineInput(invalidInput);
-		auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
-		// Parsed correctly
-		REQUIRE(maybeParsed.has_value() == false);
-	}
+  for (auto const* invalidInput : {"tolc python",
+                                   "tolc fakeLanguage",
+                                   "tolc python --output noInput",
+                                   "tolc python --input noOutput"}) {
+    auto cli = TestUtil::CommandLineInput(invalidInput);
+    auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+    // Parsed correctly
+    REQUIRE(maybeParsed.has_value() == false);
+  }
 };
 
 TEST_CASE("Module name is required", "[parse]") {
-	auto cli = TestUtil::CommandLineInput("tolc python -i input -o output");
-	auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
-	// Parsed correctly
-	REQUIRE(maybeParsed.has_value() == false);
+  auto cli = TestUtil::CommandLineInput("tolc python -i input -o output");
+  auto maybeParsed = CommandLine::parse(cli.argc, cli.argv);
+  // Parsed correctly
+  REQUIRE(maybeParsed.has_value() == false);
 };

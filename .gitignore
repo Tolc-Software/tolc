@@ -22,7 +22,7 @@ tools/conan_profiles/Windows/clang
 !README.md
 
 # Directories
-!.github
+!.github*
 !cmake
 !docs
 !src
