@@ -20,7 +20,7 @@ configure_file(docs/ReleaseNotes/version.in
 include(./cmake/WarningsAndOptions.cmake)
 # Need a special options since the used version of Boost::asio doesn't support
 # C++20 on MacOS
-include(cmake/Options.cmake)
+include(./cmake/Options.cmake)
 
 # Define options such as ccache
 include(./cmake/ProjectSettings.cmake)
@@ -152,7 +152,51 @@ set_target_properties(Parser PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                  OFF)
 
 include(./cmake/GetFrontend.cmake)
-get_frontend_from_source(NAME Frontend.py BRANCH feature/arm)
+add_library(
+  Frontend.py
+  src/Frontend/Python/frontend.cpp
+  src/Pybind/Builders/attributeBuilder.cpp
+  src/Pybind/Builders/classBuilder.cpp
+  src/Pybind/Builders/enumBuilder.cpp
+  src/Pybind/Builders/functionBuilder.cpp
+  src/Pybind/Builders/moduleBuilder.cpp
+  src/Pybind/Builders/moduleFileBuilder.cpp
+  src/Pybind/Builders/typeToStringBuilder.cpp
+  src/Pybind/Helpers/getDocumentationParameter.cpp
+  src/Pybind/Helpers/operatorNames.cpp
+  src/Pybind/Helpers/split.cpp
+  src/Pybind/Helpers/string.cpp
+  src/Pybind/Helpers/trampolineClass.cpp
+  src/Pybind/Helpers/types.cpp
+  src/Pybind/Proxy/attribute.cpp
+  src/Pybind/Proxy/class.cpp
+  src/Pybind/Proxy/enum.cpp
+  src/Pybind/Proxy/function.cpp
+  src/Pybind/Proxy/module.cpp
+  src/Pybind/Proxy/moduleFile.cpp
+  src/Pybind/checkType.cpp
+  src/Pybind/getOverloadedFunctions.cpp
+  src/Pybind/returnValuePolicy.cpp)
+
+add_warnings(TARGET Frontend.py)
+add_options(TARGET Frontend.py)
+
+# Set the sanitizer options on project_options
+enable_sanitizers(Frontend.py)
+
+target_link_libraries(
+  Frontend.py
+  PUBLIC IR::IR
+  PRIVATE fmt::fmt spdlog::spdlog)
+
+target_include_directories(Frontend.py PRIVATE src)
+target_include_directories(
+  Frontend.py PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+                     $<INSTALL_INTERFACE:include>)
+
+set_target_properties(Frontend.py PROPERTIES CXX_STANDARD_REQUIRED ON
+                                             CXX_EXTENSIONS OFF)
+
 # copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
 # ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
@@ -177,7 +221,7 @@ target_include_directories(TolcInternal PUBLIC src)
 target_link_libraries(
   TolcInternal
   PUBLIC Parser
-         Tolc::Frontend.py
+         Frontend.py
          Tolc::Frontend.wasm
          Tolc::Frontend.swift
          spdlog::spdlog
