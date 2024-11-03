@@ -37,6 +37,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/Sanitizers.cmake)
 # Add components tests
 add_subdirectory(Parser)
 add_subdirectory(Frontend.py)
+add_subdirectory(Frontend.wasm)
 
 foreach(
   test

@@ -1,0 +1,19 @@
+# Ignore everything
+/*
+
+# Ignore all files named (wherever they are):
+.DS_Store
+.log
+
+# Except these
+# Files
+!.gitignore
+!CMakeLists.txt
+!configureAndBuild.bat
+!defaultModule.test.js
+!package.json
+!package-lock.json
+
+# Directories
+!cmake
+!src

@@ -1,0 +1,20 @@
+# Ignore everything
+/*
+
+# Ignore all files named (wherever they are):
+.DS_Store
+.log
+
+# Except these
+# Files
+!.gitignore
+!configureAndBuild.bat
+!CMakeLists.txt
+!README.md
+!package.json
+!package-lock.json
+
+# Directories
+!cmake
+!src
+!EmscriptenStage

@@ -200,7 +200,48 @@ set_target_properties(Frontend.py PROPERTIES CXX_STANDARD_REQUIRED ON
 # copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
 # ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
-get_frontend_from_source(NAME Frontend.wasm BRANCH feature/arm)
+add_library(
+  Frontend.wasm
+  src/Embind/Builders/attributeBuilder.cpp
+  src/Embind/Builders/classBuilder.cpp
+  src/Embind/Builders/enumBuilder.cpp
+  src/Embind/Builders/functionBuilder.cpp
+  src/Embind/Builders/moduleBuilder.cpp
+  src/Embind/Builders/moduleFileBuilder.cpp
+  src/Embind/Builders/typeToStringBuilder.cpp
+  src/Embind/Proxy/attribute.cpp
+  src/Embind/Proxy/class.cpp
+  src/Embind/Proxy/enum.cpp
+  src/Embind/Proxy/function.cpp
+  src/Embind/Proxy/module.cpp
+  src/Embind/Proxy/moduleFile.cpp
+  src/Frontend/Wasm/frontend.cpp
+  src/Embind/checkType.cpp
+  src/Embind/createFunctions.cpp
+  src/Embind/getOverloadedFunctions.cpp
+  src/Embind/Helpers/split.cpp
+  src/Embind/Helpers/string.cpp
+  src/Embind/Helpers/trampolineClass.cpp
+  src/Embind/Helpers/types.cpp)
+
+add_warnings(TARGET Frontend.wasm)
+add_options(TARGET Frontend.wasm)
+
+# Set the sanitizer options on project_options
+enable_sanitizers(Frontend.wasm)
+
+target_link_libraries(
+  Frontend.wasm
+  PUBLIC IR::IR
+  PRIVATE fmt::fmt spdlog::spdlog)
+
+target_include_directories(Frontend.wasm PRIVATE src)
+target_include_directories(
+  Frontend.wasm PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+                       $<INSTALL_INTERFACE:include>)
+
+set_target_properties(Frontend.wasm PROPERTIES CXX_STANDARD_REQUIRED ON
+                                               CXX_EXTENSIONS OFF)
 # copy_frontend_docs( NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR}
 # COPY_TO ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
 
@@ -222,7 +263,7 @@ target_link_libraries(
   TolcInternal
   PUBLIC Parser
          Frontend.py
-         Tolc::Frontend.wasm
+         Frontend.wasm
          Tolc::Frontend.swift
          spdlog::spdlog
          fmt::fmt
