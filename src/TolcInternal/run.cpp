@@ -86,9 +86,9 @@ void logError(ErrorOrigin origin) {
     case ErrorOrigin::FrontendWasm: repository = "Frontend.wasm"; break;
     case ErrorOrigin::FrontendObjc: repository = "Frontend.swift"; break;
   }
+  spdlog::error("Error reported from {}", repository);
   spdlog::error(
-      "If this error is something Tolc should be able to solve, please open a feature request or a bug report here: https://github.com/Tolc-Software/{}/issues/new",
-      repository);
+      "If this error is something Tolc should be able to solve, please open a feature request or a bug report here: https://github.com/Tolc-Software/tolc/issues/new");
 }
 
 int run(int argc, const char** argv) {

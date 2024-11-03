@@ -38,6 +38,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/Sanitizers.cmake)
 add_subdirectory(Parser)
 add_subdirectory(Frontend.py)
 add_subdirectory(Frontend.wasm)
+add_subdirectory(Frontend.swift)
 
 foreach(
   test

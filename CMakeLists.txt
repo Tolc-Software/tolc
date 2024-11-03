@@ -29,6 +29,13 @@ include(./cmake/Sanitizers.cmake)
 
 include(./cmake/StaticAnalyzers.cmake)
 
+include(FetchContent)
+FetchContent_Declare(
+  IRSpecification
+  GIT_REPOSITORY https://github.com/Tolc-Software/IntermediateRepresentation.git
+  GIT_TAG v0.15.1)
+FetchContent_MakeAvailable(IRSpecification)
+
 find_package(CLI11 REQUIRED)
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
@@ -151,7 +158,6 @@ target_include_directories(
 set_target_properties(Parser PROPERTIES CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS
                                                                  OFF)
 
-include(./cmake/GetFrontend.cmake)
 add_library(
   Frontend.py
   src/Frontend/Python/frontend.cpp
@@ -197,7 +203,8 @@ target_include_directories(
 set_target_properties(Frontend.py PROPERTIES CXX_STANDARD_REQUIRED ON
                                              CXX_EXTENSIONS OFF)
 
-# copy_frontend_docs(NAME Frontend.py SRC_DIR ${frontend.py_SOURCE_DIR} COPY_TO
+# include(./cmake/GetFrontend.cmake) copy_frontend_docs(NAME Frontend.py SRC_DIR
+# ${frontend.py_SOURCE_DIR} COPY_TO
 # ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/python)
 
 add_library(
@@ -245,7 +252,78 @@ set_target_properties(Frontend.wasm PROPERTIES CXX_STANDARD_REQUIRED ON
 # copy_frontend_docs( NAME Frontend.wasm SRC_DIR ${frontend.wasm_SOURCE_DIR}
 # COPY_TO ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/webassembly)
 
-get_frontend_from_source(NAME Frontend.swift BRANCH feature/arm)
+add_library(
+  Frontend.swift
+  src/ObjcSwift/Helpers/getDocumentationParameter.cpp
+  src/ObjcSwift/Helpers/operatorNames.cpp
+  src/ObjcSwift/Helpers/split.cpp
+  src/ObjcSwift/Helpers/string.cpp
+  src/ObjcSwift/Helpers/typeToStringBuilder.cpp
+  src/ObjcSwift/Helpers/types.cpp
+  src/ObjcSwift/Helpers/wrapInFunction.cpp
+  src/ObjcSwift/getOverloadedFunctions.cpp
+  src/Frontend/Swift/frontend.cpp
+  src/Swift/Builders/attributeBuilder.cpp
+  src/Swift/Builders/classBuilder.cpp
+  src/Swift/Builders/enumBuilder.cpp
+  src/Swift/Builders/functionBuilder.cpp
+  src/Swift/Builders/moduleBuilder.cpp
+  src/Swift/Builders/moduleFileBuilder.cpp
+  src/Swift/Builders/typeBuilder.cpp
+  src/Swift/Proxy/attribute.cpp
+  src/Swift/Proxy/class.cpp
+  src/Swift/Proxy/enum.cpp
+  src/Swift/Proxy/function.cpp
+  src/Swift/Proxy/function.cpp
+  src/Swift/Proxy/module.cpp
+  src/Swift/Proxy/moduleFile.cpp
+  src/Swift/getName.cpp
+  src/Frontend/Objc/frontend.cpp
+  src/Objc/utility.cpp
+  src/Objc/Builders/attributeBuilder.cpp
+  src/Objc/Builders/classBuilder.cpp
+  src/Objc/Builders/enumBuilder.cpp
+  src/Objc/Builders/functionBuilder.cpp
+  src/Objc/Builders/moduleBuilder.cpp
+  src/Objc/Builders/moduleFileBuilder.cpp
+  src/Objc/Builders/typeBuilder.cpp
+  src/Objc/Conversions/Container/container.cpp
+  src/Objc/Conversions/Container/helpers.cpp
+  src/Objc/Conversions/Container/value.cpp
+  src/Objc/Conversions/base.cpp
+  src/Objc/Conversions/container.cpp
+  src/Objc/Conversions/enum.cpp
+  src/Objc/Conversions/getConversionName.cpp
+  src/Objc/Conversions/userDefined.cpp
+  src/Objc/Conversions/utility.cpp
+  src/Objc/Proxy/attribute.cpp
+  src/Objc/Proxy/class.cpp
+  src/Objc/Proxy/enum.cpp
+  src/Objc/Proxy/function.cpp
+  src/Objc/Proxy/function.cpp
+  src/Objc/Proxy/moduleFile.cpp
+  src/Objc/Proxy/structure.cpp
+  src/Objc/getName.cpp)
+
+add_warnings(TARGET Frontend.swift)
+add_options(TARGET Frontend.swift)
+
+# Set the sanitizer options on project_options
+enable_sanitizers(Frontend.swift)
+
+target_link_libraries(
+  Frontend.swift
+  PUBLIC IR::IR
+  PRIVATE fmt::fmt spdlog::spdlog)
+
+target_include_directories(Frontend.swift PRIVATE src)
+target_include_directories(
+  Frontend.swift PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+                        $<INSTALL_INTERFACE:include>)
+
+set_target_properties(Frontend.swift PROPERTIES CXX_STANDARD_REQUIRED ON
+                                                CXX_EXTENSIONS OFF)
+
 # copy_frontend_docs(NAME Frontend.swift SRC_DIR ${frontend.swift_SOURCE_DIR}
 # COPY_TO ${CMAKE_CURRENT_LIST_DIR}/docs/packaging/docs/objc)
 
@@ -264,7 +342,7 @@ target_link_libraries(
   PUBLIC Parser
          Frontend.py
          Frontend.wasm
-         Tolc::Frontend.swift
+         Frontend.swift
          spdlog::spdlog
          fmt::fmt
          CLI11::CLI11)
