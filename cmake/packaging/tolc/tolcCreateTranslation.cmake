@@ -4,15 +4,14 @@ function(_tolc_create_bindings)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues)
-  set(singleValues TARGET LANGUAGE OUTPUT DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
+  set(singleValues TARGET LANGUAGE OUTPUT DO_NOT_SEARCH_TARGET_INCLUDES
+                   NO_ANALYTICS)
   set(multiValues HEADERS)
-  # Process the arguments passed in
-  # can be used e.g. via ARG_TARGET
+  # Process the arguments passed in can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
                         "${multiValues}" ${ARGN})
 
-  # Variables related to error messages:
-  # Cannot assume too new CMake version
+  # Variables related to error messages: Cannot assume too new CMake version
   set(function_name tolc_create_bindings)
   set(usage "Usage: ${function_name}(TARGET myLibrary LANGUAGE python)")
 
@@ -53,7 +52,10 @@ function(_tolc_create_bindings)
   message(
     STATUS "Creating bindings to ${ARG_LANGUAGE} in target ${tolc_target_name}")
 
-  get_property(cpp_version TARGET ${ARG_TARGET} PROPERTY CXX_STANDARD)
+  get_property(
+    cpp_version
+    TARGET ${ARG_TARGET}
+    PROPERTY CXX_STANDARD)
   if(NOT cpp_version)
     set(cpp_version 17)
   endif()
@@ -62,27 +64,30 @@ function(_tolc_create_bindings)
     get_pybind11(VERSION ${tolc_pybind11_version})
     # Create the python module
     set(expected_tolc_files ${ARG_OUTPUT}/${ARG_TARGET}_python.cpp)
-    pybind11_add_module(${tolc_target_name}
-                        ${expected_tolc_files})
+    pybind11_add_module(${tolc_target_name} ${expected_tolc_files})
 
-    set_property(TARGET ${tolc_target_name} PROPERTY CXX_STANDARD ${cpp_version})
+    set_property(TARGET ${tolc_target_name} PROPERTY CXX_STANDARD
+                                                     ${cpp_version})
   elseif(ARG_LANGUAGE STREQUAL "wasm")
     set(expected_tolc_files ${ARG_OUTPUT}/${ARG_TARGET}_wasm.cpp)
-    # Assumes that the Emscripten toolchain file is used
-    # Will result in a .js and a .wasm file
+    # Assumes that the Emscripten toolchain file is used Will result in a .js
+    # and a .wasm file
     add_executable(${tolc_target_name} ${expected_tolc_files})
 
-    # Export Promise as 'loadMyLib' for module 'MyLib'
-    # -s MODULARIZE=1 sets it as a promise based load
-    # Note that this is necessary for preJS to work properly
+    target_link_libraries(${tolc_target_name} PRIVATE embind)
+
+    # Export Promise as 'loadMyLib' for module 'MyLib' -s MODULARIZE=1 sets it
+    # as a promise based load Note that this is necessary for preJS to work
+    # properly
     set_property(
       TARGET ${tolc_target_name}
       PROPERTY
         LINK_FLAGS
-        "-s MODULARIZE=1 -s EXPORT_NAME='load${ARG_TARGET}' --pre-js ${ARG_OUTPUT}/pre.js -lembind "
+        "-s MODULARIZE=1 -s EXPORT_NAME=\"load${ARG_TARGET}\" --pre-js ${ARG_OUTPUT}/pre.js "
     )
 
-    set_property(TARGET ${tolc_target_name} PROPERTY CXX_STANDARD ${cpp_version})
+    set_property(TARGET ${tolc_target_name} PROPERTY CXX_STANDARD
+                                                     ${cpp_version})
   elseif(ARG_LANGUAGE STREQUAL "objc")
     enable_language(OBJC)
     enable_language(OBJCXX)
@@ -93,7 +98,8 @@ function(_tolc_create_bindings)
     target_link_libraries(${tolc_target_name} PRIVATE "-framework Foundation")
     target_include_directories(${tolc_target_name} PUBLIC ${ARG_OUTPUT})
     # Same as C++
-    set_property(TARGET ${tolc_target_name} PROPERTY OBJCXX_STANDARD ${cpp_version})
+    set_property(TARGET ${tolc_target_name} PROPERTY OBJCXX_STANDARD
+                                                     ${cpp_version})
   else()
     error_with_usage(
       "Unknown language input: ${ARG_LANGUAGE}. Valid input: [${tolc_supported_languages}]"
@@ -119,7 +125,8 @@ function(_tolc_create_bindings)
   # The added library target depends on the target being translated
   add_dependencies(${tolc_target_name} tolc_translate_file_${ARG_TARGET})
 
-  # NOTE: The user may need to provide additional links if they have their PUBLIC/PRIVATE dependencies missmatched
+  # NOTE: The user may need to provide additional links if they have their
+  # PUBLIC/PRIVATE dependencies missmatched
   target_link_libraries(${tolc_target_name} PRIVATE ${ARG_TARGET})
 
   set_target_properties(
@@ -127,22 +134,21 @@ function(_tolc_create_bindings)
     PROPERTIES ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc"
                RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tolc")
-  # This allows the target to be called target_language, but still be imported e.g. in python as 'import target'
+  # This allows the target to be called target_language, but still be imported
+  # e.g. in python as 'import target'
   set_target_properties(${tolc_target_name} PROPERTIES OUTPUT_NAME
                                                        ${ARG_TARGET})
 endfunction()
 
-# Need to enable languages in a global scope
-# => Wrap in a macro and create a "_" function so
-# we don't pollute the users variable name space
+# Need to enable languages in a global scope => Wrap in a macro and create a "_"
+# function so we don't pollute the users variable name space
 macro(tolc_create_bindings)
   # Define the supported set of keywords
   set(prefix ARG)
   set(noValues DO_NOT_SEARCH_TARGET_INCLUDES NO_ANALYTICS)
   set(singleValues TARGET LANGUAGE OUTPUT)
   set(multiValues HEADERS)
-  # Process the arguments passed in
-  # can be used e.g. via ARG_TARGET
+  # Process the arguments passed in can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
                         "${multiValues}" ${ARGN})
 
@@ -152,16 +158,16 @@ macro(tolc_create_bindings)
 
   _tolc_create_bindings(
     TARGET
-      ${ARG_TARGET}
+    ${ARG_TARGET}
     LANGUAGE
-      ${ARG_LANGUAGE}
+    ${ARG_LANGUAGE}
     OUTPUT
-      ${ARG_OUTPUT}
+    ${ARG_OUTPUT}
     HEADERS
-      ${ARG_HEADERS}
+    ${ARG_HEADERS}
     DO_NOT_SEARCH_TARGET_INCLUDES
-      ${ARG_DO_NOT_SEARCH_TARGET_INCLUDES}
+    ${ARG_DO_NOT_SEARCH_TARGET_INCLUDES}
     NO_ANALYTICS
-      ${ARG_NO_ANALYTICS})
+    ${ARG_NO_ANALYTICS})
 
 endmacro()

@@ -1,7 +1,7 @@
 include_guard()
 
-# NOTE: This fixture is used for all packaging tests
-# Create a fixture for creating a local install of tolc to test
+# NOTE: This fixture is used for all packaging tests Create a fixture for
+# creating a local install of tolc to test
 set(test_package ${CMAKE_CURRENT_BINARY_DIR}/test_package/tolc)
 add_test(
   NAME InstallPackage
@@ -17,7 +17,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/GetEmscripten.cmake)
 
 # Will be used to compile wasm tests
 if(NOT emsdk_SOURCE_DIR)
-  get_emscripten(VERSION 3.1.3)
+  get_emscripten(VERSION 3.1.69)
 endif()
 # Export the toolchain so it can be used in system tests
 set(emscripten_toolchain

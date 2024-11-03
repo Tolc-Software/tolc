@@ -12,8 +12,7 @@ function(add_system_test)
   set(noValues)
   set(singleValues NAME LANGUAGE)
   set(multiValues RUN_COMMAND)
-  # Process the arguments passed in
-  # can be used e.g. via ARG_TARGET
+  # Process the arguments passed in can be used e.g. via ARG_TARGET
   cmake_parse_arguments(${prefix} "${noValues}" "${singleValues}"
                         "${multiValues}" ${ARGN})
   # Path to the consumer project
@@ -27,8 +26,8 @@ function(add_system_test)
     set(extra_cmake -DCMAKE_TOOLCHAIN_FILE=${emscripten_toolchain})
   endif()
 
-  # Generate the consumer build files
-  # NOTE: Here we inject the path to the package that gets tested
+  # Generate the consumer build files NOTE: Here we inject the path to the
+  # package that gets tested
   add_test(
     NAME Generate${test_name}
     WORKING_DIRECTORY ${consumer}
@@ -51,7 +50,8 @@ function(add_system_test)
   set_tests_properties(Build${test_name} PROPERTIES FIXTURES_REQUIRED
                                                     FixtureGenerate${test_name})
 
-  # This requires that the project creates an executable called 'consumer' in the build directory
+  # This requires that the project creates an executable called 'consumer' in
+  # the build directory
   add_test(NAME Run${test_name} COMMAND ${run_command})
   set_tests_properties(Run${test_name} PROPERTIES FIXTURES_SETUP
                                                   FixtureRun${test_name})
@@ -74,7 +74,6 @@ foreach(test_name translateFileTest translateLibraryWithHeaders
 endforeach()
 
 foreach(test_name createTranslationTestWasm)
-  # Note: --no-experimental-fetch requires node>=v18
   add_system_test(
     NAME
     ${test_name}
@@ -82,19 +81,12 @@ foreach(test_name createTranslationTestWasm)
     wasm
     RUN_COMMAND
     node
-    --no-experimental-fetch
     ${CMAKE_CURRENT_LIST_DIR}/${test_name}/test.js)
 endforeach()
 
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Darwin)
   foreach(test_name createTranslationTestObjc)
-    add_system_test(
-      NAME
-      ${test_name}
-      LANGUAGE
-      objc
-      RUN_COMMAND
-      ${CMAKE_CURRENT_LIST_DIR}/${test_name}/build/consumer)
+    add_system_test(NAME ${test_name} LANGUAGE objc RUN_COMMAND
+                    ${CMAKE_CURRENT_LIST_DIR}/${test_name}/build/consumer)
   endforeach()
 endif()
-

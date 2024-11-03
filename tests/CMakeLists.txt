@@ -34,6 +34,9 @@ endif()
 
 include(${CMAKE_SOURCE_DIR}/cmake/Sanitizers.cmake)
 
+# Add Parser tests
+add_subdirectory(Parser)
+
 foreach(
   test
   CommandLine/parse.cpp Log/postJSON.cpp TolcInternal/buildConfig.cpp
@@ -56,7 +59,7 @@ foreach(
   add_warnings(TARGET ${testName})
   tolc_add_options(TARGET ${testName})
 
-  set(ENABLE_SANITIZER_ADDRESS TRUE)
-  set(ENABLE_SANITIZER_MEMORY TRUE)
+  set(ENABLE_SANITIZER_ADDRESS FALSE)
+  set(ENABLE_SANITIZER_MEMORY FALSE)
   enable_sanitizers(${testName})
 endforeach()

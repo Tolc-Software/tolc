@@ -1,9 +1,10 @@
 # Need 3.11 for FetchContent module
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.25)
 
 project(Consumer)
 
-# NOTE: Assumes tolc package is put into following path before executing this test
+# NOTE: Assumes tolc package is put into following path before executing this
+# test
 if(NOT tolc_DIR)
   message(
     FATAL_ERROR
