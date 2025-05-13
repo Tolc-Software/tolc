@@ -108,13 +108,20 @@ Requirements:
 
 * CMake
 * python3
-* conan
+* conan 2.x
 * clang
+
+Get the dependencies
+
+```sh
+$ conan install . --output-folder=build --build=missing
+```
+
 
 Configure the project:
 
 ```shell
-$ cmake -S. -Bbuild -G Ninja -DCMAKE_CXX_COMPILER="clang++" -DCMAKE_C_COMPILER="clang" -DCMAKE_BUILD_TYPE="Debug" -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON
+$ cmake -S. -Bbuild -G Ninja -DCMAKE_CXX_COMPILER="clang++" -DCMAKE_C_COMPILER="clang" -DCMAKE_BUILD_TYPE="Release" -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON
 ```
 
 Build `tolc`:

@@ -47,7 +47,7 @@ target_include_directories(Frontend.swift_TestUtil PUBLIC TestUtil/include)
 target_link_libraries(
   Frontend.swift_TestUtil PRIVATE Parser Frontend.swift Catch2::Catch2
                                   Tolc::Stage fmt::fmt)
-target_link_libraries(Frontend.swift_TestUtil PUBLIC IR::IR)
+target_link_libraries(Frontend.swift_TestUtil PUBLIC IntermediateRepresentation)
 
 add_warnings(TARGET Frontend.swift_TestUtil)
 add_options(TARGET Frontend.swift_TestUtil)

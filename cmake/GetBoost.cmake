@@ -20,7 +20,7 @@ function(get_boost)
   string(REPLACE "." "_" underscore_version ${ARG_VERSION})
   FetchContent_Declare(
     boost
-    URL https://boostorg.jfrog.io/artifactory/main/release/${ARG_VERSION}/source/boost_${underscore_version}.tar.gz
+    URL https://archives.boost.io/release/${ARG_VERSION}/source/boost_${underscore_version}.tar.gz
   )
 
   if(NOT boost_POPULATED)

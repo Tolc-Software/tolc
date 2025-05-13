@@ -43,8 +43,8 @@ add_library(Frontend.py_TestUtil TestUtil/include/TestUtil/pybindStage.cpp
 target_include_directories(Frontend.py_TestUtil PUBLIC TestUtil/include)
 target_link_libraries(Frontend.py_TestUtil PRIVATE Parser fmt::fmt
                                                    Catch2::Catch2)
-target_link_libraries(Frontend.py_TestUtil PUBLIC IR::IR Tolc::Stage
-                                                  Frontend.py)
+target_link_libraries(Frontend.py_TestUtil PUBLIC IntermediateRepresentation
+                                                  Tolc::Stage Frontend.py)
 
 add_warnings(TARGET Frontend.py_TestUtil)
 add_options(TARGET Frontend.py_TestUtil)

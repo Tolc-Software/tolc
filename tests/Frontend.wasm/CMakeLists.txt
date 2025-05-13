@@ -49,7 +49,8 @@ add_library(
 target_include_directories(Frontend.wasm_TestUtil PUBLIC TestUtil/include)
 target_link_libraries(Frontend.wasm_TestUtil PRIVATE Frontend.wasm Parser
                                                      fmt::fmt Catch2::Catch2)
-target_link_libraries(Frontend.wasm_TestUtil PUBLIC IR::IR Tolc::Stage)
+target_link_libraries(Frontend.wasm_TestUtil PUBLIC IntermediateRepresentation
+                                                    Tolc::Stage)
 find_package(fmt REQUIRED)
 
 add_warnings(TARGET Frontend.wasm_TestUtil)

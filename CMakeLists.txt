@@ -29,12 +29,15 @@ include(./cmake/Sanitizers.cmake)
 
 include(./cmake/StaticAnalyzers.cmake)
 
-include(FetchContent)
-FetchContent_Declare(
-  IRSpecification
-  GIT_REPOSITORY https://github.com/Tolc-Software/IntermediateRepresentation.git
-  GIT_TAG v0.15.1)
-FetchContent_MakeAvailable(IRSpecification)
+add_library(IntermediateRepresentation INTERFACE)
+target_include_directories(
+  IntermediateRepresentation
+  INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+            $<INSTALL_INTERFACE:include>)
+
+set_target_properties(
+  IntermediateRepresentation
+  PROPERTIES PUBLIC_HEADER ${CMAKE_CURRENT_LIST_DIR}/include/IR/ir.hpp)
 
 find_package(CLI11 REQUIRED)
 find_package(fmt REQUIRED)
@@ -138,7 +141,7 @@ add_llvm_library(
 
 target_link_libraries(
   Parser
-  PUBLIC IR::IR
+  PUBLIC IntermediateRepresentation
   PRIVATE clangASTMatchers clangBasic clangTooling spdlog::spdlog fmt::fmt
           ctre::ctre)
 
@@ -192,7 +195,7 @@ enable_sanitizers(Frontend.py)
 
 target_link_libraries(
   Frontend.py
-  PUBLIC IR::IR
+  PUBLIC IntermediateRepresentation
   PRIVATE fmt::fmt spdlog::spdlog)
 
 target_include_directories(Frontend.py PRIVATE src)
@@ -239,7 +242,7 @@ enable_sanitizers(Frontend.wasm)
 
 target_link_libraries(
   Frontend.wasm
-  PUBLIC IR::IR
+  PUBLIC IntermediateRepresentation
   PRIVATE fmt::fmt spdlog::spdlog)
 
 target_include_directories(Frontend.wasm PRIVATE src)
@@ -313,7 +316,7 @@ enable_sanitizers(Frontend.swift)
 
 target_link_libraries(
   Frontend.swift
-  PUBLIC IR::IR
+  PUBLIC IntermediateRepresentation
   PRIVATE fmt::fmt spdlog::spdlog)
 
 target_include_directories(Frontend.swift PRIVATE src)
