@@ -15,8 +15,7 @@ configure_file(
   TestUtil/include/TestUtil/getTestFilesDirectory.hpp.in
   ${CMAKE_CURRENT_LIST_DIR}/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
   @ONLY)
-add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp
-                     TestUtil/src/TestUtil/startServer.cpp)
+add_library(TestUtil TestUtil/src/TestUtil/CommandLineInput.cpp)
 add_warnings(TARGET TestUtil)
 tolc_add_options(TARGET TestUtil)
 target_include_directories(TestUtil PUBLIC TestUtil/include)
@@ -42,7 +41,7 @@ add_subdirectory(Frontend.swift)
 
 foreach(
   test
-  CommandLine/parse.cpp Log/postJSON.cpp TolcInternal/buildConfig.cpp
+  CommandLine/parse.cpp TolcInternal/buildConfig.cpp
   TolcInternal/run.cpp TolcInternal/getExecutableDirectoryPath.cpp
   TolcInternal/getSystemIncludes.cpp)
 

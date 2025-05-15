@@ -333,7 +333,6 @@ set_target_properties(Frontend.swift PROPERTIES CXX_STANDARD_REQUIRED ON
 add_library(
   TolcInternal
   src/CommandLine/parse.cpp
-  # src/Log/postJSON.cpp
   src/Log/log.cpp
   src/TolcInternal/buildConfig.cpp
   src/TolcInternal/getExecutableDirectoryPath.cpp

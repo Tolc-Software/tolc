@@ -114,27 +114,29 @@ Requirements:
 Get the dependencies
 
 ```sh
-$ conan install . --output-folder=build --build=missing
+$ conan install . --output-folder=. --build=missing
 ```
+
+This will create the toolchain file `./build/Release/generators/conan_toolchain.cmake` that we can pass to `cmake`.
 
 
 Configure the project:
 
 ```shell
-$ cmake -S. -Bbuild -G Ninja -DCMAKE_CXX_COMPILER="clang++" -DCMAKE_C_COMPILER="clang" -DCMAKE_BUILD_TYPE="Release" -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON
+$ cmake -S. -Bbuild -G Ninja -DCMAKE_CXX_COMPILER="clang++" -DCMAKE_C_COMPILER="clang" -DCMAKE_BUILD_TYPE="Release" -DENABLE_TESTING=ON -DENABLE_PACKAGING=ON -DCMAKE_TOOLCHAIN_FILE=./build/Release/generators/conan_toolchain.cmake
 ```
 
 Build `tolc`:
 
 ```shell
-cmake --build build
+$ cmake --build build
 ```
 
 Test with `ctest`:
 
 ```shell
-cd build
-ctest
+$ cd build
+$ ctest
 ```
 
 Create install package with `CPack`:
@@ -142,6 +144,4 @@ Create install package with `CPack`:
 ```shell
 $ cpack -G TGZ --config build/CPackConfig.cmake
 ```
-
-This repository holds the command line interface for `tolc`, see [the Parser](https://github.com/Tolc-Software/Parser) for how the `C++` to be translated is parsed, or [one of the language modules](https://github.com/Tolc-Software/frontend.py) to see how the output is written.
 

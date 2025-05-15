@@ -8,7 +8,7 @@ Parser::Config getParserConfig() {
   auto config = Parser::Config();
   // This is auto filled by CMake
   // clang-format off
-  config.m_systemIncludes = {"-isystem/Users/simryd/code/tolc/build/_deps/llvm_entry-src/include/c++/v1", "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include", "-isystem/Users/simryd/code/tolc/build/_deps/llvm_entry-src/lib/clang/19.1.0/include", "-isystem/Users/simryd/code/tolc/build/_deps/llvm_entry-src/lib/clang/19/include", "-isystem/usr/local/include", "-isystem/System/Library/Frameworks", "-isystem/Library/Frameworks"};
+  config.m_systemIncludes = {"-isystem/Users/simonrydell/code/tolc/build/_deps/llvm_entry-src/include/c++/v1", "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include", "-isystem/Users/simonrydell/code/tolc/build/_deps/llvm_entry-src/lib/clang/19.1.0/include", "-isystem/Users/simonrydell/code/tolc/build/_deps/llvm_entry-src/lib/clang/19/include", "-isystem/usr/local/include", "-isystem/System/Library/Frameworks", "-isystem/Library/Frameworks"};
   // clang-format on
   return config;
 }

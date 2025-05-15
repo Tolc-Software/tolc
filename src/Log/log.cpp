@@ -1,5 +1,4 @@
 #include "Log/log.hpp"
-// #include "Log/postJSON.hpp"
 
 #include <chrono>
 #include <string>
@@ -19,7 +18,6 @@ void logTimeTaken(Log::Data data) {
   std::string json =
       R"({"success": )" + hasSucceeded + std::string(R"(, "time_taken": )") +
       std::to_string(static_cast<int64_t>(duration.count())) + "}";
-  // Log::postJSON("api.tolc.io", "4000", "/report", json);
 }
 
 }    // namespace Log
