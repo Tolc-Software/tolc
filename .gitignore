@@ -8,25 +8,23 @@
 # CMake generated files
 src/TolcInternal/getSystemIncludes.cpp
 tests/TestUtil/include/TestUtil/getTestFilesDirectory.hpp
-tools/conan_profiles/Darwin/clang
-tools/conan_profiles/Linux/clang
-tools/conan_profiles/Windows/clang
 
 # Except these files
 !.clang-format
 !.clang-tidy
 !.gitignore
-!conanfile.txt
 !CMakeLists.txt
 !CMakeSettings.json
 !LICENSE.md
 !README.md
+!conanfile.txt
 
 # Directories
 !.github*
+!COPYRIGHT.md
 !cmake
 !docs
+!include
 !src
 !tests
 !tools
-!COPYRIGHT.md
