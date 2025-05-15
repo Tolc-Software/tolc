@@ -1,0 +1,13 @@
+[requires]
+fmt/8.0.1
+spdlog/1.9.2
+catch2/3.7.1
+ctre/3.9.0
+cli11/2.4.2
+
+[layout]
+cmake_layout
+
+[generators]
+CMakeDeps
+CMakeToolchain

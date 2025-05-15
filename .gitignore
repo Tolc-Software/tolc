@@ -16,6 +16,7 @@ tools/conan_profiles/Windows/clang
 !.clang-format
 !.clang-tidy
 !.gitignore
+!conanfile.txt
 !CMakeLists.txt
 !CMakeSettings.json
 !LICENSE.md
