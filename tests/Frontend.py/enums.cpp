@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Testing enums", "[enums]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 enum Unscoped {
 	Under,
 	Uboat,
@@ -43,7 +42,7 @@ namespace NS {
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # C++11 enums work
 scoped = {moduleName}.Scoped.Snail
 enumTest = {moduleName}.EnumTest(scoped)
@@ -61,10 +60,10 @@ self.assertNotEqual(deep, {moduleName}.NS.Deep.Double)
 # Documentation carries over from C++
 self.assertIn("Documentation describing the enum", {moduleName}.NS.Deep.__doc__)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Enums");
+  stage.exportAsExample("Enums");
 }

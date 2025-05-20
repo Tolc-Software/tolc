@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("std::complex gets converted to complex", "[complex]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <complex>
 
 using namespace std::complex_literals;
@@ -33,7 +32,7 @@ std::complex<double> r(std::complex<double> d) {
 }
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::complex translates to a complex in python
 i = {moduleName}.i()
 self.assertEqual(i.real, 5)
@@ -52,10 +51,10 @@ r = {moduleName}.r(complex(1, 2))
 self.assertEqual(r.real, 1)
 self.assertEqual(r.imag, 2)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::complex");
+  stage.exportAsExample("std::complex");
 }

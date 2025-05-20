@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::lists", "[lists]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 #include <list>
 
@@ -38,7 +37,7 @@ public:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::list translates to a normal array in python
 my_array = ["hi", "ho"]
 with_member = {moduleName}.WithMember(my_array)
@@ -47,10 +46,10 @@ self.assertEqual(with_member.getS(), my_array)
 with_function = {moduleName}.WithFunction()
 self.assertEqual(with_function.sum([1, 2, 3]), 6)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::list");
+  stage.exportAsExample("std::list");
 }

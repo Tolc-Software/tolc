@@ -5,13 +5,12 @@
 namespace Swift::Proxy {
 
 struct Module {
-	explicit Module(std::string const& moduleName,
-	                std::string const& extending);
+  explicit Module(std::string const& moduleName, std::string const& extending);
 
-	std::string getSwift() const;
+  std::string getSwift() const;
 
-private:
-	std::string m_moduleName;
-	std::string m_extending;
+  private:
+  std::string m_moduleName;
+  std::string m_extending;
 };
 }    // namespace Swift::Proxy

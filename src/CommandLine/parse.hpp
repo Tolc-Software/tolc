@@ -10,30 +10,30 @@ namespace CommandLine {
 * Will store the result after parsing the command line options given to tolc
 */
 struct CLIResult {
-	// What file should be translated
-	std::string inputFile;
+  // What file should be translated
+  std::string inputFile;
 
-	// Where tolc is allowed to put output
-	std::string outputDirectory;
+  // Where tolc is allowed to put output
+  std::string outputDirectory;
 
-	// The language chosen by the user to translate to
-	std::string language;
+  // The language chosen by the user to translate to
+  std::string language;
 
-	// The name that will be used when importing the module from some other language
-	std::string moduleName;
+  // The name that will be used when importing the module from some other language
+  std::string moduleName;
 
-	// Include directories for the input file
-	std::vector<std::string> includes;
+  // Include directories for the input file
+  std::vector<std::string> includes;
 
-	// C++ standard to parse headers with
-	int8_t cppVersion = 17;
+  // C++ standard to parse headers with
+  int8_t cppVersion = 17;
 
-	// Was the help flag set? Then the parsing is successful,
-	// but the objects are default constructed
-	bool isHelp = false;
+  // Was the help flag set? Then the parsing is successful,
+  // but the objects are default constructed
+  bool isHelp = false;
 
-	// Do not send any analytics
-	bool noAnalytics = false;
+  // Do not send any analytics
+  bool noAnalytics = false;
 };
 
 /**
@@ -43,4 +43,4 @@ struct CLIResult {
 */
 [[nodiscard]] std::optional<CommandLine::CLIResult> parse(int argc,
                                                           const char** argv);
-}
+}    // namespace CommandLine

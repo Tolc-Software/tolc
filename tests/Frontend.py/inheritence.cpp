@@ -8,11 +8,10 @@
 #include <string>
 
 TEST_CASE("Inheritence", "[inheritence]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 struct Pet {
@@ -26,7 +25,7 @@ struct Dog : public Pet {
 };
 )";
 
-	auto pythonTestCode = R"(
+  auto pythonTestCode = R"(
 fido = m.Dog("Fido")
 
 # Inherits public properties
@@ -36,8 +35,8 @@ self.assertEqual(fido.name, "Fido")
 self.assertEqual(fido.bark(), "woof!")
 )";
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Simple inheritence");
+  stage.exportAsExample("Simple inheritence");
 }

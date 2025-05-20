@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::maps", "[maps]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <map>
 #include <string>
 
@@ -35,7 +34,7 @@ private:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::map translates to a normal dictionary in python
 my_map = {{"hi": 4, "ho": 5}}
 c = {moduleName}.MyClass(my_map)
@@ -61,10 +60,10 @@ for incopatible_map in [{{"key": "value"}}, {{5: 2}}]:
         + str(error_context.exception.args[0]),
     )
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::map");
+  stage.exportAsExample("std::map");
 }

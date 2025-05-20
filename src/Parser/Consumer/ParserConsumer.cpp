@@ -5,7 +5,7 @@
 namespace Consumer {
 
 void ParserConsumer::HandleTranslationUnit(clang::ASTContext& context) {
-	m_visitor.TraverseDecl(context.getTranslationUnitDecl());
+  m_visitor.TraverseDecl(context.getTranslationUnitDecl());
 }
 
 }    // namespace Consumer

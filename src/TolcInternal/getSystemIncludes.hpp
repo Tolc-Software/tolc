@@ -9,4 +9,4 @@ namespace TolcInternal {
 * The input is used as a prefix to the llvm includes
 */
 std::vector<std::string> getSystemIncludes(std::string const& llvmRoot);
-}
+}    // namespace TolcInternal

@@ -4,10 +4,9 @@
 #include <iostream>
 
 int main() {
-	if (!std::filesystem::exists(getExpectedOutFile())) {
-		std::cerr << "Output file does not exist: " << getExpectedOutFile()
-		          << '\n';
-		return 1;
-	}
-	return 0;
+  if (!std::filesystem::exists(getExpectedOutFile())) {
+    std::cerr << "Output file does not exist: " << getExpectedOutFile() << '\n';
+    return 1;
+  }
+  return 0;
 }

@@ -16,4 +16,4 @@ IR::StructData* getStructDataBasedOnAccess(IR::Struct& s,
 
 IRProxy::StructData* getStructDataBasedOnAccess(IRProxy::Struct& s,
                                                 clang::AccessSpecifier access);
-}
+}    // namespace Helpers

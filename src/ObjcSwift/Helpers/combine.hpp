@@ -9,10 +9,10 @@ namespace ObjcSwift::Helpers {
 */
 template <typename T>
 void combine(std::set<T>& result, std::vector<T> const& toBeAdded) {
-	for (auto const& v : toBeAdded) {
-		if (result.find(v) == result.end()) {
-			result.insert(v);
-		}
-	}
+  for (auto const& v : toBeAdded) {
+    if (result.find(v) == result.end()) {
+      result.insert(v);
+    }
+  }
 }
 }    // namespace ObjcSwift::Helpers

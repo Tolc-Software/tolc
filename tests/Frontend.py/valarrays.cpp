@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Simple valarrays", "[valarrays]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <valarray>
 
 std::valarray<int> get() {
@@ -19,14 +18,14 @@ std::valarray<int> get() {
 }
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 v = {moduleName}.get()
 self.assertEqual(v, [1, 2, 3])
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::valarray");
+  stage.exportAsExample("std::valarray");
 }

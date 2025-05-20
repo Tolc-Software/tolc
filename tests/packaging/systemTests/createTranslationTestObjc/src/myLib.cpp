@@ -3,6 +3,6 @@
 
 namespace myLib {
 std::string getGreeting() {
-	return "Hi Tolc!";
+  return "Hi Tolc!";
 }
-}    // namespace myLibNS
+}    // namespace myLib

@@ -10,10 +10,10 @@ namespace Parser {
 * - Every top level value should be commented.
 */
 struct Config {
-	// Absolute paths to system headers
-	std::vector<std::string> m_systemIncludes {};
+  // Absolute paths to system headers
+  std::vector<std::string> m_systemIncludes {};
 
-	// The C++ version of the inner libtooling parser
-	int8_t m_cppVersion = 17;
+  // The C++ version of the inner libtooling parser
+  int8_t m_cppVersion = 17;
 };
-}
+}    // namespace Parser

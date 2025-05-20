@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Specialized templates", "[templates]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <array>
 #include <map>
 #include <string>
@@ -39,7 +38,7 @@ template class MyClass<std::map<char, std::vector<int>>>;
 template class MyClass<std::array<int, 3>>;
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # getSomething<std::string>
 hi = {moduleName}.getSomething("hi")
 self.assertEqual(hi, "hi")
@@ -64,10 +63,10 @@ self.assertEqual(my_class_map.myFun({{'h': [1]}}), {{'h': [1]}})
 my_class_array = {moduleName}.MyClass_array_int_3()
 self.assertEqual(my_class_array.myFun([1, 2, 3]), [1, 2, 3])
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Templates");
+  stage.exportAsExample("Templates");
 }

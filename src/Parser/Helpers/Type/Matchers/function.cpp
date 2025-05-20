@@ -8,7 +8,7 @@ static constexpr auto stdFunctionPattern =
     ctll::fixed_string {"(struct|class) std(::__1)?::function<.*?>"};
 
 constexpr auto matchStdFunction(std::string_view sv) noexcept {
-	return ctre::match<stdFunctionPattern>(sv);
+  return ctre::match<stdFunctionPattern>(sv);
 }
 
 // Example:
@@ -18,16 +18,16 @@ constexpr auto matchStdFunction(std::string_view sv) noexcept {
 static constexpr auto cFunctionPattern = ctll::fixed_string {R"(.*? \(.*?\))"};
 
 constexpr auto matchCFunction(std::string_view sv) noexcept {
-	return ctre::match<cFunctionPattern>(sv);
+  return ctre::match<cFunctionPattern>(sv);
 }
 std::optional<IR::Type::Function> getFunctionType(std::string_view type) {
-	// Can either be "std::function<...>" or C-style function "void(bool)"
-	if (matchStdFunction(type) || matchCFunction(type)) {
-		IR::Type::Function f;
-		f.m_representation = type;
-		return f;
-	}
-	return {};
+  // Can either be "std::function<...>" or C-style function "void(bool)"
+  if (matchStdFunction(type) || matchCFunction(type)) {
+    IR::Type::Function f;
+    f.m_representation = type;
+    return f;
+  }
+  return {};
 }
 
 }    // namespace Helpers::Type::Matchers

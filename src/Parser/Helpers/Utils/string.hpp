@@ -9,4 +9,4 @@ namespace Helpers::Utils {
 * If str does not contain substr, return str.
 */
 std::string removeSubString(std::string str, std::string_view substr);
-}
+}    // namespace Helpers::Utils

@@ -7,16 +7,16 @@
 namespace Consumer {
 
 class ParserConsumer : public clang::ASTConsumer {
-public:
-	explicit ParserConsumer(clang::ASTContext* context,
-	                        IR::Namespace& parsedNamespaces,
-	                        bool& parsedSuccessfully)
-	    : m_visitor(context, parsedNamespaces, parsedSuccessfully) {}
+  public:
+  explicit ParserConsumer(clang::ASTContext* context,
+                          IR::Namespace& parsedNamespaces,
+                          bool& parsedSuccessfully)
+    : m_visitor(context, parsedNamespaces, parsedSuccessfully) {}
 
-	virtual void HandleTranslationUnit(clang::ASTContext& context);
+  virtual void HandleTranslationUnit(clang::ASTContext& context);
 
-private:
-	Visitor::ParserVisitor m_visitor;
+  private:
+  Visitor::ParserVisitor m_visitor;
 };
 
 }    // namespace Consumer

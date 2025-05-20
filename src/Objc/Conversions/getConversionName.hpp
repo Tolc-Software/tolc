@@ -33,4 +33,4 @@ getConversionBaseName(IR::BaseType baseType,
 Objc::Conversions::Conversion
 getConversionContainerName(IR::Type const& containerType,
                            std::string const& conversionNamespace = "");
-}
+}    // namespace Objc::Conversions

@@ -9,4 +9,4 @@ namespace Visitor::Helpers {
 * Extracts the formatted documentation string from decl
 */
 std::string getDocumentation(clang::Decl* decl);
-}
+}    // namespace Visitor::Helpers

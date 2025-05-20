@@ -19,20 +19,20 @@ namespace Objc::Builders {
 namespace {
 std::string getModuleName(std::string const& moduleName,
                           std::string const& fullyQualifiedName) {
-	return fmt::format("{}",
-	                   fmt::join(ObjcSwift::Helpers::split(
-	                                 moduleName + fullyQualifiedName, "::"),
-	                             ""));
+  return fmt::format("{}",
+                     fmt::join(ObjcSwift::Helpers::split(
+                                   moduleName + fullyQualifiedName, "::"),
+                               ""));
 }
 }    // namespace
 
 std::optional<Objc::Proxy::Class> buildModule(IR::Namespace const& ns,
                                               Objc::Cache& cache) {
-	Objc::Proxy::Class objcModule(
-	    getModuleName(cache.m_moduleName, ns.m_representation),
-	    ns.m_representation);
-	objcModule.setAsPurelyStatic();
+  Objc::Proxy::Class objcModule(
+      getModuleName(cache.m_moduleName, ns.m_representation),
+      ns.m_representation);
+  objcModule.setAsPurelyStatic();
 
-	return objcModule;
+  return objcModule;
 }
 }    // namespace Objc::Builders

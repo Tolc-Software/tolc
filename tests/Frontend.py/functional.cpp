@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Taking functions as arguments", "[functional]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <functional>
 #include <vector>
 
@@ -34,7 +33,7 @@ int accumulateArrayOfFunctions(std::vector<std::function<int()>> arrayToSum) {
 }
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 def callback(i):
   return i
 
@@ -53,10 +52,10 @@ def fiver():
 result1 = {moduleName}.accumulateArrayOfFunctions([fiver, fiver])
 self.assertEqual(result1, 10)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::function");
+  stage.exportAsExample("std::function");
 }

@@ -16,45 +16,43 @@ namespace Swift::Builders {
 std::optional<Swift::Proxy::ModuleFile>
 buildModuleFile(std::vector<Objc::Proxy::Structure const*> const& structures,
                 std::string const& moduleName) {
-	Swift::Proxy::ModuleFile rootFile(moduleName);
+  Swift::Proxy::ModuleFile rootFile(moduleName);
 
-	Swift::Cache cache;
-	cache.m_moduleName = moduleName;
-	cache.m_definedSymbols = {moduleName};
+  Swift::Cache cache;
+  cache.m_moduleName = moduleName;
+  cache.m_definedSymbols = {moduleName};
 
-	for (auto const* structure : structures) {
-		using Kind = Objc::Proxy::Structure::Kind;
-		switch (structure->m_kind) {
-			case Kind::Class: {
-				rootFile.addClass(buildClass(
-				    static_cast<Objc::Proxy::Class const&>(*structure),
-				    cache.m_moduleName));
-				break;
-			}
-			case Kind::Namespace: {
-				for (auto const& module : buildModules(
-				         static_cast<Objc::Proxy::Class const&>(*structure),
-				         cache)) {
-					rootFile.addModule(module);
-				}
-				break;
-			}
-			case Kind::Function: {
-				rootFile.addFunction(buildFunction(
-				    static_cast<Objc::Proxy::Function const&>(*structure),
-				    cache.m_moduleName));
-				break;
-			}
-			case Kind::Enum: {
-				break;
-			}
-			case Kind::Attribute: {
-				break;
-			}
-			break;
-		}
-	}
+  for (auto const* structure : structures) {
+    using Kind = Objc::Proxy::Structure::Kind;
+    switch (structure->m_kind) {
+      case Kind::Class: {
+        rootFile.addClass(
+            buildClass(static_cast<Objc::Proxy::Class const&>(*structure),
+                       cache.m_moduleName));
+        break;
+      }
+      case Kind::Namespace: {
+        for (auto const& module : buildModules(
+                 static_cast<Objc::Proxy::Class const&>(*structure), cache)) {
+          rootFile.addModule(module);
+        }
+        break;
+      }
+      case Kind::Function: {
+        rootFile.addFunction(
+            buildFunction(static_cast<Objc::Proxy::Function const&>(*structure),
+                          cache.m_moduleName));
+        break;
+      }
+      case Kind::Enum: {
+        break;
+      }
+      case Kind::Attribute: {
+        break;
+      } break;
+    }
+  }
 
-	return rootFile;
+  return rootFile;
 }
 }    // namespace Swift::Builders

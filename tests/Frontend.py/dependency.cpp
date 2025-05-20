@@ -8,11 +8,10 @@
 
 TEST_CASE("You can refer to things as long as they are previously defined",
           "[dependency]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 namespace MyLib {
 struct Data { int i; };
 }
@@ -24,13 +23,13 @@ MyLib::Data complexFunction() {
 }
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # Can call a function which depends on an inner object
 data = {moduleName}.complexFunction()
 self.assertEqual(data.i, 5)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 }

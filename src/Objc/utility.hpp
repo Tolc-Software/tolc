@@ -22,4 +22,4 @@ std::string wrapInImplementation(std::string_view objcClass,
 
 // Get a documentation string if not empty
 std::string getDocumentationString(std::string_view documentation);
-}
+}    // namespace Objc

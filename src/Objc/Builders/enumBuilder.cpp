@@ -6,22 +6,21 @@
 
 namespace Objc::Builders {
 
-Objc::Proxy::Enum buildEnum(IR::Enum const& e,
-                            Objc::Cache& cache) {
-	auto enumName = Objc::getEnumName(e.m_representation, cache.m_moduleName);
-	Objc::Proxy::Enum proxyEnum(enumName);
+Objc::Proxy::Enum buildEnum(IR::Enum const& e, Objc::Cache& cache) {
+  auto enumName = Objc::getEnumName(e.m_representation, cache.m_moduleName);
+  Objc::Proxy::Enum proxyEnum(enumName);
 
-	proxyEnum.setScoped(e.m_isScoped);
-	proxyEnum.setDocumentation(e.m_documentation);
-	proxyEnum.m_id = e.m_id;
+  proxyEnum.setScoped(e.m_isScoped);
+  proxyEnum.setDocumentation(e.m_documentation);
+  proxyEnum.m_id = e.m_id;
 
-	for (auto const& value : e.m_values) {
-		proxyEnum.addValue(enumName + value);
-	}
+  for (auto const& value : e.m_values) {
+    proxyEnum.addValue(enumName + value);
+  }
 
-	// Register conversion functions
-	Objc::Conversions::setEnumConversions(e, proxyEnum, cache);
+  // Register conversion functions
+  Objc::Conversions::setEnumConversions(e, proxyEnum, cache);
 
-	return proxyEnum;
+  return proxyEnum;
 }
 }    // namespace Objc::Builders

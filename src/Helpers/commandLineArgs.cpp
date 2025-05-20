@@ -1,5 +1,5 @@
-#include "Helpers/Utils/combine.hpp"
 #include "Helpers/commandLineArgs.hpp"
+#include "Helpers/Utils/combine.hpp"
 #include "Parser/Config.hpp"
 #include "Parser/Windows/systemIncludeHelper.hpp"
 #include <fmt/format.h>

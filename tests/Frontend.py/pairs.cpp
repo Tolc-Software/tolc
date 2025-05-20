@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::pairs", "[pairs]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 class MyClass {
@@ -33,7 +32,7 @@ public:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # Converts to a tuple, but is convertible from array aswell
 my_array = ["hi", 4]
 for t in [my_array, tuple(my_array)]:
@@ -43,10 +42,10 @@ for t in [my_array, tuple(my_array)]:
 with_function = {moduleName}.WithFunction()
 self.assertEqual(with_function.sum((1, 2)), 3)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::pair");
+  stage.exportAsExample("std::pair");
 }

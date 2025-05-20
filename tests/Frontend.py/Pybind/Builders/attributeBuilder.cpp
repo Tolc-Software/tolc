@@ -8,24 +8,24 @@
 #include <string>
 
 TEST_CASE("Can build simple attributes", "[attributeBuilder]") {
-	IR::Variable v;
+  IR::Variable v;
 
-	std::string variableName = "i";
-	v.m_name = variableName;
+  std::string variableName = "i";
+  v.m_name = variableName;
 
-	std::string moduleName = "Module";
-	auto fullyQualifiedName = moduleName + "::" + variableName;
+  std::string moduleName = "Module";
+  auto fullyQualifiedName = moduleName + "::" + variableName;
 
-	Pybind::Proxy::TypeInfo typeInfo;
-	auto proxyAttribute =
-	    Pybind::Builders::buildAttribute(moduleName, v, typeInfo);
-	auto pybind = proxyAttribute.getPybind();
-	CAPTURE(pybind);
+  Pybind::Proxy::TypeInfo typeInfo;
+  auto proxyAttribute =
+      Pybind::Builders::buildAttribute(moduleName, v, typeInfo);
+  auto pybind = proxyAttribute.getPybind();
+  CAPTURE(pybind);
 
-	auto expectedContains =
-	    fmt::format(R"(attr("{name}") = &{fullyQualifiedName})",
-	                fmt::arg("fullyQualifiedName", fullyQualifiedName),
-	                fmt::arg("name", v.m_name));
-	CAPTURE(expectedContains);
-	REQUIRE(TestUtil::contains(pybind, expectedContains));
+  auto expectedContains =
+      fmt::format(R"(attr("{name}") = &{fullyQualifiedName})",
+                  fmt::arg("fullyQualifiedName", fullyQualifiedName),
+                  fmt::arg("name", v.m_name));
+  CAPTURE(expectedContains);
+  REQUIRE(TestUtil::contains(pybind, expectedContains));
 }

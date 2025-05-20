@@ -7,11 +7,11 @@ namespace TestUtil {
 * Converts string input into argc and argv
 */
 struct CommandLineInput {
-	int argc;
-	const char** argv;
+  int argc;
+  const char** argv;
 
-	CommandLineInput(std::string const& input);
+  CommandLineInput(std::string const& input);
 
-	~CommandLineInput();
+  ~CommandLineInput();
 };
 }    // namespace TestUtil

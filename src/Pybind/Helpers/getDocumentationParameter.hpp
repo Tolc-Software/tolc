@@ -8,4 +8,4 @@ namespace Pybind::Helpers {
 *   m.def("f", &f, {getDocumentationParameter('My function')})
 */
 std::string getDocumentationParameter(std::string const& documentation);
-}
+}    // namespace Pybind::Helpers

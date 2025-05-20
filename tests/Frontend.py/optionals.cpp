@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::optionals", "[optionals]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <optional>
 #include <string>
 
@@ -34,7 +33,7 @@ public:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::optional is either the value or None in python
 greeting = "hello"
 with_member = {moduleName}.WithMember(greeting)
@@ -43,10 +42,10 @@ self.assertEqual(with_member.getS(), greeting)
 with_function = {moduleName}.WithFunction()
 self.assertEqual(with_function.getNullopt(), None)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::optional");
+  stage.exportAsExample("std::optional");
 }

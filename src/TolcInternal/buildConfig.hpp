@@ -12,27 +12,27 @@ namespace TolcInternal {
 * Stores everyting needed to use the Parser and Frontends
 */
 struct Config {
-	enum class Language { Python, Wasm, Objc };
+  enum class Language { Python, Wasm, Objc };
 
-	// Tells the parser what to do
-	Parser::Config parserConfig;
+  // Tells the parser what to do
+  Parser::Config parserConfig;
 
-	// The language chosen to translate to
-	Language language;
+  // The language chosen to translate to
+  Language language;
 
-	// Name of the exported library
-	// TODO: Maybe add to a Frontend::Python::Config?
-	std::string moduleName;
+  // Name of the exported library
+  // TODO: Maybe add to a Frontend::Python::Config?
+  std::string moduleName;
 
-	// What file should be translated
-	std::filesystem::path inputFile;
+  // What file should be translated
+  std::filesystem::path inputFile;
 
-	// Where tolc is allowed to put output
-	std::filesystem::path outputDirectory;
+  // Where tolc is allowed to put output
+  std::filesystem::path outputDirectory;
 };
 
 /**
 * Tries to build the config from the cli options given by the user
 */
 std::optional<Config> buildConfig(CommandLine::CLIResult const& cli);
-}
+}    // namespace TolcInternal
