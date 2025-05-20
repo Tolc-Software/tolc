@@ -8,11 +8,10 @@
 #include <string>
 
 TEST_CASE("Virtual inheritence", "[virtualInheritence]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 class Animal {
@@ -41,7 +40,7 @@ std::string call_sound(Animal *animal) {
 }
 )";
 
-	auto pythonTestCode = R"(
+  auto pythonTestCode = R"(
 fido = m.Dog()
 grumpy = True
 
@@ -68,8 +67,8 @@ self.assertEqual(whiskers.sound(1, not grumpy), "meow! ")
 self.assertEqual(m.call_sound(whiskers), "meow! meow! meow! ")
 )";
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Overriding virtual in python");
+  stage.exportAsExample("Overriding virtual in python");
 }

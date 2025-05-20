@@ -8,18 +8,17 @@
 #include <string>
 
 TEST_CASE("Classes", "[classes]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
-	// Add instantiation in a source file.
-	// This cannot be just declared, must be instantiated
-	// See https://github.com/pybind/pybind11/issues/682
-	// And https://en.cppreference.com/w/cpp/language/static
-	//
-	// Instantiation (must be in a source file):
-	stage.addModuleFile("test.cpp", "int const WithConstructor::i;");
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  // Add instantiation in a source file.
+  // This cannot be just declared, must be instantiated
+  // See https://github.com/pybind/pybind11/issues/682
+  // And https://en.cppreference.com/w/cpp/language/static
+  //
+  // Instantiation (must be in a source file):
+  stage.addModuleFile("test.cpp", "int const WithConstructor::i;");
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 #include <string_view>
 
@@ -73,7 +72,7 @@ struct Documentation {};
 struct JavaDoc {};
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # You can access static variables without instantiating class
 self.assertEqual({moduleName}.WithConstructor.i, 5)
 
@@ -115,10 +114,10 @@ self.assertIn("Documentation carries over", {moduleName}.Documentation.__doc__)
 self.assertIn("JavaDoc Style", {moduleName}.JavaDoc.__doc__)
 
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Classes");
+  stage.exportAsExample("Classes");
 }

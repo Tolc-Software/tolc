@@ -12,48 +12,46 @@ namespace {
 * It assumes that a failed parse -> return non zero values.
 * This wraps this functionality and just returns the exit status from this function
 */
-int parseInternal(CLI::App& app,
-                  int argc,
-                  const char** argv) {
-	// Will return if something goes wrong
-	// Therefore it has to be at this level
-	CLI11_PARSE(app, argc, argv);
-	return 0;
+int parseInternal(CLI::App& app, int argc, const char** argv) {
+  // Will return if something goes wrong
+  // Therefore it has to be at this level
+  CLI11_PARSE(app, argc, argv);
+  return 0;
 }
 }    // namespace
 
 void addCommonCommands(CLI::App& languageApp, CommandLine::CLIResult& result) {
-	// Adding directly to languageApp since these options
-	// should come after the language subcommand in the CLI
-	languageApp
-	    .add_option("-i,--input",
-	                result.inputFile,
-	                "The interface file to be translated.")
-	    ->required();
+  // Adding directly to languageApp since these options
+  // should come after the language subcommand in the CLI
+  languageApp
+      .add_option("-i,--input",
+                  result.inputFile,
+                  "The interface file to be translated.")
+      ->required();
 
-	languageApp
-	    .add_option("-m,--module-name",
-	                result.moduleName,
-	                "The name of the exported library.")
-	    ->required();
+  languageApp
+      .add_option("-m,--module-name",
+                  result.moduleName,
+                  "The name of the exported library.")
+      ->required();
 
-	languageApp
-	    .add_option("-o,--output",
-	                result.outputDirectory,
-	                "The output directory where the bindings will be stored.")
-	    ->required();
+  languageApp
+      .add_option("-o,--output",
+                  result.outputDirectory,
+                  "The output directory where the bindings will be stored.")
+      ->required();
 
-	languageApp.add_option(
-	    "-I",
-	    result.includes,
-	    "Path to search for when resolving #include statements.");
+  languageApp.add_option(
+      "-I",
+      result.includes,
+      "Path to search for when resolving #include statements.");
 
-	languageApp.add_option("--std",
-	                       result.cppVersion,
-	                       "The C++ version to parse the interface with.");
+  languageApp.add_option("--std",
+                         result.cppVersion,
+                         "The C++ version to parse the interface with.");
 
-	languageApp.add_flag(
-	    "--no-analytics", result.noAnalytics, "Don't gather analytics.");
+  languageApp.add_flag(
+      "--no-analytics", result.noAnalytics, "Don't gather analytics.");
 }
 
 /**
@@ -63,13 +61,13 @@ void addCommonCommands(CLI::App& languageApp, CommandLine::CLIResult& result) {
                                             CommandLine::CLIResult& result,
                                             std::string const& language,
                                             std::string const& description) {
-	auto* lang = rootApp.add_subcommand(language, description);
+  auto* lang = rootApp.add_subcommand(language, description);
 
-	addCommonCommands(*lang, result);
+  addCommonCommands(*lang, result);
 
-	lang->callback([&result, language]() { result.language = language; });
+  lang->callback([&result, language]() { result.language = language; });
 
-	return lang;
+  return lang;
 }
 
 /**
@@ -77,43 +75,42 @@ void addCommonCommands(CLI::App& languageApp, CommandLine::CLIResult& result) {
 */
 [[nodiscard]] std::vector<CLI::App*>
 addSubcommandsAndOptions(CLI::App& app, CommandLine::CLIResult& result) {
-	// One language must be chosen
-	std::vector<CLI::App*> apps = {&app};
+  // One language must be chosen
+  std::vector<CLI::App*> apps = {&app};
 
-	apps.push_back(addLanguageCommands(
-	    app,
-	    result,
-	    "python",
-	    "Create bindings to use C++ from python via CPython"));
-	apps.push_back(addLanguageCommands(
-	    app,
-	    result,
-	    "wasm",
-	    "Create bindings to use C++ from javascript via WebAssembly"));
-	apps.push_back(addLanguageCommands(
-	    app, result, "objc", "Create bindings to use C++ from Objective-C"));
+  apps.push_back(addLanguageCommands(
+      app,
+      result,
+      "python",
+      "Create bindings to use C++ from python via CPython"));
+  apps.push_back(addLanguageCommands(
+      app,
+      result,
+      "wasm",
+      "Create bindings to use C++ from javascript via WebAssembly"));
+  apps.push_back(addLanguageCommands(
+      app, result, "objc", "Create bindings to use C++ from Objective-C"));
 
-	// At least one language need to be chosen
-	app.require_subcommand(1);
-	return apps;
+  // At least one language need to be chosen
+  app.require_subcommand(1);
+  return apps;
 }
 
 [[nodiscard]] std::optional<CommandLine::CLIResult> parse(int argc,
                                                           const char** argv) {
-	CLI::App app {
-	    "Tolc is a bindings compiler between C++ and other languages"};
+  CLI::App app {"Tolc is a bindings compiler between C++ and other languages"};
 
-	CommandLine::CLIResult result;
-	auto apps = CommandLine::addSubcommandsAndOptions(app, result);
+  CommandLine::CLIResult result;
+  auto apps = CommandLine::addSubcommandsAndOptions(app, result);
 
-	if (auto exitStatus = parseInternal(app, argc, argv); exitStatus == 0) {
-		// Final check if CLI11 exited early due to a --help flag
-		for (auto const& a : apps) {
-			result.isHelp = result.isHelp || !a->get_help_ptr()->empty();
-		}
-		return result;
-	}
-	return std::nullopt;
+  if (auto exitStatus = parseInternal(app, argc, argv); exitStatus == 0) {
+    // Final check if CLI11 exited early due to a --help flag
+    for (auto const& a : apps) {
+      result.isHelp = result.isHelp || !a->get_help_ptr()->empty();
+    }
+    return result;
+  }
+  return std::nullopt;
 }
 
 }    // namespace CommandLine

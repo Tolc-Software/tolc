@@ -7,25 +7,25 @@
 namespace Visitor {
 
 bool ParserVisitor::VisitNamespaceDecl(clang::NamespaceDecl* namespaceDecl) {
-	if (isInSystemHeader(namespaceDecl)) {
-		// Continue the AST search
-		return true;
-	}
-	spdlog::debug(R"(Parsing namespace: "{}")",
-	              namespaceDecl->getQualifiedNameAsString());
+  if (isInSystemHeader(namespaceDecl)) {
+    // Continue the AST search
+    return true;
+  }
+  spdlog::debug(R"(Parsing namespace: "{}")",
+                namespaceDecl->getQualifiedNameAsString());
 
-	IRProxy::Namespace parsedNamespace;
-	parsedNamespace.m_fullyQualifiedName =
-	    namespaceDecl->getQualifiedNameAsString();
+  IRProxy::Namespace parsedNamespace;
+  parsedNamespace.m_fullyQualifiedName =
+      namespaceDecl->getQualifiedNameAsString();
 
-	parsedNamespace.m_documentation =
-	    Visitor::Helpers::getDocumentation(namespaceDecl);
+  parsedNamespace.m_documentation =
+      Visitor::Helpers::getDocumentation(namespaceDecl);
 
-	// Export our parsed namespace
-	m_irData.m_namespaces.push_back(parsedNamespace);
+  // Export our parsed namespace
+  m_irData.m_namespaces.push_back(parsedNamespace);
 
-	// Continue the AST search
-	return true;
+  // Continue the AST search
+  return true;
 }
 
-}
+}    // namespace Visitor

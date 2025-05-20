@@ -1,5 +1,5 @@
 namespace myLib {
 int getNumber() {
-	return 3;
+  return 3;
 }
-}    // namespace myLibNS
+}    // namespace myLib

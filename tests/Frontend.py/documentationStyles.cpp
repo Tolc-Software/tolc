@@ -8,11 +8,10 @@
 #include <string>
 
 TEST_CASE("Classes", "[documentationStyles]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 // One line comment
 class OneLiner {};
 
@@ -55,7 +54,7 @@ class Triplets {};
 class DoxyBang {};
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # These types of documentations are supported for:
 #   Classes
 #   Member variables
@@ -78,10 +77,10 @@ self.assertIn("Triplets", {moduleName}.Triplets.__doc__)
 
 self.assertIn("one of the doxy styles", {moduleName}.DoxyBang.__doc__)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Documentation Styles");
+  stage.exportAsExample("Documentation Styles");
 }

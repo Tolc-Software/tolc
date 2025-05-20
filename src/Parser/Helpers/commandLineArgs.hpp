@@ -13,7 +13,6 @@ namespace Helpers {
 * If the system includes input is empty, it will use CMake generated hardcoded paths to LLVM
 * The systemIncludes should be on the format {"-isystem/path/one", "-isystem/path/two"}
 */
-std::vector<std::string>
-getCommandLineArgs(Parser::Config const& config);
+std::vector<std::string> getCommandLineArgs(Parser::Config const& config);
 
 }    // namespace Helpers

@@ -8,11 +8,10 @@
 #include <string>
 
 TEST_CASE("Operators", "[operators]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 class MyClass {
@@ -52,7 +51,7 @@ public:
 };
 )";
 
-	auto pythonTestCode = R"(
+  auto pythonTestCode = R"(
 my_class = m.MyClass(10)
 self.assertEqual(my_class.value, 10)
 
@@ -95,8 +94,8 @@ self.assertEqual(my_class(100), 100)
 self.assertEqual(my_class("The inner value is: "), "The inner value is: 0")
 )";
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Operators");
+  stage.exportAsExample("Operators");
 }

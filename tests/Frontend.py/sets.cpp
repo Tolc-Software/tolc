@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::sets", "[sets]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <set>
 #include <string>
 
@@ -35,7 +34,7 @@ private:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::set translates to a normal array or a set in python
 mySet = {{"hi", "this is a set"}}
 c = {moduleName}.MyClass(mySet)
@@ -65,10 +64,10 @@ self.assertTrue(
 
 
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::set");
+  stage.exportAsExample("std::set");
 }

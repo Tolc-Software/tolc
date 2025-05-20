@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Namespaces turn into modules", "[namespaces]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 /*
@@ -40,7 +39,7 @@ int complexFunction() {
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # Namespaces corresponds to submodules
 result = {moduleName}.MyLib.complexFunction()
 self.assertEqual(result, 5)
@@ -53,10 +52,10 @@ self.assertIn("MyLib contains a bunch of MyLib functions", \
 lifeProTips = {moduleName}.MyLib.We.Are.Going.Pretty.Deep.meaningOfLife()
 self.assertEqual(lifeProTips, "42")
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Namespaces");
+  stage.exportAsExample("Namespaces");
 }

@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Overloaded functions", "[overloadedFunctions]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 // Overloaded free functions
@@ -39,7 +38,7 @@ public:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # Overloaded functions work the same as in C++
 # Free function overload
 self.assertEqual({moduleName}.sayHello(), "Hello!")
@@ -54,10 +53,10 @@ self.assertEqual(overload.getStuff("My stuff"), "My stuff")
 self.assertEqual(overload.safety(), "Safe!")
 self.assertEqual(overload.safety(), {moduleName}.safety())
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Overloaded Functions");
+  stage.exportAsExample("Overloaded Functions");
 }

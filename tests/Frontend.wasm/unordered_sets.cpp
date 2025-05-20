@@ -8,11 +8,10 @@
 #include <string>
 
 TEST_CASE("Using std::unordered_sets", "[unordered_sets]") {
-	std::string moduleName = "defaultModule";
-	auto stage =
-	    TestUtil::EmbindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "defaultModule";
+  auto stage = TestUtil::EmbindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 #include <unordered_set>
 
@@ -36,7 +35,7 @@ private:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 myunordered_set = {{"hi", "this is a unordered_set"}}
 c = {moduleName}.MyClass(myunordered_set)
 self.assertEqual(c.getS(), myunordered_set)
@@ -65,8 +64,8 @@ self.assertTrue(
 
 
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runEmbindTest(cppCode, pythonTestCode, moduleName);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runEmbindTest(cppCode, pythonTestCode, moduleName);
+  REQUIRE(errorCode == 0);
 }

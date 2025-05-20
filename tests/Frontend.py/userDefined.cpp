@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("User defined classes", "[userDefined]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 
 class MyClass {
@@ -39,7 +38,7 @@ private:
 };
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 phrase = "Hello from py"
 myClass = {moduleName}.buildMyClass(phrase);
 
@@ -48,8 +47,8 @@ self.assertEqual(myClass.getS(), phrase)
 owner = {moduleName}.Owner(myClass)
 self.assertEqual(owner.getMyClass().getS(), phrase)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 }

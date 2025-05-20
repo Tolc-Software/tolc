@@ -8,11 +8,10 @@
 
 TEST_CASE("std::filesystem::path gets converted to pathlib.Path",
           "[filesystem_paths]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <filesystem>
 #include <vector>
 
@@ -33,7 +32,7 @@ std::filesystem::path joinPaths(std::vector<std::filesystem::path> arrayToSum) {
 }
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::filesystem::path translates to pathlib.Path in python
 from pathlib import Path
 
@@ -48,10 +47,10 @@ self.assertEqual(toString, p1.name)
 result1 = {moduleName}.joinPaths([p0, p1])
 self.assertEqual(result1, p0 / p1)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::filesystem::path");
+  stage.exportAsExample("std::filesystem::path");
 }

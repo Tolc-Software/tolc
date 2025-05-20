@@ -4,15 +4,15 @@
 namespace Swift::Builders {
 
 Swift::Proxy::Enum buildEnum(IR::Enum const& e) {
-	Swift::Proxy::Enum proxyEnum(e.m_name, e.m_representation);
+  Swift::Proxy::Enum proxyEnum(e.m_name, e.m_representation);
 
-	proxyEnum.setScoped(e.m_isScoped);
-	proxyEnum.setDocumentation(e.m_documentation);
+  proxyEnum.setScoped(e.m_isScoped);
+  proxyEnum.setDocumentation(e.m_documentation);
 
-	for (auto const& value : e.m_values) {
-		proxyEnum.addValue(value);
-	}
+  for (auto const& value : e.m_values) {
+    proxyEnum.addValue(value);
+  }
 
-	return proxyEnum;
+  return proxyEnum;
 }
 }    // namespace Swift::Builders

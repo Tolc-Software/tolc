@@ -16,4 +16,4 @@ std::pair<std::string, std::string> getTrampolineClass(
     std::string const& fullyQualifiedName,
     std::vector<Pybind::Proxy::Function> const& virtualFunctions,
     std::vector<Pybind::Proxy::Function> const& pureVirtualFunctions);
-}
+}    // namespace Pybind::Helpers

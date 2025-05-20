@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::unordered_maps", "[unordered_maps]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <string>
 #include <unordered_map>
 
@@ -35,7 +34,7 @@ private:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::unordered_map translates to a normal dictionary in python
 myunordered_map = {{"hi": 4, "ho": 5}}
 c = {moduleName}.MyClass(myunordered_map)
@@ -62,10 +61,10 @@ for incompatible_map in [{{"key": "value"}}, {{5: 2}}]:
     )
 
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::unordered_map");
+  stage.exportAsExample("std::unordered_map");
 }

@@ -2,4 +2,4 @@
 
 namespace Objc::Proxy {
 Structure::~Structure() {}
-}
+}    // namespace Objc::Proxy

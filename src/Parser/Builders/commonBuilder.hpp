@@ -40,17 +40,17 @@ buildParentStructure(clang::DeclContext const* parent,
 template <typename ClangDecl>
 std::deque<std::pair<std::string, IRProxy::Structure>>
 buildStructure(ClangDecl const* clangDecl, IRProxy::Structure baseStructure) {
-	auto splitNames =
-	    Helpers::Utils::split(clangDecl->getQualifiedNameAsString(), "::");
+  auto splitNames =
+      Helpers::Utils::split(clangDecl->getQualifiedNameAsString(), "::");
 
-	auto nameOfDecl = splitNames.back();
-	splitNames.pop_back();
-	// Build from where we don't know the declstructure
-	auto structure =
-	    Builders::buildParentStructure(clangDecl->getParent(), splitNames);
-	// Push the base back in
-	structure.push_back({nameOfDecl, baseStructure});
-	return structure;
+  auto nameOfDecl = splitNames.back();
+  splitNames.pop_back();
+  // Build from where we don't know the declstructure
+  auto structure =
+      Builders::buildParentStructure(clangDecl->getParent(), splitNames);
+  // Push the base back in
+  structure.push_back({nameOfDecl, baseStructure});
+  return structure;
 }
 
 }    // namespace Builders

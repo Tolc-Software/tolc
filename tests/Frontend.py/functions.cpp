@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Write to file functions", "[functions]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <fstream>
 #include <string>
 
@@ -48,7 +47,7 @@ int static getZero() {
 }
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 {moduleName}.sayHello()
 with open("hello.txt", "r") as f:
     self.assertEqual(f.readline(), "Hello!")
@@ -79,10 +78,10 @@ self.assertEqual(result, "H")
 # Static functions are just normal module functions in python
 self.assertEqual({moduleName}.getZero(), 0)
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("Functions");
+  stage.exportAsExample("Functions");
 }

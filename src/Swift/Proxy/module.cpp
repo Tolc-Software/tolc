@@ -5,16 +5,16 @@
 namespace Swift::Proxy {
 
 std::string Module::getSwift() const {
-	return fmt::format(R"(
+  return fmt::format(R"(
 extension {} {{
   public class {} {{}}
 }}
 )",
-	                   m_extending,
-	                   m_moduleName);
+                     m_extending,
+                     m_moduleName);
 }
 
 Module::Module(std::string const& moduleName, std::string const& extending)
-    : m_moduleName(moduleName), m_extending(extending) {}
+  : m_moduleName(moduleName), m_extending(extending) {}
 
 }    // namespace Swift::Proxy

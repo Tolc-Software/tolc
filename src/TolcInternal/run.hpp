@@ -6,4 +6,4 @@ namespace TolcInternal {
 * This is done to make the testing more flexible.
 */
 int run(int argc, const char** argv);
-}
+}    // namespace TolcInternal

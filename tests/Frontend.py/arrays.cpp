@@ -7,11 +7,10 @@
 #include <string>
 
 TEST_CASE("Using std::arrays", "[arrays]") {
-	std::string moduleName = "m";
-	auto stage =
-	    TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
+  std::string moduleName = "m";
+  auto stage = TestUtil::PybindStage(TestStage::getRootStagePath(), moduleName);
 
-	auto cppCode = R"(
+  auto cppCode = R"(
 #include <array>
 #include <string>
 
@@ -38,7 +37,7 @@ public:
 
 )";
 
-	auto pythonTestCode = fmt::format(R"(
+  auto pythonTestCode = fmt::format(R"(
 # std::array translates to a normal array in python
 my_array = ["hi", "ho"]
 with_member = {moduleName}.WithMember(my_array)
@@ -64,10 +63,10 @@ for incompatible_array in [["too many", "too many", "too many"], ["too few"]]:
         "Error msg does not mention the given arguments: " + str(error_context.exception.args[0]),
     )
 )",
-	                                  fmt::arg("moduleName", moduleName));
+                                    fmt::arg("moduleName", moduleName));
 
-	auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
-	REQUIRE(errorCode == 0);
+  auto errorCode = stage.runPybindTest(cppCode, pythonTestCode);
+  REQUIRE(errorCode == 0);
 
-	stage.exportAsExample("std::array");
+  stage.exportAsExample("std::array");
 }

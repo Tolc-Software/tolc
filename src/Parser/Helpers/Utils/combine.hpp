@@ -9,4 +9,4 @@ namespace Helpers::Utils {
 */
 std::vector<std::string> combine(std::vector<std::string> const& v0,
                                  std::vector<std::string> const& v1);
-}
+}    // namespace Helpers::Utils

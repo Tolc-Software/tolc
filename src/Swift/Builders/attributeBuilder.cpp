@@ -7,28 +7,28 @@ namespace Swift::Builders {
 Swift::Proxy::Attribute
 buildAttribute(Objc::Proxy::Attribute const& objcAttribute,
                std::string const& callFrom) {
-	Swift::Proxy::Attribute attr(objcAttribute.getName(),
-	                             buildType(objcAttribute.getType()));
+  Swift::Proxy::Attribute attr(objcAttribute.getName(),
+                               buildType(objcAttribute.getType()));
 
-	if (objcAttribute.isStatic()) {
-		attr.setAsStatic();
-	}
+  if (objcAttribute.isStatic()) {
+    attr.setAsStatic();
+  }
 
-	std::string callPath = "";
+  std::string callPath = "";
 
-	if (objcAttribute.isStandalone() || objcAttribute.isStatic()) {
-		callPath = callFrom;
-	} else {
-		callPath = "m_object";
-	}
-	callPath += "." + objcAttribute.getName();
+  if (objcAttribute.isStandalone() || objcAttribute.isStatic()) {
+    callPath = callFrom;
+  } else {
+    callPath = "m_object";
+  }
+  callPath += "." + objcAttribute.getName();
 
-	attr.addGetter(callPath);
+  attr.addGetter(callPath);
 
-	if (!objcAttribute.isConst()) {
-		attr.addSetter(callPath);
-	}
+  if (!objcAttribute.isConst()) {
+    attr.addSetter(callPath);
+  }
 
-	return attr;
+  return attr;
 }
 }    // namespace Swift::Builders

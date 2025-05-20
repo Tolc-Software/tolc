@@ -8,16 +8,16 @@
 namespace Frontend {
 
 class ParserFrontendAction : public clang::ASTFrontendAction {
-public:
-	explicit ParserFrontendAction(IR::Namespace& parsedNamespaces,
-	                              bool& parsedSuccessfully);
+  public:
+  explicit ParserFrontendAction(IR::Namespace& parsedNamespaces,
+                                bool& parsedSuccessfully);
 
-	std::unique_ptr<clang::ASTConsumer>
-	CreateASTConsumer(clang::CompilerInstance& compiler,
-	                  llvm::StringRef /*InFile*/);
+  std::unique_ptr<clang::ASTConsumer>
+  CreateASTConsumer(clang::CompilerInstance& compiler,
+                    llvm::StringRef /*InFile*/);
 
-	IR::Namespace& m_parsedNamespaces;
-	bool& m_parsedSuccessfully;
+  IR::Namespace& m_parsedNamespaces;
+  bool& m_parsedSuccessfully;
 };
 
 }    // namespace Frontend

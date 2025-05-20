@@ -1,3 +1,3 @@
 namespace myLib {
 int getNumber();
-}    // namespace myLibNS
+}    // namespace myLib

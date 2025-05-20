@@ -15,4 +15,4 @@ std::filesystem::path getRootStagePath();
 * NOTE: This is populated at configure time by cmake
 */
 std::filesystem::path getExamplesPath();
-}
+}    // namespace TestStage

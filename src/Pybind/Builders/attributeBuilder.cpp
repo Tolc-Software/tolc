@@ -8,9 +8,9 @@ namespace Pybind::Builders {
 Pybind::Proxy::Attribute buildAttribute(std::string const& parentNamespace,
                                         IR::Variable const& v,
                                         Pybind::Proxy::TypeInfo& typeInfo) {
-	Pybind::Proxy::Attribute attr(v.m_name, parentNamespace + "::" + v.m_name);
-	Pybind::checkType(v.m_type, typeInfo);
+  Pybind::Proxy::Attribute attr(v.m_name, parentNamespace + "::" + v.m_name);
+  Pybind::checkType(v.m_type, typeInfo);
 
-	return attr;
+  return attr;
 }
 }    // namespace Pybind::Builders
